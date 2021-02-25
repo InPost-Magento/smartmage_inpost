@@ -20,12 +20,12 @@ class AddProductSendLockerAttribute implements DataPatchInterface, PatchRevertab
     /**
      * @var ModuleDataSetupInterface
      */
-    protected ModuleDataSetupInterface $moduleDataSetup;
+    protected $moduleDataSetup;
 
     /**
      * @var EavSetupFactory
      */
-    protected EavSetupFactory $eavSetupFactory;
+    protected $eavSetupFactory;
 
     /**
      * AddProductSendLockerAttribute constructor.

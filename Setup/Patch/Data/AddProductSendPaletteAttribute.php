@@ -20,12 +20,12 @@ class AddProductSendPaletteAttribute implements DataPatchInterface, PatchReverta
     /**
      * @var ModuleDataSetupInterface
      */
-    protected ModuleDataSetupInterface $moduleDataSetup;
+    protected $moduleDataSetup;
 
     /**
      * @var EavSetupFactory
      */
-    protected EavSetupFactory $eavSetupFactory;
+    protected $eavSetupFactory;
 
     /**
      * AddProductSendLockerAttribute constructor.
