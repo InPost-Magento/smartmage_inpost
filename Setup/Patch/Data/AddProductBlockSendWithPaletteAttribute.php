@@ -53,7 +53,7 @@ class AddProductBlockSendWithPaletteAttribute implements DataPatchInterface, Pat
             self::BLOCK_SEND_PALETTE_ATTRIBUTE_NAME,
             [
                 'type' => 'int',
-                'label' => 'Send with InPost Palette',
+                'label' => 'Block send with InPost Palette',
                 'input' => 'boolean',
                 'user_defined' => false,
                 'global' => ScopedAttributeInterface::SCOPE_STORE,

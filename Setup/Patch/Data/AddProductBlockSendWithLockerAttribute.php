@@ -53,7 +53,7 @@ class AddProductBlockSendWithLockerAttribute implements DataPatchInterface, Patc
             self::BLOCK_SEND_LOCKER_ATTRIBUTE_NAME,
             [
                 'type' => 'int',
-                'label' => 'Send with Locker',
+                'label' => 'Block send with Locker',
                 'input' => 'boolean',
                 'user_defined' => false,
                 'global' => ScopedAttributeInterface::SCOPE_STORE,
