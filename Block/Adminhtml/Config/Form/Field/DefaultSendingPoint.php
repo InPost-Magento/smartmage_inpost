@@ -1,11 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace Smartmage\Inpost\Block\Adminhtml\Config\Form\Field;
 
-use Magento\Backend\Block\Template\Context;
+use  Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use Magento\Framework\View\Helper\SecureHtmlRenderer;
 
 /**
  * Class DefaultSendingPoint
@@ -18,10 +18,9 @@ class DefaultSendingPoint extends Field
     public function __construct(
         Context $context,
         array $data = [],
-        ?SecureHtmlRenderer $secureRenderer = null,
         $code = null
     ) {
-        parent::__construct($context, $data, $secureRenderer);
+        parent::__construct($context, $data);
         $this->code = $code;
     }
 
@@ -49,8 +48,8 @@ window.easyPackAsyncInit = function () {
                 };
 
             window.onload = function() {
-              easyPack.dropdownWidget("row_carriers_inpostlocker_' . $this->code . '_default_sending_point", function(point) {
-                  jQuery("#carriers_inpostlocker_' . $this->code . '_default_sending_point").val(point.name);
+              easyPack.dropdownWidget("row_carriers_inpost_inpostlocker_' . $this->code . '_default_sending_point", function(point) {
+                  jQuery("#carriers_inpost_inpostlocker_' . $this->code . '_default_sending_point").val(point.name);
               });
             }
           </script>
