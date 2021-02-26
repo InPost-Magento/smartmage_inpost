@@ -5,7 +5,7 @@ namespace Smartmage\Inpost\Model\Config\Source;
 use Magento\Framework\Data\OptionSourceInterface;
 
 /**
- * Class Type
+ * Class DayOfTheWeek
  */
 class DayOfTheWeek implements OptionSourceInterface
 {
@@ -20,7 +20,7 @@ class DayOfTheWeek implements OptionSourceInterface
     /**
      * {@inheritdoc}
      */
-    public function toOptionArray()
+    public function toOptionArray() : array
     {
         return [
             ['value' => self::MONDAY, 'label' => __('Monday')],
