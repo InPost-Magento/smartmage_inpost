@@ -12,10 +12,10 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 
-class AddProductSendCourierAttribute implements DataPatchInterface, PatchRevertableInterface
+class AddProductBlockSendWithLockerAttribute implements DataPatchInterface, PatchRevertableInterface
 {
 
-    const SEND_COURIER_ATTRIBUTE_NAME = 'send_with_courier';
+    const BLOCK_SEND_LOCKER_ATTRIBUTE_NAME = 'block_send_with_locker';
 
     /**
      * @var ModuleDataSetupInterface
@@ -43,24 +43,24 @@ class AddProductSendCourierAttribute implements DataPatchInterface, PatchReverta
     /**
      * {@inheritdoc}
      */
-    public function apply(): AddProductSendCourierAttribute
+    public function apply(): AddProductBlockSendWithLockerAttribute
     {
         $this->moduleDataSetup->getConnection()->startSetup();
 
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
         $eavSetup->addAttribute(
             Product::ENTITY,
-            self::SEND_COURIER_ATTRIBUTE_NAME,
+            self::BLOCK_SEND_LOCKER_ATTRIBUTE_NAME,
             [
                 'type' => 'int',
-                'label' => 'Send with InPost Courier',
+                'label' => 'Send with Locker',
                 'input' => 'boolean',
                 'user_defined' => false,
                 'global' => ScopedAttributeInterface::SCOPE_STORE,
                 'group' => 'General',
                 'source' => Boolean::class,
                 'default' => 1,
-                'sort_order' => 99999,
+                'sort_order' => 99997,
                 'visible_on_front' => false,
                 'used_in_product_listing' => false,
                 'searchable' => false,
@@ -92,7 +92,7 @@ class AddProductSendCourierAttribute implements DataPatchInterface, PatchReverta
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
         $eavSetup->removeAttribute(
             Product::ENTITY,
-            self::SEND_COURIER_ATTRIBUTE_NAME
+            self::BLOCK_SEND_LOCKER_ATTRIBUTE_NAME
         );
 
         $this->moduleDataSetup->getConnection()->endSetup();

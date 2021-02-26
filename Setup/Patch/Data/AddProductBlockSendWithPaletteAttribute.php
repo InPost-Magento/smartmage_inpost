@@ -12,10 +12,10 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 
-class AddProductSendLockerAttribute implements DataPatchInterface, PatchRevertableInterface
+class AddProductBlockSendWithPaletteAttribute implements DataPatchInterface, PatchRevertableInterface
 {
 
-    const SEND_LOCKER_ATTRIBUTE_NAME = 'send_with_locker';
+    const BLOCK_SEND_PALETTE_ATTRIBUTE_NAME = 'block_send_with_palette';
 
     /**
      * @var ModuleDataSetupInterface
@@ -43,17 +43,17 @@ class AddProductSendLockerAttribute implements DataPatchInterface, PatchRevertab
     /**
      * {@inheritdoc}
      */
-    public function apply(): AddProductSendLockerAttribute
+    public function apply(): AddProductBlockSendWithPaletteAttribute
     {
         $this->moduleDataSetup->getConnection()->startSetup();
 
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
         $eavSetup->addAttribute(
             Product::ENTITY,
-            self::SEND_LOCKER_ATTRIBUTE_NAME,
+            self::BLOCK_SEND_PALETTE_ATTRIBUTE_NAME,
             [
                 'type' => 'int',
-                'label' => 'Send with Locker',
+                'label' => 'Send with InPost Palette',
                 'input' => 'boolean',
                 'user_defined' => false,
                 'global' => ScopedAttributeInterface::SCOPE_STORE,
@@ -92,7 +92,7 @@ class AddProductSendLockerAttribute implements DataPatchInterface, PatchRevertab
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
         $eavSetup->removeAttribute(
             Product::ENTITY,
-            self::SEND_LOCKER_ATTRIBUTE_NAME
+            self::BLOCK_SEND_PALETTE_ATTRIBUTE_NAME
         );
 
         $this->moduleDataSetup->getConnection()->endSetup();
