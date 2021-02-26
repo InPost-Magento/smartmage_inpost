@@ -60,7 +60,7 @@ class AddProductBlockSendWithPaletteAttribute implements DataPatchInterface, Pat
                 'group' => 'General',
                 'source' => Boolean::class,
                 'default' => 0,
-                'sort_order' => 99999,
+                'sort_order' => 32767,
                 'visible_on_front' => false,
                 'used_in_product_listing' => false,
                 'searchable' => false,

@@ -60,7 +60,7 @@ class AddProductBlockSendWithCourierAttribute implements DataPatchInterface, Pat
                 'group' => 'General',
                 'source' => Boolean::class,
                 'default' => 0,
-                'sort_order' => 99998,
+                'sort_order' => 32766,
                 'visible_on_front' => false,
                 'used_in_product_listing' => false,
                 'searchable' => false,
