@@ -12,10 +12,10 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 
-class AddProductSendPaletteAttribute implements DataPatchInterface, PatchRevertableInterface
+class AddProductBlockSendWithCourierAttribute implements DataPatchInterface, PatchRevertableInterface
 {
 
-    const SEND_PALETTE_ATTRIBUTE_NAME = 'send_with_palette';
+    const BLOCK_SEND_COURIER_ATTRIBUTE_NAME = 'block_send_with_courier';
 
     /**
      * @var ModuleDataSetupInterface
@@ -43,24 +43,24 @@ class AddProductSendPaletteAttribute implements DataPatchInterface, PatchReverta
     /**
      * {@inheritdoc}
      */
-    public function apply(): AddProductSendPaletteAttribute
+    public function apply(): AddProductBlockSendWithCourierAttribute
     {
         $this->moduleDataSetup->getConnection()->startSetup();
 
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
         $eavSetup->addAttribute(
             Product::ENTITY,
-            self::SEND_PALETTE_ATTRIBUTE_NAME,
+            self::BLOCK_SEND_COURIER_ATTRIBUTE_NAME,
             [
                 'type' => 'int',
-                'label' => 'Send with InPost Palette',
+                'label' => 'Block send with InPost Courier',
                 'input' => 'boolean',
                 'user_defined' => false,
                 'global' => ScopedAttributeInterface::SCOPE_STORE,
                 'group' => 'General',
                 'source' => Boolean::class,
-                'default' => 1,
-                'sort_order' => 99999,
+                'default' => 0,
+                'sort_order' => 99998,
                 'visible_on_front' => false,
                 'used_in_product_listing' => false,
                 'searchable' => false,
@@ -92,7 +92,7 @@ class AddProductSendPaletteAttribute implements DataPatchInterface, PatchReverta
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
         $eavSetup->removeAttribute(
             Product::ENTITY,
-            self::SEND_PALETTE_ATTRIBUTE_NAME
+            self::BLOCK_SEND_COURIER_ATTRIBUTE_NAME
         );
 
         $this->moduleDataSetup->getConnection()->endSetup();
