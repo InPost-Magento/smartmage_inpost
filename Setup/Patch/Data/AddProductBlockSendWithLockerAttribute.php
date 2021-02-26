@@ -60,7 +60,7 @@ class AddProductBlockSendWithLockerAttribute implements DataPatchInterface, Patc
                 'group' => 'General',
                 'source' => Boolean::class,
                 'default' => 0,
-                'sort_order' => 99997,
+                'sort_order' => 32765,
                 'visible_on_front' => false,
                 'used_in_product_listing' => false,
                 'searchable' => false,
