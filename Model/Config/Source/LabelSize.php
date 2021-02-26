@@ -5,7 +5,7 @@ namespace Smartmage\Inpost\Model\Config\Source;
 use Magento\Framework\Data\OptionSourceInterface;
 
 /**
- * Class Type
+ * Class LabelSize
  */
 class LabelSize implements OptionSourceInterface
 {
@@ -15,7 +15,7 @@ class LabelSize implements OptionSourceInterface
     /**
      * {@inheritdoc}
      */
-    public function toOptionArray()
+    public function toOptionArray() : array
     {
         return [
             ['value' => self::A4, 'label' => __('A4')],

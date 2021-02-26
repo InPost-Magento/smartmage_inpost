@@ -5,7 +5,7 @@ namespace Smartmage\Inpost\Model\Config\Source;
 use Magento\Framework\Data\OptionSourceInterface;
 
 /**
- * Class Type
+ * Class WeightUnit
  */
 class WeightUnit implements OptionSourceInterface
 {
@@ -15,7 +15,7 @@ class WeightUnit implements OptionSourceInterface
     /**
      * {@inheritdoc}
      */
-    public function toOptionArray()
+    public function toOptionArray() : array
     {
         return [
             ['value' => self::KILOGRAM, 'label' => __('Kilograms')],

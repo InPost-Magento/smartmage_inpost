@@ -5,7 +5,7 @@ namespace Smartmage\Inpost\Model\Config\Source;
 use Magento\Framework\Data\OptionSourceInterface;
 
 /**
- * Class Type
+ * Class Mode
  */
 class Mode implements OptionSourceInterface
 {
@@ -15,7 +15,7 @@ class Mode implements OptionSourceInterface
     /**
      * {@inheritdoc}
      */
-    public function toOptionArray()
+    public function toOptionArray() : array
     {
         return [
             ['value' => self::TEST, 'label' => __('Test')],

@@ -5,7 +5,7 @@ namespace Smartmage\Inpost\Model\Config\Source;
 use Magento\Framework\Data\OptionSourceInterface;
 
 /**
- * Class Type
+ * Class LabelFormat
  */
 class LabelFormat implements OptionSourceInterface
 {
@@ -16,7 +16,7 @@ class LabelFormat implements OptionSourceInterface
     /**
      * {@inheritdoc}
      */
-    public function toOptionArray()
+    public function toOptionArray() : array
     {
         return [
             ['value' => self::PDF, 'label' => __('PDF')],

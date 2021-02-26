@@ -5,7 +5,7 @@ namespace Smartmage\Inpost\Model\Config\Source;
 use Magento\Framework\Data\OptionSourceInterface;
 
 /**
- * Class Type
+ * Class DefaultWaySending
  */
 class DefaultWaySending implements OptionSourceInterface
 {
@@ -14,18 +14,21 @@ class DefaultWaySending implements OptionSourceInterface
 
     protected $code = '';
 
+    /**
+     * DefaultWaySending constructor.
+     * @param null $code
+     */
     public function __construct($code = null)
     {
         $this->code = $code;
     }
+
     /**
      * {@inheritdoc}
      */
-    public function toOptionArray()
+    public function toOptionArray() : array
     {
-        \Magento\Framework\App\ObjectManager::getInstance()->get(\Psr\Log\LoggerInterface::class)->error('$this->code');
-        \Magento\Framework\App\ObjectManager::getInstance()->get(\Psr\Log\LoggerInterface::class)->error($this->code);
-        switch ($this->code){
+        switch ($this->code) {
             case (self::INPOST_LOCKER_STNDARD):
                 return [
                     ['value' => 'parcel_locker', 'label' => __('Nadanie w Paczkomacie')],
