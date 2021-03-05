@@ -2,7 +2,6 @@ var config = {
     map: {
         '*': {
             'easyPackWidget' : 'Smartmage_Inpost/js/easyPackWidget',
-            'configEasyPack' : 'Smartmage_Inpost/js/configEasyPack',
         }
     },
     paths: {
@@ -12,6 +11,6 @@ var config = {
     },
 
     shim: {
-        'easyPackWidget': ['jquery', 'inPostSdk', 'configEasyPack'],
+        'easyPackWidget': ['jquery', 'inPostSdk'],
     }
 };
