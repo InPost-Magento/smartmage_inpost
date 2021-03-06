@@ -8,5 +8,7 @@ use Smartmage\Inpost\Model\Carrier\AbstractMethod;
 
 class Palette extends AbstractMethods
 {
-    protected $methodKey = 'inpostcourier_palette';
+    protected $methodKey = 'palette';
+
+    protected $carrierCode = 'inpostcourier';
 }
