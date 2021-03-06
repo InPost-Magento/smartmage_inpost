@@ -22,7 +22,7 @@ class InpostLocker extends AbstractInpostCarrier implements CarrierInterface
     /**
      * @var string
      */
-    protected $_code = 'inpost_inpostlocker';
+    protected $_code = 'inpostlocker';
 
     /**
      * InpostLocker constructor.

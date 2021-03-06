@@ -6,6 +6,7 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Shipping\Model\Carrier\AbstractCarrier;
 use Magento\Shipping\Model\Rate\Result;
+use Smartmage\Inpost\Model\ConfigProvider;
 
 class AbstractInpostCarrier extends AbstractCarrier
 {
@@ -25,6 +26,11 @@ class AbstractInpostCarrier extends AbstractCarrier
      */
     protected $methods;
 
+    /**
+     * @var ConfigProvider
+     */
+    protected $configProvider;
+
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         ErrorFactory $rateErrorFactory,
@@ -32,11 +38,13 @@ class AbstractInpostCarrier extends AbstractCarrier
         ResultFactory $rateResultFactory,
         MethodFactory $rateMethodFactory,
         array $methods,
+        ConfigProvider $configProvider,
         array $data = []
     ) {
         $this->rateResultFactory = $rateResultFactory;
         $this->rateMethodFactory = $rateMethodFactory;
         $this->methods = $methods;
+        $this->configProvider = $configProvider;
         parent::__construct($scopeConfig, $rateErrorFactory, $logger, $data);
     }
 
@@ -71,16 +79,16 @@ class AbstractInpostCarrier extends AbstractCarrier
     public function getAllowedMethods()
     {
         //'carriers/' . $this->_code . '/' . $field;
-        //carriers/inpost_inpostcourier/inpostcourier_c2c/active
+        //carriers/inpost/inpostcourier/c2c/active
         $allowedMethods = [];
 
         foreach ($this->methods as $method) {
-            if ($this->getConfigFlag($this->_code.'/'.$method::METHOD_KEY . '/active')
+            if ($this->configProvider->getConfigFlag($this->_code.'/'.$method::METHOD_KEY . '/active')
                 && $method->isAllowed()
             ) {
                 $allowedMethods[] = [
                     'key' => $method::METHOD_KEY,
-                    'sort' => $this->getConfigData($this->_code.'/'.$method::METHOD_KEY . '/position'),
+                    'sort' => $this->configProvider->getConfigData($this->_code.'/'.$method::METHOD_KEY . '/position'),
                     'price' => $method->calculatePrice()
                 ];
             }
@@ -98,10 +106,10 @@ class AbstractInpostCarrier extends AbstractCarrier
         $method = $this->rateMethodFactory->create();
 
         $method->setCarrier($this->_code);
-        $method->setCarrierTitle($this->getConfigData('label'));
+        $method->setCarrierTitle($this->configProvider->getConfigData($this->_code.'/label'));
 
         $method->setMethod($this->_code);
-        $method->setMethodTitle($this->getConfigData($method->getKey(). '/name'));
+        $method->setMethodTitle($this->configProvider->getConfigData($method->getKey(). '/name'));
 
         $shippingPrice = $method->calculatePrice();
         $method->setPrice($shippingPrice);

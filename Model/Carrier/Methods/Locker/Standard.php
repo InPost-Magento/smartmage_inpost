@@ -8,5 +8,7 @@ use Smartmage\Inpost\Model\Carrier\AbstractMethod;
 
 class Standard extends AbstractMethod
 {
-    protected $methodKey = 'inpostlocker_standard';
+    protected $methodKey = 'standard';
+
+    protected $carrierCode = 'inpostlocker';
 }

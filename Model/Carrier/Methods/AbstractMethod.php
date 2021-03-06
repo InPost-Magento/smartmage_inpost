@@ -92,7 +92,7 @@ class AbstractMethod
                 $this->carrierCode . '/' . $this->methodKey . '/free_shipping_subtotal'
             );
 
-
+            $total = $this->getQuoteTotal();
 
         }
 
@@ -110,8 +110,14 @@ class AbstractMethod
     /**
      * @return mixed
      */
-    private function getQuote()
+    protected function getQuote()
     {
         return $this->checkoutSessionFactory->create->getQuote();
     }
+
+    protected function getQuoteTotal($quote)
+    {
+
+    }
+
 }

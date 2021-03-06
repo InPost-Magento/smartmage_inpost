@@ -29,7 +29,7 @@ class InpostCourier extends AbstractInpostCarrier implements CarrierInterface
     /**
      * @var string
      */
-    protected $_code = 'inpost_inpostcourier';
+    protected $_code = 'inpostcourier';
 
     /**
      * InpostCourier constructor.

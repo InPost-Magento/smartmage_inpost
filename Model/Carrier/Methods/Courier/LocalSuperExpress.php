@@ -8,5 +8,7 @@ use Smartmage\Inpost\Model\Carrier\AbstractMethod;
 
 class LocalSuperExpress extends AbstractMethod
 {
-    protected $methodKey = 'inpostcourier_localsuperexpress';
+    protected $methodKey = 'localsuperexpress';
+
+    protected $carrierCode = 'inpostcourier';
 }
