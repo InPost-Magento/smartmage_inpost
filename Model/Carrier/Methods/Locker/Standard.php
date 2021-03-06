@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Smartmafe\Inpost\Model\Carrier\Methods\Locker;
+namespace Smartmage\Inpost\Model\Carrier\Methods\Locker;
 
-class Standard
+use Smartmage\Inpost\Model\Carrier\AbstractMethod;
+
+class Standard extends AbstractMethod
 {
-
+    protected $methodKey = 'inpostlocker_standard';
 }

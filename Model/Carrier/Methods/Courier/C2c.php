@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Smartmafe\Inpost\Model\Carrier\Methods\Courier;
+namespace Smartmage\Inpost\Model\Carrier\Methods\Courier;
 
-class C2c
+use Smartmage\Inpost\Model\Carrier\AbstractMethod;
+
+class C2c extends AbstractMethod
 {
-    const METHOD_KEY = 'inpostcourier_c2c';
-    const CONFIG_PATH = 'shipping_methods/' . self::METHOD_KEY;
-
-    
+    protected $methodKey = 'inpostcourier_c2c';
 }

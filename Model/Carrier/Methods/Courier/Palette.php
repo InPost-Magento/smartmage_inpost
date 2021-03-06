@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Smartmafe\Inpost\Model\Carrier\Methods\Courier;
+namespace Smartmage\Inpost\Model\Carrier\Methods\Courier;
 
+use Smartmage\Inpost\Model\Carrier\AbstractMethod;
 
-class Palette
+class Palette extends AbstractMethods
 {
-
+    protected $methodKey = 'inpostcourier_palette';
 }

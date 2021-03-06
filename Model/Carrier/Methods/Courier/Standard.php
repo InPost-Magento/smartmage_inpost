@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Smartmafe\Inpost\Model\Carrier\Methods\Courier;
+namespace Smartmage\Inpost\Model\Carrier\Methods\Courier;
 
-class Standard
+use Smartmage\Inpost\Model\Carrier\AbstractMethod;
+
+class Standard extends AbstractMethod
 {
-
+    protected $methodKey = 'inpostcourier_standard';
 }
