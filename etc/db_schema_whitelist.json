@@ -1,0 +1,17 @@
+{
+    "smartmage_inpost_shipment": {
+        "column": {
+            "entity_id": true,
+            "shipment_id": true,
+            "status": true,
+            "service": true,
+            "shipment_attributes": true,
+            "sending_method": true,
+            "receiver_data": true,
+            "reference": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}
