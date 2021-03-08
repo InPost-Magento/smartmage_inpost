@@ -14,4 +14,8 @@
             <argument name="code" xsi:type="string">standardcod</argument>
         </arguments>
     </virtualType>
+
+    <type name="Magento\Quote\Api\CartRepositoryInterface">
+        <plugin name="quote_inpost_locker_id_attribute" type="Smartmage\Inpost\Plugin\CartRepositoryExtended" />
+    </type>
 </config>
