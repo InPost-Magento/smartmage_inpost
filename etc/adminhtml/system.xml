@@ -1,0 +1,669 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="carriers">
+            <group id="inpost" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Inpost</label>
+                <field id="mode" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Mode</label>
+                    <source_model>Smartmage\Inpost\Model\Config\Source\Mode</source_model>
+                </field>
+                <field id="access_token" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Access Token</label>
+                </field>
+                <field id="label_format" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Label format</label>
+                    <source_model>Smartmage\Inpost\Model\Config\Source\LabelFormat</source_model>
+                </field>
+                <field id="label_size" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Label size</label>
+                    <source_model>Smartmage\Inpost\Model\Config\Source\LabelSize</source_model>
+                </field>
+                <field id="change_address" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Change sender's address</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sender_name" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sender - name</label>
+                    <depends>
+                        <field id="change_address">1</field>
+                    </depends>
+                </field>
+                <field id="sender_surname" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sender - surname</label>
+                    <depends>
+                        <field id="change_address">1</field>
+                    </depends>
+                </field>
+                <field id="sender_company" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Sender - company</label>
+                    <depends>
+                        <field id="change_address">1</field>
+                    </depends>
+                </field>
+                <field id="sender_email" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Sender - email</label>
+                    <depends>
+                        <field id="change_address">1</field>
+                    </depends>
+                </field>
+                <field id="sender_phone" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Sender - phone</label>
+                    <depends>
+                        <field id="change_address">1</field>
+                    </depends>
+                </field>
+                <field id="sender_street" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Sender - street</label>
+                    <depends>
+                        <field id="change_address">1</field>
+                    </depends>
+                </field>
+                <field id="sender_building_number" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Sender - building number</label>
+                    <depends>
+                        <field id="change_address">1</field>
+                    </depends>
+                </field>
+                <field id="sender_city" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Sender - city</label>
+                    <depends>
+                        <field id="change_address">1</field>
+                    </depends>
+                </field>
+                <field id="sender_postcode" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sender - postcode</label>
+                    <depends>
+                        <field id="change_address">1</field>
+                    </depends>
+                </field>
+                <field id="sender_country_code" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Sender - country code</label>
+                    <depends>
+                        <field id="change_address">1</field>
+                    </depends>
+                </field>
+                <field id="generate_shipping" translate="label" type="select" sortOrder="160" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>After generate package send email to customer</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="send_email" translate="label" type="select" sortOrder="170" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Generate shipping in order after generating Inpost package</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="become_partner" translate="label" type="label" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Become a partner(SzybkieZwroty.pl)</label>
+                    <comment><![CDATA[<a href="https://szybkiezwroty.pl/pl/business#navigate-buttons">Become a partner</a>]]></comment>
+                </field>
+                <field id="szybkiezwroty_url" translate="label" type="text" sortOrder="190" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Url for szybkiezwroty</label>
+                </field>
+                <field id="weight_attribute_code" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Weight attribute code</label>
+                </field>
+                <field id="weight_unit" translate="label" type="select" sortOrder="210" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Weight unit</label>
+                    <source_model>Smartmage\Inpost\Model\Config\Source\WeightUnit</source_model>
+                </field>
+                <field id="automatic_pay_for_package" translate="label" type="select" sortOrder="220" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Automatic payment for generated package</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <group id="inpostlocker" translate="label" type="text" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Inpost - Paczkomaty</label>
+                    <group id="standard" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Inpost - Paczkomaty 24/7</label>
+                        <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                            <label>Enabled</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        </field>
+                        <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                        </field>
+                        <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Method name</label>
+                        </field>
+                        <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Price</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                        </field>
+                        <field id="free_shipping_enable" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1">
+                            <label>Enable Free Shipping Threshold</label>
+                            <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                        </field>
+                        <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
+                            <label>Free Shipping Amount Threshold</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                            <depends>
+                                <field id="free_shipping_enable">1</field>
+                            </depends>
+                        </field>
+                        <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Position</label>
+                        </field>
+                        <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Max cart weight</label>
+                            <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                        </field>
+                        <field id="default_way_sending" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1">
+                            <label>Default way of sending</label>
+                            <source_model>DefaultWaySendingStandard</source_model>
+                        </field>
+                        <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                            <label>Default sending point</label>
+                            <frontend_model>DefaultSendingPointStandard</frontend_model>
+                        </field>
+                    </group>
+                    <group id="standardcod" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Inpost - Paczkomaty 24/7 - płatność przy odbiorze</label>
+                        <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                            <label>Enabled</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        </field>
+                        <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                        </field>
+                        <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Method name</label>
+                        </field>
+                        <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Price</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                        </field>
+                        <field id="free_shipping_enable" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1">
+                            <label>Enable Free Shipping Threshold</label>
+                            <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                        </field>
+                        <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
+                            <label>Free Shipping Amount Threshold</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                            <depends>
+                                <field id="free_shipping_enable">1</field>
+                            </depends>
+                        </field>
+                        <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Position</label>
+                        </field>
+                        <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Max cart weight</label>
+                            <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                        </field>
+                        <field id="default_way_sending" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1">
+                            <label>Default way of sending</label>
+                            <source_model>DefaultWaySendingStandard</source_model>
+                        </field>
+                        <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                            <label>Default sending point</label>
+                            <frontend_model>DefaultSendingPointStandardCod</frontend_model>
+                        </field>
+                    </group>
+                    <group id="standardeow" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Inpost - Paczkomaty 24/7 - dostawa w weekend</label>
+                        <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                            <label>Enabled</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        </field>
+                        <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                        </field>
+                        <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Method name</label>
+                        </field>
+                        <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Price</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                        </field>
+                        <field id="free_shipping_enable" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1">
+                            <label>Enable Free Shipping Threshold</label>
+                            <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                        </field>
+                        <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
+                            <label>Free Shipping Amount Threshold</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                            <depends>
+                                <field id="free_shipping_enable">1</field>
+                            </depends>
+                        </field>
+                        <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Position</label>
+                        </field>
+                        <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Max cart weight</label>
+                            <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                        </field>
+                        <field id="start_day" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1">
+                            <label>Day of the week starting delivery in weekend</label>
+                            <source_model>Smartmage\Inpost\Model\Config\Source\DayOfTheWeek</source_model>
+                        </field>
+                        <field id="end_day" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1">
+                            <label>Day of the week ending delivery in weekend</label>
+                            <source_model>Smartmage\Inpost\Model\Config\Source\DayOfTheWeek</source_model>
+                        </field>
+                        <field id="start_hour" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1">
+                            <label>Hour starting delivery in weekend</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                        </field>
+                        <field id="end_hour" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1">
+                            <label>Hour ending delivery in weekend</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                        </field>
+                        <field id="show_only_delivery_eow" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                            <label>Show only delivery in weekend</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                            <comment>If set on Yes, normal parcel delivery will be hidden if weeknd delivery will be available</comment>
+                        </field>
+                    </group>
+                    <group id="standardeowcod" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Inpost - Paczkomaty 24/7 - dostawa w weekend - płatność przy odbiorze</label>
+                        <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                            <label>Enabled</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        </field>
+                        <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                        </field>
+                        <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Method name</label>
+                        </field>
+                        <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Price</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                        </field>
+                        <field id="free_shipping_enable" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1">
+                            <label>Enable Free Shipping Threshold</label>
+                            <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                        </field>
+                        <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
+                            <label>Free Shipping Amount Threshold</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                            <depends>
+                                <field id="free_shipping_enable">1</field>
+                            </depends>
+                        </field>
+                        <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Position</label>
+                        </field>
+                        <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Max cart weight</label>
+                            <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                        </field>
+                        <field id="start_day" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1">
+                            <label>Day of the week starting delivery in weekend</label>
+                            <source_model>Smartmage\Inpost\Model\Config\Source\DayOfTheWeek</source_model>
+                        </field>
+                        <field id="end_day" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1">
+                            <label>Day of the week ending delivery in weekend</label>
+                            <source_model>Smartmage\Inpost\Model\Config\Source\DayOfTheWeek</source_model>
+                        </field>
+                        <field id="start_hour" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1">
+                            <label>Hour starting delivery in weekend</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                        </field>
+                        <field id="end_hour" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1">
+                            <label>Hour ending delivery in weekend</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                        </field>
+                        <field id="show_only_delivery_eow" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                            <label>Show only delivery in weekend</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                            <comment>If set on Yes, normal parcel delivery will be hidden if weeknd delivery will be available</comment>
+                        </field>
+                    </group>
+                </group>
+                <group id="inpostcourier" translate="label" type="text" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Inpost - Przesyłka kurierska</label>
+                    <group id="c2c" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Inpost - Przesyłka kurierska InPost Kurier Standard</label>
+                        <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                            <label>Enabled</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        </field>
+                        <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                        </field>
+                        <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Method name</label>
+                        </field>
+                        <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Price</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                        </field>
+                        <field id="free_shipping_enable" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1">
+                            <label>Enable Free Shipping Threshold</label>
+                            <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                        </field>
+                        <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
+                            <label>Free Shipping Amount Threshold</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                            <depends>
+                                <field id="free_shipping_enable">1</field>
+                            </depends>
+                        </field>
+                        <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Position</label>
+                        </field>
+                        <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Max cart weight</label>
+                            <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                        </field>
+                    </group>
+                    <group id="c2ccod" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Inpost - Przesyłka kurierska InPost Kurier Standard – za pobraniem</label>
+                        <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                            <label>Enabled</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        </field>
+                        <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                        </field>
+                        <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Method name</label>
+                        </field>
+                        <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Price</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                        </field>
+                        <field id="free_shipping_enable" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1">
+                            <label>Enable Free Shipping Threshold</label>
+                            <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                        </field>
+                        <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
+                            <label>Free Shipping Amount Threshold</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                            <depends>
+                                <field id="free_shipping_enable">1</field>
+                            </depends>
+                        </field>
+                        <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Position</label>
+                        </field>
+                        <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Max cart weight</label>
+                            <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                        </field>
+                    </group>
+                    <group id="standard" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Inpost - Przesyłka kurierska standardowa</label>
+                        <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                            <label>Enabled</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        </field>
+                        <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                        </field>
+                        <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Method name</label>
+                        </field>
+                        <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Price</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                        </field>
+                        <field id="free_shipping_enable" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1">
+                            <label>Enable Free Shipping Threshold</label>
+                            <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                        </field>
+                        <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
+                            <label>Free Shipping Amount Threshold</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                            <depends>
+                                <field id="free_shipping_enable">1</field>
+                            </depends>
+                        </field>
+                        <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Position</label>
+                        </field>
+                        <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Max cart weight</label>
+                            <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                        </field>
+                    </group>
+                    <group id="express1000" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Inpost - Przesyłka kurierska z doręczeniem do 10:00</label>
+                        <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                            <label>Enabled</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        </field>
+                        <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                        </field>
+                        <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Method name</label>
+                        </field>
+                        <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Price</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                        </field>
+                        <field id="free_shipping_enable" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1">
+                            <label>Enable Free Shipping Threshold</label>
+                            <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                        </field>
+                        <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
+                            <label>Free Shipping Amount Threshold</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                            <depends>
+                                <field id="free_shipping_enable">1</field>
+                            </depends>
+                        </field>
+                        <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Position</label>
+                        </field>
+                        <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Max cart weight</label>
+                            <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                        </field>
+                    </group>
+                    <group id="express1200" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Inpost - Przesyłka kurierska z doręczeniem do 12:00</label>
+                        <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                            <label>Enabled</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        </field>
+                        <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                        </field>
+                        <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Method name</label>
+                        </field>
+                        <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Price</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                        </field>
+                        <field id="free_shipping_enable" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1">
+                            <label>Enable Free Shipping Threshold</label>
+                            <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                        </field>
+                        <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
+                            <label>Free Shipping Amount Threshold</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                            <depends>
+                                <field id="free_shipping_enable">1</field>
+                            </depends>
+                        </field>
+                        <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Position</label>
+                        </field>
+                        <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Max cart weight</label>
+                            <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                        </field>
+                    </group>
+                    <group id="express1700" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Inpost - Przesyłka kurierska z doręczeniem do 17:00</label>
+                        <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                            <label>Enabled</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        </field>
+                        <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                        </field>
+                        <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Method name</label>
+                        </field>
+                        <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Price</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                        </field>
+                        <field id="free_shipping_enable" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1">
+                            <label>Enable Free Shipping Threshold</label>
+                            <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                        </field>
+                        <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
+                            <label>Free Shipping Amount Threshold</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                            <depends>
+                                <field id="free_shipping_enable">1</field>
+                            </depends>
+                        </field>
+                        <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Position</label>
+                        </field>
+                        <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Max cart weight</label>
+                            <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                        </field>
+                    </group>
+                    <group id="localstandard" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Inpost - Przesyłka kurierska lokalna standardowa</label>
+                        <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                            <label>Enabled</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        </field>
+                        <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                        </field>
+                        <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Method name</label>
+                        </field>
+                        <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Price</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                        </field>
+                        <field id="free_shipping_enable" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1">
+                            <label>Enable Free Shipping Threshold</label>
+                            <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                        </field>
+                        <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
+                            <label>Free Shipping Amount Threshold</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                            <depends>
+                                <field id="free_shipping_enable">1</field>
+                            </depends>
+                        </field>
+                        <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Position</label>
+                        </field>
+                        <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Max cart weight</label>
+                            <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                        </field>
+                    </group>
+                    <group id="localexpress" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Inpost - Przesyłka kurierska lokalna Expresowa</label>
+                        <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                            <label>Enabled</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        </field>
+                        <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                        </field>
+                        <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Method name</label>
+                        </field>
+                        <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Price</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                        </field>
+                        <field id="free_shipping_enable" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1">
+                            <label>Enable Free Shipping Threshold</label>
+                            <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                        </field>
+                        <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
+                            <label>Free Shipping Amount Threshold</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                            <depends>
+                                <field id="free_shipping_enable">1</field>
+                            </depends>
+                        </field>
+                        <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Position</label>
+                        </field>
+                        <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Max cart weight</label>
+                            <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                        </field>
+                    </group>
+                    <group id="localsuperexpress" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Inpost - Przesyłka kurierska lokalna Super Expresowa</label>
+                        <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                            <label>Enabled</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        </field>
+                        <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                        </field>
+                        <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Method name</label>
+                        </field>
+                        <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Price</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                        </field>
+                        <field id="free_shipping_enable" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1">
+                            <label>Enable Free Shipping Threshold</label>
+                            <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                        </field>
+                        <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
+                            <label>Free Shipping Amount Threshold</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                            <depends>
+                                <field id="free_shipping_enable">1</field>
+                            </depends>
+                        </field>
+                        <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Position</label>
+                        </field>
+                        <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Max cart weight</label>
+                            <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                        </field>
+                    </group>
+                    <group id="palette" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Inpost - Przesyłka kurierska paleta standard</label>
+                        <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                            <label>Enabled</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        </field>
+                        <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                        </field>
+                        <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Method name</label>
+                        </field>
+                        <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Price</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                        </field>
+                        <field id="free_shipping_enable" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1">
+                            <label>Enable Free Shipping Threshold</label>
+                            <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                        </field>
+                        <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
+                            <label>Free Shipping Amount Threshold</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                            <depends>
+                                <field id="free_shipping_enable">1</field>
+                            </depends>
+                        </field>
+                        <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Position</label>
+                        </field>
+                        <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Max cart weight</label>
+                            <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                        </field>
+                    </group>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>
