@@ -7,14 +7,13 @@ namespace Smartmage\Inpost\Model\Carrier;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Smartmage\Inpost\Model\ConfigProvider;
-use Magento\Checkout\Model\SessionFactory as CheckoutSessionFactory;
 
 class AbstractMethod
 {
     /**
      * @var string
      */
-    protected $methodKey;
+    public $methodKey;
 
     /**
      * @var ScopeConfigInterface
@@ -29,7 +28,7 @@ class AbstractMethod
     /**
      * @var String
      */
-    protected $carrierCode;
+    public $carrierCode;
 
     /**
      * @var ConfigProvider
@@ -37,37 +36,119 @@ class AbstractMethod
     protected $configProvider;
 
     /**
-     * @var CheckoutSessionFactory
+     * @var mixed
      */
-    protected $checkoutSessionFactory;
+    protected $quote;
+
+    protected $quoteItems;
+
+    /**
+     * @var string
+     */
+    protected $blockAttribute;
 
     /**
      * AbstractMethod constructor.
      * @param ScopeConfigInterface $scopeConfig
      * @param String $carrierCode
      * @param ConfigProvider $configProvider
-     * @param CheckoutSessionFactory $checkoutSessionFactory
+     * @param StoreManagerInterface $storeManager
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         String $carrierCode,
         ConfigProvider $configProvider,
-        CheckoutSessionFactory $checkoutSessionFactory
+        StoreManagerInterface $storeManager
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->carrierCode = $carrierCode;
         $this->configProvider = $configProvider;
-        $this->checkoutSessionFactory = $checkoutSessionFactory;
+        $this->storeManager = $storeManager;
+        $this->quote = $this->getQuote();
     }
 
+    /**
+     * @return bool
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
     public function isAllowed()
     {
-        //Darmowa dostawa od
-        //Maksymalna waga koszyka
+        //Darmowa dostawa od - done
+        //Maksymalna waga koszyka done
         //Dopuszczalność wysyłki danego koszyka
         //Okienko czasowe metody dostawy w weekend
 
-        return true;
+        //Check if method is active
+        if (!$this->configProvider->getConfigFlag($this->carrierCode . '/' . $this->methodKey . '/active')) {
+            return false;
+        }
+
+        //Check if products have disabled shipping method type
+        if ($this->isShippingDisabled()) {
+            return false;
+        }
+
+        //Checking that the products do not weigh too much
+        $maxWeight = $this->configProvider->getConfigData(
+            $this->carrierCode . '/' . $this->methodKey .'/max_cart_weight'
+        );
+        if ($this->calculateWeight() > $maxWeight) {
+            return false;
+        }
+    }
+
+    protected function isWeekendSendAvailable(): bool
+    {
+        return false;
+    }
+
+    protected function calculateWeight()
+    {
+        $customWeightAttribute = $this->configProvider->getConfigData(
+            'weight_attribute_code'
+        );
+        $weight = 0;
+
+        if ($customWeightAttribute) {
+            $storeId = $this->storeManager->getStore()->getId();
+            foreach ($this->quoteItems as $item) {
+                $quoteProduct = $item->getProduct();
+                $weight += $quoteProduct->getResource()->getAttributeRawValue(
+                    $quoteProduct->getId(),
+                    $customWeightAttribute,
+                    $storeId
+                );
+            }
+        } else {
+            foreach ($this->quoteItems as $item) {
+                $weight += ($item->getWeight() * $item->getQty());
+            }
+        }
+
+        return $weight;
+    }
+
+    /**
+     * @return bool
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    protected function isShippingDisabled()
+    {
+        $storeId = $this->storeManager->getStore()->getId();
+        foreach ($this->quoteItems as $item) {
+            $product = $item->getProduct();
+            $blockShip = $product->getResource()->getAttributeRawValue(
+                $product->getId(),
+                $this->blockAttribute,
+                $storeId
+            );
+
+            if ($blockShip) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -78,6 +159,10 @@ class AbstractMethod
         if ($this->isFreeShipping()) {
             return 0;
         }
+
+        return $this->configProvider->getConfigData(
+            $this->carrierCode . '/' . $this->methodKey . '/price'
+        );
     }
 
     /**
@@ -94,6 +179,9 @@ class AbstractMethod
 
             $total = $this->getQuoteTotal();
 
+            if ($total >= $freeShippingFrom) {
+                return true;
+            }
         }
 
         return false;
@@ -107,17 +195,19 @@ class AbstractMethod
         return $this->methodKey;
     }
 
-    /**
-     * @return mixed
-     */
-    protected function getQuote()
-    {
-        return $this->checkoutSessionFactory->create->getQuote();
-    }
-
     protected function getQuoteTotal($quote)
     {
+        $total = 0;
 
+        foreach ($this->quoteItems as $item) {
+            $total += $item->getQty()*$item->getPrice();
+        }
+
+        return $total;
     }
 
+    public function setItems($quoteItems)
+    {
+        $this->quoteItems = $quoteItems;
+    }
 }

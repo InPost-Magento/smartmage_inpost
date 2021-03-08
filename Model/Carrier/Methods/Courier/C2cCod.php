@@ -8,7 +8,9 @@ use Smartmage\Inpost\Model\Carrier\AbstractMethod;
 
 class C2cCod extends AbstractMethod
 {
-    protected $methodKey = 'c2ccod';
+    public $methodKey = 'c2ccod';
 
-    protected $carrierCode = 'inpostcourier';
+    public $carrierCode = 'inpostcourier';
+
+    protected $blockAttribute = 'block_send_with_courier';
 }

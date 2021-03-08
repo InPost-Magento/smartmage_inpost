@@ -8,7 +8,9 @@ use Smartmage\Inpost\Model\Carrier\AbstractMethod;
 
 class LocalStandard extends AbstractMethod
 {
-    protected $methodKey = 'localstandard';
+    public $methodKey = 'localstandard';
 
-    protected $carrierCode = 'inpostcourier';
+    public $carrierCode = 'inpostcourier';
+
+    protected $blockAttribute = 'block_send_with_courier';
 }

@@ -7,6 +7,7 @@ use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Shipping\Model\Carrier\AbstractCarrier;
 use Magento\Shipping\Model\Rate\Result;
 use Smartmage\Inpost\Model\ConfigProvider;
+use Magento\Checkout\Model\SessionFactory as CheckoutSessionFactory;
 
 class AbstractInpostCarrier extends AbstractCarrier
 {
@@ -31,6 +32,22 @@ class AbstractInpostCarrier extends AbstractCarrier
      */
     protected $configProvider;
 
+    /**
+     * @var CheckoutSessionFactory
+     */
+    protected $checkoutSessionFactory;
+
+    /**
+     * AbstractInpostCarrier constructor.
+     * @param ScopeConfigInterface $scopeConfig
+     * @param ErrorFactory $rateErrorFactory
+     * @param LoggerInterface $logger
+     * @param ResultFactory $rateResultFactory
+     * @param MethodFactory $rateMethodFactory
+     * @param array $methods
+     * @param ConfigProvider $configProvider
+     * @param array $data
+     */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         ErrorFactory $rateErrorFactory,
@@ -39,18 +56,20 @@ class AbstractInpostCarrier extends AbstractCarrier
         MethodFactory $rateMethodFactory,
         array $methods,
         ConfigProvider $configProvider,
+        CheckoutSessionFactory $checkoutSessionFactory,
         array $data = []
     ) {
         $this->rateResultFactory = $rateResultFactory;
         $this->rateMethodFactory = $rateMethodFactory;
         $this->methods = $methods;
         $this->configProvider = $configProvider;
+        $this->checkoutSessionFactory = $checkoutSessionFactory;
         parent::__construct($scopeConfig, $rateErrorFactory, $logger, $data);
     }
 
     /**
      * @param RateRequest $request
-     * @return bool|\Magento\Framework\DataObject|void|null
+     * @return Result
      */
     public function collectRates(RateRequest $request)
     {
@@ -58,17 +77,10 @@ class AbstractInpostCarrier extends AbstractCarrier
         $result = $this->rateResultFactory->create();
 
         foreach ($this->getAllowedMethods() as $methodKey => $method) {
-            $this->createResultMethod($method);
+            $result->append(
+                $this->createResultMethod($method)
+            );
         }
-
-        /*
-        $shippingPrice = $this->getShippingPrice($request, $freeBoxes);
-
-        if ($shippingPrice !== false) {
-            $method = $this->createResultMethod($shippingPrice);
-            $result->append($method);
-        }
-        */
 
         return $result;
     }
@@ -78,17 +90,18 @@ class AbstractInpostCarrier extends AbstractCarrier
      */
     public function getAllowedMethods()
     {
-        //'carriers/' . $this->_code . '/' . $field;
-        //carriers/inpost/inpostcourier/c2c/active
         $allowedMethods = [];
+        $quoteItems = $this->getQuoteItems();
 
         foreach ($this->methods as $method) {
-            if ($this->configProvider->getConfigFlag($this->_code.'/'.$method::METHOD_KEY . '/active')
-                && $method->isAllowed()
+            $method->setItems($quoteItems);
+            if ($method->isAllowed()
             ) {
                 $allowedMethods[] = [
-                    'key' => $method::METHOD_KEY,
-                    'sort' => $this->configProvider->getConfigData($this->_code.'/'.$method::METHOD_KEY . '/position'),
+                    'key' => $method->getKey(),
+                    'sort' => $this->configProvider->getConfigData(
+                        $this->_code . '/' . $method->getKey() . '/position'
+                    ),
                     'price' => $method->calculatePrice()
                 ];
             }
@@ -102,18 +115,25 @@ class AbstractInpostCarrier extends AbstractCarrier
 
     private function createResultMethod($method)
     {
-        /** @var \Magento\Quote\Model\Quote\Address\RateResult\Method $method */
-        $method = $this->rateMethodFactory->create();
+        /** @var \Magento\Quote\Model\Quote\Address\RateResult\Method $rateMethod */
+        $rateMethod = $this->rateMethodFactory->create();
 
-        $method->setCarrier($this->_code);
-        $method->setCarrierTitle($this->configProvider->getConfigData($this->_code.'/label'));
+        $rateMethod->setCarrier($this->_code);
+        $rateMethod->setCarrierTitle($this->configProvider->getConfigData($this->_code . '/label'));
 
-        $method->setMethod($this->_code);
-        $method->setMethodTitle($this->configProvider->getConfigData($method->getKey(). '/name'));
+        $rateMethod->setMethod($this->_code);
+        $rateMethod->setMethodTitle($this->configProvider->getConfigData($method['key'] . '/name'));
 
-        $shippingPrice = $method->calculatePrice();
-        $method->setPrice($shippingPrice);
-        $method->setCost($shippingPrice);
-        return $method;
+        $rateMethod->setPrice($method['price']);
+        $rateMethod->setCost($method['price']);
+        return $rateMethod;
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getQuoteItems()
+    {
+        return $this->checkoutSessionFactory->create->getQuote()->getAllVisibleItems();
     }
 }

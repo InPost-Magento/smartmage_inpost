@@ -8,7 +8,9 @@ use Smartmage\Inpost\Model\Carrier\AbstractMethod;
 
 class Express1200 extends AbstractMethod
 {
-    protected $methodKey = 'express1200';
+    public $methodKey = 'express1200';
 
-    protected $carrierCode = 'inpostcourier';
+    public $carrierCode = 'inpostcourier';
+
+    protected $blockAttribute = 'block_send_with_courier';
 }
