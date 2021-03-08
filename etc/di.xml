@@ -1,0 +1,17 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="DefaultWaySendingStandard" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
+        <arguments>
+            <argument name="code" xsi:type="string">standard</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointStandard" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">standard</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointStandardCod" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">standardcod</argument>
+        </arguments>
+    </virtualType>
+</config>
