@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Smartmage\Inpost\Model\Carrier;
+namespace Smartmage\Inpost\Model\Carrier\Methods;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\StoreManagerInterface;
@@ -35,11 +35,6 @@ class AbstractMethod
      */
     protected $configProvider;
 
-    /**
-     * @var mixed
-     */
-    protected $quote;
-
     protected $quoteItems;
 
     /**
@@ -50,21 +45,17 @@ class AbstractMethod
     /**
      * AbstractMethod constructor.
      * @param ScopeConfigInterface $scopeConfig
-     * @param String $carrierCode
      * @param ConfigProvider $configProvider
      * @param StoreManagerInterface $storeManager
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        String $carrierCode,
         ConfigProvider $configProvider,
         StoreManagerInterface $storeManager
     ) {
         $this->scopeConfig = $scopeConfig;
-        $this->carrierCode = $carrierCode;
         $this->configProvider = $configProvider;
         $this->storeManager = $storeManager;
-        $this->quote = $this->getQuote();
     }
 
     /**
@@ -90,16 +81,22 @@ class AbstractMethod
 
         //Checking that the products do not weigh too much
         $maxWeight = $this->configProvider->getConfigData(
-            $this->carrierCode . '/' . $this->methodKey .'/max_cart_weight'
+            $this->carrierCode . '/' . $this->methodKey . '/max_cart_weight'
         );
         if ($this->calculateWeight() > $maxWeight) {
             return false;
         }
+
+        if (!$this->isWeekendSendAvailable()) {
+            return false;
+        }
+
+        return true;
     }
 
     protected function isWeekendSendAvailable(): bool
     {
-        return false;
+        return true;
     }
 
     protected function calculateWeight()
@@ -195,7 +192,7 @@ class AbstractMethod
         return $this->methodKey;
     }
 
-    protected function getQuoteTotal($quote)
+    protected function getQuoteTotal()
     {
         $total = 0;
 
@@ -209,5 +206,12 @@ class AbstractMethod
     public function setItems($quoteItems)
     {
         $this->quoteItems = $quoteItems;
+    }
+
+    public function getName()
+    {
+        return $this->configProvider->getConfigData(
+            $this->carrierCode . '/' . $this->methodKey . '/name'
+        );
     }
 }

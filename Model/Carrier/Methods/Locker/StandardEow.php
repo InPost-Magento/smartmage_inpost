@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Smartmage\Inpost\Model\Carrier\Methods\Locker;
 
-use Smartmage\Inpost\Model\Carrier\AbstractMethod;
+use Smartmage\Inpost\Model\Carrier\Methods\AbstractMethod;
 
 class StandardEow extends AbstractMethod
 {
@@ -17,19 +17,19 @@ class StandardEow extends AbstractMethod
     protected function isWeekendSendAvailable(): bool
     {
         $startDay = $this->configProvider->getConfigData(
-            $this->carrierCode . '/' . $this->methodKey .'/start_day'
+            $this->carrierCode . '/' . $this->methodKey . '/start_day'
         );
 
         $endDay = $this->configProvider->getConfigData(
-            $this->carrierCode . '/' . $this->methodKey .'/end_day'
+            $this->carrierCode . '/' . $this->methodKey . '/end_day'
         );
 
         $startHour = $this->configProvider->getConfigData(
-            $this->carrierCode . '/' . $this->methodKey .'/start_hour'
+            $this->carrierCode . '/' . $this->methodKey . '/start_hour'
         );
 
         $endHour = $this->configProvider->getConfigData(
-            $this->carrierCode . '/' . $this->methodKey .'/end_hour'
+            $this->carrierCode . '/' . $this->methodKey . '/end_hour'
         );
 
         $currentDayOfWeek = date('w');
@@ -38,9 +38,22 @@ class StandardEow extends AbstractMethod
             $currentDayOfWeek = 7;
         }
 
-        if ($currentDayOfWeek >= $startDay && $currentDayOfWeek <= $endDay) {
-
+        if ($currentDayOfWeek > $startDay && $currentDayOfWeek < $endDay) {
+            return true;
         }
+
+        if ($currentDayOfWeek == $startDay) {
+            if (date('Hi') >= str_replace(':', '', $startHour)) {
+                return true;
+            }
+        }
+
+        if ($currentDayOfWeek == $endDay) {
+            if (date('Hi') < str_replace(':', '', $endHour)) {
+                return true;
+            }
+        }
+
         return false;
     }
 }

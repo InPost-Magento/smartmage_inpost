@@ -6,6 +6,7 @@ namespace Smartmage\Inpost\Model\Carrier;
 
 use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Shipping\Model\Carrier\CarrierInterface;
+use Magento\Shipping\Model\Rate\Result;
 use Smartmage\Inpost\Model\Carrier\Methods\Locker\Standard;
 use Smartmage\Inpost\Model\Carrier\Methods\Locker\StandardCod;
 use Smartmage\Inpost\Model\Carrier\Methods\Locker\StandardEow;
@@ -13,6 +14,10 @@ use Smartmage\Inpost\Model\Carrier\Methods\Locker\StandardEowCod;
 use Psr\Log\LoggerInterface;
 use Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Shipping\Model\Rate\ResultFactory;
+use Magento\Quote\Model\Quote\Address\RateResult\MethodFactory;
+use Smartmage\Inpost\Model\ConfigProvider;
+use Magento\Checkout\Model\Session;
 
 /**
  * Class InpostLocker for locker carrier
@@ -31,11 +36,12 @@ class InpostLocker extends AbstractInpostCarrier implements CarrierInterface
      * @param LoggerInterface $logger
      * @param ResultFactory $rateResultFactory
      * @param MethodFactory $rateMethodFactory
-     * @param ItemPriceCalculator $itemPriceCalculator
      * @param Standard $standardLocker
      * @param StandardCod $standardCod
      * @param StandardEow $standardEow
      * @param StandardEowCod $standardEowCod
+     * @param Session $checkoutSession
+     * @param ConfigProvider $configProvider
      * @param array $data
      */
     public function __construct(
@@ -48,6 +54,8 @@ class InpostLocker extends AbstractInpostCarrier implements CarrierInterface
         StandardCod $standardCod,
         StandardEow $standardEow,
         StandardEowCod $standardEowCod,
+        Session $checkoutSession,
+        ConfigProvider $configProvider,
         array $data = []
     ) {
         $this->rateResultFactory = $rateResultFactory;
@@ -65,7 +73,52 @@ class InpostLocker extends AbstractInpostCarrier implements CarrierInterface
             $rateResultFactory,
             $rateMethodFactory,
             $methods,
+            $configProvider,
+            $checkoutSession,
             []
         );
+    }
+
+    /**
+     * @param RateRequest $request
+     * @return Result
+     */
+    public function collectRates(RateRequest $request)
+    {
+        if ($this->disableNormalParcel()) {
+            /** @var Result $result */
+            $result = $this->rateResultFactory->create();
+
+            $this->getAllowedMethods();
+
+            foreach ($this->allowedMethods as $method) {
+
+                if (!in_array($method['key'], $this->eowMethods) && $this->eowAvailable) {
+                    continue;
+                }
+                $result->append(
+                    parent::createResultMethod($method)
+                );
+            }
+
+            return $result;
+        } else {
+            return parent::collectRates($request);
+        }
+    }
+
+    /**
+     * @return bool
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    protected function disableNormalParcel()
+    {
+        if ($this->configProvider->getConfigFlag(
+            $this->_code . '/show_only_delivery_eow'
+        )) {
+            return true;
+        }
+
+        return false;
     }
 }

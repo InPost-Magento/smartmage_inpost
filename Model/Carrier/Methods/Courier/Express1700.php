@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Smartmage\Inpost\Model\Carrier\Methods\Courier;
 
-use Smartmage\Inpost\Model\Carrier\AbstractMethod;
+use Smartmage\Inpost\Model\Carrier\Methods\AbstractMethod;
 
 class Express1700 extends AbstractMethod
 {

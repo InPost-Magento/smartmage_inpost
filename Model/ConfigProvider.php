@@ -39,14 +39,13 @@ class ConfigProvider
      */
     public function getConfigData($field)
     {
-        $path = 'carriers/inpost/' . $field;
+        $path = 'carriers/' . $field;
 
         return $this->scopeConfig->getValue(
             $path,
             ScopeInterface::SCOPE_STORE,
             $this->storeManager->getStore()
         );
-        //carriers/inpost/inpostlocker/standard
     }
 
     /**
@@ -57,7 +56,7 @@ class ConfigProvider
      */
     public function getConfigFlag($field)
     {
-        $path = 'carriers/inpost/' . $field;
+        $path = 'carriers/' . $field;
 
         return $this->scopeConfig->isSetFlag(
             $path,

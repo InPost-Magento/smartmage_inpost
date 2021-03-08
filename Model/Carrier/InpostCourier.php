@@ -20,6 +20,8 @@ use Smartmage\Inpost\Model\Carrier\Methods\Courier\LocalStandard;
 use Smartmage\Inpost\Model\Carrier\Methods\Courier\LocalSuperExpress;
 use Smartmage\Inpost\Model\Carrier\Methods\Courier\Palette;
 use Smartmage\Inpost\Model\Carrier\Methods\Courier\Standard;
+use Smartmage\Inpost\Model\ConfigProvider;
+use Magento\Checkout\Model\Session;
 
 /**
  * Class InpostCourier for courier carrier
@@ -38,7 +40,6 @@ class InpostCourier extends AbstractInpostCarrier implements CarrierInterface
      * @param LoggerInterface $logger
      * @param ResultFactory $rateResultFactory
      * @param MethodFactory $rateMethodFactory
-     * @param ItemPriceCalculator $itemPriceCalculator
      * @param C2c $c2c
      * @param C2cCod $c2cCod
      * @param Express1000 $express1000
@@ -49,6 +50,8 @@ class InpostCourier extends AbstractInpostCarrier implements CarrierInterface
      * @param LocalSuperExpress $localSuperExpress
      * @param Palette $palette
      * @param Standard $standard
+     * @param Session $checkoutSession
+     * @param ConfigProvider $configProvider
      * @param array $data
      */
     public function __construct(
@@ -67,6 +70,8 @@ class InpostCourier extends AbstractInpostCarrier implements CarrierInterface
         LocalSuperExpress $localSuperExpress,
         Palette $palette,
         Standard $standard,
+        Session $checkoutSession,
+        ConfigProvider $configProvider,
         array $data = []
     ) {
         $this->rateResultFactory = $rateResultFactory;
@@ -91,6 +96,8 @@ class InpostCourier extends AbstractInpostCarrier implements CarrierInterface
             $rateResultFactory,
             $rateMethodFactory,
             $methods,
+            $configProvider,
+            $checkoutSession,
             []
         );
     }

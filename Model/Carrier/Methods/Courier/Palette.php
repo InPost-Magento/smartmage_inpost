@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Smartmage\Inpost\Model\Carrier\Methods\Courier;
 
-use Smartmage\Inpost\Model\Carrier\AbstractMethod;
+use Smartmage\Inpost\Model\Carrier\Methods\AbstractMethod;
 
-class Palette extends AbstractMethods
+class Palette extends AbstractMethod
 {
     public $methodKey = 'palette';
 
