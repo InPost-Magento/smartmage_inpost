@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <shipping>
+            <inpost>
+                <mode>test</mode>
+                <label_format>pdf</label_format>
+                <label_size>a4</label_size>
+                <change_address>0</change_address>
+                <sender_country_code>PL</sender_country_code>
+                <free_method>G</free_method>
+                <weight_attribute_code>weight</weight_attribute_code>
+                <weight_unit>kg</weight_unit>
+                <automatic_pay_for_package>0</automatic_pay_for_package>
+            </inpost>
+        </shipping>
+        <carriers>
+            <inpostlocker>
+                <model>Smartmage\Inpost\Model\Carrier\InpostLocker</model>
+                <title>Inpost Paczkomaty</title>
+                <active>1</active>
+                <show_only_delivery_eow>0</show_only_delivery_eow>
+                <standard>
+                    <active>0</active>
+                    <name>Paczkomaty 24/7</name>
+                    <max_cart_weight>25</max_cart_weight>
+                </standard>
+                <standardcod>
+                    <active>0</active>
+                    <title>Inpost</title>
+                    <name>Paczkomaty 24/7</name>
+                    <max_cart_weight>25</max_cart_weight>
+                </standardcod>
+                <standardeow>
+                    <active>0</active>
+                    <title>Inpost</title>
+                    <name>Paczkomaty 24/7</name>
+                    <max_cart_weight>25</max_cart_weight>
+                    <start_day>4</start_day>
+                    <end_day>6</end_day>
+                    <start_hour>20:00</start_hour>
+                    <end_hour>13:00</end_hour>
+                </standardeow>
+                <standardeowcod>
+                    <active>0</active>
+                    <title>Inpost</title>
+                    <name>Paczkomaty 24/7</name>
+                    <max_cart_weight>25</max_cart_weight>
+                    <start_day>4</start_day>
+                    <end_day>6</end_day>
+                    <start_hour>20:00</start_hour>
+                    <end_hour>13:00</end_hour>
+                </standardeowcod>
+            </inpostlocker>
+            <inpostcourier>
+                <model>Smartmage\Inpost\Model\Carrier\InpostCourier</model>
+                <title>Inpost Kurier</title>
+                <active>1</active>
+                <c2c>
+                    <active>0</active>
+                    <title>Inpost</title>
+                    <name>Kurier</name>
+                    <max_cart_weight>25</max_cart_weight>
+                </c2c>
+                <c2ccod>
+                    <active>0</active>
+                    <title>Inpost</title>
+                    <name>Kurier - płatność przy odbiorze</name>
+                    <max_cart_weight>25</max_cart_weight>
+                </c2ccod>
+                <standard>
+                    <active>0</active>
+                    <title>Inpost</title>
+                    <name>Kurier</name>
+                    <max_cart_weight>25</max_cart_weight>
+                </standard>
+                <express1000>
+                    <active>0</active>
+                    <title>Inpost</title>
+                    <name>Kurier - doręczenie do 10:00</name>
+                    <max_cart_weight>25</max_cart_weight>
+                </express1000>
+                <express1200>
+                    <active>0</active>
+                    <title>Inpost</title>
+                    <name>Kurier - doręczenie do 12:00</name>
+                    <max_cart_weight>25</max_cart_weight>
+                </express1200>
+                <express1700>
+                    <active>0</active>
+                    <title>Inpost</title>
+                    <name>Kurier - doręczenie do 17:00</name>
+                    <max_cart_weight>25</max_cart_weight>
+                </express1700>
+                <localstandard>
+                    <active>0</active>
+                    <title>Inpost</title>
+                    <name>Kurier - przesyłka lokalna expresowa</name>
+                    <max_cart_weight>25</max_cart_weight>
+                </localstandard>
+                <localexpress>
+                    <active>0</active>
+                    <title>Inpost</title>
+                    <name>Kurier - przesyłka lokalna expresowa</name>
+                    <max_cart_weight>25</max_cart_weight>
+                </localexpress>
+                <localsuperexpress>
+                    <active>0</active>
+                    <title>Inpost</title>
+                    <name>Kurier - przesyłka lokalna super expresowa</name>
+                    <max_cart_weight>25</max_cart_weight>
+                </localsuperexpress>
+                <palette>
+                    <active>0</active>
+                    <title>Inpost</title>
+                    <name>Kurier - przesyłka na palecie</name>
+                    <max_cart_weight>25</max_cart_weight>
+                </palette>
+            </inpostcourier>
+        </carriers>
+    </default>
+</config>

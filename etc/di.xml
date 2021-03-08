@@ -16,4 +16,19 @@
             <argument name="resourceModel" xsi:type="string">Smartmage\Inpost\Model\ResourceModel\Shipment</argument>
         </arguments>
     </virtualType>
+    <virtualType name="DefaultWaySendingStandard" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
+        <arguments>
+            <argument name="code" xsi:type="string">standard</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointStandard" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">standard</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointStandardCod" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">standardcod</argument>
+        </arguments>
+    </virtualType>
 </config>
