@@ -75,8 +75,12 @@ class CartRepositoryExtended
     {
         $cartExtension = $cart->getExtensionAttributes();
         if ($cartExtension === null) {
+
             $cartExtension = $this->cartExtensionFactory->create();
         }
+
+        $inpostLockerId = $cart->getData('inpost_locker_id');
+        $cartExtension->setInpostLockerId($inpostLockerId);
 
         $cart->setExtensionAttributes($cartExtension);
     }
@@ -91,6 +95,7 @@ class CartRepositoryExtended
         CartInterface $quote
     ) {
         $extensionAttributes = $quote->getExtensionAttributes() ?: $this->cartExtensionFactory->create();
+
         if ($extensionAttributes !== null && $extensionAttributes->getInpostLockerId() !== null) {
             $quote->setInpostLockerId($extensionAttributes->getInpostLockerId());
         }

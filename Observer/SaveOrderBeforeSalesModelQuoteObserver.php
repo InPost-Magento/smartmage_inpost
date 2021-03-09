@@ -1,37 +1,52 @@
 <?php
 namespace Smartmage\Inpost\Observer;
 
-use Magento\Framework\DataObject\Copy;
+use Magento\Framework\DataObject\Copy\Config;
+use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
+use Magento\Sales\Api\Data\OrderInterface;
 
 class SaveOrderBeforeSalesModelQuoteObserver implements ObserverInterface
 {
-    /**
-     * @var Copy
-     */
-    protected $objectCopyService;
+    protected $fieldsetConfig;
 
-    /**
-     * @param Copy $objectCopyService
-     */
+    protected $orderInterface;
+
     public function __construct(
-        Copy $objectCopyService
+        Config $fieldsetConfig,
+        OrderInterface $orderInterface
     ) {
-        $this->objectCopyService = $objectCopyService;
+        $this->fieldsetConfig = $fieldsetConfig;
+        $this->orderInterface = $orderInterface;
     }
 
-    /**
-     * @param \Magento\Framework\Event\Observer $observer
-     */
-    public function execute(\Magento\Framework\Event\Observer $observer)
+    public function execute(Observer $observer)
     {
-        /* @var \Magento\Sales\Model\Order $order */
-        $order = $observer->getEvent()->getData('order');
-        /* @var \Magento\Quote\Model\Quote $quote */
-        $quote = $observer->getEvent()->getData('quote');
-
-        $this->objectCopyService->copyFieldsetToTarget('sales_convert_quote', 'to_order', $quote, $order);
+        $source = $observer->getEvent()->getQuote();
+        $target = $observer->getEvent()->getOrder();
+        $this->copyFieldsetToTarget('sales_convert_quote', 'to_order', 'global', $source, $target);
 
         return $this;
+    }
+
+    public function copyFieldsetToTarget($fieldset, $aspect, $root, $source, $target)
+    {
+        $fields = $this->fieldsetConfig->getFieldset($fieldset, $root);
+
+        $methods = get_class_methods($this->orderInterface);
+
+        foreach ($fields as $code => $node) {
+            $targetCode = (string)$node[$aspect];
+            $targetCode = $targetCode == '*' ? $code : $targetCode;
+
+            if (!in_array($this->getMethodName($targetCode), $methods)) {
+                $target->setData($targetCode, $source->getData($code));
+            }
+        }
+    }
+
+    public function getMethodName($key)
+    {
+        return 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
     }
 }

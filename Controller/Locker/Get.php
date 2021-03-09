@@ -41,16 +41,9 @@ class Save extends \Magento\Framework\App\Action\Action
     {
         $result = $this->resultJsonFactory->create();
         if ($this->getRequest()->isAjax()) {
-            $lockerId = $this->getRequest()->getParam('inpost_locker_id');
-            $status = 0;
+            $lockerId = $this->checkoutProcessor->getLockerId() ?? null;
 
-            if ($lockerId) {
-                if ($this->checkoutProcessor->setLockerId($lockerId)) {
-                    $status = 1;
-                }
-            }
-
-            return $result->setData(['status' => $status]);
+            return $result->setData(['inpost_locker_id' => $lockerId]);
         }
 
         /** @var \Magento\Framework\Controller\Result\Forward $resultForward */
