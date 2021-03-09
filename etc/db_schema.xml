@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-
     <table name="smartmage_inpost_shipment" resource="default" engine="innodb" comment="Smartmage Inpost shipment">
         <column name="entity_id" xsi:type="int" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity id"/>
         <column name="shipment_id" xsi:type="int" padding="10" unsigned="true" nullable="false" comment="Shipment id"/>
@@ -14,6 +13,14 @@
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id"/>
         </constraint>
+    </table>
 
+    <table name="quote" resource="default" engine="innodb">
+        <column name="inpost_locker_id" xsi:type="varchar" length="10" />
+    </table>
+
+    <table name="sales_order" resource="default" engine="innodb">
+        <column name="inpost_locker_id" xsi:type="varchar" length="10" />
+        <column name="inpost_shipment_id" xsi:type="varchar" length="20" />
     </table>
 </schema>

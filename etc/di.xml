@@ -140,4 +140,8 @@
             <argument name="points" xsi:type="string">pop</argument>
         </arguments>
     </virtualType>
+
+    <type name="Magento\Quote\Api\CartRepositoryInterface">
+        <plugin name="quote_inpost_locker_id_attribute" type="Smartmage\Inpost\Plugin\CartRepositoryExtended" />
+    </type>
 </config>
