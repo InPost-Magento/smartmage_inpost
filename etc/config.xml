@@ -27,14 +27,12 @@
                 </standard>
                 <standardcod>
                     <active>0</active>
-                    <title>Inpost</title>
-                    <name>Paczkomaty 24/7</name>
+                    <name>Paczkomaty 24/7 - płatność przy odbiorze</name>
                     <max_cart_weight>25</max_cart_weight>
                 </standardcod>
                 <standardeow>
                     <active>0</active>
-                    <title>Inpost</title>
-                    <name>Paczkomaty 24/7</name>
+                    <name>Paczkomaty 24/7 - dostawa w weekend</name>
                     <max_cart_weight>25</max_cart_weight>
                     <start_day>4</start_day>
                     <end_day>6</end_day>
@@ -43,8 +41,7 @@
                 </standardeow>
                 <standardeowcod>
                     <active>0</active>
-                    <title>Inpost</title>
-                    <name>Paczkomaty 24/7</name>
+                    <name>Paczkomaty 24/7 - dostawa w weekend i płatność przy odbiorze</name>
                     <max_cart_weight>25</max_cart_weight>
                     <start_day>4</start_day>
                     <end_day>6</end_day>
@@ -58,61 +55,51 @@
                 <active>1</active>
                 <c2c>
                     <active>0</active>
-                    <title>Inpost</title>
                     <name>Kurier</name>
                     <max_cart_weight>25</max_cart_weight>
                 </c2c>
                 <c2ccod>
                     <active>0</active>
-                    <title>Inpost</title>
                     <name>Kurier - płatność przy odbiorze</name>
                     <max_cart_weight>25</max_cart_weight>
                 </c2ccod>
                 <standard>
                     <active>0</active>
-                    <title>Inpost</title>
                     <name>Kurier</name>
                     <max_cart_weight>25</max_cart_weight>
                 </standard>
                 <express1000>
                     <active>0</active>
-                    <title>Inpost</title>
                     <name>Kurier - doręczenie do 10:00</name>
                     <max_cart_weight>25</max_cart_weight>
                 </express1000>
                 <express1200>
                     <active>0</active>
-                    <title>Inpost</title>
                     <name>Kurier - doręczenie do 12:00</name>
                     <max_cart_weight>25</max_cart_weight>
                 </express1200>
                 <express1700>
                     <active>0</active>
-                    <title>Inpost</title>
                     <name>Kurier - doręczenie do 17:00</name>
                     <max_cart_weight>25</max_cart_weight>
                 </express1700>
                 <localstandard>
                     <active>0</active>
-                    <title>Inpost</title>
                     <name>Kurier - przesyłka lokalna expresowa</name>
                     <max_cart_weight>25</max_cart_weight>
                 </localstandard>
                 <localexpress>
                     <active>0</active>
-                    <title>Inpost</title>
                     <name>Kurier - przesyłka lokalna expresowa</name>
                     <max_cart_weight>25</max_cart_weight>
                 </localexpress>
                 <localsuperexpress>
                     <active>0</active>
-                    <title>Inpost</title>
                     <name>Kurier - przesyłka lokalna super expresowa</name>
                     <max_cart_weight>25</max_cart_weight>
                 </localsuperexpress>
                 <palette>
                     <active>0</active>
-                    <title>Inpost</title>
                     <name>Kurier - przesyłka na palecie</name>
                     <max_cart_weight>25</max_cart_weight>
                 </palette>

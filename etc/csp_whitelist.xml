@@ -10,6 +10,7 @@
             <values>
                 <value id="inpost-geowidget" type="host">https://api-pl-points.easypack24.net</value>
                 <value id="inpost-osm" type="host">https://osm.inpost.pl</value>
+                <value id="inpost-shipx" type="host">https://api-shipx-pl.easypack24.net</value>
             </values>
         </policy>
         <policy id="media-src">
