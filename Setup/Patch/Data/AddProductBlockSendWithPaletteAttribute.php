@@ -12,6 +12,9 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 
+/**
+ * Class AddProductBlockSendWithPaletteAttribute which adds an attribute block_send_with_palette
+ */
 class AddProductBlockSendWithPaletteAttribute implements DataPatchInterface, PatchRevertableInterface
 {
 

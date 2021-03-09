@@ -31,28 +31,15 @@ class DefaultSendingPoint extends Field
     {
         $html = parent::render($element);
         return $html . '
-<script type="text/javascript">
-window.easyPackAsyncInit = function () {
-                    easyPack.init({
-              instance: "pl",
-              mapType: "osm",
-              searchType: "osm",
-              points: {
-                types: ["parcel_locker", "pop"],
-              },
-              map: {
-                useGeolocation: true,
-                initialTypes: ["parcel_locker", "pop"]
-              }
-            })
-                };
-
-            window.onload = function() {
-              easyPack.dropdownWidget("row_carriers_inpost_inpostlocker_' . $this->code . '_default_sending_point", function(point) {
-                  jQuery("#carriers_inpost_inpostlocker_' . $this->code . '_default_sending_point").val(point.name);
-              });
-            }
-          </script>
-';
+        <script type="text/x-magento-init">
+            {
+                "*": {
+                    "Smartmage_Inpost/js/easyPackWidget": {
+                        "wrapper":"'.$this->code.'",
+                        "points": '.($this->code === 'standard' ? json_encode(array('parcel_locker', 'dispatch_order')) : json_encode(array('pop'))).'
+                    }
+                }
+            }        
+        </script>';
     }
 }
