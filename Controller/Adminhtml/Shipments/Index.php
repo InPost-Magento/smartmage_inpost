@@ -21,7 +21,7 @@ class Index extends \Smartmage\Inpost\Controller\Adminhtml\Shipments
     protected $coreRegistry;
 
     /**
-     * Lowstock constructor.
+     * Index constructor.
      * @param Context $context
      * @param FileFactory $fileFactory
      * @param Registry $coreRegistry
