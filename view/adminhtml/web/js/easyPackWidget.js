@@ -8,7 +8,7 @@ define([
         getPointData: 'https://api-shipx-pl.easypack24.net/v1/points/',
         hideInputDefaultSendingPoint: function(fieldWrapper) {
             return new Promise(function(resolve, reject) {
-                fieldWrapper.find('input').css('display', 'none');
+                fieldWrapper.find('input').addClass('inpost-field-hide');
 
                 resolve('True');
             });
@@ -82,9 +82,9 @@ define([
         init: function(fieldWrapper, pointsTypes) {
 
             var self = this;
-            var wrapperDefaultSendingPoint = $('#row_carriers_inpost_inpostlocker_'+ fieldWrapper +'_default_sending_point td.value');
+            var wrapperDefaultSendingPoint = $('#row_carriers_'+ fieldWrapper +'_default_sending_point td.value');
             var wrapperEasyPackWidget = 'inpost_carrier_'+ fieldWrapper +'_default_sending_point';
-            var defaultSendingPointValue = $('#carriers_inpost_inpostlocker_'+ fieldWrapper +'_default_sending_point');
+            var defaultSendingPointValue = $('#carriers_'+ fieldWrapper +'_default_sending_point');
 
             return new Promise(function(resolve, reject) {
                 self.hideInputDefaultSendingPoint(wrapperDefaultSendingPoint).then(function() {

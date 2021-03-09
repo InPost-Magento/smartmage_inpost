@@ -11,7 +11,14 @@ use Magento\Framework\Data\OptionSourceInterface;
 class DefaultWaySending implements OptionSourceInterface
 {
     const INPOST_LOCKER_STANDARD = 'standard';
-    const INPOST_LOCKER_STANDARD_COD = 'standard_cod';
+    const INPOST_COURIER_C2C = 'c2c';
+    const INPOST_COURIER_STANDARD = 'courier_standard';
+    const INPOST_COURIER_EXPRESS1000 = 'express1000';
+    const INPOST_COURIER_EXPRESS1200 = 'express1200';
+    const INPOST_COURIER_EXPRESS1700 = 'express1700';
+    const INPOST_COURIER_LOCAL_STANDARD = 'local_standard';
+    const INPOST_COURIER_LOCAL_EXPRESS = 'local_express';
+    const INPOST_COURIER_LOCAL_SUPER_EXPRESS = 'local_super_express';
 
     protected $code = '';
 
@@ -37,10 +44,25 @@ class DefaultWaySending implements OptionSourceInterface
                     ['value' => 'dispatch_order', 'label' => __('Odbiór przez Kuriera')],
                     ['value' => 'pop', 'label' => __('Nadanie w POP')],
                 ];
-            case (self::INPOST_LOCKER_STANDARD_COD):
+            case (self::INPOST_COURIER_C2C):
                 return [
-                    ['value' => 'UPS', 'label' => __('United Parcel Service')],
-                    ['value' => 'UPS_XML', 'label' => __('United Parcel Service XML')]
+                    ['value' => 'dispatch_order', 'label' => __('Odbiór przez kuriera')],
+                    ['value' => 'pop', 'label' => __('Nadanie w POP')],
+                    ['value' => 'parcel_locker', 'label' => __('Nadanie w paczkomacie')]
+                ];
+            case (self::INPOST_COURIER_STANDARD):
+            case (self::INPOST_COURIER_EXPRESS1000):
+            case (self::INPOST_COURIER_EXPRESS1200):
+            case (self::INPOST_COURIER_EXPRESS1700):
+            case (self::INPOST_COURIER_LOCAL_STANDARD):
+            case (self::INPOST_COURIER_LOCAL_EXPRESS):
+            case (self::INPOST_COURIER_LOCAL_SUPER_EXPRESS):
+                return [
+                    ['value' => 'courier_pok', 'label' => __('Nadanie w POK')],
+                    ['value' => 'branch', 'label' => __('Nadanie w Oddziale')],
+                    ['value' => 'dispatch_order', 'label' => __('Odbiór przez Kuriera')],
+                    ['value' => 'pop', 'label' => __('Nadanie w POP')],
+
                 ];
             default:
                 return [];
