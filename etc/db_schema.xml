@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="smartmage_inpost_shipment" resource="default" engine="innodb" comment="Smartmage Inpost shipment">
+        <column name="entity_id" xsi:type="int" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity id"/>
+        <column name="shipment_id" xsi:type="int" padding="10" unsigned="true" nullable="false" comment="Shipment id"/>
+        <column name="status" xsi:type="varchar" length="255" nullable="true" comment="Shipment status"/>
+        <column name="service" xsi:type="varchar" length="255" nullable="true" comment="Shipment service"/>
+        <column name="shipment_attributes" xsi:type="varchar" length="255" nullable="true" comment="Shipment attributes"/>
+        <column name="sending_method" xsi:type="varchar" length="255" nullable="true" comment="Sending method"/>
+        <column name="receiver_data" xsi:type="varchar" length="255" nullable="true" comment="Receiver data"/>
+        <column name="reference" xsi:type="varchar" length="255" nullable="true" comment="Reference"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+
+    </table>
+</schema>
