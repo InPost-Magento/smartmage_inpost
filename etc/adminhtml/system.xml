@@ -8,6 +8,9 @@
                     <label>Mode</label>
                     <source_model>Smartmage\Inpost\Model\Config\Source\Mode</source_model>
                 </field>
+                <field id="organization_id" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Organization ID</label>
+                </field>
                 <field id="access_token" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Access Token</label>
                 </field>
@@ -15,7 +18,7 @@
                     <label>Label format</label>
                     <source_model>Smartmage\Inpost\Model\Config\Source\LabelFormat</source_model>
                 </field>
-                <field id="label_size" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                <field id="label_size" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Label size</label>
                     <source_model>Smartmage\Inpost\Model\Config\Source\LabelSize</source_model>
                 </field>
@@ -83,12 +86,12 @@
                         <field id="change_address">1</field>
                     </depends>
                 </field>
-                <field id="generate_shipping" translate="label" type="select" sortOrder="160" showInDefault="1" showInWebsite="1" canRestore="1">
-                    <label>After generate package send email to customer</label>
+                <field id="send_email" translate="label" type="select" sortOrder="160" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Generate shipping in order after generating Inpost package</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="send_email" translate="label" type="select" sortOrder="170" showInDefault="1" showInWebsite="1" canRestore="1">
-                    <label>Generate shipping in order after generating Inpost package</label>
+                <field id="generate_shipping" translate="label" type="select" sortOrder="170" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>After generate package send email to customer</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="become_partner" translate="label" type="label" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -241,16 +244,22 @@
                         </field>
                         <field id="start_hour" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1">
                             <label>Hour starting delivery in weekend</label>
-                            <validate>validate-number validate-zero-or-greater</validate>
                         </field>
                         <field id="end_hour" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1">
                             <label>Hour ending delivery in weekend</label>
-                            <validate>validate-number validate-zero-or-greater</validate>
                         </field>
-                        <field id="show_only_delivery_eow" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                        <field id="show_only_delivery_eow" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" canRestore="1">
                             <label>Show only delivery in weekend</label>
                             <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                             <comment>If set on Yes, normal parcel delivery will be hidden if weeknd delivery will be available</comment>
+                        </field>
+                        <field id="default_way_sending" translate="label" type="select" sortOrder="140" showInDefault="1" showInWebsite="1">
+                            <label>Default way of sending</label>
+                            <source_model>DefaultWaySendingStandard</source_model>
+                        </field>
+                        <field id="default_sending_point" translate="comment" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="0">
+                            <label>Default sending point</label>
+                            <frontend_model>DefaultSendingPointStandardEow</frontend_model>
                         </field>
                     </group>
                     <group id="standardeowcod" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -297,16 +306,22 @@
                         </field>
                         <field id="start_hour" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1">
                             <label>Hour starting delivery in weekend</label>
-                            <validate>validate-number validate-zero-or-greater</validate>
                         </field>
                         <field id="end_hour" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1">
                             <label>Hour ending delivery in weekend</label>
-                            <validate>validate-number validate-zero-or-greater</validate>
                         </field>
-                        <field id="show_only_delivery_eow" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                        <field id="show_only_delivery_eow" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" canRestore="1">
                             <label>Show only delivery in weekend</label>
                             <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                             <comment>If set on Yes, normal parcel delivery will be hidden if weeknd delivery will be available</comment>
+                        </field>
+                        <field id="default_way_sending" translate="label" type="select" sortOrder="140" showInDefault="1" showInWebsite="1">
+                            <label>Default way of sending</label>
+                            <source_model>DefaultWaySendingStandard</source_model>
+                        </field>
+                        <field id="default_sending_point" translate="comment" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="0">
+                            <label>Default sending point</label>
+                            <frontend_model>DefaultSendingPointStandardEowCod</frontend_model>
                         </field>
                     </group>
                 </group>

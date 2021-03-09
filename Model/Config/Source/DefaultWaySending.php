@@ -10,8 +10,8 @@ use Magento\Framework\Data\OptionSourceInterface;
  */
 class DefaultWaySending implements OptionSourceInterface
 {
-    const INPOST_LOCKER_STNDARD = 'standard';
-    const INPOST_LOCKER_STNDARD_COD = 'standard_cod';
+    const INPOST_LOCKER_STANDARD = 'standard';
+    const INPOST_LOCKER_STANDARD_COD = 'standard_cod';
 
     protected $code = '';
 
@@ -30,14 +30,14 @@ class DefaultWaySending implements OptionSourceInterface
     public function toOptionArray() : array
     {
         switch ($this->code) {
-            case (self::INPOST_LOCKER_STNDARD):
+            case (self::INPOST_LOCKER_STANDARD):
                 return [
                     ['value' => 'parcel_locker', 'label' => __('Nadanie w Paczkomacie')],
                     ['value' => 'branch', 'label' => __('Nadanie w Oddziale')],
                     ['value' => 'dispatch_order', 'label' => __('Odbiór przez Kuriera')],
                     ['value' => 'pop', 'label' => __('Nadanie w POP')],
                 ];
-            case (self::INPOST_LOCKER_STNDARD_COD):
+            case (self::INPOST_LOCKER_STANDARD_COD):
                 return [
                     ['value' => 'UPS', 'label' => __('United Parcel Service')],
                     ['value' => 'UPS_XML', 'label' => __('United Parcel Service XML')]

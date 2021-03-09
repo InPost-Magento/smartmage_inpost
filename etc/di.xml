@@ -14,4 +14,14 @@
             <argument name="code" xsi:type="string">standardcod</argument>
         </arguments>
     </virtualType>
+    <virtualType name="DefaultSendingPointStandardEow" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">standardeow</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointStandardEowCod" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">standardeowcod</argument>
+        </arguments>
+    </virtualType>
 </config>
