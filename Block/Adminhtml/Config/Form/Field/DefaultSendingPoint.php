@@ -14,14 +14,17 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
 class DefaultSendingPoint extends Field
 {
     protected $code = '';
+    protected $points = '';
 
     public function __construct(
         Context $context,
         array $data = [],
-        $code = null
+        $code = null,
+        $points = null
     ) {
         parent::__construct($context, $data);
         $this->code = $code;
+        $this->points = $points;
     }
 
     /**
@@ -35,11 +38,11 @@ class DefaultSendingPoint extends Field
             {
                 "*": {
                     "Smartmage_Inpost/js/easyPackWidget": {
-                        "wrapper":"'.$this->code.'",
-                        "points": '.($this->code === 'standard' ? json_encode(array('parcel_locker', 'dispatch_order')) : json_encode(array('pop'))).'
+                        "wrapper":"' . $this->code . '",
+                        "points": ' . ($this->points === 'standard' ? json_encode(array('parcel_locker', 'dispatch_order')) : json_encode(array('pop'))) . '
                     }
                 }
-            }        
+            }
         </script>';
     }
 }

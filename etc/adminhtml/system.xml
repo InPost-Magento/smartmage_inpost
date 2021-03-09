@@ -11,7 +11,7 @@
                 <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Title</label>
                 </field>
-                <field id="show_only_delivery_eow" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                <field id="show_only_delivery_eow" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Show only delivery in weekend</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>If set on Yes, normal parcel delivery will be hidden if weekend delivery will be available</comment>
@@ -43,7 +43,7 @@
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
                     </field>
-                    <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <field id="max_cart_weight" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
                         <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
                     </field>
@@ -54,6 +54,9 @@
                     <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Default sending point</label>
                         <frontend_model>DefaultSendingPointStandard</frontend_model>
+                        <depends>
+                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
+                        </depends>
                     </field>
                 </group>
                 <group id="standardcod" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -61,9 +64,6 @@
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    </field>
-                    <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Title</label>
                     </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
@@ -97,6 +97,9 @@
                     <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Default sending point</label>
                         <frontend_model>DefaultSendingPointStandardCod</frontend_model>
+                        <depends>
+                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
+                        </depends>
                     </field>
                 </group>
                 <group id="standardeow" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -105,9 +108,6 @@
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
-                    <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Title</label>
-                    </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
                     </field>
@@ -143,11 +143,20 @@
                     </field>
                     <field id="start_hour" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1">
                         <label>Hour starting delivery in weekend</label>
-                        <validate>validate-number validate-zero-or-greater</validate>
                     </field>
                     <field id="end_hour" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1">
                         <label>Hour ending delivery in weekend</label>
-                        <validate>validate-number validate-zero-or-greater</validate>
+                    </field>
+                    <field id="default_way_sending" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1">
+                        <label>Default way of sending</label>
+                        <source_model>DefaultWaySendingStandard</source_model>
+                    </field>
+                    <field id="default_sending_point" translate="comment" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Default sending point</label>
+                        <frontend_model>DefaultSendingPointStandardEow</frontend_model>
+                        <depends>
+                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
+                        </depends>
                     </field>
                 </group>
                 <group id="standardeowcod" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -156,9 +165,6 @@
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
-                    <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Title</label>
-                    </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
                     </field>
@@ -194,11 +200,20 @@
                     </field>
                     <field id="start_hour" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1">
                         <label>Hour starting delivery in weekend</label>
-                        <validate>validate-number validate-zero-or-greater</validate>
                     </field>
                     <field id="end_hour" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1">
                         <label>Hour ending delivery in weekend</label>
-                        <validate>validate-number validate-zero-or-greater</validate>
+                    </field>
+                    <field id="default_way_sending" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1">
+                        <label>Default way of sending</label>
+                        <source_model>DefaultWaySendingStandard</source_model>
+                    </field>
+                    <field id="default_sending_point" translate="comment" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Default sending point</label>
+                        <frontend_model>DefaultSendingPointStandardEowCod</frontend_model>
+                        <depends>
+                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
+                        </depends>
                     </field>
                 </group>
             </group>
@@ -213,9 +228,10 @@
                 </field>
                 <group id="c2c" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Inpost - Przesyłka kurierska InPost Kurier Standard</label>
-                    <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <field id="active" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>The inpost_courier_c2c service addressed to an individual customer</comment>
                     </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
@@ -241,16 +257,25 @@
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
                         <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                    </field>
+                    <field id="default_way_sending" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1">
+                        <label>Default way of sending</label>
+                        <source_model>DefaultWaySendingC2c</source_model>
+                    </field>
+                    <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Default sending point</label>
+                        <frontend_model>DefaultSendingPointC2c</frontend_model>
+                        <depends>
+                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
+                        </depends>
                     </field>
                 </group>
                 <group id="c2ccod" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Inpost - Przesyłka kurierska InPost Kurier Standard – za pobraniem</label>
-                    <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <field id="active" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    </field>
-                    <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Title</label>
+                        <comment>The inpost_courier_c2c service addressed to an individual customer</comment>
                     </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
@@ -276,16 +301,25 @@
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
                         <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                    </field>
+                    <field id="default_way_sending" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1">
+                        <label>Default way of sending</label>
+                        <source_model>DefaultWaySendingC2c</source_model>
+                    </field>
+                    <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Default sending point</label>
+                        <frontend_model>DefaultSendingPointC2cCod</frontend_model>
+                        <depends>
+                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
+                        </depends>
                     </field>
                 </group>
                 <group id="standard" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Inpost - Przesyłka kurierska standardowa</label>
-                    <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <field id="active" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    </field>
-                    <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Title</label>
+                        <comment>The inpost_courier_standard service addressed to the business client</comment>
                     </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
@@ -311,6 +345,17 @@
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
                         <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                    </field>
+                    <field id="default_way_sending" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1">
+                        <label>Default way of sending</label>
+                        <source_model>DefaultWaySendingCourierStandard</source_model>
+                    </field>
+                    <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Default sending point</label>
+                        <frontend_model>DefaultSendingPointCourierStandard</frontend_model>
+                        <depends>
+                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
+                        </depends>
                     </field>
                 </group>
                 <group id="express1000" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -319,9 +364,6 @@
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
-                    <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Title</label>
-                    </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
                     </field>
@@ -346,6 +388,17 @@
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
                         <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                    </field>
+                    <field id="default_way_sending" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1">
+                        <label>Default way of sending</label>
+                        <source_model>DefaultWaySendingExpress1000</source_model>
+                    </field>
+                    <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Default sending point</label>
+                        <frontend_model>DefaultSendingPointExpress1000</frontend_model>
+                        <depends>
+                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
+                        </depends>
                     </field>
                 </group>
                 <group id="express1200" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -354,9 +407,6 @@
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
-                    <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Title</label>
-                    </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
                     </field>
@@ -381,6 +431,17 @@
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
                         <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                    </field>
+                    <field id="default_way_sending" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1">
+                        <label>Default way of sending</label>
+                        <source_model>DefaultWaySendingExpress1200</source_model>
+                    </field>
+                    <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Default sending point</label>
+                        <frontend_model>DefaultSendingPointExpress1200</frontend_model>
+                        <depends>
+                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
+                        </depends>
                     </field>
                 </group>
                 <group id="express1700" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -389,9 +450,6 @@
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
-                    <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Title</label>
-                    </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
                     </field>
@@ -416,6 +474,17 @@
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
                         <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                    </field>
+                    <field id="default_way_sending" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1">
+                        <label>Default way of sending</label>
+                        <source_model>DefaultWaySendingExpress1700</source_model>
+                    </field>
+                    <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Default sending point</label>
+                        <frontend_model>DefaultSendingPointExpress1700</frontend_model>
+                        <depends>
+                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
+                        </depends>
                     </field>
                 </group>
                 <group id="localstandard" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -424,9 +493,6 @@
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
-                    <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Title</label>
-                    </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
                     </field>
@@ -451,6 +517,17 @@
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
                         <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                    </field>
+                    <field id="default_way_sending" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1">
+                        <label>Default way of sending</label>
+                        <source_model>DefaultWaySendingLocalStandard</source_model>
+                    </field>
+                    <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Default sending point</label>
+                        <frontend_model>DefaultSendingPointLocalStandard</frontend_model>
+                        <depends>
+                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
+                        </depends>
                     </field>
                 </group>
                 <group id="localexpress" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -459,9 +536,6 @@
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
-                    <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Title</label>
-                    </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
                     </field>
@@ -486,6 +560,17 @@
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
                         <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                    </field>
+                    <field id="default_way_sending" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1">
+                        <label>Default way of sending</label>
+                        <source_model>DefaultWaySendingLocalExpress</source_model>
+                    </field>
+                    <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Default sending point</label>
+                        <frontend_model>DefaultSendingPointLocalExpress</frontend_model>
+                        <depends>
+                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
+                        </depends>
                     </field>
                 </group>
                 <group id="localsuperexpress" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -494,9 +579,6 @@
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
-                    <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Title</label>
-                    </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
                     </field>
@@ -522,15 +604,23 @@
                         <label>Max cart weight</label>
                         <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
                     </field>
+                    <field id="default_way_sending" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1">
+                        <label>Default way of sending</label>
+                        <source_model>DefaultWaySendingLocalSuperExpress</source_model>
+                    </field>
+                    <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Default sending point</label>
+                        <frontend_model>DefaultSendingPointLocalSuperExpress</frontend_model>
+                        <depends>
+                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
+                        </depends>
+                    </field>
                 </group>
                 <group id="palette" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Inpost - Przesyłka kurierska paleta standard</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    </field>
-                    <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Title</label>
                     </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
@@ -567,14 +657,18 @@
                     <label>Mode</label>
                     <source_model>Smartmage\Inpost\Model\Config\Source\Mode</source_model>
                 </field>
-                <field id="access_token" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="organization_id" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Organization ID</label>
+                </field>
+                <field id="access_token" translate="label" type="obscure" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                     <label>Access Token</label>
                 </field>
                 <field id="label_format" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Label format</label>
                     <source_model>Smartmage\Inpost\Model\Config\Source\LabelFormat</source_model>
                 </field>
-                <field id="label_size" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                <field id="label_size" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Label size</label>
                     <source_model>Smartmage\Inpost\Model\Config\Source\LabelSize</source_model>
                 </field>
@@ -642,15 +736,15 @@
                         <field id="change_address">1</field>
                     </depends>
                 </field>
-                <field id="generate_shipping" translate="label" type="select" sortOrder="160" showInDefault="1" showInWebsite="1" canRestore="1">
-                    <label>After generate package send email to customer</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
-                <field id="send_email" translate="label" type="select" sortOrder="170" showInDefault="1" showInWebsite="1" canRestore="1">
+                <field id="send_email" translate="label" type="select" sortOrder="160" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Generate shipping in order after generating Inpost package</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="become_partner" translate="label" type="label" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <field id="generate_shipping" translate="label" type="select" sortOrder="170" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>After generate package send email to customer</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="become_partner" translate="label comment" type="label" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Become a partner(SzybkieZwroty.pl)</label>
                     <comment><![CDATA[<a href="https://szybkiezwroty.pl/pl/business#navigate-buttons">Become a partner</a>]]></comment>
                 </field>
@@ -667,6 +761,10 @@
                 <field id="automatic_pay_for_package" translate="label" type="select" sortOrder="220" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Automatic payment for generated package</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="default_pickup_pont" translate="label" type="select" sortOrder="230" showInDefault="1" showInWebsite="1">
+                    <label>Default pickup point</label>
+                    <source_model>Smartmage\Inpost\Model\Config\Source\DefaultPickupPoint</source_model>
                 </field>
             </group>
         </section>
