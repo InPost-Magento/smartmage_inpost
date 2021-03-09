@@ -9,7 +9,7 @@ use Smartmage\Inpost\Model\Checkout\Processor;
 /**
  * Class Save
  */
-class Save extends \Magento\Framework\App\Action\Action
+class Get extends \Magento\Framework\App\Action\Action
 {
     /**
      * @var JsonFactory
