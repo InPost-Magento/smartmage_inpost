@@ -119,7 +119,7 @@
     </virtualType>
     <virtualType name="DefaultSendingPointLocalSuperExpress" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
         <arguments>
-            <argument name="code" xsi:type="string">inpostcourier_localesuperxpress</argument>
+            <argument name="code" xsi:type="string">inpostcourier_localsuperexpress</argument>
             <argument name="points" xsi:type="string">pop</argument>
         </arguments>
     </virtualType>
