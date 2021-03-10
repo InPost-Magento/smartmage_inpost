@@ -72,7 +72,8 @@
                 <!--<item name="options" xsi:type="object">Smartmage\Inpost\Model\Config\Source\Service</item>-->
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">inpostshipment_form_create</item>
-                    <!--<item name="disabled" xsi:type="boolean">true</item>-->
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Service</item>
+                    <item name="disabled" xsi:type="boolean">true</item>
                 </item>
             </argument>
 
@@ -102,13 +103,13 @@
                     <enabled>true</enabled>
                 </switcherConfig>
                 <label translate="true">Service</label>
-                <dataScope>service_id</dataScope>
+                <dataScope>service</dataScope>
                 <dataType>text</dataType>
             </settings>
             <formElements>
                 <select>
                     <settings>
-                        <options class="Smartmage\Inpost\Model\Config\Source\Service"/>
+                        <options class="Smartmage\Inpost\Model\Config\Source\ShippingMethods"/>
                     </settings>
                 </select>
             </formElements>
