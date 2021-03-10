@@ -5,28 +5,19 @@ namespace Smartmage\Inpost\Controller\Adminhtml;
 use Magento\Backend\App\Action;
 
 /**
- * Class Shipment
+ * Abstract Class Shipments
  * @package Smartmage\Inpost\Controller\Adminhtml
  */
-abstract class Shipments extends \Magento\Backend\App\Action
+abstract class Shipments extends Action
 {
     const ADMIN_RESOURCE = 'Smartmage_Inpost::shipments';
 
     /**
-     * @var \Magento\Framework\App\Response\Http\FileFactory
-     */
-    protected $fileFactory;
-
-    /**
-     * Report constructor.
      * @param Action\Context $context
-     * @param \Magento\Framework\App\Response\Http\FileFactory $fileFactory
      */
     public function __construct(
-        Action\Context $context,
-        \Magento\Framework\App\Response\Http\FileFactory $fileFactory
+        Action\Context $context
     ) {
         parent::__construct($context);
-        $this->fileFactory = $fileFactory;
     }
 }
