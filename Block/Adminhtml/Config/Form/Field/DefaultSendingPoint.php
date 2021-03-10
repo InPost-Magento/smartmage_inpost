@@ -39,7 +39,7 @@ class DefaultSendingPoint extends Field
                 "*": {
                     "Smartmage_Inpost/js/easyPackWidget": {
                         "wrapper":"' . $this->code . '",
-                        "points": ' . ($this->points === 'standard' ? json_encode(array('parcel_locker', 'dispatch_order')) : json_encode(array('pop'))) . '
+                        "points": ' . ($this->points === 'standard' ? json_encode(array('parcel_locker', 'pop')) : json_encode(array('pop'))) . '
                     }
                 }
             }
