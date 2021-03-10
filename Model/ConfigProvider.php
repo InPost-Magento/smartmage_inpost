@@ -8,6 +8,9 @@ use Magento\Store\Model\StoreManagerInterface;
 
 class ConfigProvider
 {
+    const LABEL_FORMAT = 'label_format';
+    const LABEL_SIZE = 'label_size';
+
     /**
      * @var ScopeConfigInterface
      */
@@ -64,4 +67,26 @@ class ConfigProvider
             $this->storeManager->getStore()
         );
     }
+
+    public function getShippingConfigData($field)
+    {
+        $path = 'shipping/inpost/' . $field;
+
+        return $this->scopeConfig->getValue(
+            $path,
+            ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()
+        );
+    }
+
+    public function getLabelFormat()
+    {
+        return $this->getShippingConfigData(self::LABEL_FORMAT);
+    }
+
+    public function getLabelSize()
+    {
+        return $this->getShippingConfigData(self::LABEL_SIZE);
+    }
+
 }
