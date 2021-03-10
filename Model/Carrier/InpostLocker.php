@@ -89,7 +89,7 @@ class InpostLocker extends AbstractInpostCarrier implements CarrierInterface
             /** @var Result $result */
             $result = $this->rateResultFactory->create();
 
-            $this->getAllowedMethods();
+            $this->getActiveAllowedMethods();
 
             foreach ($this->allowedMethods as $method) {
 

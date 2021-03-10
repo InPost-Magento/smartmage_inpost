@@ -1,0 +1,28 @@
+<?php
+/**
+ * @var $block \Smartmage\Inpost\Block\Adminhtml\Order\View\Inpost
+ */
+$methods = $block->getInpostShippingMethods();
+$selectedMethod = $block->getSelectedMethod();
+$orderId = $block->getOrder()->getId();
+?>
+<div class="field field-store-switcher">
+    <form action="<?php echo $this->getUrl('smartmageinpost/shipments/create') ?>">
+        <div class="control">
+            <input type="hidden" name="order_id" value="<?= $orderId ?>">
+            <select
+                id="shipping_method"
+                class="admin__control-select"
+                name="shipping_method"
+            >
+                <option value=""><?= __('Choose method') ?></option>
+                <?php foreach ($methods as $method) : ?>
+                    <option value="<?= $method['value'] ?>"<?php if ($selectedMethod == $method['value']) : ?> selected<?php endif; ?>><?= $method['label'] ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <button id="submit" title="Submit" type="submit" class="action-default scalable edit primary">
+            <span><?= __('Submit') ?></span>
+        </button>
+    </form>
+</div>

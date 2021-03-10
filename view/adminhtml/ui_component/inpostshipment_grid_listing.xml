@@ -51,6 +51,35 @@
                 </item>
             </argument>
         </filters>
+        <massaction name="listing_massaction">
+            <action name="print_label">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">print_label</item>
+                        <item name="label" xsi:type="string" translate="true">Print label</item>
+                        <item name="url" xsi:type="url" path="*/*/massPrintLabel"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="print_return_label">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">print_return_label</item>
+                        <item name="label" xsi:type="string" translate="true">Print return label</item>
+                        <item name="url" xsi:type="url" path="*/*/massPrintReturnLabel"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="print_dispatch_order_label">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">print_dispatch_order_label</item>
+                        <item name="label" xsi:type="string" translate="true">Print dispatch order label</item>
+                        <item name="url" xsi:type="url" path="*/*/massPrintDispatchOrderLabel"/>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
 <!--        <exportButton name="export_button"/>-->
         <paging name="listing_paging"/>
     </listingToolbar>
