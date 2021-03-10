@@ -90,7 +90,7 @@ class AbstractInpostCarrier extends AbstractCarrier
         /** @var Result $result */
         $result = $this->rateResultFactory->create();
 
-        $this->getAllowedMethods();
+        $this->getActiveAllowedMethods();
 
         foreach ($this->allowedMethods as $method) {
             $result->append(
@@ -104,7 +104,7 @@ class AbstractInpostCarrier extends AbstractCarrier
     /**
      * @return array
      */
-    public function getAllowedMethods()
+    public function getActiveAllowedMethods()
     {
         $allowedMethods = [];
         $methods = [];
@@ -137,6 +137,23 @@ class AbstractInpostCarrier extends AbstractCarrier
         return $methods;
     }
 
+    /**
+     * @return array
+     */
+    public function getAllowedMethods() : array
+    {
+        $methods = [];
+        foreach ($this->methods as $method) {
+            $methods[$method->getKey()] = $method->getName();
+        }
+        return $methods;
+    }
+
+    /**
+     * @param $method
+     * @return \Magento\Quote\Model\Quote\Address\RateResult\Method
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
     protected function createResultMethod($method)
     {
         /** @var \Magento\Quote\Model\Quote\Address\RateResult\Method $rateMethod */
