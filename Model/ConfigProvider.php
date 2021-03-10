@@ -6,10 +6,35 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
+/**
+ * Class ConfigProvider
+ * @package Smartmage\Inpost\Model
+ */
 class ConfigProvider
 {
-    const LABEL_FORMAT = 'label_format';
-    const LABEL_SIZE = 'label_size';
+    const SHIPPING_MODE = 'mode';
+    const SHIPPING_ORGANIZATION_ID = 'organization_id';
+    const SHIPPING_ACCESS_TOKEN = 'access_token';
+    const SHIPPING_LABEL_FORMAT = 'label_format';
+    const SHIPPING_LABEL_SIZE = 'label_size';
+    const SHIPPING_CHANGE_ADDRESS = 'change_address';
+    const SHIPPING_SENDER_NAME = 'sender_name';
+    const SHIPPING_SENDER_SURNAME = 'sender_surname';
+    const SHIPPING_SENDER_EMAIL = 'sender_email';
+    const SHIPPING_SENDER_PHONE = 'sender_phone';
+    const SHIPPING_SENDER_STREET = 'sender_street';
+    const SHIPPING_SENDER_BUILDING_NUMBER = 'sender_building_number';
+    const SHIPPING_SENDER_CITY = 'sender_city';
+    const SHIPPING_SENDER_POSTCODE = 'sender_postcode';
+    const SHIPPING_SENDER_COUNTRY_CODE = 'sender_country_code';
+    const SHIPPING_SEND_EMAIL = 'send_email';
+    const SHIPPING_GENERATE_SHIPPING = 'generate_shipping';
+    const SHIPPING_BECOME_PARTNER = 'become_partner';
+    const SHIPPING_SZYBKIEZWROTY_URL = 'szybkiezwroty_url';
+    const SHIPPING_WEIGHT_ATTRIBUTE_CODE = 'weight_attribute_code';
+    const SHIPPING_WEIGHT_UNIT = 'weight_unit';
+    const SHIPPING_AUTOMATIC_PAY_FOR_PACKAGE = 'automatic_pay_for_package';
+    const SHIPPING_DEFAULT_PICKUP_POINT = 'default_pickup_pont';
 
     /**
      * @var ScopeConfigInterface
@@ -32,6 +57,229 @@ class ConfigProvider
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->storeManager = $storeManager;
+    }
+
+    /**
+     * @param $field
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getShippingConfigData($field)
+    {
+        $path = 'shipping/inpost/' . $field;
+
+        return $this->scopeConfig->getValue(
+            $path,
+            ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()
+        );
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getMode()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_MODE);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getOrganizationId()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_ORGANIZATION_ID);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getAccessToken()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_ACCESS_TOKEN);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getLabelFormat()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_LABEL_FORMAT);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getLabelSize()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_LABEL_SIZE);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getChangeAddress()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_CHANGE_ADDRESS);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getSenderName()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_SENDER_NAME);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getSenderSurname()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_SENDER_SURNAME);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getSenderEmail()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_SENDER_EMAIL);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getSenderPhone()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_SENDER_PHONE);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getSenderStreet()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_SENDER_STREET);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getSenderBuildingNumber()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_SENDER_BUILDING_NUMBER);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getSenderCity()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_SENDER_CITY);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getSenderPostcode()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_SENDER_POSTCODE);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getSenderCountryCode()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_SENDER_COUNTRY_CODE);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getSendEmail()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_SEND_EMAIL);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getGenerateShipping()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_GENERATE_SHIPPING);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getBecomePartner()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_BECOME_PARTNER);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getSzybkiezwrotyUrl()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_SZYBKIEZWROTY_URL);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getWeightAttributeCode()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_WEIGHT_ATTRIBUTE_CODE);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getWeightUnit()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_WEIGHT_UNIT);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getAutomaticPayForPackage()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_AUTOMATIC_PAY_FOR_PACKAGE);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getDefaultPickupPoint()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_DEFAULT_PICKUP_POINT);
     }
 
     /**
@@ -67,26 +315,4 @@ class ConfigProvider
             $this->storeManager->getStore()
         );
     }
-
-    public function getShippingConfigData($field)
-    {
-        $path = 'shipping/inpost/' . $field;
-
-        return $this->scopeConfig->getValue(
-            $path,
-            ScopeInterface::SCOPE_STORE,
-            $this->storeManager->getStore()
-        );
-    }
-
-    public function getLabelFormat()
-    {
-        return $this->getShippingConfigData(self::LABEL_FORMAT);
-    }
-
-    public function getLabelSize()
-    {
-        return $this->getShippingConfigData(self::LABEL_SIZE);
-    }
-
 }
