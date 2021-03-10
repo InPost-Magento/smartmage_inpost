@@ -1,4 +1,21 @@
+<?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Smartmage\Inpost\Api\Data\ShipmentSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Smartmage\Inpost\Api\Data\ShipmentInterface" type="Smartmage\Inpost\Model\Shipment" />
+    <preference for="Smartmage\Inpost\Api\ShipmentRepositoryInterface" type="Smartmage\Inpost\Model\ShipmentRepository" />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="inpostshipment_grid_listing_data_source" xsi:type="string">SmartmageInpostShipmentCollection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="SmartmageInpostShipmentCollection" type="Smartmage\Inpost\Ui\DataProvider\Inpostshipment\Listing\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">smartmage_inpost_shipment</argument>
+            <argument name="resourceModel" xsi:type="string">Smartmage\Inpost\Model\ResourceModel\Shipment</argument>
+        </arguments>
+    </virtualType>
     <virtualType name="DefaultWaySendingStandard" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
         <arguments>
             <argument name="code" xsi:type="string">standard</argument>
@@ -123,4 +140,8 @@
             <argument name="points" xsi:type="string">pop</argument>
         </arguments>
     </virtualType>
+
+    <type name="Magento\Quote\Api\CartRepositoryInterface">
+        <plugin name="quote_inpost_locker_id_attribute" type="Smartmage\Inpost\Plugin\CartRepositoryExtended" />
+    </type>
 </config>
