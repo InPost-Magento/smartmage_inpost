@@ -77,16 +77,19 @@ class SendingMethod extends \Magento\Ui\Component\Form\Element\Select
         parent::prepare();
 
         $config = $this->getData('config');
-
         $data= $this->request->getParams();
-        $shippingMethod = $data['shipping_method'];
-        $codes = explode('_', $shippingMethod);
-        $this->defaultWaySending->setCode(str_replace('cod', '', $codes[1]));
 
         if (isset($config['dataScope']) && $config['dataScope'] == 'sending_method') {
-            $default = $this->configProvider->getConfigData($codes[0] . '/' . $codes[1] . '/default_way_sending');
+            $shippingMethod = $data['shipping_method'];
+            $codes = explode('_', $shippingMethod);
+            $this->defaultWaySending->setCode(str_replace('cod', '', $codes[1]));
             $config['options'] = $this->defaultWaySending->toOptionArray();
-            $config['default'] = $default;
+            if (isset($data['sending_method'])) {
+                $config['default'] = $data['sending_method'];
+            } else {
+                $default = $this->configProvider->getConfigData($codes[0] . '/' . $codes[1] . '/default_way_sending');
+                $config['default'] = $default;
+            }
 
             $this->setData('config', (array)$config);
         }

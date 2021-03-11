@@ -63,13 +63,18 @@ class Insurance extends \Magento\Ui\Component\Form\Element\Input
 
         $config = $this->getData('config');
         $data= $this->request->getParams();
-        $order = $this->orderRepository->get($data['order_id']);
 
         if (isset($config['dataScope']) && $config['dataScope'] == 'insurance') {
-            if ($this->configProvider->getShippingConfigData('automatic_pay_for_package')) {
-                $config['default'] = $this->priceCurrency->convertAndRound($order->getGrandTotal());
-                $this->setData('config', (array)$config);
+            if (isset($data['insurance'])) {
+                $config['default'] = $data['insurance'];
+            } else {
+                if ($this->configProvider->getShippingConfigData('automatic_pay_for_package')) {
+                    $order = $this->orderRepository->get($data['order_id']);
+                    $config['default'] = $this->priceCurrency->convertAndRound($order->getGrandTotal());
+                    $this->setData('config', (array)$config);
+                }
             }
+
         }
     }
 }

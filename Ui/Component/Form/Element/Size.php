@@ -90,6 +90,9 @@ class Size extends \Magento\Ui\Component\Form\Element\Select
 
         if (isset($config['dataScope']) && $config['dataScope'] == 'size') {
             $config['options'] = $this->size->toOptionArray();
+            if (isset($data['size'])) {
+                $config['default'] = $data['size'];
+            }
             $this->setData('config', (array)$config);
         }
     }
