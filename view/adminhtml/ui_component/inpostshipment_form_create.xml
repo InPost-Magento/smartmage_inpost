@@ -13,10 +13,6 @@
 
     <settings>
         <buttons>
-            <button name="delete" class="Magento\CatalogRule\Block\Adminhtml\Edit\DeleteButton"/>
-            <button name="save_and_apply" class="Magento\CatalogRule\Block\Adminhtml\Edit\SaveAndApplyButton"/>
-            <button name="save_and_continue" class="Magento\CatalogRule\Block\Adminhtml\Edit\SaveAndContinueButton"/>
-            <button name="reset" class="Magento\CatalogRule\Block\Adminhtml\Edit\ResetButton"/>
             <button name="save" class="Magento\CatalogRule\Block\Adminhtml\Edit\SaveButton"/>
             <button name="back">
                 <url path="*/*/"/>
@@ -52,8 +48,6 @@
             </item>
         </argument>
 
-        <!-- This field has data type 'text' and standard 'input' form element and looks like input -->
-
         <field name="order_details">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -69,11 +63,10 @@
 
         <field name="service" formElement="select">
             <argument name="data" xsi:type="array">
-                <!--<item name="options" xsi:type="object">Smartmage\Inpost\Model\Config\Source\Service</item>-->
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">inpostshipment_form_create</item>
                     <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Service</item>
-                    <!--<item name="disabled" xsi:type="boolean">true</item>-->
+                    <item name="disabled" xsi:type="boolean">true</item>
                 </item>
             </argument>
 
@@ -84,7 +77,6 @@
                             <value>inpostlocker_standard</value>
                             <actions>
                                 <action name="0">
-                                    <!--<target>inpostshipment_form_create.inpostshipment_form_create.shipment_fieldset.target_locker</target>-->
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.target_locker</target>
                                     <callback>show</callback>
                                 </action>
@@ -498,7 +490,6 @@
 
         <field name="sending_method">
             <argument name="data" xsi:type="array">
-                <!--<item name="options" xsi:type="object">Smartmage\Inpost\Model\Config\Source\DefaultWaySending</item>-->
                 <item name="config" xsi:type="array">
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Sending Method</item>
@@ -516,6 +507,8 @@
                     <item name="label" xsi:type="string" translate="true">Width</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">width</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Width</item>
                 </item>
             </argument>
         </field>
@@ -526,6 +519,8 @@
                     <item name="label" xsi:type="string" translate="true">Length</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">length</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Length</item>
                 </item>
             </argument>
         </field>
@@ -536,6 +531,8 @@
                     <item name="label" xsi:type="string" translate="true">Height</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">height</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Height</item>
                 </item>
             </argument>
         </field>

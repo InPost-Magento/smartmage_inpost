@@ -7,7 +7,7 @@ use Magento\Framework\Pricing\PriceCurrencyInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 
-class TargetLocker extends \Magento\Ui\Component\Form\Element\Input
+class Length extends \Magento\Ui\Component\Form\Element\Input
 {
     /**
      * @var Http
@@ -59,16 +59,11 @@ class TargetLocker extends \Magento\Ui\Component\Form\Element\Input
         $config = $this->getData('config');
         $data= $this->request->getParams();
 
-        if (isset($config['dataScope']) && $config['dataScope'] == 'target_locker') {
-            if (isset($data['target_locker'])) {
-                $config['default'] = $data['target_locker'];
-            } else {
-                $order = $this->orderRepository->get($data['order_id']);
-                $extensionAttributes = $order->getExtensionAttributes();
-                $config['default'] = $extensionAttributes->getInpostLockerId();
+        if (isset($config['dataScope']) && $config['dataScope'] == 'length') {
+            if (isset($data['length'])) {
+                $config['default'] = $data['length'];
+                $this->setData('config', (array)$config);
             }
-
-            $this->setData('config', (array)$config);
         }
     }
 }

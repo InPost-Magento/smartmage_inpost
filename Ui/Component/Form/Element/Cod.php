@@ -61,8 +61,13 @@ class Cod extends \Magento\Ui\Component\Form\Element\Input
         $order = $this->orderRepository->get($data['order_id']);
 
         if (isset($config['dataScope']) && $config['dataScope'] == 'cod') {
-            $config['default'] = $this->priceCurrency->convertAndRound($order->getGrandTotal());
-            $this->setData('config', (array)$config);
+            if (isset($data['cod'])) {
+                $config['default'] = $data['cod'];
+            } else {
+                $config['default'] = $this->priceCurrency->convertAndRound($order->getGrandTotal());
+                $this->setData('config', (array)$config);
+            }
+
         }
     }
 }

@@ -61,8 +61,13 @@ class Reference extends \Magento\Ui\Component\Form\Element\Input
         $order = $this->orderRepository->get($data['order_id']);
 
         if (isset($config['dataScope']) && $config['dataScope'] == 'reference') {
-            $config['default'] = $order->getIncrementId();
-            $this->setData('config', (array)$config);
+            if (isset($data['reference'])) {
+                $config['default'] = $data['reference'];
+            } else {
+                $config['default'] = $order->getIncrementId();
+                $this->setData('config', (array)$config);
+            }
+
         }
     }
 }
