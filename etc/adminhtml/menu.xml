@@ -10,5 +10,15 @@
              action="smartmageinpost/shipments/index"
              resource="Smartmage_Inpost::shipments"
         />
+
+        <add id="Smartmage_Inpost::shipmentsmenucreate"
+             title="Smartmage Inpost Shipments Create"
+             translate="title"
+             module="Smartmage_Inpost"
+             sortOrder="60"
+             parent="Magento_Sales::sales_operation"
+             action="smartmageinpost/shipments/create"
+             resource="Smartmage_Inpost::shipments"
+        />
     </menu>
 </config>
