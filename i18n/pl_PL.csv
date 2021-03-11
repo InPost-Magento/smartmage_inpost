@@ -58,3 +58,7 @@ Service,Usługa
 Size,Gabaryt
 New Shipment,Nowa przesyłka
 Shipment Details,Szczegóły przesyłki
+Print label,Wydrukuj etykietę
+Print return label,Wydrukuj etykietę zwrotu
+Print dispatch order label,Wydrukuj etykietę zlecenia odbioru
+Smartmage Inpost Shipments,Smartmage Inpost Przesyłki

@@ -6,6 +6,14 @@
             <item name="deps" xsi:type="string">inpostshipment_grid_listing.inpostshipment_grid_listing_data_source</item>
         </item>
         <item name="spinner" xsi:type="string">inpostshipment_grid_columns</item>
+        <item name="buttons" xsi:type="array">
+            <item name="full_sync" xsi:type="array">
+                <item name="name" xsi:type="string">full_sync</item>
+                <item name="label" xsi:type="string" translate="true">Full sync</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">smartmageinpost/shipments/fullsync</item>
+            </item>
+        </item>
     </argument>
     <dataSource name="inpostshipment_grid_listing_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
@@ -43,38 +51,38 @@
                 </item>
             </argument>
         </filters>
+        <massaction name="listing_massaction">
+            <action name="print_label">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">print_label</item>
+                        <item name="label" xsi:type="string" translate="true">Print label</item>
+                        <item name="url" xsi:type="url" path="*/*/massPrintLabel"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="print_return_label">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">print_return_label</item>
+                        <item name="label" xsi:type="string" translate="true">Print return label</item>
+                        <item name="url" xsi:type="url" path="*/*/massPrintReturnLabel"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="print_dispatch_order_label">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">print_dispatch_order_label</item>
+                        <item name="label" xsi:type="string" translate="true">Print dispatch order label</item>
+                        <item name="url" xsi:type="url" path="*/*/massPrintDispatchOrderLabel"/>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
 <!--        <exportButton name="export_button"/>-->
         <paging name="listing_paging"/>
     </listingToolbar>
-    <massaction name="listing_massaction">
-        <action name="print_label">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="type" xsi:type="string">print_label</item>
-                    <item name="label" xsi:type="string" translate="true">Print label</item>
-                    <item name="url" xsi:type="url" path="*/*/massPrintLabel"/>
-                </item>
-            </argument>
-        </action>
-        <action name="print_return_label">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="type" xsi:type="string">print_return_label</item>
-                    <item name="label" xsi:type="string" translate="true">Print Return label</item>
-                    <item name="url" xsi:type="url" path="*/*/massPrintReturnLabel"/>
-                </item>
-            </argument>
-        </action>
-        <action name="print_dispatch_order_label">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="type" xsi:type="string">print_dispatch_order_label</item>
-                    <item name="label" xsi:type="string" translate="true">Print Dispatch order label</item>
-                    <item name="url" xsi:type="url" path="*/*/massPrintDispatchOrderLabel"/>
-                </item>
-            </argument>
-        </action>
-    </massaction>
     <columns name="inpostshipment_grid_columns">
         <selectionsColumn name="ids">
             <argument name="data" xsi:type="array">

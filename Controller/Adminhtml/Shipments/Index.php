@@ -6,7 +6,6 @@ use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Result\PageFactory;
-use Magento\Framework\App\Response\Http\FileFactory;
 
 class Index extends \Smartmage\Inpost\Controller\Adminhtml\Shipments
 {
@@ -23,17 +22,15 @@ class Index extends \Smartmage\Inpost\Controller\Adminhtml\Shipments
     /**
      * Index constructor.
      * @param Context $context
-     * @param FileFactory $fileFactory
      * @param Registry $coreRegistry
      * @param PageFactory $resultPageFactory
      */
     public function __construct(
         Action\Context $context,
-        FileFactory $fileFactory,
         Registry $coreRegistry,
         PageFactory $resultPageFactory
     ) {
-        parent::__construct($context, $fileFactory);
+        parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
         $this->coreRegistry = $coreRegistry;
     }
