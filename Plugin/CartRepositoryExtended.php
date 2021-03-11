@@ -75,7 +75,6 @@ class CartRepositoryExtended
     {
         $cartExtension = $cart->getExtensionAttributes();
         if ($cartExtension === null) {
-
             $cartExtension = $this->cartExtensionFactory->create();
         }
 

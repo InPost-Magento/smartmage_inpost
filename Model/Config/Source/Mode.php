@@ -13,6 +13,9 @@ class Mode implements OptionSourceInterface
     const TEST = 'test';
     const PROD = 'prod';
 
+    const TEST_BASE_URI = 'https://sandbox-api-shipx-pl.easypack24.net';
+    const PROD_BASE_URI = 'https://api-shipx-pl.easypack24.net';
+
     /**
      * {@inheritdoc}
      */

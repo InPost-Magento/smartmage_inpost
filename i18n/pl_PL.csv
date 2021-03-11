@@ -45,7 +45,24 @@ Automatic payment for generated package,Generowane przesyłki automatycznie ubez
 Default pickup point,Domyślny punkt odbioru
 Kilograms,Kilogramy
 Grams,Gramy
+Target Locker,Paczkomat docelowy
+Cash on Delivery Value,Wartość pobrania
+Insurance Value,Wartość ubezpieczenia
+Reference Number,Numer referencyjny
+Sending Method,Sposób nadania
+Order Number,Numer zamówienia
+Width,Szerokość
+Length,Długość
+Height,Wysokość
+Service,Usługa
+Size,Gabaryt
+New Shipment,Nowa przesyłka
+Shipment Details,Szczegóły przesyłki
 Print label,Wydrukuj etykietę
 Print return label,Wydrukuj etykietę zwrotu
 Print dispatch order label,Wydrukuj etykietę zlecenia odbioru
 Smartmage Inpost Shipments,Smartmage Inpost Przesyłki
+Small,Gabaryt A
+Medium,Gabaryt B
+Large,Gabaryt C
+X Large,Gabaryt D

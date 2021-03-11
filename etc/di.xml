@@ -26,6 +26,11 @@
             <argument name="code" xsi:type="string">c2c</argument>
         </arguments>
     </virtualType>
+    <virtualType name="DefaultWaySendingC2cCod" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
+        <arguments>
+            <argument name="code" xsi:type="string">c2c</argument>
+        </arguments>
+    </virtualType>
     <virtualType name="DefaultWaySendingCourierStandard" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
         <arguments>
             <argument name="code" xsi:type="string">courier_standard</argument>
@@ -143,5 +148,9 @@
 
     <type name="Magento\Quote\Api\CartRepositoryInterface">
         <plugin name="quote_inpost_locker_id_attribute" type="Smartmage\Inpost\Plugin\CartRepositoryExtended" />
+    </type>
+
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="order_inpost_attributes" type="Smartmage\Inpost\Plugin\OrderRepositoryExtended" />
     </type>
 </config>
