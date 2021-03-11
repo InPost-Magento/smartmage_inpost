@@ -7,8 +7,10 @@ use Magento\Framework\Pricing\PriceCurrencyInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponent\DataProvider\Sanitizer;
 use Magento\Sales\Api\OrderRepositoryInterface;
+use Smartmage\Inpost\Model\Config\Source\DefaultWaySending;
+use Smartmage\Inpost\Model\ConfigProvider;
 
-class Service extends \Magento\Ui\Component\Form\Element\Select
+class SendingMethod extends \Magento\Ui\Component\Form\Element\Select
 {
     /**
      * @var Http
@@ -26,19 +28,32 @@ class Service extends \Magento\Ui\Component\Form\Element\Select
     protected $priceCurrency;
 
     /**
-     * OrderDetails constructor.
+     * @var DefaultWaySending
+     */
+    protected $defaultWaySending;
+
+    protected $configProvider;
+
+    /**
+     * SendingMethod constructor.
      * @param Http $request
      * @param OrderRepositoryInterface $orderRepository
      * @param PriceCurrencyInterface $priceCurrency
      * @param ContextInterface $context
+     * @param DefaultWaySending $defaultWaySending
+     * @param ConfigProvider $configProvider
+     * @param null $options
      * @param array $components
      * @param array $data
+     * @param Sanitizer|null $sanitizer
      */
     public function __construct(
         Http $request,
         OrderRepositoryInterface $orderRepository,
         PriceCurrencyInterface $priceCurrency,
         ContextInterface $context,
+        DefaultWaySending $defaultWaySending,
+        ConfigProvider $configProvider,
         $options = null,
         array $components = [],
         array $data = [],
@@ -48,6 +63,8 @@ class Service extends \Magento\Ui\Component\Form\Element\Select
         $this->request = $request;
         $this->orderRepository = $orderRepository;
         $this->priceCurrency = $priceCurrency;
+        $this->defaultWaySending = $defaultWaySending;
+        $this->configProvider = $configProvider;
     }
 
     /**
@@ -58,11 +75,18 @@ class Service extends \Magento\Ui\Component\Form\Element\Select
     public function prepare()
     {
         parent::prepare();
-        $config = $this->getData('config');
-        $data= $this->request->getParams();
 
-        if (isset($config['dataScope']) && $config['dataScope'] == 'service') {
-            $config['default'] = $data['shipping_method'];
+        $config = $this->getData('config');
+
+        $data= $this->request->getParams();
+        $shippingMethod = $data['shipping_method'];
+        $codes = explode('_', $shippingMethod);
+        $this->defaultWaySending->setCode(str_replace('cod', '', $codes[1]));
+
+        if (isset($config['dataScope']) && $config['dataScope'] == 'sending_method') {
+            $default = $this->configProvider->getConfigData($codes[0] . '/' . $codes[1] . '/default_way_sending');
+            $config['options'] = $this->defaultWaySending->toOptionArray();
+            $config['default'] = $default;
 
             $this->setData('config', (array)$config);
         }

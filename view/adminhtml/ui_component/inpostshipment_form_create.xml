@@ -208,6 +208,264 @@
                                 </action>
                             </actions>
                         </rule>
+
+                        <rule name="14">
+                            <value>inpostlocker_standard</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="15">
+                            <value>inpostlocker_standardcod</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="16">
+                            <value>inpostlocker_standardeow</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="17">
+                            <value>inpostlocker_standardeowcod</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+
+
+                        <rule name="18">
+                            <value>inpostcourier_standard</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="19">
+                            <value>inpostcourier_c2c</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="20">
+                            <value>inpostcourier_c2ccod</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="21">
+                            <value>inpostcourier_express1000</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="22">
+                            <value>inpostcourier_express1200</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="23">
+                            <value>inpostcourier_express1700</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="24">
+                            <value>inpostcourier_localstandard</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="25">
+                            <value>inpostcourier_localexpress</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="26">
+                            <value>inpostcourier_localsuperexpress</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="27">
+                            <value>inpostcourier_palette</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+
+                        <rule name="28">
+                            <value>inpostlocker_standard</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="29">
+                            <value>inpostlocker_standardcod</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="30">
+                            <value>inpostlocker_standardeow</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="31">
+                            <value>inpostlocker_standardeowcod</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+
+
+                        <rule name="32">
+                            <value>inpostcourier_standard</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="33">
+                            <value>inpostcourier_c2c</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="34">
+                            <value>inpostcourier_c2ccod</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="35">
+                            <value>inpostcourier_express1000</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="36">
+                            <value>inpostcourier_express1200</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="37">
+                            <value>inpostcourier_express1700</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="38">
+                            <value>inpostcourier_localstandard</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="39">
+                            <value>inpostcourier_localexpress</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="40">
+                            <value>inpostcourier_localsuperexpress</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="41">
+                            <value>inpostcourier_palette</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
                     </rules>
                     <enabled>true</enabled>
                 </switcherConfig>
@@ -228,6 +486,7 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">inpostshipment_form_create</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\TargetLocker</item>
                 </item>
             </argument>
             <settings>
@@ -239,7 +498,7 @@
 
         <field name="sending_method">
             <argument name="data" xsi:type="array">
-                <item name="options" xsi:type="object">Smartmage\Inpost\Model\Config\Source\SendingMethod</item>
+                <!--<item name="options" xsi:type="object">Smartmage\Inpost\Model\Config\Source\DefaultWaySending</item>-->
                 <item name="config" xsi:type="array">
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Sending Method</item>
@@ -283,13 +542,13 @@
 
         <field name="size">
             <argument name="data" xsi:type="array">
-                <item name="options" xsi:type="object">Smartmage\Inpost\Model\Config\Source\SendingMethod</item>
                 <item name="config" xsi:type="array">
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Size</item>
                     <item name="formElement" xsi:type="string">select</item>
                     <item name="source" xsi:type="string">inpostshipment_form_create</item>
                     <item name="dataScope" xsi:type="string">size</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Size</item>
                 </item>
             </argument>
         </field>
@@ -300,6 +559,7 @@
                     <item name="label" xsi:type="string" translate="true">Cash on Delivery Value</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Cod</item>
                 </item>
             </argument>
         </field>
@@ -310,6 +570,7 @@
                     <item name="label" xsi:type="string" translate="true">Insurance Value</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Insurance</item>
                 </item>
             </argument>
         </field>
@@ -320,6 +581,7 @@
                     <item name="label" xsi:type="string" translate="true">Reference Number</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Reference</item>
                 </item>
             </argument>
         </field>

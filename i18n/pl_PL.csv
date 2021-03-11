@@ -62,3 +62,7 @@ Print label,Wydrukuj etykietę
 Print return label,Wydrukuj etykietę zwrotu
 Print dispatch order label,Wydrukuj etykietę zlecenia odbioru
 Smartmage Inpost Shipments,Smartmage Inpost Przesyłki
+Small,Gabaryt A
+Medium,Gabaryt B
+Large,Gabaryt C
+X Large,Gabaryt D

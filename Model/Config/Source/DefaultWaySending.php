@@ -68,4 +68,9 @@ class DefaultWaySending implements OptionSourceInterface
                 return [];
         }
     }
+
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
 }
