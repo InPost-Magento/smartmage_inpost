@@ -2,20 +2,38 @@
 namespace Smartmage\Inpost\Model\ApiShipx;
 
 use Smartmage\Inpost\Model\ConfigProvider;
+use Magento\Framework\App\Response\Http;
+use Prophecy\Call\Call;
+use Smartmage\Inpost\Model\ApiShipx\CallResult;
 
 abstract class AbstractService implements ServiceInterface
 {
+    const API_RESPONSE_MESSAGE_KEY = 'message';
+    const API_RESPONSE_DETAILS_KEY = 'details';
+
+    const API_RESPONSE_VALIDATION_KEYS_KEY = [
+        'required' => 'Podanie wartości jest wymagane.',
+        'invalid' => 'Podana wartość jest nieprawidłowa.',
+        'too_short' => 'Podana wartość jest zbyt krótka.',
+        'too_long' => 'Podana wartość jest zbyt długa.',
+        'too_small' => 'Podana wartość jest zbyt mała.',
+        'too_big' => 'Podana wartość jest zbyt duża.',
+        'invalid_format' => 'Podana wartość ma niepoprawny format, np. gdy w pole numer telefonu zostały wpisane litery.',
+        'not_a_number' => 'Wprowadzona wartość powinna być liczbą.',
+        'not_an_integer' => 'Wprowadzona wartość powinna być liczbą całkowitą.'
+    ];
+
     protected $method;
 
     protected $successResponseCode;
 
+    protected $successMessage = 'Blank success message';
+
+    protected $failMessage = 'Blank fail message';
+
+    protected $callResult;
+
     protected $requestHeaders = [];
-
-    protected $responseHeaders = [];
-
-    protected $responseBody;
-
-    protected $responseStatus;
 
     protected $timeout = 60;
 
@@ -32,8 +50,6 @@ abstract class AbstractService implements ServiceInterface
     public function getMode()
     {
         return $this->configProvider->getMode();
-        //todo full_implementation
-        return \Smartmage\Inpost\Model\Config\Source\Mode::TEST;
     }
 
     public function getBaseUri()
@@ -55,7 +71,6 @@ abstract class AbstractService implements ServiceInterface
 
         $ch = curl_init();
         $token = $this->configProvider->getAccessToken();
-        $logger->info(print_r($token, true));
 
         $this->requestHeaders['Authorization'] = "Authorization: Bearer " . $token;
 
@@ -85,15 +100,86 @@ abstract class AbstractService implements ServiceInterface
 
         $response = curl_exec($ch);
         $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
         $response = json_decode($response, true);
 
+        $this->callResult = [
+            CallResult::STRING_STATUS => CallResult::STATUS_FAIL,
+            CallResult::STRING_MESSAGE => 'Default fail message',
+            CallResult::STRING_RESPONSE_CODE => null
+        ];
+
         if ($responseCode == $this->successResponseCode){
+
             curl_close($ch);
-            $logger->info(print_r($response, true));
+//            $logger->info(print_r($response, true));
+
+            $this->callResult ['status'] = CallResult::STATUS_SUCCESS;
+            $this->callResult ['message'] = $this->successMessage;
+            $this->callResult ['response_code'] = $responseCode;
+
             return $response;
-        }else if (1 == 2) {
-            return null;
+
+        } else if ($responseCode == Http::STATUS_CODE_400) { //Przy przesyłaniu danych metodą POST lub PUT wystąpiły błędy w walidacji. Szczegółowe błędy walidacji zawarte są pod atrybutem details.
+
+            curl_close($ch);
+
+            $errorsStr = '';
+            if (isset($response[self::API_RESPONSE_DETAILS_KEY])){
+                foreach ($response[self::API_RESPONSE_DETAILS_KEY] as $k => $detail) {
+                    $errorsStr .= '[ ' . $k . ' : ';
+                    foreach ($detail as $detailItem) {
+                        $errorsStr .= '( ' . $detailItem . ' ), ';
+                    }
+                    $errorsStr .= ' ], ';
+                }
+            }
+
+            $this->callResult ['status'] = CallResult::STATUS_FAIL;
+            $this->callResult ['message'] = $response[self::API_RESPONSE_MESSAGE_KEY] . ' - ' . $errorsStr;
+            $this->callResult ['response_code'] = Http::STATUS_CODE_400;
+
+            return $response;
+
+        } else if ($responseCode == Http::STATUS_CODE_401) { //Dostęp do zasobu jest niemożliwy ponieważ zapytanie nie zostało podpisane kluczem access token.
+
+            curl_close($ch);
+
+            $this->callResult ['status'] = CallResult::STATUS_FAIL;
+            $this->callResult ['message'] = $response[self::API_RESPONSE_MESSAGE_KEY];
+            $this->callResult ['response_code'] = Http::STATUS_CODE_401;
+
+            return $response;
+
+        } else if ($responseCode == Http::STATUS_CODE_403) { //Dostęp do określone zasobu jest zabroniony dla tego zapytania (np. z powodu braku lub niewłaściwego zakresu uprawnień).
+
+            curl_close($ch);
+
+            $this->callResult ['status'] = CallResult::STATUS_FAIL;
+            $this->callResult ['message'] = $response[self::API_RESPONSE_MESSAGE_KEY];
+            $this->callResult ['response_code'] = Http::STATUS_CODE_403;
+
+            return $response;
+
+        } else if ($responseCode == Http::STATUS_CODE_404) { //Szukany zasób nie został odnaleziony, np. adres URL jest niepoprawny lub zasób nie istnieje.
+
+            curl_close($ch);
+
+            $this->callResult ['status'] = CallResult::STATUS_FAIL;
+            $this->callResult ['message'] = $response[self::API_RESPONSE_MESSAGE_KEY];
+            $this->callResult ['response_code'] = Http::STATUS_CODE_404;
+
+            return $response;
+
+        } else if ($responseCode == Http::STATUS_CODE_500) { //Wystąpił błąd po stronie serwera.
+
+            curl_close($ch);
+
+            $this->callResult ['status'] = CallResult::STATUS_FAIL;
+            $this->callResult ['message'] = $response[self::API_RESPONSE_MESSAGE_KEY];
+            $this->callResult ['response_code'] = Http::STATUS_CODE_500;
+
+            return $response;
+
         }
 
         if ($response === false) {

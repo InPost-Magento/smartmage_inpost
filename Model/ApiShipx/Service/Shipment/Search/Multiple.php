@@ -2,17 +2,14 @@
 
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Search;
 
-use \Smartmage\Inpost\{
-    Api\Data\ShipmentInterface,
-    Model\ApiShipx\Service\Shipment\AbstractSearch,
-    Model\ShipmentRepository,
-    Model\ShipmentManagement,
-    Model\ConfigProvider
-};
+use Smartmage\Inpost\Api\Data\ShipmentInterface;
+use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\AbstractSearch;
+use Smartmage\Inpost\Model\ConfigProvider;
+use Smartmage\Inpost\Model\ShipmentManagement;
+use Smartmage\Inpost\Model\ShipmentRepository;
 
 class Multiple extends AbstractSearch
 {
-
     protected $shipmentRepository;
 
     protected $shipmentManagement;
@@ -21,10 +18,10 @@ class Multiple extends AbstractSearch
         ConfigProvider $configProvider,
         ShipmentRepository $shipmentRepository,
         ShipmentManagement $shipmentManagement
-    )
-    {
+    ) {
         $this->shipmentRepository = $shipmentRepository;
         $this->shipmentManagement = $shipmentManagement;
+        $this->successMessage = __('The shipment list has been successfully synchronized');
         parent::__construct($configProvider);
     }
 
@@ -38,23 +35,20 @@ class Multiple extends AbstractSearch
         $totalPagesUpdated = false;
 
         for ($page = 1; ; $page++) {
-            $logger->info('CURPAGE');
-            $logger->info($page);
-
-            $callResult = $this->call(null, ['page' => $page]);
+            $result = $this->call(null, ['page' => $page]);
 
             if (!$totalPagesUpdated) {
-                $totalPagesRaw = (float)$callResult['count'] / (float)$callResult['per_page'];
+                $totalPagesRaw = (float)$result['count'] / (float)$result['per_page'];
                 $logger->info($totalPagesRaw);
                 $totalPages = ceil($totalPagesRaw);
                 $logger->info($totalPages);
                 $totalPagesUpdated = true;
             }
 
-            if (isset($callResult['items']) && !empty($callResult['items'])) {
-                foreach ($callResult['items'] as $item) {
+            if (isset($result['items']) && !empty($result['items'])) {
+                foreach ($result['items'] as $item) {
                     try {
-                        $formatedData = array();
+                        $formatedData = [];
 
                         $parcel             = $item['parcels'][0];
                         $shipmentAttributes = '';
@@ -86,18 +80,18 @@ class Multiple extends AbstractSearch
                         $formatedData[ShipmentInterface::TARGET_POINT]        = $item['custom_attributes']['target_point'];
 
                         $this->shipmentManagement->addOrUpdate($formatedData);
-
                     } catch (\Exception $exception) {
                         $logger->info($exception->getMessage());
                     }
                 }
-            } else {
+            } else { // If no shipments from api end for loop
                 break;
             }
 
-            if ($page >= $totalPages)
+            if ($page >= $totalPages) { // If end of pages end for loop
                 break;
+            }
         }
+        return $this->callResult;
     }
-
 }
