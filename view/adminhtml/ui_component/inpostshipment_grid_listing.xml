@@ -96,7 +96,6 @@
                 <filter>textRange</filter>
                 <label translate="true">ID</label>
                 <resizeDefaultWidth>25</resizeDefaultWidth>
-                <sorting>desc</sorting>
             </settings>
         </column>
         <column name="shipment_id">
@@ -104,6 +103,7 @@
                 <filter>text</filter>
                 <bodyTmpl>ui/grid/cells/text</bodyTmpl>
                 <label translate="true">Shipment id</label>
+                <sorting>desc</sorting>
             </settings>
         </column>
         <column name="status">

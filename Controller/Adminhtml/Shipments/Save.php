@@ -37,7 +37,7 @@ class Save extends \Smartmage\Inpost\Controller\Adminhtml\Shipments
 //        }
 
         try {
-            $this->courier->createShipment();
+            $result = $this->courier->createShipment();
             $this->messageManager->addSuccessMessage(__('success'));
 //        } catch (LocalizedException $e) {
 //            $this->messageManager->addErrorMessage($e->getMessage());

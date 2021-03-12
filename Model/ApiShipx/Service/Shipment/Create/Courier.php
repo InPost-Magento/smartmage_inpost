@@ -58,7 +58,7 @@ class Courier extends AbstractCreate
 
     public function createShipment ()
     {
-        $this->call($this->sampleBody);
+        return $this->call($this->sampleBody);
     }
 
 }
