@@ -1,13 +1,58 @@
 <?php
 /**
  * @var $block \Smartmage\Inpost\Block\Adminhtml\Order\View\Inpost
- */
+ */ ?>
+<div class="field">
+<?php if ($block->getInpostShipmentId()) : ?>
+<table class="data-table admin__table-primary">
+    <thead class="headings">
+    <tr>
+        <th><?= __('Tracking number') ?></th>
+        <th><?= __('Service') ?></th>
+        <th><?= __('Details') ?></th>
+        <th><?= __('Actions') ?></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <a href="<?= $block->getShippingTrackingUrl(); ?>"><?= $block->getShippingTrackingNumber(); ?></a>
+        </td>
+        <td>
+            <?= $block->getShippingService(); ?>
+        </td>
+        <td>
+            <div>
+                <?php $details = $block->getShippingDetails(); ?>
+                <?php foreach ($details as $key => $value): ?>
+                <div class="details-<?= $key ?>">
+                    <?php echo $block->escapeHtml($value) ?>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </td>
+        <td>
+            <div class="actions">
+                <a href="<?= /* @noEscape */ $block->getLabelUrl() ?>" target="_blank">
+                    <?= $block->escapeHtml(__('Print label')) ?>
+                </a>
+            </div>
+            <div class="actions">
+                <a href="<?= /* @noEscape */ $block->getReturnUrl() ?>" target="_blank">
+                    <?= $block->escapeHtml(__('Return')) ?>
+                </a>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<?php endif ?>
+<?php
 $methods = $block->getInpostShippingMethods();
 $selectedMethod = $block->getSelectedMethod();
 $orderId = $block->getOrder()->getId();
 ?>
-<div class="field field-store-switcher">
-    <form action="<?php echo $this->getUrl('smartmageinpost/shipments/create') ?>">
+    <form action="<?= $this->getUrl('smartmageinpost/shipments/create') ?>">
         <div class="control">
             <input type="hidden" name="order_id" value="<?= $orderId ?>">
             <select
@@ -26,3 +71,4 @@ $orderId = $block->getOrder()->getId();
         </button>
     </form>
 </div>
+

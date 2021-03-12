@@ -50,6 +50,16 @@ class Shipment extends AbstractModel implements ShipmentInterface
         return $this->getData(self::REFERENCE);
     }
 
+    public function getTrackingNumber()
+    {
+        return $this->getData(self::TRACKING_NUMBER);
+    }
+
+    public function getTargetPoint()
+    {
+        return $this->getData(self::TARGET_POINT);
+    }
+
     public function setShipmentId($shipmentId)
     {
         return $this->setData(self::SHIPMENT_ID, $shipmentId);
@@ -83,6 +93,16 @@ class Shipment extends AbstractModel implements ShipmentInterface
     public function setReference($reference)
     {
         return $this->setData(self::REFERENCE, $reference);
+    }
+
+    public function setTrackingNumber($trackingNumber)
+    {
+        return $this->setData(self::TRACKING_NUMBER, $trackingNumber);
+    }
+
+    public function setTargetPoint($targetPoint)
+    {
+        return $this->setData(self::TARGET_POINT, $targetPoint);
     }
 
 }

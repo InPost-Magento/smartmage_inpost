@@ -3,8 +3,6 @@
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Create;
 
 use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\AbstractCreate;
-use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
-use Smartmage\Inpost\Model\ConfigProvider;
 
 class Courier extends AbstractCreate
 {
