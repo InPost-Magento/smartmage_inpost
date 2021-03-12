@@ -1,8 +1,25 @@
 <?php
 namespace Smartmage\Inpost\Model\ApiShipx;
 
+use Magento\Framework\App\Response\Http;
+
 abstract class AbstractService implements ServiceInterface
 {
+    const API_RESPONSE_MESSAGE_KEY = 'message';
+    const API_RESPONSE_DETAILS_KEY = 'details';
+
+    const API_RESPONSE_VALIDATION_KEYS_KEY = [
+        'required' => 'Podanie wartości jest wymagane.',
+        'invalid' => 'Podana wartość jest nieprawidłowa.',
+        'too_short' => 'Podana wartość jest zbyt krótka.',
+        'too_long' => 'Podana wartość jest zbyt długa.',
+        'too_small' => 'Podana wartość jest zbyt mała.',
+        'too_big' => 'Podana wartość jest zbyt duża.',
+        'invalid_format' => 'Podana wartość ma niepoprawny format, np. gdy w pole numer telefonu zostały wpisane litery.',
+        'not_a_number' => 'Wprowadzona wartość powinna być liczbą.',
+        'not_an_integer' => 'Wprowadzona wartość powinna być liczbą całkowitą.'
+    ];
+
     protected $method;
 
     protected $successResponseCode;
@@ -72,15 +89,32 @@ abstract class AbstractService implements ServiceInterface
 
         $response = curl_exec($ch);
         $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
         $response = json_decode($response, true);
 
         if ($responseCode == $this->successResponseCode){
             curl_close($ch);
             $logger->info(print_r($response, true));
             return $response;
-        }else if (1 == 2) {
-            return null;
+        } else if ($responseCode == Http::STATUS_CODE_400) { //Przy przesyłaniu danych metodą POST lub PUT wystąpiły błędy w walidacji. Szczegółowe błędy walidacji zawarte są pod atrybutem details.
+            $errorsStr = '';
+            if (isset($response[self::API_RESPONSE_DETAILS_KEY])){
+                foreach ($response[self::API_RESPONSE_DETAILS_KEY] as $k => $detail) {
+                    $errorsStr .= '[ ' . $k . ' : ';
+                    foreach ($detail as $detailItem) {
+                        $errorsStr .= '( ' . $detail . ' ), ';
+                    }
+                    $errorsStr .= ' ], ';
+                }
+            }
+            throw new \Exception($response[self::API_RESPONSE_MESSAGE_KEY] . ' - ' . $errorsStr, $responseCode);
+        } else if ($responseCode == Http::STATUS_CODE_401) { //Dostęp do zasobu jest niemożliwy ponieważ zapytanie nie zostało podpisane kluczem access token.
+            throw new \Exception($response[self::API_RESPONSE_MESSAGE_KEY], $responseCode);
+        } else if ($responseCode == Http::STATUS_CODE_403) { //Dostęp do określone zasobu jest zabroniony dla tego zapytania (np. z powodu braku lub niewłaściwego zakresu uprawnień).
+            throw new \Exception($response[self::API_RESPONSE_MESSAGE_KEY], $responseCode);
+        } else if ($responseCode == Http::STATUS_CODE_404) { //Szukany zasób nie został odnaleziony, np. adres URL jest niepoprawny lub zasób nie istnieje.
+            throw new \Exception($response[self::API_RESPONSE_MESSAGE_KEY], $responseCode);
+        } else if ($responseCode == Http::STATUS_CODE_500) { //Wystąpił błąd po stronie serwera.
+            throw new \Exception($response[self::API_RESPONSE_MESSAGE_KEY], $responseCode);
         }
 
         if ($response === false) {

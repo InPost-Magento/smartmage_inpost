@@ -36,10 +36,6 @@ class Save extends \Smartmage\Inpost\Controller\Adminhtml\Shipments
 //            return $this->resultRedirectFactory->create()->setPath('catalog/product/', ['_current' => true]);
 //        }
 
-        print_r('<pre>');
-        print_r($this->getRequest()->getParams());
-        print_r('</pre>');
-        die();
 
         try {
             $result = $this->courier->createShipment();
