@@ -18,15 +18,13 @@ class Create extends \Smartmage\Inpost\Controller\Adminhtml\Shipments
     /**
      * Index constructor.
      * @param Context $context
-     * @param FileFactory $fileFactory
      * @param PageFactory $resultPageFactory
      */
     public function __construct(
         Context $context,
-        FileFactory $fileFactory,
         PageFactory $resultPageFactory
     ) {
-        parent::__construct($context, $fileFactory);
+        parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
     }
 

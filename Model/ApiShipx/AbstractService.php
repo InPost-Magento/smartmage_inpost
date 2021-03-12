@@ -28,6 +28,8 @@ abstract class AbstractService implements ServiceInterface
 
     protected $successMessage = 'Blank success message';
 
+    protected $failMessage = 'Blank fail message';
+
     protected $callResult;
 
     protected $requestHeaders = [];

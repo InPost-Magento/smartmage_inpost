@@ -40,7 +40,6 @@ class DefaultWaySending implements OptionSourceInterface
             case (self::INPOST_LOCKER_STANDARD):
                 return [
                     ['value' => 'parcel_locker', 'label' => __('Nadanie w Paczkomacie')],
-                    ['value' => 'branch', 'label' => __('Nadanie w Oddziale')],
                     ['value' => 'dispatch_order', 'label' => __('Odbiór przez Kuriera')],
                     ['value' => 'pop', 'label' => __('Nadanie w POP')],
                 ];
@@ -58,8 +57,6 @@ class DefaultWaySending implements OptionSourceInterface
             case (self::INPOST_COURIER_LOCAL_EXPRESS):
             case (self::INPOST_COURIER_LOCAL_SUPER_EXPRESS):
                 return [
-                    ['value' => 'courier_pok', 'label' => __('Nadanie w POK')],
-                    ['value' => 'branch', 'label' => __('Nadanie w Oddziale')],
                     ['value' => 'dispatch_order', 'label' => __('Odbiór przez Kuriera')],
                     ['value' => 'pop', 'label' => __('Nadanie w POP')],
 

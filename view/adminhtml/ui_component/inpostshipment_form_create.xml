@@ -107,6 +107,19 @@
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
                                     <callback>hide</callback>
                                 </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>hide</callback>
+                                </action>
                             </actions>
                         </rule>
                         <rule name="1">
@@ -123,6 +136,19 @@
                                 <action name="2">
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
                                     <callback>show</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>hide</callback>
                                 </action>
                             </actions>
                         </rule>
@@ -141,6 +167,19 @@
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
                                     <callback>show</callback>
                                 </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>hide</callback>
+                                </action>
                             </actions>
                         </rule>
                         <rule name="3">
@@ -157,6 +196,19 @@
                                 <action name="2">
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
                                     <callback>show</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>hide</callback>
                                 </action>
                             </actions>
                         </rule>
@@ -176,6 +228,19 @@
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
                                     <callback>hide</callback>
                                 </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
                             </actions>
                         </rule>
                         <rule name="5">
@@ -192,6 +257,19 @@
                                 <action name="2">
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
                                     <callback>hide</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
                                 </action>
                             </actions>
                         </rule>
@@ -210,6 +288,19 @@
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
                                     <callback>hide</callback>
                                 </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
                             </actions>
                         </rule>
                         <rule name="7">
@@ -226,6 +317,19 @@
                                 <action name="2">
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
                                     <callback>hide</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
                                 </action>
                             </actions>
                         </rule>
@@ -244,6 +348,19 @@
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
                                     <callback>hide</callback>
                                 </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
                             </actions>
                         </rule>
                         <rule name="9">
@@ -260,6 +377,19 @@
                                 <action name="2">
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
                                     <callback>hide</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
                                 </action>
                             </actions>
                         </rule>
@@ -278,6 +408,19 @@
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
                                     <callback>hide</callback>
                                 </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
                             </actions>
                         </rule>
                         <rule name="11">
@@ -294,6 +437,19 @@
                                 <action name="2">
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
                                     <callback>hide</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
                                 </action>
                             </actions>
                         </rule>
@@ -312,6 +468,19 @@
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
                                     <callback>hide</callback>
                                 </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
                             </actions>
                         </rule>
                         <rule name="13">
@@ -328,6 +497,19 @@
                                 <action name="2">
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
                                     <callback>hide</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
                                 </action>
                             </actions>
                         </rule>
