@@ -13,6 +13,12 @@
                 <item name="class" xsi:type="string">primary</item>
                 <item name="url" xsi:type="string">smartmageinpost/shipments/fullsync</item>
             </item>
+            <item name="full_sync2" xsi:type="array">
+                <item name="name" xsi:type="string">full_sync2</item>
+                <item name="label" xsi:type="string" translate="true">Full sync2</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">smartmageinpost/shipments/fullsync</item>
+            </item>
         </item>
     </argument>
     <dataSource name="inpostshipment_grid_listing_data_source">
@@ -96,7 +102,6 @@
                 <filter>textRange</filter>
                 <label translate="true">ID</label>
                 <resizeDefaultWidth>25</resizeDefaultWidth>
-                <sorting>desc</sorting>
             </settings>
         </column>
         <column name="shipment_id">
@@ -104,6 +109,7 @@
                 <filter>text</filter>
                 <bodyTmpl>ui/grid/cells/text</bodyTmpl>
                 <label translate="true">Shipment id</label>
+                <sorting>desc</sorting>
             </settings>
         </column>
         <column name="status">

@@ -54,6 +54,9 @@ class Courier extends AbstractCreate
                     "amount" => 50.00,
                     "currency" => "PLN"
                 ],
+                "custom_attributes" => [
+                    "sending_method" => "dispatch_order"
+                ],
                 "service" => "inpost_courier_standard",
                 "reference" => "Test",
                 "comments" => "dowolny komentarz"
