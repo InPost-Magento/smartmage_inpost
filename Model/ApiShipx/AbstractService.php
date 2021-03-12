@@ -80,6 +80,8 @@ abstract class AbstractService implements ServiceInterface
 
         if ($this->method === CURLOPT_HTTPGET && is_array($parameters)) {
             $url = $endpoint . '?' . http_build_query($parameters);
+        } else {
+            $url = $endpoint;
         }
 
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -125,9 +127,11 @@ abstract class AbstractService implements ServiceInterface
 
             $errorsStr = '';
             if (isset($response[self::API_RESPONSE_DETAILS_KEY])){
+                print_r($response[self::API_RESPONSE_DETAILS_KEY]);
                 foreach ($response[self::API_RESPONSE_DETAILS_KEY] as $k => $detail) {
                     $errorsStr .= '[ ' . $k . ' : ';
                     foreach ($detail as $detailItem) {
+
                         $errorsStr .= '( ' . $detailItem . ' ), ';
                     }
                     $errorsStr .= ' ], ';

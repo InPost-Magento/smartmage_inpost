@@ -25,7 +25,7 @@ class Locker extends AbstractCreate
         ];
 
         if ($data['sending_method'] != 'dispatch_order') {
-            $requestBody['custom_attributes']['dropoff_point'] = $this->configProvider->getConfigData(
+            $this->requestBody['custom_attributes']['dropoff_point'] = $this->configProvider->getConfigData(
                 str_replace('_', '/', $data['service']) . '/default_sending_point'
             );
         }
