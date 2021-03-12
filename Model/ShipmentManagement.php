@@ -2,13 +2,13 @@
 
 namespace Smartmage\Inpost\Model;
 
-use Smartmage\Inpost\Api;
-use Smartmage\Inpost\Api\Data\ShipmentInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\SortOrderBuilder;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Stdlib\DateTime\DateTimeFactory;
 use Magento\Store\Model\StoreManagerInterface;
+use Smartmage\Inpost\Api;
+use Smartmage\Inpost\Api\Data\ShipmentInterface;
 
 /**
  * Class ShipmentManagement
@@ -108,18 +108,19 @@ class ShipmentManagement implements Api\ShipmentManagementInterface
         if ($count === 0) {
             $shipment = $this->shipmentFactory->create();
             $shipment->setShipmentId($shipmentData[ShipmentInterface::SHIPMENT_ID]);
-        } else if ($count === 1) {
+        } elseif ($count === 1) {
             $shipment = $obtainedShipments->getItems()[0];
         }
-            $shipment->setStatus($shipmentData[ShipmentInterface::STATUS]);
-            $shipment->setService($shipmentData[ShipmentInterface::SERVICE]);
-            $shipment->setShipmentAttributes($shipmentData[ShipmentInterface::SHIPMENT_ATTRIBUTES]);
-            $shipment->setSendingMethod($shipmentData[ShipmentInterface::SENDING_METHOD]);
-            $shipment->setReceiverData($shipmentData[ShipmentInterface::RECEIVER_DATA]);
-            $shipment->setReference($shipmentData[ShipmentInterface::REFERENCE]);
+        $shipment->setStatus($shipmentData[ShipmentInterface::STATUS]);
+        $shipment->setService($shipmentData[ShipmentInterface::SERVICE]);
+        $shipment->setShipmentAttributes($shipmentData[ShipmentInterface::SHIPMENT_ATTRIBUTES]);
+        $shipment->setSendingMethod($shipmentData[ShipmentInterface::SENDING_METHOD]);
+        $shipment->setReceiverData($shipmentData[ShipmentInterface::RECEIVER_DATA]);
+        $shipment->setReference($shipmentData[ShipmentInterface::REFERENCE]);
+        $shipment->setTrackingNumber($shipmentData[ShipmentInterface::TRACKING_NUMBER]);
+        $shipment->setTargetPoint($shipmentData[ShipmentInterface::TARGET_POINT]);
 
-            $this->shipmentRepository->save($shipment);
-
+        $this->shipmentRepository->save($shipment);
     }
 
     /**
@@ -141,5 +142,4 @@ class ShipmentManagement implements Api\ShipmentManagementInterface
 //        }
         return null;
     }
-
 }

@@ -3,8 +3,6 @@
 namespace Smartmage\Inpost\Controller\Adminhtml\Shipments;
 
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Response\Http\FileFactory;
-use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\View\Result\PageFactory;
 
 class Create extends \Smartmage\Inpost\Controller\Adminhtml\Shipments

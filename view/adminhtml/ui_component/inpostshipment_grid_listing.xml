@@ -112,6 +112,13 @@
                 <sorting>desc</sorting>
             </settings>
         </column>
+        <column name="tracking_number" class="Smartmage\Inpost\Ui\Component\Listing\Column\TrackingNumber">
+            <settings>
+                <filter>text</filter>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <label translate="true">Tracking number</label>
+            </settings>
+        </column>
         <column name="status">
             <settings>
                 <filter>text</filter>

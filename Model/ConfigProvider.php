@@ -3,6 +3,7 @@
 namespace Smartmage\Inpost\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Encryption\EncryptorInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
@@ -47,14 +48,22 @@ class ConfigProvider
     protected $storeManager;
 
     /**
+     * @var \Magento\Framework\Encryption\EncryptorInterface
+     */
+    protected $encryptor;
+
+    /**
      * ConfigProvider constructor.
      * @param ScopeConfigInterface $scopeConfig
      * @param StoreManagerInterface $storeManager
+     * @param \Magento\Framework\Encryption\EncryptorInterface $encryptor
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        StoreManagerInterface $storeManager
+        StoreManagerInterface $storeManager,
+        EncryptorInterface $encryptor
     ) {
+        $this->encryptor = $encryptor;
         $this->scopeConfig = $scopeConfig;
         $this->storeManager = $storeManager;
     }
@@ -99,7 +108,7 @@ class ConfigProvider
      */
     public function getAccessToken()
     {
-        return $this->getShippingConfigData(self::SHIPPING_ACCESS_TOKEN);
+        return $this->encryptor->decrypt($this->getShippingConfigData(self::SHIPPING_ACCESS_TOKEN));
     }
 
     /**

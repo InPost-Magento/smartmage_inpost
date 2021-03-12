@@ -1,6 +1,7 @@
 <?php
 namespace Smartmage\Inpost\Model\ApiShipx;
 
+use Smartmage\Inpost\Model\ConfigProvider;
 use Magento\Framework\App\Response\Http;
 use Prophecy\Call\Call;
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
@@ -38,17 +39,24 @@ abstract class AbstractService implements ServiceInterface
 
     protected $callUri;
 
+    protected $configProvider;
+
+    public function __construct(
+        ConfigProvider $configProvider
+    ) {
+        $this->configProvider = $configProvider;
+    }
+
     public function getMode()
     {
-        //todo full_implementation
-        return \Smartmage\Inpost\Model\Config\Source\Mode::TEST;
+        return $this->configProvider->getMode();
     }
 
     public function getBaseUri()
     {
         if ($this->getMode() === \Smartmage\Inpost\Model\Config\Source\Mode::TEST) {
             return \Smartmage\Inpost\Model\Config\Source\Mode::TEST_BASE_URI;
-        } else if ($this->getMode() === \Smartmage\Inpost\Model\Config\Source\Mode::PROD) {
+        } elseif ($this->getMode() === \Smartmage\Inpost\Model\Config\Source\Mode::PROD) {
             return \Smartmage\Inpost\Model\Config\Source\Mode::PROD_BASE_URI;
         } else {
             return null;
@@ -62,8 +70,9 @@ abstract class AbstractService implements ServiceInterface
         $logger->addWriter($writer);
 
         $ch = curl_init();
+        $token = $this->configProvider->getAccessToken();
 
-        $this->requestHeaders['Authorization'] = "Authorization: Bearer " . "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJzYW5kYm94LWFwaS1zaGlweC1wbC5lYXN5cGFjazI0Lm5ldCIsInN1YiI6InNhbmRib3gtYXBpLXNoaXB4LXBsLmVhc3lwYWNrMjQubmV0IiwiZXhwIjoxNTAyMTg4NjIyLCJpYXQiOjE1MDIxODg2MjIsImp0aSI6IjY0YjJmMTVjLTk3OWEtNDU5MC1hZGU0LWZiYzk1MmFmMGE5YyJ9.KLHwKX9c6H5a2trQMCvUIHfOurPeDomv84MoSLbPN6AdhMiRfZ197Y2OhtNwTnwyFUE2zObylLXrIvYaWZo7Aw";
+        $this->requestHeaders['Authorization'] = "Authorization: Bearer " . $token;
 
         $logger->info(print_r($this->getBaseUri() . '/' . $this->callUri, true));
 
@@ -119,7 +128,7 @@ abstract class AbstractService implements ServiceInterface
                 foreach ($response[self::API_RESPONSE_DETAILS_KEY] as $k => $detail) {
                     $errorsStr .= '[ ' . $k . ' : ';
                     foreach ($detail as $detailItem) {
-                        $errorsStr .= '( ' . $detail . ' ), ';
+                        $errorsStr .= '( ' . $detailItem . ' ), ';
                     }
                     $errorsStr .= ' ], ';
                 }
