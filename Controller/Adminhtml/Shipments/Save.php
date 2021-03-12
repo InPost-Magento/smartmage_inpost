@@ -62,10 +62,12 @@ class Save extends \Smartmage\Inpost\Controller\Adminhtml\Shipments
         $shipmentClass = $this->classMapper[$data['shipment_fieldset']['service']];
 
         try {
-            $requestBody = $shipmentClass->createBody(
+            $shipmentClass->createBody(
                 $data['shipment_fieldset'],
                 $this->orderRepository->get($data['shipment_fieldset']['order_id'])
             );
+
+            $response = $shipmentClass->createShipment();
         } catch (NoSuchEntityException $e) {
             $this->messageManager->addExceptionMessage(
                 $e,
@@ -76,7 +78,6 @@ class Save extends \Smartmage\Inpost\Controller\Adminhtml\Shipments
 
 
         try {
-            $this->courier->createShipment();
             $this->messageManager->addSuccessMessage(__('success'));
 //        } catch (LocalizedException $e) {
 //            $this->messageManager->addErrorMessage($e->getMessage());
