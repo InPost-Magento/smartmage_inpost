@@ -44,4 +44,50 @@ class Courier extends AbstractCreate
 
         parent::createBody($data, $order);
     }
+
+    public function setSampleData()
+    {
+        $this->requestBody = [
+            "receiver" => [
+                "company_name" => "Company name",
+                "first_name" => "Jan",
+                "last_name" => "Kowalski",
+                "email" => "receiver@example.com",
+                "phone" => "888000000",
+                "address" => [
+                    "street" => "Cybernetyki",
+                    "building_number" => "10",
+                    "city" => "Warszawa",
+                    "post_code" => "02-677",
+                    "country_code" => "PL"
+                ]
+            ],
+            "parcels" => [
+                "dimensions" => [
+                    "length" => "80",
+                    "width" => "160",
+                    "height" => "340",
+                    "unit" => "mm"
+                ],
+                "weight" => [
+                    "amount" => "1",
+                    "unit" => "kg"
+                ],
+            ],
+            "insurance" => [
+                "amount" => 50,
+                "currency" => "PLN"
+            ],
+            "cod" => [
+                "amount" => 50.00,
+                "currency" => "PLN"
+            ],
+            "custom_attributes" => [
+                "sending_method" => "dispatch_order",
+            ],
+            "service" => "inpost_courier_standard",
+            "reference" => "Test",
+            "comments" => "dowolny komentarz"
+        ];
+    }
 }
