@@ -13,9 +13,9 @@
                 <item name="class" xsi:type="string">primary</item>
                 <item name="url" xsi:type="string">smartmageinpost/shipments/fullsync</item>
             </item>
-            <item name="full_sync" xsi:type="array">
-                <item name="name" xsi:type="string">full_sync</item>
-                <item name="label" xsi:type="string" translate="true">Full sync</item>
+            <item name="full_sync2" xsi:type="array">
+                <item name="name" xsi:type="string">full_sync2</item>
+                <item name="label" xsi:type="string" translate="true">Full sync2</item>
                 <item name="class" xsi:type="string">primary</item>
                 <item name="url" xsi:type="string">smartmageinpost/shipments/fullsync</item>
             </item>
