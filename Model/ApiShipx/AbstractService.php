@@ -2,6 +2,8 @@
 namespace Smartmage\Inpost\Model\ApiShipx;
 
 use Magento\Framework\App\Response\Http;
+use Prophecy\Call\Call;
+use Smartmage\Inpost\Model\ApiShipx\CallResult;
 
 abstract class AbstractService implements ServiceInterface
 {
@@ -24,13 +26,11 @@ abstract class AbstractService implements ServiceInterface
 
     protected $successResponseCode;
 
+    protected $successMessage = 'Blank success message';
+
+    protected $callResult;
+
     protected $requestHeaders = [];
-
-    protected $responseHeaders = [];
-
-    protected $responseBody;
-
-    protected $responseStatus;
 
     protected $timeout = 60;
 
@@ -91,11 +91,27 @@ abstract class AbstractService implements ServiceInterface
         $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $response = json_decode($response, true);
 
+        $this->callResult = [
+            CallResult::STRING_STATUS => CallResult::STATUS_FAIL,
+            CallResult::STRING_MESSAGE => 'Default fail message',
+            CallResult::STRING_RESPONSE_CODE => null
+        ];
+
         if ($responseCode == $this->successResponseCode){
+
             curl_close($ch);
-            $logger->info(print_r($response, true));
+//            $logger->info(print_r($response, true));
+
+            $this->callResult ['status'] = CallResult::STATUS_SUCCESS;
+            $this->callResult ['message'] = $this->successMessage;
+            $this->callResult ['response_code'] = $responseCode;
+
             return $response;
+
         } else if ($responseCode == Http::STATUS_CODE_400) { //Przy przesyłaniu danych metodą POST lub PUT wystąpiły błędy w walidacji. Szczegółowe błędy walidacji zawarte są pod atrybutem details.
+
+            curl_close($ch);
+
             $errorsStr = '';
             if (isset($response[self::API_RESPONSE_DETAILS_KEY])){
                 foreach ($response[self::API_RESPONSE_DETAILS_KEY] as $k => $detail) {
@@ -106,15 +122,53 @@ abstract class AbstractService implements ServiceInterface
                     $errorsStr .= ' ], ';
                 }
             }
-            throw new \Exception($response[self::API_RESPONSE_MESSAGE_KEY] . ' - ' . $errorsStr, $responseCode);
+
+            $this->callResult ['status'] = CallResult::STATUS_FAIL;
+            $this->callResult ['message'] = $response[self::API_RESPONSE_MESSAGE_KEY] . ' - ' . $errorsStr;
+            $this->callResult ['response_code'] = Http::STATUS_CODE_400;
+
+            return $response;
+
         } else if ($responseCode == Http::STATUS_CODE_401) { //Dostęp do zasobu jest niemożliwy ponieważ zapytanie nie zostało podpisane kluczem access token.
-            throw new \Exception($response[self::API_RESPONSE_MESSAGE_KEY], $responseCode);
+
+            curl_close($ch);
+
+            $this->callResult ['status'] = CallResult::STATUS_FAIL;
+            $this->callResult ['message'] = $response[self::API_RESPONSE_MESSAGE_KEY];
+            $this->callResult ['response_code'] = Http::STATUS_CODE_401;
+
+            return $response;
+
         } else if ($responseCode == Http::STATUS_CODE_403) { //Dostęp do określone zasobu jest zabroniony dla tego zapytania (np. z powodu braku lub niewłaściwego zakresu uprawnień).
-            throw new \Exception($response[self::API_RESPONSE_MESSAGE_KEY], $responseCode);
+
+            curl_close($ch);
+
+            $this->callResult ['status'] = CallResult::STATUS_FAIL;
+            $this->callResult ['message'] = $response[self::API_RESPONSE_MESSAGE_KEY];
+            $this->callResult ['response_code'] = Http::STATUS_CODE_403;
+
+            return $response;
+
         } else if ($responseCode == Http::STATUS_CODE_404) { //Szukany zasób nie został odnaleziony, np. adres URL jest niepoprawny lub zasób nie istnieje.
-            throw new \Exception($response[self::API_RESPONSE_MESSAGE_KEY], $responseCode);
+
+            curl_close($ch);
+
+            $this->callResult ['status'] = CallResult::STATUS_FAIL;
+            $this->callResult ['message'] = $response[self::API_RESPONSE_MESSAGE_KEY];
+            $this->callResult ['response_code'] = Http::STATUS_CODE_404;
+
+            return $response;
+
         } else if ($responseCode == Http::STATUS_CODE_500) { //Wystąpił błąd po stronie serwera.
-            throw new \Exception($response[self::API_RESPONSE_MESSAGE_KEY], $responseCode);
+
+            curl_close($ch);
+
+            $this->callResult ['status'] = CallResult::STATUS_FAIL;
+            $this->callResult ['message'] = $response[self::API_RESPONSE_MESSAGE_KEY];
+            $this->callResult ['response_code'] = Http::STATUS_CODE_500;
+
+            return $response;
+
         }
 
         if ($response === false) {

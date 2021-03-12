@@ -29,7 +29,6 @@ class Courier extends AbstractCreate
                     ]
                 ],
                 "parcels" => [
-                    "id" => "small package",
                     "dimensions" => [
                         "length" => "80",
                         "width" => "160",
@@ -39,8 +38,7 @@ class Courier extends AbstractCreate
                     "weight" => [
                         "amount" => "1",
                         "unit" => "kg"
-                    ],
-                    "is_non_standard" => false
+                    ]
                 ],
                 "insurance" => [
                     "amount" => 50,

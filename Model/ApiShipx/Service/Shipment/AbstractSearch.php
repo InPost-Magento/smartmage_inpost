@@ -13,6 +13,8 @@ abstract class AbstractSearch extends AbstractService
 
     protected $successResponseCode = Http::STATUS_CODE_200;
 
+    protected $successMessage;
+
     protected $callUri = 'v1/organizations/71/shipments';
 
     protected $sampleBody;
