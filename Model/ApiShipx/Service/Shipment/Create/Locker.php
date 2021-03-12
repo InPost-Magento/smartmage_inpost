@@ -2,17 +2,17 @@
 
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Create;
 
-use \Smartmage\Inpost\{
-    Model\ApiShipx\Service\Shipment\AbstractCreate
-};
+use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\AbstractCreate;
+use Smartmage\Inpost\Model\ConfigProvider;
 
 class Locker extends AbstractCreate
 {
-
-    public function __construct()
-    {
+    public function __construct(
+        ConfigProvider $configProvider
+    ) {
+        parent::__construct($configProvider);
         $this->sampleBody =
-            array(
+            [
                 "receiver" => [
                     "name" => "Name",
                     "company_name" => "Company name",
@@ -39,12 +39,11 @@ class Locker extends AbstractCreate
                 "service" => "inpost_locker_standard",
                 "reference" => "Test",
                 "comments" => "dowolny komentarz"
-            );
+            ];
     }
 
-    public function createShipment ()
+    public function createShipment()
     {
         $this->call($this->sampleBody);
     }
-
 }

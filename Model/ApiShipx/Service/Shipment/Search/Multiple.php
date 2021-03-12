@@ -2,10 +2,7 @@
 
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Search;
 
-use \Smartmage\Inpost\{
-    Model\ApiShipx\Service\Shipment\AbstractSearch,
-    Model\ShipmentRepository
-};
+use Smartmage\Inpost\{Model\ApiShipx\Service\Shipment\AbstractSearch, Model\ConfigProvider, Model\ShipmentRepository};
 
 class Multiple extends AbstractSearch
 {
@@ -13,10 +10,12 @@ class Multiple extends AbstractSearch
     protected $shipmentRepository;
 
     public function __construct(
-        ShipmentRepository $shipmentRepository,
+        ConfigProvider $configProvider,
+        ShipmentRepository $shipmentRepository
     )
     {
         $this->shipmentRepository = $shipmentRepository;
+        parent::__construct($configProvider);
     }
 
     public function getAllShipments()
