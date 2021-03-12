@@ -8,7 +8,7 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Smartmage\Inpost\Model\ConfigProvider;
 
-class AbstractMethod
+abstract class AbstractMethod
 {
     /**
      * @var string

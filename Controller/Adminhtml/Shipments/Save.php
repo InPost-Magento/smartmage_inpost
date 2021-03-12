@@ -2,26 +2,52 @@
 
 namespace Smartmage\Inpost\Controller\Adminhtml\Shipments;
 
-use \Magento\Backend\App\Action;
-use \Smartmage\Inpost\{
-    Model\ApiShipx\Service\Shipment\Create\Courier,
-    Model\ApiShipx\Service\Shipment\Create\Locker
-};
+use Magento\Backend\App\Action;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Sales\Api\OrderRepositoryInterface;
+use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Create\Courier;
+use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Create\Locker;
 
 class Save extends \Smartmage\Inpost\Controller\Adminhtml\Shipments
 {
-
     protected $courier;
 
     protected $locker;
 
+    protected $classMapper;
+
+    /**
+     * @var OrderRepositoryInterface
+     */
+    protected $orderRepository;
+
     public function __construct(
         Action\Context $context,
         Courier $courier,
-        Locker $locker
+        Locker $locker,
+        OrderRepositoryInterface $orderRepository
     ) {
         $this->courier = $courier;
         $this->locker = $locker;
+        $this->orderRepository = $orderRepository;
+
+        $this->classMapper = [
+            'inpostlocker_standard' => $this->locker,
+            'inpostlocker_standardcod' => $this->locker,
+            'inpostlocker_standardeow' => $this->locker,
+            'inpostlocker_standardeowcod' => $this->locker,
+            'inpostcourier_standard' => $this->courier,
+            'inpostcourier_c2c' => $this->courier,
+            'inpostcourier_c2ccod' => $this->courier,
+            'inpostcourier_express1000' => $this->courier,
+            'inpostcourier_express1200' => $this->courier,
+            'inpostcourier_express1700' => $this->courier,
+            'inpostcourier_localstandard' => $this->courier,
+            'inpostcourier_localexpress' => $this->courier,
+            'inpostcourier_localsuperexpress' => $this->courier,
+            'inpostcourier_palette' => $this->courier,
+        ];
+
         parent::__construct($context);
     }
 
@@ -32,14 +58,22 @@ class Save extends \Smartmage\Inpost\Controller\Adminhtml\Shipments
      */
     public function execute()
     {
-//        if (!$this->_validateProducts()) {
-//            return $this->resultRedirectFactory->create()->setPath('catalog/product/', ['_current' => true]);
-//        }
+        $data = $this->getRequexst()->getParams();
+        $shipmentClass = $this->classMapper[$data['shipment_fieldset']['service']];
 
-        print_r('<pre>');
-        print_r($this->getRequest()->getParams());
-        print_r('</pre>');
-        die();
+        try {
+            $requestBody = $shipmentClass->createBody(
+                $data['shipment_fieldset'],
+                $this->orderRepository->get($data['shipment_fieldset']['order_id'])
+            );
+        } catch (NoSuchEntityException $e) {
+            $this->messageManager->addExceptionMessage(
+                $e,
+                __('Order not exist')
+            );
+        }
+
+
 
         try {
             $this->courier->createShipment();
@@ -55,5 +89,4 @@ class Save extends \Smartmage\Inpost\Controller\Adminhtml\Shipments
 
         return $this->resultRedirectFactory->create()->setPath('sales/order/view', ['order_id' => 1]);
     }
-
 }

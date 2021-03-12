@@ -13,7 +13,7 @@ use Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory;
 use Psr\Log\LoggerInterface;
 use Magento\Checkout\Model\Session;
 
-class AbstractInpostCarrier extends AbstractCarrier
+abstract class AbstractInpostCarrier extends AbstractCarrier
 {
 
     /**
