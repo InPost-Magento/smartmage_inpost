@@ -2,17 +2,13 @@
 
 namespace Smartmage\Inpost\Model;
 
-use Smartmage\Inpost\Api;
-use Smartmage\Inpost\Api\Data\ShipmentInterface;
-use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
-use Magento\Framework\Api\SortOrder;
 use Magento\Framework\Api\SortOrderBuilder;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Stdlib\DateTime\DateTimeFactory;
 use Magento\Store\Model\StoreManagerInterface;
-use Magento\Store\Model\ScopeInterface;
-use Magento\ConfigurableProduct\Model\ResourceModel\Product\Type\Configurable;
+use Smartmage\Inpost\Api;
+use Smartmage\Inpost\Api\Data\ShipmentInterface;
 
 /**
  * Class ShipmentManagement
@@ -90,20 +86,41 @@ class ShipmentManagement implements Api\ShipmentManagementInterface
     /**
      * @inheritdoc
      */
-    public function add($shipmentId)
+    public function addOrUpdate($shipmentData)
     {
+        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
+        $logger = new \Zend\Log\Logger();
+        $logger->addWriter($writer);
+
         $searchCriteria = $this->searchCriteriaBuilder
-            ->addFilter(ShipmentInterface::SHIPMENT_ID, (int)$shipmentId)
+            ->addFilter(ShipmentInterface::SHIPMENT_ID, $shipmentData[ShipmentInterface::SHIPMENT_ID])
             ->create();
 
-        $count = $this->shipmentRepository->getList($searchCriteria)->getTotalCount();
+        $obtainedShipments = $this->shipmentRepository->getList($searchCriteria);
+        $count = $obtainedShipments->getTotalCount();
 
+        $logger->info('COUNT');
+        $logger->info($count);
+
+        /**
+         * @var $shipment ShipmentInterface
+         */
         if ($count === 0) {
             $shipment = $this->shipmentFactory->create();
-//            $shipment->setProductId($product->getId());
-//            $shipment->setEmail($email);
-            $this->shipmentRepository->save($shipment);
+            $shipment->setShipmentId($shipmentData[ShipmentInterface::SHIPMENT_ID]);
+        } elseif ($count === 1) {
+            $shipment = $obtainedShipments->getItems()[0];
         }
+        $shipment->setStatus($shipmentData[ShipmentInterface::STATUS]);
+        $shipment->setService($shipmentData[ShipmentInterface::SERVICE]);
+        $shipment->setShipmentAttributes($shipmentData[ShipmentInterface::SHIPMENT_ATTRIBUTES]);
+        $shipment->setSendingMethod($shipmentData[ShipmentInterface::SENDING_METHOD]);
+        $shipment->setReceiverData($shipmentData[ShipmentInterface::RECEIVER_DATA]);
+        $shipment->setReference($shipmentData[ShipmentInterface::REFERENCE]);
+        $shipment->setTrackingNumber($shipmentData[ShipmentInterface::TRACKING_NUMBER]);
+        $shipment->setTargetPoint($shipmentData[ShipmentInterface::TARGET_POINT]);
+
+        $this->shipmentRepository->save($shipment);
     }
 
     /**
@@ -123,6 +140,6 @@ class ShipmentManagement implements Api\ShipmentManagementInterface
 //                $this->shipmentRepository->delete($item);
 //            }
 //        }
+        return null;
     }
-
 }

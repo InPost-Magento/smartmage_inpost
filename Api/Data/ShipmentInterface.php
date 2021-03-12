@@ -12,6 +12,8 @@ interface ShipmentInterface
     const SENDING_METHOD = 'sending_method';
     const RECEIVER_DATA = 'receiver_data';
     const REFERENCE = 'reference';
+    const TRACKING_NUMBER = 'tracking_number';
+    const TARGET_POINT = 'target_point';
 
     /**
      * Get Id
@@ -68,6 +70,20 @@ interface ShipmentInterface
      * @return int|null
      */
     public function getReference();
+
+    /**
+     * Get tracking number
+     *
+     * @return string|null
+     */
+    public function getTrackingNumber();
+
+    /**
+     * Get target point
+     *
+     * @return string|null
+     */
+    public function getTargetPoint();
 
     /**
      * Set Id
@@ -132,4 +148,20 @@ interface ShipmentInterface
      * @return $this
      */
     public function setReference($reference);
+
+    /**
+     * Set tracking number
+     *
+     * @param string $trackingNumber
+     * @return $this
+     */
+    public function setTrackingNumber($trackingNumber);
+
+    /**
+     * Set target point
+     *
+     * @param string $targetPoint
+     * @return $this
+     */
+    public function setTargetPoint($targetPoint);
 }

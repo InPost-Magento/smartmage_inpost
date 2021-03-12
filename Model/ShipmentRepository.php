@@ -99,6 +99,17 @@ class ShipmentRepository implements ShipmentRepositoryInterface
         return $shipment;
     }
 
+    public function getByShipmentId($shipmentId)
+    {
+        /** @var \Smartmage\Inpost\Api\Data\ShipmentInterface|\Magento\Framework\Model\AbstractModel $shipment */
+        $shipment = $this->shipmentFactory->create();
+        $this->resource->load($shipment, $shipmentId, 'shipment_id');
+        if (!$shipment->getId($shipment)) {
+            throw new Exception\NoSuchEntityException(__('Shipment with shipment_id "%1" does not exist.', $shipmentId));
+        }
+        return $shipment;
+    }
+
     /**
      * Retrieve shipments matching the specified criteria.
      *

@@ -5,11 +5,11 @@ namespace Smartmage\Inpost\Api;
 interface ShipmentManagementInterface
 {
     /**
-     * @param int $shipmentId
+     * @param array $shipmentData
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function add($shipmentId);
+    public function addOrUpdate($shipmentData);
 
     /**
      * @param int $productId

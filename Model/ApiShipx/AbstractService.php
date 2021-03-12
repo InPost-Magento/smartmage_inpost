@@ -7,6 +7,8 @@ abstract class AbstractService implements ServiceInterface
 {
     protected $method;
 
+    protected $successResponseCode;
+
     protected $requestHeaders = [];
 
     protected $responseHeaders = [];
@@ -45,7 +47,7 @@ abstract class AbstractService implements ServiceInterface
         }
     }
 
-    public function call($requestBody = null)
+    public function call($requestBody = null, $parameters = null)
     {
         $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
         $logger = new \Zend\Log\Logger();
@@ -59,7 +61,13 @@ abstract class AbstractService implements ServiceInterface
 
         $logger->info(print_r($this->getBaseUri() . '/' . $this->callUri, true));
 
-        curl_setopt($ch, CURLOPT_URL, $this->getBaseUri() . '/' . $this->callUri);
+        $endpoint = $this->getBaseUri() . '/' . $this->callUri;
+
+        if ($this->method === CURLOPT_HTTPGET && is_array($parameters)) {
+            $url = $endpoint . '?' . http_build_query($parameters);
+        }
+
+        curl_setopt($ch, CURLOPT_URL, $url);
 
         if ($this->method === CURLOPT_POST) {
             $this->requestHeaders['Content-Type'] = "Content-Type: application/json";
@@ -75,37 +83,36 @@ abstract class AbstractService implements ServiceInterface
         curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->requestHeaders);
 
-//        foreach ($this->parameters as $key => $value) {
-//            curl_setopt($ch, $key, $value);
-//        }
-
         $response = curl_exec($ch);
         $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        $response = json_decode($response, true);
+
+        if ($responseCode == $this->successResponseCode){
+            curl_close($ch);
+            $logger->info(print_r($response, true));
+            return $response;
+        }else if (1 == 2) {
+            return null;
+        }
 
         if ($response === false) {
             $errNo = curl_errno($ch);
             $errStr = curl_error($ch);
             curl_close($ch);
             if (empty($errStr)) {
-//                throw new \Exception('Failed to request resource.', $responseCode);
                 $logger->info(print_r('emty error', true));
                 $logger->info(print_r($responseCode, true));
+                throw new \Exception('Failed to request resource.', $responseCode);
             }
-//            throw new \Exception('cURL Error # '.$errNo.': '.$errStr, $responseCode);
+
             $logger->info(print_r('notemty error', true));
             $logger->info(print_r($errNo, true));
             $logger->info(print_r($errStr, true));
             $logger->info(print_r($responseCode, true));
 
-            return null;
+            throw new \Exception('cURL Error # '.$errNo.': '.$errStr, $responseCode);
         }
 
-        curl_close($ch);
-
-        $response = json_decode($response);
-
-        $logger->info(print_r($response, true));
-
-        return $response;
     }
 }
