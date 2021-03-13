@@ -97,3 +97,13 @@ Receiver data,Dane odbiorcy
 Reference,Numer referencyjny
 "If api is unavailable then this field will be empty","Jeśli interfejs API jest niedostępny, to pole będzie puste"
 "You Don't have any dispatch points","Nie masz żadnych punktów wysyłki"
+Address Details,Dane Adresowe
+Verify that the "Street" and "Building number" fields have been correctly filled in,Zweryfikuj czy pola "Ulica" i "Numer budynku" zostały poprawnie wypełnione
+Company Name,Nazwa firmy
+Phone,Numer telefonu
+First Name,Imię
+Last Name,Nazwisko
+Postcode,Kod pocztowy
+Street,Ulica
+Building Number,Numer budynku
+City,Miasto
