@@ -65,9 +65,8 @@ class FirstName extends \Magento\Ui\Component\Form\Element\Input
                 $config['default'] = $data['first_name'];
             } else {
                 $config['default'] = $order->getCustomerFirstname();
-                $this->setData('config', (array)$config);
             }
-
+            $this->setData('config', (array)$config);
         }
     }
 }

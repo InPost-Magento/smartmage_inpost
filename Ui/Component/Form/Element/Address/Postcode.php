@@ -65,9 +65,8 @@ class Postcode extends \Magento\Ui\Component\Form\Element\Input
                 $config['default'] = $data['post_code'];
             } else {
                 $config['default'] = $order->getShippingAddress()->getPostcode();
-                $this->setData('config', (array)$config);
             }
-
+            $this->setData('config', (array)$config);
         }
     }
 }

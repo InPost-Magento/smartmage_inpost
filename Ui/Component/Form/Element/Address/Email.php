@@ -81,8 +81,8 @@ class Email extends \Magento\Ui\Component\Form\Element\Input
                 $config['default'] = $data['email'];
             } else {
                 $config['default'] = $order->getCustomerEmail();
-                $this->setData('config', (array)$config);
             }
+            $this->setData('config', (array)$config);
         }
     }
 }

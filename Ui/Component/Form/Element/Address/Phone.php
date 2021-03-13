@@ -65,9 +65,8 @@ class Phone extends \Magento\Ui\Component\Form\Element\Input
                 $config['default'] = $data['phone'];
             } else {
                 $config['default'] = $order->getShippingAddress()->getTelephone();
-                $this->setData('config', (array)$config);
             }
-
+            $this->setData('config', (array)$config);
         }
     }
 }

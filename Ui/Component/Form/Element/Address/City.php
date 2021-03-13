@@ -65,9 +65,8 @@ class City extends \Magento\Ui\Component\Form\Element\Input
                 $config['default'] = $data['city'];
             } else {
                 $config['default'] = $order->getShippingAddress()->getCity();
-                $this->setData('config', (array)$config);
             }
-
+            $this->setData('config', (array)$config);
         }
     }
 }

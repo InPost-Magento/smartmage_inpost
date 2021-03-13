@@ -74,9 +74,8 @@ class BuildingNumber extends \Magento\Ui\Component\Form\Element\Input
                 $config['default'] = $data['building_number'];
             } else {
                 $config['default'] = $this->orderProcessor->getBuildingNumber();
-                $this->setData('config', (array)$config);
             }
-
+            $this->setData('config', (array)$config);
         }
     }
 }
