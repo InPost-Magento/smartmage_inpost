@@ -53,7 +53,8 @@ class Locker extends AbstractCreate
             ],
             "custom_attributes" => [
                 "sending_method" => "parcel_locker",
-                "target_point" => "KRA012"
+                "target_point" => "KRA012",
+                "dropoff_point" => "BBI02A"
             ],
             "service" => "inpost_locker_standard",
             "reference" => "Test",

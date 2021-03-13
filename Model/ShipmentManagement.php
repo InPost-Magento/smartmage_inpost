@@ -99,9 +99,6 @@ class ShipmentManagement implements Api\ShipmentManagementInterface
         $obtainedShipments = $this->shipmentRepository->getList($searchCriteria);
         $count = $obtainedShipments->getTotalCount();
 
-        $logger->info('COUNT');
-        $logger->info($count);
-
         /**
          * @var $shipment ShipmentInterface
          */
@@ -118,28 +115,9 @@ class ShipmentManagement implements Api\ShipmentManagementInterface
         $shipment->setReceiverData($shipmentData[ShipmentInterface::RECEIVER_DATA]);
         $shipment->setReference($shipmentData[ShipmentInterface::REFERENCE]);
         $shipment->setTrackingNumber($shipmentData[ShipmentInterface::TRACKING_NUMBER]);
-        $shipment->setTargetPoint($shipmentData[ShipmentInterface::TARGET_POINT]);
+        $shipment->setTargetPoint(isset($shipmentData[ShipmentInterface::TARGET_POINT]) ? $shipmentData[ShipmentInterface::TARGET_POINT] : '');
 
         $this->shipmentRepository->save($shipment);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function remove($shipmentId)
-    {
-//        $this->searchCriteriaBuilder
-//            ->addFilter(ShipmentInterface::EMAIL, $email);
-//        if (null !== $productId) {
-//            $this->searchCriteriaBuilder
-//                ->addFilter(ShipmentInterface::PRODUCT_ID, $productId);
-//        }
-//        $list = $this->shipmentRepository->getList($this->searchCriteriaBuilder->create());
-//        foreach ($list->getItems() as $item) {
-//            if ($secret === $this->getHash($email, $productId)) {
-//                $this->shipmentRepository->delete($item);
-//            }
-//        }
-        return null;
-    }
 }
