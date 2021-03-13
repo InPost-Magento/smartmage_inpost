@@ -9,6 +9,9 @@ abstract class AbstractService implements ServiceInterface
     const API_RESPONSE_MESSAGE_KEY = 'message';
     const API_RESPONSE_DETAILS_KEY = 'details';
 
+    const API_RESPONSE_ERROR_KEY = 'error';
+    const API_ERROR_VALIDATION_FAILED = 'validation_failed';
+
     const API_RESPONSE_VALIDATION_KEYS_KEY = [
         'required' => 'Podanie wartości jest wymagane.',
         'invalid' => 'Podana wartość jest nieprawidłowa.',
@@ -72,15 +75,19 @@ abstract class AbstractService implements ServiceInterface
 
         $this->requestHeaders['Authorization'] = "Authorization: Bearer " . $token;
 
-        $logger->info(print_r($this->getBaseUri() . '/' . $this->callUri, true));
-
         $endpoint = $this->getBaseUri() . '/' . $this->callUri;
+
+        $logger->info(print_r('$parameters', true));
+        $logger->info(print_r($parameters, true));
 
         if ($this->method === CURLOPT_HTTPGET && is_array($parameters)) {
             $url = $endpoint . '?' . http_build_query($parameters);
+            $url = $string = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '[]=', $url);
         } else {
             $url = $endpoint;
         }
+
+        $logger->info(print_r($url, true));
 
         curl_setopt($ch, CURLOPT_URL, $url);
 
@@ -129,10 +136,13 @@ abstract class AbstractService implements ServiceInterface
                 $logger->info(print_r($response[self::API_RESPONSE_DETAILS_KEY], true));
                 foreach ($response[self::API_RESPONSE_DETAILS_KEY] as $k => $detail) {
                     $errorsStr .= '[ ' . $k . ' : ';
-                    foreach ($detail as $detailItem) {
-
-                        $errorsStr .= '( ' . $detailItem . ' ), ';
-                    }
+//                    if (is_array($detail)) {
+//                        foreach ($detail as $detailItem) {
+//                            $errorsStr .= '( ' . $detailItem . ' ), ';
+//                        }
+//                    } else {
+//                        $errorsStr .= $detail;
+//                    }
                     $errorsStr .= ' ], ';
                 }
             }
@@ -183,24 +193,11 @@ abstract class AbstractService implements ServiceInterface
 
             return $response;
 
-        }
-
-        if ($response === false) {
+        } else {
             $errNo = curl_errno($ch);
             $errStr = curl_error($ch);
-            curl_close($ch);
-            if (empty($errStr)) {
-                $logger->info(print_r('emty error', true));
-                $logger->info(print_r($responseCode, true));
-                throw new \Exception('Failed to request resource.', $responseCode);
-            }
 
-            $logger->info(print_r('notemty error', true));
-            $logger->info(print_r($errNo, true));
-            $logger->info(print_r($errStr, true));
-            $logger->info(print_r($responseCode, true));
-
-            throw new \Exception('cURL Error # '.$errNo.': '.$errStr, $responseCode);
+            throw new \Exception('Unknown cURL Error - '.$errNo.': '.$errStr, $responseCode);
         }
 
     }

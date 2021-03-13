@@ -3,44 +3,62 @@
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Create;
 
 use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\AbstractCreate;
+use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
+use Smartmage\Inpost\Model\ConfigProvider;
+use Smartmage\Inpost\Model\Order\Processor as OrderProcessor;
 
 class Courier extends AbstractCreate
 {
+    /**
+     * @var OrderProcessor
+     */
+    protected $orderProcessor;
+
+    /**
+     * Courier constructor.
+     * @param ConfigProvider $configProvider
+     * @param ShippingMethods $shippingMethods
+     * @param OrderProcessor $orderProcessor
+     */
+    public function __construct(
+        ConfigProvider $configProvider,
+        ShippingMethods $shippingMethods,
+        OrderProcessor $orderProcessor
+    ) {
+        $this->orderProcessor = $orderProcessor;
+        parent::__construct($configProvider, $shippingMethods);
+    }
 
     public function createBody($data, $order)
     {
+        $this->orderProcessor->setOrder($order);
         $this->requestBody = [
             "receiver" => [
-                "company_name" => $order->getShippingAddress()->getCompany(),
-                "first_name" => $order->getCustomerFirstname(),
-                "last_name" => $order->getCustomerLastname(),
+                "company_name" => $data['company_name'],
+                "first_name" => $data['first_name'],
+                "last_name" => $data['last_name'],
+                'phone' => $data['phone'],
                 "address" => [
-                    "street" => "Cybernetyki",
-                    "building_number" => "10",
-                    "city" => "Warszawa",
-                    "post_code" => "02-677",
+                    "street" => $data['street'],
+                    "building_number" => $data['building_number'],
+                    "city" => $data['city'],
+                    "post_code" => $data['post_code'],
                     "country_code" => "PL",
                 ]
             ],
             "parcels" => [
                 "dimensions" => [
-                    "length" => "80",
-                    "width" => "160",
-                    "height" => "340",
+                    "length" => $data['length'],
+                    "width" => $data['width'],
+                    "height" => $data['height'],
                     "unit" => "mm",
                 ],
                 "weight" => [
-                    "amount" => "1",
+                    "amount" => $this->orderProcessor->getOrderWeight(),
                     "unit" => $this->configProvider->getShippingConfigData('weight_unit'),
                 ]
             ],
         ];
-
-        if ($data['sending_method'] != 'dispatch_order') {
-            $this->requestBody['custom_attributes']['dropoff_point'] = $this->configProvider->getConfigData(
-                str_replace('_', '/', $data['service']) . '/default_sending_point'
-            );
-        }
 
         parent::createBody($data, $order);
     }

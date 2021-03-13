@@ -1,13 +1,14 @@
 <?php
 
-namespace Smartmage\Inpost\Ui\Component\Form\Element;
+namespace Smartmage\Inpost\Ui\Component\Form\Element\Address;
 
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\Pricing\PriceCurrencyInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
+use Smartmage\Inpost\Model\Order\Processor as OrderProcessor;
 
-class Service extends \Magento\Ui\Component\Form\Element\Select
+class BuildingNumber extends \Magento\Ui\Component\Form\Element\Input
 {
     /**
      * @var Http
@@ -25,6 +26,11 @@ class Service extends \Magento\Ui\Component\Form\Element\Select
     protected $priceCurrency;
 
     /**
+     * @var OrderProcessor
+     */
+    protected $orderProcessor;
+
+    /**
      * OrderDetails constructor.
      * @param Http $request
      * @param OrderRepositoryInterface $orderRepository
@@ -37,15 +43,16 @@ class Service extends \Magento\Ui\Component\Form\Element\Select
         Http $request,
         OrderRepositoryInterface $orderRepository,
         PriceCurrencyInterface $priceCurrency,
+        OrderProcessor $orderProcessor,
         ContextInterface $context,
-        $options = null,
         array $components = [],
         array $data = []
     ) {
-        parent::__construct($context, $options, $components, $data);
+        parent::__construct($context, $components, $data);
         $this->request = $request;
         $this->orderRepository = $orderRepository;
         $this->priceCurrency = $priceCurrency;
+        $this->orderProcessor = $orderProcessor;
     }
 
     /**
@@ -56,12 +63,18 @@ class Service extends \Magento\Ui\Component\Form\Element\Select
     public function prepare()
     {
         parent::prepare();
+
         $config = $this->getData('config');
         $data= $this->request->getParams();
+        $order = $this->orderRepository->get($data['order_id']);
+        $this->orderProcessor->setOrder($order);
 
-        if (isset($config['dataScope']) && $config['dataScope'] == 'service') {
-            $config['default'] = $data['shipping_method'];
-
+        if (isset($config['dataScope']) && $config['dataScope'] == 'building_number') {
+            if (isset($data['building_number'])) {
+                $config['default'] = $data['building_number'];
+            } else {
+                $config['default'] = $this->orderProcessor->getBuildingNumber();
+            }
             $this->setData('config', (array)$config);
         }
     }

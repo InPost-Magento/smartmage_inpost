@@ -5,7 +5,6 @@ namespace Smartmage\Inpost\Ui\Component\Form\Element;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\Pricing\PriceCurrencyInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
-use Magento\Framework\View\Element\UiComponent\DataProvider\Sanitizer;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Smartmage\Inpost\Model\Config\Source\DefaultWaySending;
 use Smartmage\Inpost\Model\ConfigProvider;
@@ -45,7 +44,6 @@ class SendingMethod extends \Magento\Ui\Component\Form\Element\Select
      * @param null $options
      * @param array $components
      * @param array $data
-     * @param Sanitizer|null $sanitizer
      */
     public function __construct(
         Http $request,
@@ -56,10 +54,9 @@ class SendingMethod extends \Magento\Ui\Component\Form\Element\Select
         ConfigProvider $configProvider,
         $options = null,
         array $components = [],
-        array $data = [],
-        ?Sanitizer $sanitizer = null
+        array $data = []
     ) {
-        parent::__construct($context, $options, $components, $data, $sanitizer);
+        parent::__construct($context, $options, $components, $data);
         $this->request = $request;
         $this->orderRepository = $orderRepository;
         $this->priceCurrency = $priceCurrency;
@@ -79,11 +76,18 @@ class SendingMethod extends \Magento\Ui\Component\Form\Element\Select
         $config = $this->getData('config');
         $data= $this->request->getParams();
 
+        //inpostcourier_standard
+
         if (isset($config['dataScope']) && $config['dataScope'] == 'sending_method') {
             $shippingMethod = $data['shipping_method'];
             $codes = explode('_', $shippingMethod);
-            $this->defaultWaySending->setCode(str_replace('cod', '', $codes[1]));
+            $methodCode = $codes[1];
+            if ($codes[0] == 'inpostcourier' && $codes[1] == 'standard') {
+                $methodCode = 'courier_standard';
+            }
+            $this->defaultWaySending->setCode(str_replace('cod', '', $methodCode));
             $config['options'] = $this->defaultWaySending->toOptionArray();
+
             if (isset($data['sending_method'])) {
                 $config['default'] = $data['sending_method'];
             } else {

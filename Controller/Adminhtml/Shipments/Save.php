@@ -20,6 +20,6 @@ class Save extends AbstractSave
             $this->orderRepository->get($data['shipment_fieldset']['order_id'])
         );
 
-        $response = $shipmentClass->createShipment();
+        return $shipmentClass->createShipment();
     }
 }

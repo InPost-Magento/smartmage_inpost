@@ -12,52 +12,8 @@ use Magento\Sales\Api\OrderRepositoryInterface;
 /**
  * Class DataProvider
  */
-class CreateDataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider
+class CreateDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
-    /**
-     * @var OrderRepositoryInterface
-     */
-    protected $orderRepository;
-
-    /**
-     * CreateDataProvider constructor.
-     * @param string $name
-     * @param string $primaryFieldName
-     * @param string $requestFieldName
-     * @param ReportingInterface $reporting
-     * @param SearchCriteriaBuilder $searchCriteriaBuilder
-     * @param RequestInterface $request
-     * @param FilterBuilder $filterBuilder
-     * @param OrderRepositoryInterface $orderRepository
-     * @param array $meta
-     * @param array $data
-     */
-    public function __construct(
-        string $name,
-        string $primaryFieldName,
-        string $requestFieldName,
-        ReportingInterface $reporting,
-        SearchCriteriaBuilder $searchCriteriaBuilder,
-        RequestInterface $request,
-        FilterBuilder $filterBuilder,
-        OrderRepositoryInterface $orderRepository,
-        array $meta = [],
-        array $data = []
-    ) {
-        $this->orderRepository = $orderRepository;
-        parent::__construct(
-            $name,
-            $primaryFieldName,
-            $requestFieldName,
-            $reporting,
-            $searchCriteriaBuilder,
-            $request,
-            $filterBuilder,
-            $meta,
-            $data
-        );
-    }
-
     /**
      * Get data
      *
@@ -65,33 +21,11 @@ class CreateDataProvider extends \Magento\Framework\View\Element\UiComponent\Dat
      */
     public function getData()
     {
-        //$orderId = $this->request->getParam('order_id');
-        //$order = $this->orderRepository->get($orderId);
-
-        //$data[]['items']['order_details'] = '123';
-        //$this->request->getParam('service_id')
-        //[1 => ['shipment_fieldset' => $item]]
-
-
-        if (isset($this->loadedData)) {
-            //return $this->loadedData;
-        }
-
-        //$this->loadedData['0']['shipment_fieldset'] = ['target_locker' => '123'];
-        //$this->loadedData[0]['target_locker'] = '123';
-        //return $this->loadedData;
         return [];
     }
 
-    /**
-     * Get meta information
-     *
-     * @return array
-     */
-    public function getMeta()
+    public function addFilter(\Magento\Framework\Api\Filter $filter)
     {
-        $meta = parent::getMeta();
-
-        return $meta;
+        return;
     }
 }
