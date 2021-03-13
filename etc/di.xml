@@ -146,11 +146,27 @@
         </arguments>
     </virtualType>
 
+    <preference for="Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterface"
+                type="Smartmage\Inpost\Model\ShipmentOrderLink"/>
+    <preference for="Smartmage\Inpost\Api\ShipmentOrderLinksProviderInterface"
+                type="Smartmage\Inpost\Model\ShipmentOrderLink\Provider"/>
+
     <type name="Magento\Quote\Api\CartRepositoryInterface">
         <plugin name="quote_inpost_locker_id_attribute" type="Smartmage\Inpost\Plugin\CartRepositoryExtended" />
     </type>
 
     <type name="Magento\Sales\Api\OrderRepositoryInterface">
         <plugin name="order_inpost_attributes" type="Smartmage\Inpost\Plugin\OrderRepositoryExtended" />
+    </type>
+
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">smartmage_inpost_shipment_order_link</item>
+                    <item name="identifierField" xsi:type="string">link_id</item>
+                </item>
+            </argument>
+        </arguments>
     </type>
 </config>

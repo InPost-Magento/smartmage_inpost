@@ -5,6 +5,6 @@
     </extension_attributes>
     <extension_attributes for="Magento\Sales\Api\Data\OrderInterface">
         <attribute code="inpost_locker_id" type="string"/>
-        <attribute code="inpost_shipment_id" type="string"/>
+        <attribute code="inpost_shipment_links" type="Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterface[]"/>
     </extension_attributes>
 </config>
