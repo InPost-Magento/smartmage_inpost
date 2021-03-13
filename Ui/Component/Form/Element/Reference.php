@@ -65,9 +65,8 @@ class Reference extends \Magento\Ui\Component\Form\Element\Input
                 $config['default'] = $data['reference'];
             } else {
                 $config['default'] = $order->getIncrementId();
-                $this->setData('config', (array)$config);
             }
-
+            $this->setData('config', (array)$config);
         }
     }
 }

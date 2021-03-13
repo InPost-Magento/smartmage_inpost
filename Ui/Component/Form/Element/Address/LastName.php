@@ -65,9 +65,8 @@ class LastName extends \Magento\Ui\Component\Form\Element\Input
                 $config['default'] = $data['last_name'];
             } else {
                 $config['default'] = $order->getCustomerLastname();
-                $this->setData('config', (array)$config);
             }
-
+            $this->setData('config', (array)$config);
         }
     }
 }

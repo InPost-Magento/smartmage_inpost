@@ -64,10 +64,11 @@ class Cod extends \Magento\Ui\Component\Form\Element\Input
             if (isset($data['cod'])) {
                 $config['default'] = $data['cod'];
             } else {
-                $config['default'] = $this->priceCurrency->convertAndRound($order->getGrandTotal());
-                $this->setData('config', (array)$config);
+                if (strpos($data['shipping_method'], 'cod') !== false) {
+                    $config['default'] = $this->priceCurrency->convertAndRound($order->getGrandTotal());
+                }
             }
-
+            $this->setData('config', (array)$config);
         }
     }
 }

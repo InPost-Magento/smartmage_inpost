@@ -65,9 +65,8 @@ class CompanyName extends \Magento\Ui\Component\Form\Element\Input
                 $config['default'] = $data['company_name'];
             } else {
                 $config['default'] = $order->getShippingAddress()->getCompany();
-                $this->setData('config', (array)$config);
             }
-
+            $this->setData('config', (array)$config);
         }
     }
 }

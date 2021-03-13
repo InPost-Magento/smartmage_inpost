@@ -76,9 +76,8 @@ class Street extends \Magento\Ui\Component\Form\Element\Input
                 $config['default'] = $data['street'];
             } else {
                 $config['default'] = $this->orderProcessor->getStreet();
-                $this->setData('config', (array)$config);
             }
-
+            $this->setData('config', (array)$config);
         }
     }
 }
