@@ -181,4 +181,13 @@ class Status implements OptionSourceInterface
 
         return $statuses;
     }
+
+    /**
+     * @param $status
+     * @return \Magento\Framework\Phrase
+     */
+    public function getStatusLabel($status)
+    {
+        return (isset(self::STATUS_LABEL[$status])) ? __(self::STATUS_LABEL[$status]) : $status;
+    }
 }
