@@ -7,15 +7,21 @@
         </item>
         <item name="spinner" xsi:type="string">inpostshipment_grid_columns</item>
         <item name="buttons" xsi:type="array">
+            <item name="sample_courier" xsi:type="array">
+                <item name="name" xsi:type="string">sample_courier</item>
+                <item name="label" xsi:type="string" translate="true">Create sample courier shipment</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">smartmageinpost/shipments_savesample/courier</item>
+            </item>
+                <item name="sample_locker" xsi:type="array">
+                <item name="name" xsi:type="string">sample_locker</item>
+                <item name="label" xsi:type="string" translate="true">Create sample locker shipment</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">smartmageinpost/shipments_savesample/locker</item>
+            </item>
             <item name="full_sync" xsi:type="array">
                 <item name="name" xsi:type="string">full_sync</item>
                 <item name="label" xsi:type="string" translate="true">Full sync</item>
-                <item name="class" xsi:type="string">primary</item>
-                <item name="url" xsi:type="string">smartmageinpost/shipments/fullsync</item>
-            </item>
-            <item name="full_sync2" xsi:type="array">
-                <item name="name" xsi:type="string">full_sync2</item>
-                <item name="label" xsi:type="string" translate="true">Full sync2</item>
                 <item name="class" xsi:type="string">primary</item>
                 <item name="url" xsi:type="string">smartmageinpost/shipments/fullsync</item>
             </item>

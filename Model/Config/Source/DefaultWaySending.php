@@ -11,6 +11,7 @@ use Magento\Framework\Data\OptionSourceInterface;
 class DefaultWaySending implements OptionSourceInterface
 {
     const INPOST_LOCKER_STANDARD = 'standard';
+    const INPOST_LOCKER_STANDARDEOW = 'standardeow';
     const INPOST_COURIER_C2C = 'c2c';
     const INPOST_COURIER_STANDARD = 'courier_standard';
     const INPOST_COURIER_EXPRESS1000 = 'express1000';
@@ -38,6 +39,7 @@ class DefaultWaySending implements OptionSourceInterface
     {
         switch ($this->code) {
             case (self::INPOST_LOCKER_STANDARD):
+            case (self::INPOST_LOCKER_STANDARDEOW):
                 return [
                     ['value' => 'parcel_locker', 'label' => __('Nadanie w Paczkomacie')],
                     ['value' => 'dispatch_order', 'label' => __('Odbiór przez Kuriera')],
@@ -59,7 +61,6 @@ class DefaultWaySending implements OptionSourceInterface
                 return [
                     ['value' => 'dispatch_order', 'label' => __('Odbiór przez Kuriera')],
                     ['value' => 'pop', 'label' => __('Nadanie w POP')],
-
                 ];
             default:
                 return [];

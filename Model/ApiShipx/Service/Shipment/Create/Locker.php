@@ -9,18 +9,6 @@ use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
 class Locker extends AbstractCreate
 {
 
-    /**
-     * Locker constructor.
-     * @param ConfigProvider $configProvider
-     * @param ShippingMethods $shippingMethods
-     */
-    public function __construct(
-        ConfigProvider $configProvider,
-        ShippingMethods $shippingMethods
-    ) {
-        parent::__construct($configProvider, $shippingMethods);
-    }
-
     public function createBody($data, $order)
     {
         $this->requestBody = [
@@ -37,39 +25,42 @@ class Locker extends AbstractCreate
         ];
 
         if ($data['sending_method'] != 'dispatch_order') {
-            $requestBody['custom_attributes']['dropoff_point'] = $this->configProvider->getConfigData(
+            $this->requestBody['custom_attributes']['dropoff_point'] = $this->configProvider->getConfigData(
                 str_replace('_', '/', $data['service']) . '/default_sending_point'
             );
         }
 
         parent::createBody($data, $order);
+    }
 
-        /*$requestBody = [
+    public function setSampleData()
+    {
+        $this->requestBody = [
             "receiver" => [
-                "email" => $order->getCustomerEmail(),
-                "phone" => $order->getShippingAddress()->getTelephone(),
+                "email" => "receiver@example.com",
+                "phone" => "888000000",
             ],
             "parcels" => [
-                "template" => $data['size']
+                "template" => "small",
             ],
             "insurance" => [
-                "amount" => $data['insurance'],
+                "amount" => 25,
                 "currency" => "PLN"
             ],
             "cod" => [
-                "amount" => $data['cod'],
+                "amount" => 12.50,
                 "currency" => "PLN"
             ],
             "custom_attributes" => [
-                "sending_method" => $data['sending_method'],
-                "target_point" => $data['target_locker'],
-                "dropoff_point" => $this->configProvider->getConfigData(str_replace('_', '/', $data['service']))
+                "sending_method" => "parcel_locker",
+                "target_point" => "KRA012",
+                "dropoff_point" => "BBI02A"
             ],
-            "service" => $data['service'],
-            "reference" => $data['reference'],
-            "comments" => ""
-        ];*/
+            "service" => "inpost_locker_standard",
+            "reference" => "Test",
+            "comments" => "dowolny komentarz"
+        ];
 
-        return $requestBody;
+        return $this;
     }
 }
