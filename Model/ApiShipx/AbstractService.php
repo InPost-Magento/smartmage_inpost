@@ -9,6 +9,9 @@ abstract class AbstractService implements ServiceInterface
     const API_RESPONSE_MESSAGE_KEY = 'message';
     const API_RESPONSE_DETAILS_KEY = 'details';
 
+    const API_RESPONSE_ERROR_KEY = 'error';
+    const API_ERROR_VALIDATION_FAILED = 'validation_failed';
+
     const API_RESPONSE_VALIDATION_KEYS_KEY = [
         'required' => 'Podanie wartości jest wymagane.',
         'invalid' => 'Podana wartość jest nieprawidłowa.',
@@ -133,13 +136,13 @@ abstract class AbstractService implements ServiceInterface
                 $logger->info(print_r($response[self::API_RESPONSE_DETAILS_KEY], true));
                 foreach ($response[self::API_RESPONSE_DETAILS_KEY] as $k => $detail) {
                     $errorsStr .= '[ ' . $k . ' : ';
-                    if (is_array($detail)) {
-                        foreach ($detail as $detailItem) {
-                            $errorsStr .= '( ' . $detailItem . ' ), ';
-                        }
-                    } else {
-                        $errorsStr .= $detail;
-                    }
+//                    if (is_array($detail)) {
+//                        foreach ($detail as $detailItem) {
+//                            $errorsStr .= '( ' . $detailItem . ' ), ';
+//                        }
+//                    } else {
+//                        $errorsStr .= $detail;
+//                    }
                     $errorsStr .= ' ], ';
                 }
             }
