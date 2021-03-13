@@ -10,6 +10,7 @@ use Magento\Sales\Helper\Admin;
 use Magento\Shipping\Helper\Data as ShippingHelper;
 use Magento\Tax\Helper\Data as TaxHelper;
 use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
+use Smartmage\Inpost\Model\Config\Source\Size as SizeConfig;
 use Smartmage\Inpost\Model\ShipmentRepository;
 use Smartmage\Inpost\Api\Data\ShipmentInterface;
 
@@ -20,9 +21,9 @@ use Smartmage\Inpost\Api\Data\ShipmentInterface;
 class Inpost extends AbstractOrder
 {
     protected $shippingMethods;
-
     protected $inpostShipment;
     protected $shipmentRepository;
+    protected $sizeConfig;
 
     /**
      * Inpost constructor.
@@ -31,6 +32,7 @@ class Inpost extends AbstractOrder
      * @param \Magento\Sales\Helper\Admin $adminHelper
      * @param \Smartmage\Inpost\Model\Config\Source\ShippingMethods $shippingMethods
      * @param \Smartmage\Inpost\Model\ShipmentRepository $shipmentRepository
+     * @param \Smartmage\Inpost\Model\Config\Source\Size $sizeConfig
      * @param array $data
      * @param \Magento\Shipping\Helper\Data|null $shippingHelper
      * @param \Magento\Tax\Helper\Data|null $taxHelper
@@ -41,12 +43,14 @@ class Inpost extends AbstractOrder
         Admin $adminHelper,
         ShippingMethods $shippingMethods,
         ShipmentRepository $shipmentRepository,
+        SizeConfig $sizeConfig,
         array $data = [],
         ?ShippingHelper $shippingHelper = null,
         ?TaxHelper $taxHelper = null
     ) {
         $this->shippingMethods = $shippingMethods;
         $this->shipmentRepository = $shipmentRepository;
+        $this->sizeConfig = $sizeConfig;
         parent::__construct($context, $registry, $adminHelper, $data, $shippingHelper, $taxHelper);
     }
 
@@ -94,7 +98,7 @@ class Inpost extends AbstractOrder
         $details[ShipmentInterface::STATUS] = $this->getInpostShippment()->getStatus();
         if ($this->getShippingService() == 'inpost_locker_standard') {
             $details[ShipmentInterface::SHIPMENT_ATTRIBUTES] =
-                __("Dimension: ") . $this->getInpostShippment()->getShipmentsAttributes();
+                $this->sizeConfig->getSizeLabel($this->getInpostShippment()->getShipmentsAttributes());
             $details[ShipmentInterface::TARGET_POINT] =  __("Point: ") . $this->getInpostShippment()->getTargetPoint();
         }
         return $details;

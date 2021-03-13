@@ -6,7 +6,7 @@ namespace Smartmage\Inpost\Model\Config\Source;
 use Magento\Framework\Data\OptionSourceInterface;
 
 /**
- * Class Mode
+ * Class Size
  */
 class Size implements OptionSourceInterface
 {
@@ -14,6 +14,13 @@ class Size implements OptionSourceInterface
     const MEDIUM = 'medium';
     const LARGE = 'large';
     const XLARGE = 'xlarge';
+
+    const SIZE_LABEL = [
+        'small' => 'Size A',
+        'medium' => 'Size B',
+        'large' => 'Size C',
+        'xlarge' => 'Size D',
+    ];
 
     protected $c2cMethods = ['inpost_courier_c2c', 'inpost_courier_c2ccod'];
 
@@ -25,13 +32,13 @@ class Size implements OptionSourceInterface
     public function toOptionArray() : array
     {
         $sizes = [
-            ['value' => self::SMALL, 'label' => __('Small')],
-            ['value' => self::MEDIUM, 'label' => __('Medium')],
-            ['value' => self::LARGE, 'label' => __('Large')]
+            ['value' => self::SMALL, 'label' => __(self::SIZE_LABEL[self::SMALL])],
+            ['value' => self::MEDIUM, 'label' => __(self::SIZE_LABEL[self::MEDIUM])],
+            ['value' => self::LARGE, 'label' => __(self::SIZE_LABEL[self::LARGE])]
         ];
 
         if (in_array($this->shippingMethod, $this->c2cMethods) || !$this->shippingMethod) {
-            $sizes[] = ['value' => self::XLARGE, 'label' => __('X Large')];
+            $sizes[] = ['value' => self::XLARGE, 'label' => __(self::SIZE_LABEL[self::XLARGE])];
         }
 
         return $sizes;
@@ -40,5 +47,10 @@ class Size implements OptionSourceInterface
     public function setShippingMethod($shippingMethod)
     {
         $this->shippingMethod = $shippingMethod;
+    }
+
+    public function getSizeLabel($size)
+    {
+        return isset(self::SIZE_LABEL[$size]) ? __(self::SIZE_LABEL[$size]) : $size;
     }
 }
