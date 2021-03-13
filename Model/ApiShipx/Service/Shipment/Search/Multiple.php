@@ -3,6 +3,7 @@
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Search;
 
 use Smartmage\Inpost\Api\Data\ShipmentInterface;
+use Smartmage\Inpost\Model\ApiShipx\CallResult;
 use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\AbstractSearch;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\ShipmentManagement;
@@ -36,6 +37,11 @@ class Multiple extends AbstractSearch
 
         for ($page = 1; ; $page++) {
             $result = $this->call(null, ['page' => $page]);
+
+            $logger->info($this->callResult);
+
+            if ($this->callResult[CallResult::STRING_STATUS] != CallResult::STATUS_SUCCESS)
+                throw new \Exception($this->callResult[CallResult::STRING_MESSAGE], $this->callResult[CallResult::STRING_RESPONSE_CODE]);
 
             if (!$totalPagesUpdated) {
                 $totalPagesRaw = (float)$result['count'] / (float)$result['per_page'];
@@ -77,7 +83,9 @@ class Multiple extends AbstractSearch
                         $formatedData[ShipmentInterface::RECEIVER_DATA]       = $receiverData;
                         $formatedData[ShipmentInterface::REFERENCE]           = $item['reference'];
                         $formatedData[ShipmentInterface::TRACKING_NUMBER]     = $item['tracking_number'];
-                        $formatedData[ShipmentInterface::TARGET_POINT]        = $item['custom_attributes']['target_point'];
+
+                        if (isset($item['custom_attributes']) && isset($item['custom_attributes']['target_point']))
+                            $formatedData[ShipmentInterface::TARGET_POINT] = $item['custom_attributes']['target_point'];
 
                         $this->shipmentManagement->addOrUpdate($formatedData);
                     } catch (\Exception $exception) {

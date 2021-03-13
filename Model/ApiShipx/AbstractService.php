@@ -3,8 +3,6 @@ namespace Smartmage\Inpost\Model\ApiShipx;
 
 use Smartmage\Inpost\Model\ConfigProvider;
 use Magento\Framework\App\Response\Http;
-use Prophecy\Call\Call;
-use Smartmage\Inpost\Model\ApiShipx\CallResult;
 
 abstract class AbstractService implements ServiceInterface
 {
@@ -107,17 +105,18 @@ abstract class AbstractService implements ServiceInterface
         $this->callResult = [
             CallResult::STRING_STATUS => CallResult::STATUS_FAIL,
             CallResult::STRING_MESSAGE => 'Default fail message',
-            CallResult::STRING_RESPONSE_CODE => null
+            CallResult::STRING_RESPONSE_CODE => Http::STATUS_CODE_500
         ];
+
+        $logger->info(print_r($responseCode, true));
 
         if ($responseCode == $this->successResponseCode){
 
             curl_close($ch);
-//            $logger->info(print_r($response, true));
 
-            $this->callResult ['status'] = CallResult::STATUS_SUCCESS;
-            $this->callResult ['message'] = $this->successMessage;
-            $this->callResult ['response_code'] = $responseCode;
+            $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_SUCCESS;
+            $this->callResult[CallResult::STRING_MESSAGE] = $this->successMessage;
+            $this->callResult[CallResult::STRING_RESPONSE_CODE] = $responseCode;
 
             return $response;
 
@@ -127,7 +126,7 @@ abstract class AbstractService implements ServiceInterface
 
             $errorsStr = '';
             if (isset($response[self::API_RESPONSE_DETAILS_KEY])){
-                print_r($response[self::API_RESPONSE_DETAILS_KEY]);
+                $logger->info(print_r($response[self::API_RESPONSE_DETAILS_KEY], true));
                 foreach ($response[self::API_RESPONSE_DETAILS_KEY] as $k => $detail) {
                     $errorsStr .= '[ ' . $k . ' : ';
                     foreach ($detail as $detailItem) {
@@ -138,9 +137,9 @@ abstract class AbstractService implements ServiceInterface
                 }
             }
 
-            $this->callResult ['status'] = CallResult::STATUS_FAIL;
-            $this->callResult ['message'] = $response[self::API_RESPONSE_MESSAGE_KEY] . ' - ' . $errorsStr;
-            $this->callResult ['response_code'] = Http::STATUS_CODE_400;
+            $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
+            $this->callResult[CallResult::STRING_MESSAGE] = $response[self::API_RESPONSE_MESSAGE_KEY] . ' - ' . $errorsStr;
+            $this->callResult[CallResult::STRING_RESPONSE_CODE] = Http::STATUS_CODE_400;
 
             return $response;
 
@@ -148,9 +147,9 @@ abstract class AbstractService implements ServiceInterface
 
             curl_close($ch);
 
-            $this->callResult ['status'] = CallResult::STATUS_FAIL;
-            $this->callResult ['message'] = $response[self::API_RESPONSE_MESSAGE_KEY];
-            $this->callResult ['response_code'] = Http::STATUS_CODE_401;
+            $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
+            $this->callResult[CallResult::STRING_MESSAGE] = $response[self::API_RESPONSE_MESSAGE_KEY];
+            $this->callResult[CallResult::STRING_RESPONSE_CODE] = Http::STATUS_CODE_401;
 
             return $response;
 
@@ -158,9 +157,9 @@ abstract class AbstractService implements ServiceInterface
 
             curl_close($ch);
 
-            $this->callResult ['status'] = CallResult::STATUS_FAIL;
-            $this->callResult ['message'] = $response[self::API_RESPONSE_MESSAGE_KEY];
-            $this->callResult ['response_code'] = Http::STATUS_CODE_403;
+            $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
+            $this->callResult[CallResult::STRING_MESSAGE] = $response[self::API_RESPONSE_MESSAGE_KEY];
+            $this->callResult[CallResult::STRING_RESPONSE_CODE] = Http::STATUS_CODE_403;
 
             return $response;
 
@@ -168,9 +167,9 @@ abstract class AbstractService implements ServiceInterface
 
             curl_close($ch);
 
-            $this->callResult ['status'] = CallResult::STATUS_FAIL;
-            $this->callResult ['message'] = $response[self::API_RESPONSE_MESSAGE_KEY];
-            $this->callResult ['response_code'] = Http::STATUS_CODE_404;
+            $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
+            $this->callResult[CallResult::STRING_MESSAGE] = $response[self::API_RESPONSE_MESSAGE_KEY];
+            $this->callResult[CallResult::STRING_RESPONSE_CODE] = Http::STATUS_CODE_404;
 
             return $response;
 
@@ -178,9 +177,9 @@ abstract class AbstractService implements ServiceInterface
 
             curl_close($ch);
 
-            $this->callResult ['status'] = CallResult::STATUS_FAIL;
-            $this->callResult ['message'] = $response[self::API_RESPONSE_MESSAGE_KEY];
-            $this->callResult ['response_code'] = Http::STATUS_CODE_500;
+            $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
+            $this->callResult[CallResult::STRING_MESSAGE] = $response[self::API_RESPONSE_MESSAGE_KEY];
+            $this->callResult[CallResult::STRING_RESPONSE_CODE] = Http::STATUS_CODE_500;
 
             return $response;
 

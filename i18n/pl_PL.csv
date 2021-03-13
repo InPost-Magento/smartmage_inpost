@@ -68,10 +68,35 @@ Large,Gabaryt C
 X Large,Gabaryt D
 Create Shipment,Stwórz przesyłkę
 Back,Wróć
-"Dimension: ","Gabaryt: "
 "Point: ","Punkt: "
 The shipment list has been successfully synchronized,Lista przesyłek została pomyślnie zsynchronizowana
 Order not exist,Zamówienie nie istnieje
+Standard parcel locker delivery,Przesyłka paczkomatowa standardowa
+Standard courier shipment,Przesyłka kurierska standardowa
+Courier shipment with delivery until 10:00 on the next day,Przesyłka kurierska z doręczeniem do godziny 10:00 następnego dnia
+Courier shipment with delivery until 12:00 on the next day,Przesyłka kurierska z doręczeniem do godziny 12:00 następnego dnia
+Courier shipment with delivery until 17:00 on the next day,Przesyłka kurierska z doręczeniem do godziny 17:00 następnego dnia
+Local Standard courier shipment,Przesyłka kurierska Lokalna Standardowa
+Local Express courier shipment,Przesyłka kurierska Lokalna Expresowa
+Super Express courier shipment,Przesyłka kurierska Lokalna Super Expresowa
+Paleta Standard courier shipment,Przesyłka kurierska Paleta Standard
+Size A,Gabaryt A
+Size B,Gabaryt B
+Size C,Gabaryt C
+Size D,Gabaryt D
+sent in an automatic parcel station,nadanie w paczkomacie
+sent in the Customer Service Point,nadanie w Punkcie Obsługi Klienta
+sent in the Customer Service Point handling shipping of courier shipments,nadanie w Punkcie Obsługi Klienta obsługującym nadawanie przesyłek kurierskich
+sent in a Branch,nadanie w Oddziale
+Collection order - courier order,Zlecenie odbioru - zamówienie kuriera
+sent in the Shipment Service Point,nadanie w Punkcie Obsługi Przesyłek
+Tracking number,Numer przesyłki
+Shipment attributes,Cechy przesyłki
+Sending method,Sposób nadania
+Receiver data,Dane odbiorcy
+Reference,Numer referencyjny
+"If api is unavailable then this field will be empty","Jeśli interfejs API jest niedostępny, to pole będzie puste"
+"You Don't have any dispatch points","Nie masz żadnych punktów wysyłki"
 Address Details,Dane Adresowe
 Verify that the "Street" and "Building number" fields have been correctly filled in,Zweryfikuj czy pola "Ulica" i "Numer budynku" zostały poprawnie wypełnione
 Company Name,Nazwa firmy

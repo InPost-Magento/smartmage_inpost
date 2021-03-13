@@ -107,5 +107,7 @@ class Courier extends AbstractCreate
             "reference" => "Test",
             "comments" => "dowolny komentarz"
         ];
+
+        return $this;
     }
 }

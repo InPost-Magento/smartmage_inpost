@@ -11,10 +11,4 @@ interface ShipmentManagementInterface
      */
     public function addOrUpdate($shipmentData);
 
-    /**
-     * @param int $productId
-     * @throws \Magento\Framework\Exception\LocalizedException
-     */
-    public function remove($shipmentId);
-
 }
