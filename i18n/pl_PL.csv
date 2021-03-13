@@ -95,3 +95,5 @@ Shipment attributes,Cechy przesyłki
 Sending method,Sposób nadania
 Receiver data,Dane odbiorcy
 Reference,Numer referencyjny
+"If api is unavailable then this field will be empty","Jeśli interfejs API jest niedostępny, to pole będzie puste"
+"You Don't have any dispatch points","Nie masz żadnych punktów wysyłki"

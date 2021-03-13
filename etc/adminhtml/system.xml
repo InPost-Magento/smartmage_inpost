@@ -762,9 +762,10 @@
                     <label>Automatic payment for generated package</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="default_pickup_pont" translate="label" type="select" sortOrder="230" showInDefault="1" showInWebsite="1">
+                <field id="default_pickup_pont" translate="label comment" type="select" sortOrder="230" showInDefault="1" showInWebsite="1">
                     <label>Default pickup point</label>
                     <source_model>Smartmage\Inpost\Model\Config\Source\DefaultPickupPoint</source_model>
+                    <comment>If api is unavailable then this field will be empty</comment>
                 </field>
             </group>
         </section>
