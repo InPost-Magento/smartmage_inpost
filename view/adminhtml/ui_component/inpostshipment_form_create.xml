@@ -38,14 +38,12 @@
         </argument>
     </dataSource>
 
-    <fieldset name="shipment_fieldset">
+    <fieldset name="shipment_fieldset" sortOrder="10">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="label" xsi:type="string" translate="true">Shipment Details</item>
             </item>
         </argument>
-
-
 
         <field name="order_id">
             <argument name="data" xsi:type="array">
@@ -83,12 +81,6 @@
                 </item>
             </argument>
 
-            <!--<callback>setValidation</callback>
-            <params>
-                <param name="0" xsi:type="string">validate-number-range</param>
-                <param name="1" xsi:type="string">0.00-100.00</param>
-            </params>-->
-
             <settings>
                 <switcherConfig>
                     <rules>
@@ -118,6 +110,43 @@
                                 </action>
                                 <action name="5">
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>hide</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="14">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.city</target>
                                     <callback>hide</callback>
                                 </action>
                             </actions>
@@ -150,6 +179,43 @@
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
                                     <callback>hide</callback>
                                 </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="14">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.city</target>
+                                    <callback>hide</callback>
+                                </action>
                             </actions>
                         </rule>
                         <rule name="2">
@@ -180,6 +246,43 @@
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
                                     <callback>hide</callback>
                                 </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="14">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.city</target>
+                                    <callback>hide</callback>
+                                </action>
                             </actions>
                         </rule>
                         <rule name="3">
@@ -208,6 +311,43 @@
                                 </action>
                                 <action name="5">
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>hide</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="14">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.city</target>
                                     <callback>hide</callback>
                                 </action>
                             </actions>
@@ -241,6 +381,39 @@
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
                                     <callback>show</callback>
                                 </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
                             </actions>
                         </rule>
                         <rule name="5">
@@ -269,6 +442,39 @@
                                 </action>
                                 <action name="5">
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
                                     <callback>show</callback>
                                 </action>
                             </actions>
@@ -301,6 +507,39 @@
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
                                     <callback>show</callback>
                                 </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
                             </actions>
                         </rule>
                         <rule name="7">
@@ -329,6 +568,39 @@
                                 </action>
                                 <action name="5">
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
                                     <callback>show</callback>
                                 </action>
                             </actions>
@@ -361,6 +633,39 @@
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
                                     <callback>show</callback>
                                 </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
                             </actions>
                         </rule>
                         <rule name="9">
@@ -389,6 +694,39 @@
                                 </action>
                                 <action name="5">
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
                                     <callback>show</callback>
                                 </action>
                             </actions>
@@ -421,6 +759,39 @@
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
                                     <callback>show</callback>
                                 </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
                             </actions>
                         </rule>
                         <rule name="11">
@@ -449,6 +820,39 @@
                                 </action>
                                 <action name="5">
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
                                     <callback>show</callback>
                                 </action>
                             </actions>
@@ -481,6 +885,39 @@
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
                                     <callback>show</callback>
                                 </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
                             </actions>
                         </rule>
                         <rule name="13">
@@ -509,6 +946,39 @@
                                 </action>
                                 <action name="5">
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
                                     <callback>show</callback>
                                 </action>
                             </actions>
@@ -635,6 +1105,7 @@
                     <item name="label" xsi:type="string" translate="true">Cash on Delivery Value</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">cod</item>
                     <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Cod</item>
                     <item name="validation" xsi:type="array">
                         <item name="required-entry" xsi:type="boolean">true</item>
@@ -650,6 +1121,7 @@
                     <item name="label" xsi:type="string" translate="true">Insurance Value</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">insurance</item>
                     <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Insurance</item>
                     <item name="validation" xsi:type="array">
                         <item name="required-entry" xsi:type="boolean">true</item>
@@ -664,8 +1136,159 @@
                 <item name="config" xsi:type="array">
                     <item name="label" xsi:type="string" translate="true">Reference Number</item>
                     <item name="dataType" xsi:type="string">text</item>
+                    <item name="dataScope" xsi:type="string">reference</item>
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Reference</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <htmlContent name="address_title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalClasses" xsi:type="string">admin__field</item>
+                </item>
+            </argument>
+            <argument name="block" xsi:type="object">Smartmage\Inpost\Block\Adminhtml\Shipment\Create\Address</argument>
+        </htmlContent>
+
+        <field name="email">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Email</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">email</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Address\Email</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="phone">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Phone</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">phone</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Address\Phone</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="company_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Company Name</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">company_name</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Address\CompanyName</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="first_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">First Name</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">first_name</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Address\FirstName</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="last_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Last Name</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">last_name</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Address\LastName</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="city">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">City</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">city</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Address\City</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="post_code">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Postcode</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">post_code</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Address\Postcode</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <htmlContent name="street_info">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalClasses" xsi:type="string">admin__field</item>
+                </item>
+            </argument>
+            <argument name="block" xsi:type="object">Smartmage\Inpost\Block\Adminhtml\Shipment\Create\StreetInfo</argument>
+        </htmlContent>
+
+        <field name="street">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Street</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">street</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Address\Street</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="building_number">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Building Number</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">building_number</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Address\BuildingNumber</item>
                     <item name="validation" xsi:type="array">
                         <item name="required-entry" xsi:type="boolean">true</item>
                     </item>
