@@ -5,7 +5,6 @@ namespace Smartmage\Inpost\Ui\Component\Form\Element;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\Pricing\PriceCurrencyInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
-use Magento\Framework\View\Element\UiComponent\DataProvider\Sanitizer;
 use Magento\Sales\Api\OrderRepositoryInterface;
 
 class Service extends \Magento\Ui\Component\Form\Element\Select
@@ -41,10 +40,9 @@ class Service extends \Magento\Ui\Component\Form\Element\Select
         ContextInterface $context,
         $options = null,
         array $components = [],
-        array $data = [],
-        ?Sanitizer $sanitizer = null
+        array $data = []
     ) {
-        parent::__construct($context, $options, $components, $data, $sanitizer);
+        parent::__construct($context, $options, $components, $data);
         $this->request = $request;
         $this->orderRepository = $orderRepository;
         $this->priceCurrency = $priceCurrency;
