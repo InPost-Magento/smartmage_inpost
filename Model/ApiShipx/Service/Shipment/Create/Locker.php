@@ -13,8 +13,8 @@ class Locker extends AbstractCreate
     {
         $this->requestBody = [
             "receiver" => [
-                "email" => $order->getCustomerEmail(),
-                "phone" => $order->getShippingAddress()->getTelephone(),
+                "email" => $data['email'],
+                "phone" => $data['phone'],
             ],
             "parcels" => [
                 "template" => $data['size'],
@@ -23,12 +23,6 @@ class Locker extends AbstractCreate
                 "target_point" => $data['target_locker'],
             ],
         ];
-
-        if ($data['sending_method'] != 'dispatch_order') {
-            $this->requestBody['custom_attributes']['dropoff_point'] = $this->configProvider->getConfigData(
-                str_replace('_', '/', $data['service']) . '/default_sending_point'
-            );
-        }
 
         parent::createBody($data, $order);
     }

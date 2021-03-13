@@ -101,25 +101,24 @@ abstract class AbstractMethod
 
     protected function calculateWeight()
     {
-        $customWeightAttribute = $this->configProvider->getConfigData(
-            'weight_attribute_code'
-        );
+        $weightAttributeCode = $this->configProvider->getWeightAttributeCode();
         $weight = 0;
 
-        if ($customWeightAttribute) {
-            $storeId = $this->storeManager->getStore()->getId();
-            foreach ($this->quoteItems as $item) {
-                $quoteProduct = $item->getProduct();
-                $weight += $quoteProduct->getResource()->getAttributeRawValue(
-                    $quoteProduct->getId(),
-                    $customWeightAttribute,
-                    $storeId
-                );
+        $storeId = $this->storeManager->getStore()->getId();
+        foreach ($this->quoteItems as $item) {
+            $quoteProduct = $item->getProduct();
+
+            $productWeight = $quoteProduct->getResource()->getAttributeRawValue(
+                (int)$quoteProduct->getId(),
+                (string)$weightAttributeCode,
+                (int)$storeId
+            );
+
+            if (is_array($productWeight)) {
+                $productWeight = 0;
             }
-        } else {
-            foreach ($this->quoteItems as $item) {
-                $weight += ($item->getWeight() * $item->getQty());
-            }
+            $weight += $productWeight;
+
         }
 
         return $weight;
