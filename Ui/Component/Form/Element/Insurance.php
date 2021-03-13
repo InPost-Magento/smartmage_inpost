@@ -5,6 +5,7 @@ namespace Smartmage\Inpost\Ui\Component\Form\Element;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\Pricing\PriceCurrencyInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
+use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Smartmage\Inpost\Model\ConfigProvider;
 
@@ -42,6 +43,7 @@ class Insurance extends \Magento\Ui\Component\Form\Element\Input
         PriceCurrencyInterface $priceCurrency,
         ContextInterface $context,
         ConfigProvider $configProvider,
+        UiComponentFactory $uiComponentFactory,
         array $components = [],
         array $data = []
     ) {
