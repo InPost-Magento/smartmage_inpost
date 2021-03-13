@@ -59,6 +59,8 @@ abstract class AbstractSave extends Action
      */
     public function execute()
     {
+        $data = $this->_request->getParams();
+
         try {
             $result = $this->processShippment();
             $this->messageManager->addSuccessMessage($result[CallResult::STRING_MESSAGE]);
@@ -66,8 +68,12 @@ abstract class AbstractSave extends Action
             $this->messageManager->addExceptionMessage(
                 $e
             );
+            $data['shipment_fieldset']['shipping_method'] = $data['shipment_fieldset']['service'];
+            return $this->resultRedirectFactory->create()
+                ->setPath('smartmageinpost/shipments/create', $data['shipment_fieldset']);
         }
 
-        return $this->resultRedirectFactory->create()->setPath('sales/order/view', ['order_id' => 1]);
+        return $this->resultRedirectFactory->create()
+            ->setPath('sales/order/view', ['order_id' => $data['shipment_fieldset']['order_id']]);
     }
 }
