@@ -15,7 +15,7 @@
             </item>
                 <item name="sample_locker" xsi:type="array">
                 <item name="name" xsi:type="string">sample_locker</item>
-                <item name="label" xsi:type="string" translate="true">Create sample courier shipment</item>
+                <item name="label" xsi:type="string" translate="true">Create sample locker shipment</item>
                 <item name="class" xsi:type="string">primary</item>
                 <item name="url" xsi:type="string">smartmageinpost/shipments_savesample/locker</item>
             </item>

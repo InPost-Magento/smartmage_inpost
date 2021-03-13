@@ -126,7 +126,7 @@ abstract class AbstractService implements ServiceInterface
 
             $errorsStr = '';
             if (isset($response[self::API_RESPONSE_DETAILS_KEY])){
-                print_r($response[self::API_RESPONSE_DETAILS_KEY]);
+                $logger->info(print_r($response[self::API_RESPONSE_DETAILS_KEY], true));
                 foreach ($response[self::API_RESPONSE_DETAILS_KEY] as $k => $detail) {
                     $errorsStr .= '[ ' . $k . ' : ';
                     foreach ($detail as $detailItem) {

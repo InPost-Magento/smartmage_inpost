@@ -83,7 +83,9 @@ class Multiple extends AbstractSearch
                         $formatedData[ShipmentInterface::RECEIVER_DATA]       = $receiverData;
                         $formatedData[ShipmentInterface::REFERENCE]           = $item['reference'];
                         $formatedData[ShipmentInterface::TRACKING_NUMBER]     = $item['tracking_number'];
-                        $formatedData[ShipmentInterface::TARGET_POINT]        = $item['custom_attributes']['target_point'];
+
+                        if (isset($item['custom_attributes']) && isset($item['custom_attributes']['target_point']))
+                            $formatedData[ShipmentInterface::TARGET_POINT] = $item['custom_attributes']['target_point'];
 
                         $this->shipmentManagement->addOrUpdate($formatedData);
                     } catch (\Exception $exception) {
