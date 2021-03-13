@@ -7,6 +7,18 @@
         </item>
         <item name="spinner" xsi:type="string">inpostshipment_grid_columns</item>
         <item name="buttons" xsi:type="array">
+            <item name="sample_courier" xsi:type="array">
+                <item name="name" xsi:type="string">sample_courier</item>
+                <item name="label" xsi:type="string" translate="true">Create sample courier shipment</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">smartmageinpost/shipments_savesample/courier</item>
+            </item>
+                <item name="sample_locker" xsi:type="array">
+                <item name="name" xsi:type="string">sample_locker</item>
+                <item name="label" xsi:type="string" translate="true">Create sample locker shipment</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">smartmageinpost/shipments_savesample/locker</item>
+            </item>
             <item name="full_sync" xsi:type="array">
                 <item name="name" xsi:type="string">full_sync</item>
                 <item name="label" xsi:type="string" translate="true">Full sync</item>
@@ -96,7 +108,6 @@
                 <filter>textRange</filter>
                 <label translate="true">ID</label>
                 <resizeDefaultWidth>25</resizeDefaultWidth>
-                <sorting>desc</sorting>
             </settings>
         </column>
         <column name="shipment_id">
@@ -104,36 +115,47 @@
                 <filter>text</filter>
                 <bodyTmpl>ui/grid/cells/text</bodyTmpl>
                 <label translate="true">Shipment id</label>
+                <sorting>desc</sorting>
             </settings>
         </column>
-        <column name="status">
+        <column name="tracking_number" class="Smartmage\Inpost\Ui\Component\Listing\Column\TrackingNumber">
             <settings>
                 <filter>text</filter>
-                <bodyTmpl>ui/grid/cells/text</bodyTmpl>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <label translate="true">Tracking number</label>
+            </settings>
+        </column>
+        <column name="status" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <options class="Smartmage\Inpost\Model\Config\Source\Status"/>
+                <dataType>select</dataType>
                 <label translate="true">Status</label>
             </settings>
         </column>
-        <column name="service">
+
+        <column name="service" component="Magento_Ui/js/grid/columns/select">
             <settings>
-                <filter>text</filter>
-                <bodyTmpl>ui/grid/cells/text</bodyTmpl>
+                <filter>select</filter>
+                <options class="Smartmage\Inpost\Model\Config\Source\Service"/>
+                <dataType>select</dataType>
                 <label translate="true">Service</label>
             </settings>
         </column>
-        <column name="shipment_attributes">
+        <column name="shipment_attributes" class="Smartmage\Inpost\Ui\Component\Listing\Column\ShipmentAttributes">
             <settings>
-                <filter>text</filter>
+                <sortable>false</sortable>
                 <bodyTmpl>ui/grid/cells/text</bodyTmpl>
                 <label translate="true">Shipment attributes</label>
                 <resizeDefaultWidth>25</resizeDefaultWidth>
             </settings>
         </column>
-        <column name="sending_method">
+        <column name="sending_method" component="Magento_Ui/js/grid/columns/select">
             <settings>
-                <filter>text</filter>
-                <bodyTmpl>ui/grid/cells/text</bodyTmpl>
+                <filter>select</filter>
+                <options class="Smartmage\Inpost\Model\Config\Source\SendingMethod"/>
                 <label translate="true">Sending method</label>
-                <resizeDefaultWidth>20</resizeDefaultWidth>
+                <dataType>select</dataType>
             </settings>
         </column>
         <column name="receiver_data">
