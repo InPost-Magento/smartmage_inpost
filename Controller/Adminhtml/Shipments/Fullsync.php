@@ -34,8 +34,7 @@ class Fullsync extends \Smartmage\Inpost\Controller\Adminhtml\Shipments
             $this->messageManager->addSuccessMessage($result[CallResult::STRING_MESSAGE]);
         } catch (\Exception $e) {
             $this->messageManager->addExceptionMessage(
-                $e,
-                __('error')
+                $e
             );
         }
 

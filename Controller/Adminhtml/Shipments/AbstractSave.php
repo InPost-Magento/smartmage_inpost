@@ -5,6 +5,7 @@ namespace Smartmage\Inpost\Controller\Adminhtml\Shipments;
 use Magento\Backend\App\Action;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Api\OrderRepositoryInterface;
+use Smartmage\Inpost\Model\ApiShipx\CallResult;
 use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Create\Courier;
 use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Create\Locker;
 
@@ -59,11 +60,11 @@ abstract class AbstractSave extends Action
     public function execute()
     {
         try {
-            $this->processShippment();
-        } catch (NoSuchEntityException $e) {
+            $result = $this->processShippment();
+            $this->messageManager->addSuccessMessage($result[CallResult::STRING_MESSAGE]);
+        } catch (\Exception $e) {
             $this->messageManager->addExceptionMessage(
-                $e,
-                __('Order not exist')
+                $e
             );
         }
 

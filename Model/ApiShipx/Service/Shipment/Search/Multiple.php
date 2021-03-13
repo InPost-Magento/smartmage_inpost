@@ -3,6 +3,7 @@
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Search;
 
 use Smartmage\Inpost\Api\Data\ShipmentInterface;
+use Smartmage\Inpost\Model\ApiShipx\CallResult;
 use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\AbstractSearch;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\ShipmentManagement;
@@ -36,6 +37,11 @@ class Multiple extends AbstractSearch
 
         for ($page = 1; ; $page++) {
             $result = $this->call(null, ['page' => $page]);
+
+            $logger->info($this->callResult);
+
+            if ($this->callResult[CallResult::STRING_STATUS] != CallResult::STATUS_SUCCESS)
+                throw new \Exception($this->callResult[CallResult::STRING_MESSAGE], $this->callResult[CallResult::STRING_RESPONSE_CODE]);
 
             if (!$totalPagesUpdated) {
                 $totalPagesRaw = (float)$result['count'] / (float)$result['per_page'];
