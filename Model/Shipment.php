@@ -15,6 +15,11 @@ class Shipment extends AbstractModel implements ShipmentInterface
         $this->_init(ResourceModel\Shipment::class);
     }
 
+    public function getId()
+    {
+        return $this->getData(self::ENTITY_ID);
+    }
+
     public function getShipmentId()
     {
         return $this->getData(self::SHIPMENT_ID);
@@ -58,6 +63,11 @@ class Shipment extends AbstractModel implements ShipmentInterface
     public function getTargetPoint()
     {
         return $this->getData(self::TARGET_POINT);
+    }
+
+    public function setId($id)
+    {
+        return $this->setData(self::ENTITY_ID, $id);
     }
 
     public function setShipmentId($shipmentId)
