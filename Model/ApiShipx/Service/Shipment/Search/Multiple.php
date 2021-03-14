@@ -4,6 +4,7 @@ namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Search;
 
 use Smartmage\Inpost\Api\Data\ShipmentInterface;
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
+use Smartmage\Inpost\Model\ApiShipx\ErrorHandler;
 use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\AbstractSearch;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\ShipmentManagement;
@@ -18,12 +19,13 @@ class Multiple extends AbstractSearch
     public function __construct(
         ConfigProvider $configProvider,
         ShipmentRepository $shipmentRepository,
-        ShipmentManagement $shipmentManagement
+        ShipmentManagement $shipmentManagement,
+        ErrorHandler $errorHandler
     ) {
         $this->shipmentRepository = $shipmentRepository;
         $this->shipmentManagement = $shipmentManagement;
         $this->successMessage = __('The shipment list has been successfully synchronized');
-        parent::__construct($configProvider);
+        parent::__construct($configProvider, $errorHandler);
     }
 
     public function getAllShipments()
@@ -34,9 +36,11 @@ class Multiple extends AbstractSearch
 
         $totalPages = 0;
         $totalPagesUpdated = false;
+        $daysAgo = $this->configProvider->getGetShipmentsDays();
+        $daysAgo = date('Y-m-d', strtotime("-" . $daysAgo . " days"));
 
         for ($page = 1; ; $page++) {
-            $result = $this->call(null, ['page' => $page]);
+            $result = $this->call(null, ['page' => $page, 'created_at_gteq' => $daysAgo]);
 
             $logger->info($this->callResult);
 

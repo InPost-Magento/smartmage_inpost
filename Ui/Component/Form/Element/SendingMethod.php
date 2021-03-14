@@ -81,11 +81,8 @@ class SendingMethod extends \Magento\Ui\Component\Form\Element\Select
         if (isset($config['dataScope']) && $config['dataScope'] == 'sending_method') {
             $shippingMethod = $data['shipping_method'];
             $codes = explode('_', $shippingMethod);
-            $methodCode = $codes[1];
-            if ($codes[0] == 'inpostcourier' && $codes[1] == 'standard') {
-                $methodCode = 'courier_standard';
-            }
-            $this->defaultWaySending->setCode(str_replace('cod', '', $methodCode));
+
+            $this->defaultWaySending->setCode($shippingMethod);
             $config['options'] = $this->defaultWaySending->toOptionArray();
 
             if (isset($data['sending_method'])) {

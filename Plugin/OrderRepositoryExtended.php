@@ -5,6 +5,9 @@ namespace Smartmage\Inpost\Plugin;
 use Magento\Sales\Api\Data\OrderExtensionFactory;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
+use Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterface;
+use Smartmage\Inpost\Api\ShipmentOrderLinksProviderInterface;
+use Magento\Framework\EntityManager\EntityManager;
 
 class OrderRepositoryExtended
 {
@@ -12,14 +15,21 @@ class OrderRepositoryExtended
      * @var OrderExtensionFactory
      */
     protected $orderExtensionFactory;
+    protected $shipmentOrderLinksProvider;
+    protected $currentOrder;
+    protected $entityManager;
 
     /**
      * @param OrderExtensionFactory $orderExtensionFactory
      */
     public function __construct(
-        OrderExtensionFactory $orderExtensionFactory
+        OrderExtensionFactory $orderExtensionFactory,
+        ShipmentOrderLinksProviderInterface $shipmentOrderLinksProvider,
+        EntityManager $entityManager
     ) {
         $this->orderExtensionFactory = $orderExtensionFactory;
+        $this->shipmentOrderLinksProvider = $shipmentOrderLinksProvider;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -35,6 +45,9 @@ class OrderRepositoryExtended
         return $order;
     }
 
+    /**
+     * @param \Magento\Sales\Api\Data\OrderInterface $order
+     */
     protected function loadExtensionAttributes(OrderInterface &$order)
     {
         $orderExtension = $order->getExtensionAttributes();
@@ -45,8 +58,8 @@ class OrderRepositoryExtended
         $inpostLockerId = $order->getData('inpost_locker_id');
         $orderExtension->setInpostLockerId($inpostLockerId);
 
-        $inpostShipmentId = $order->getData('inpost_shipment_id');
-        $orderExtension->setInpostShipmentId($inpostShipmentId);
+        $inpostShipmentsId = $this->getInpostShipments($order);
+        $orderExtension->setInpostShipmentLinks($inpostShipmentsId);
 
         $order->setExtensionAttributes($orderExtension);
     }
@@ -64,10 +77,45 @@ class OrderRepositoryExtended
 
         if ($extensionAttributes !== null && $extensionAttributes->getInpostLockerId() !== null) {
             $order->setInpostLockerId($extensionAttributes->getInpostLockerId());
-            $order->setInpostShipmentId($extensionAttributes->getInpostShipmentId());
+            $order->setInpostShipmentLinks($extensionAttributes->getInpostShipmentLinks());
+            $this->currentOrder = $order;
         }
 
         return [$order];
     }
 
+    public function afterSave(
+        OrderRepositoryInterface $subject,
+        OrderInterface $order
+    ) {
+        if ($this->currentOrder !== null) {
+            $extensionAttributes = $this->currentOrder->getExtensionAttributes();
+
+            if ($extensionAttributes && $extensionAttributes->getInpostShipmentLinks()) {
+                $shipmentLinks = $extensionAttributes->getInpostShipmentLinks();
+                \Magento\Framework\App\ObjectManager::getInstance()->get(\Psr\Log\LoggerInterface::class)->error('$shipmentLinks');
+                \Magento\Framework\App\ObjectManager::getInstance()->get(\Psr\Log\LoggerInterface::class)->error(print_r(count($shipmentLinks), true));
+                if (is_array($shipmentLinks)) {
+                    /** @var ShipmentOrderLinkInterface $link */
+                    foreach ($shipmentLinks as $link) {
+                        $link->setIncrementId($order->getIncrementId());
+                        $this->entityManager->save($link);
+                    }
+                }
+            }
+
+            $this->currentOrder = null;
+        }
+
+        return $order;
+    }
+
+    /**
+     * @param \Magento\Sales\Api\Data\OrderInterface $order
+     * @return mixed
+     */
+    public function getInpostShipments(OrderInterface $order)
+    {
+        return $this->shipmentOrderLinksProvider->getShipments($order->getIncrementId());
+    }
 }

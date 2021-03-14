@@ -36,6 +36,7 @@ class ConfigProvider
     const SHIPPING_WEIGHT_UNIT = 'weight_unit';
     const SHIPPING_AUTOMATIC_PAY_FOR_PACKAGE = 'automatic_pay_for_package';
     const SHIPPING_DEFAULT_PICKUP_POINT = 'default_pickup_pont';
+    const SHIPPING_GET_SHIPMENTS_DAYS = 'get_shipments_days';
 
     /**
      * @var ScopeConfigInterface
@@ -289,6 +290,15 @@ class ConfigProvider
     public function getDefaultPickupPoint()
     {
         return $this->getShippingConfigData(self::SHIPPING_DEFAULT_PICKUP_POINT);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getGetShipmentsDays()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_GET_SHIPMENTS_DAYS);
     }
 
     /**

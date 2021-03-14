@@ -767,6 +767,10 @@
                     <source_model>Smartmage\Inpost\Model\Config\Source\DefaultPickupPoint</source_model>
                     <comment>If api is unavailable then this field will be empty</comment>
                 </field>
+                <field id="get_shipments_days" translate="label" type="text" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Get shipments from x days ago</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
             </group>
         </section>
     </system>

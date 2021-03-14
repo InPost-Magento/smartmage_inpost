@@ -1,18 +1,20 @@
 {
     "smartmage_inpost_shipment": {
-      "column": {
-        "entity_id": true,
-        "shipment_id": true,
-        "status": true,
-        "service": true,
-        "shipment_attributes": true,
-        "sending_method": true,
-        "receiver_data": true,
-        "reference": true
-      },
-      "constraint": {
-        "PRIMARY": true
-      }
+        "column": {
+            "entity_id": true,
+            "shipment_id": true,
+            "status": true,
+            "service": true,
+            "shipment_attributes": true,
+            "sending_method": true,
+            "receiver_data": true,
+            "reference": true,
+            "tracking_number": true,
+            "target_point": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
     },
     "quote": {
         "column": {
@@ -23,6 +25,15 @@
         "column": {
             "inpost_locker_id": true,
             "inpost_shipment_id": true
+        }
+    },
+    "smartmage_inpost_shipment_order_link": {
+        "column": {
+            "shipment_id": true,
+            "increment_id": true
+        },
+        "constraint": {
+            "FK_F045BA5396005F52F24D55F908B5370B": true
         }
     }
 }

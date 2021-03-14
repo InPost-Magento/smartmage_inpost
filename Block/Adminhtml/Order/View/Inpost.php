@@ -11,6 +11,8 @@ use Magento\Shipping\Helper\Data as ShippingHelper;
 use Magento\Tax\Helper\Data as TaxHelper;
 use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
 use Smartmage\Inpost\Model\Config\Source\Size as SizeConfig;
+use Smartmage\Inpost\Model\Config\Source\Service as ServiceConfig;
+use Smartmage\Inpost\Model\Config\Source\Status as StatusConfig;
 use Smartmage\Inpost\Model\ShipmentRepository;
 use Smartmage\Inpost\Api\Data\ShipmentInterface;
 
@@ -20,10 +22,30 @@ use Smartmage\Inpost\Api\Data\ShipmentInterface;
  */
 class Inpost extends AbstractOrder
 {
+    /**
+     * @var \Smartmage\Inpost\Model\Config\Source\ShippingMethods
+     */
     protected $shippingMethods;
+    /**
+     * @var
+     */
     protected $inpostShipment;
+    /**
+     * @var \Smartmage\Inpost\Model\ShipmentRepository
+     */
     protected $shipmentRepository;
+    /**
+     * @var \Smartmage\Inpost\Model\Config\Source\Size
+     */
     protected $sizeConfig;
+    /**
+     * @var \Smartmage\Inpost\Model\Config\Source\Service
+     */
+    protected $serviceConfig;
+    /**
+     * @var \Smartmage\Inpost\Model\Config\Source\Status
+     */
+    protected $statusConfig;
 
     /**
      * Inpost constructor.
@@ -44,6 +66,8 @@ class Inpost extends AbstractOrder
         ShippingMethods $shippingMethods,
         ShipmentRepository $shipmentRepository,
         SizeConfig $sizeConfig,
+        ServiceConfig $serviceConfig,
+        StatusConfig $statusConfig,
         array $data = [],
         ?ShippingHelper $shippingHelper = null,
         ?TaxHelper $taxHelper = null
@@ -51,6 +75,8 @@ class Inpost extends AbstractOrder
         $this->shippingMethods = $shippingMethods;
         $this->shipmentRepository = $shipmentRepository;
         $this->sizeConfig = $sizeConfig;
+        $this->serviceConfig = $serviceConfig;
+        $this->statusConfig = $statusConfig;
         parent::__construct($context, $registry, $adminHelper, $data, $shippingHelper, $taxHelper);
     }
 
@@ -71,54 +97,89 @@ class Inpost extends AbstractOrder
         return $this->getOrder()->getShippingMethod();
     }
 
-    public function getInpostShipmentId()
+    /**
+     * @return array
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getInpostShipments()
     {
-        return $this->getOrder()->getExtensionAttributes()->getInpostShipmentId();
+        $shipments = [];
+        if ($inpostShipmentLinks = $this->getOrder()->getExtensionAttributes()->getInpostShipmentLinks()) {
+            foreach ($inpostShipmentLinks as $inpostShipmentLink) {
+                if ($shipment = $this->getInpostShippment($inpostShipmentLink->getShipmentId())) {
+                    $shipments[] = $shipment;
+                }
+            }
+        }
+        return $shipments;
     }
 
-    public function getShippingTrackingUrl()
+    /**
+     * @param $shipment
+     * @return string
+     */
+    public function getShippingTrackingUrl($shipment)
     {
-        $tracking = $this->getShippingTrackingNumber();
+        $tracking = $shipment->getTrackingNumber();
         return 'https://inpost.pl/sledzenie-przesylek?number=' . $tracking;
     }
 
-    public function getShippingTrackingNumber()
+    /**
+     * @param $shipment
+     * @return \Magento\Framework\Phrase
+     */
+    public function getShippingService($shipment)
     {
-        return $this->getInpostShippment()->getTrackingNumber();
+        return $this->serviceConfig->getServiceLabel($shipment->getService());
     }
 
-    public function getShippingService()
-    {
-        return $this->getInpostShippment()->getService();
-    }
-
-    public function getShippingDetails()
+    /**
+     * @param $shipment
+     * @return array
+     */
+    public function getShippingDetails($shipment)
     {
         $details = [];
-        $details[ShipmentInterface::STATUS] = $this->getInpostShippment()->getStatus();
-        if ($this->getShippingService() == 'inpost_locker_standard') {
+        $details[ShipmentInterface::STATUS] = $this->statusConfig->getStatusLabel($shipment->getStatus());
+        if ($shipment->getService() == 'inpost_locker_standard') {
             $details[ShipmentInterface::SHIPMENT_ATTRIBUTES] =
-                $this->sizeConfig->getSizeLabel($this->getInpostShippment()->getShipmentsAttributes());
-            $details[ShipmentInterface::TARGET_POINT] =  __("Point: ") . $this->getInpostShippment()->getTargetPoint();
+                $this->sizeConfig->getSizeLabel($shipment->getShipmentsAttributes());
+            $details[ShipmentInterface::TARGET_POINT] =  __("Point: ") . $shipment->getTargetPoint();
         }
         return $details;
     }
 
-    public function getLabelUrl()
+    /**
+     * @param $shipment
+     * @return string
+     */
+    public function getLabelUrl($shipment)
     {
-        return $this->getUrl('smartmageinpost/shipments/printLabel', ['id' => $this->getInpostShipmentId()]);
+        return $this->getUrl('smartmageinpost/shipments/printLabel', ['id' => $shipment->getShipmentId()]);
     }
 
-    public function getReturnUrl()
+    /**
+     * @param $shipment
+     * @return string
+     */
+    public function getReturnUrl($shipment)
     {
-        return $this->getUrl('smartmageinpost/shipments/printReturnLabel', ['id' => $this->getInpostShipmentId()]);
+        return $this->getUrl('smartmageinpost/shipments/printReturnLabel', ['id' => $shipment->getShipmentId()]);
     }
 
-    public function getInpostShippment()
+    /**
+     * @param $inpostShipmentId
+     * @return \Magento\Framework\Model\AbstractModel|\Smartmage\Inpost\Api\Data\ShipmentInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getInpostShippment($inpostShipmentId)
     {
-        if (!$this->inpostShipment) {
-            $this->inpostShipment = $this->shipmentRepository->getByShipmentId($this->getInpostShipmentId());
+        $shipment = null;
+        try {
+            $shipment =  $this->shipmentRepository->getByShipmentId($inpostShipmentId);
+        } catch (\Exception $e) {
+
         }
-        return $this->inpostShipment;
+        return $shipment;
     }
 }

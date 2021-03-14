@@ -3,7 +3,7 @@
  * @var $block \Smartmage\Inpost\Block\Adminhtml\Order\View\Inpost
  */ ?>
 <div class="field">
-<?php if ($block->getInpostShipmentId()) : ?>
+<?php if ($shipments = $block->getInpostShipments()) : ?>
 <table class="data-table admin__table-primary">
     <thead class="headings">
     <tr>
@@ -14,16 +14,17 @@
     </tr>
     </thead>
     <tbody>
+    <?php foreach ($shipments as $shipment) : ?>
     <tr>
         <td>
-            <a href="<?= $block->getShippingTrackingUrl(); ?>"><?= $block->getShippingTrackingNumber(); ?></a>
+            <a href="<?= $block->getShippingTrackingUrl($shipment); ?>"><?= $shipment->getTrackingNumber(); ?></a>
         </td>
         <td>
-            <?= $block->getShippingService(); ?>
+            <?= $block->getShippingService($shipment); ?>
         </td>
         <td>
             <div>
-                <?php $details = $block->getShippingDetails(); ?>
+                <?php $details = $block->getShippingDetails($shipment); ?>
                 <?php foreach ($details as $key => $value): ?>
                 <div class="details-<?= $key ?>">
                     <?php echo $block->escapeHtml($value) ?>
@@ -33,17 +34,18 @@
         </td>
         <td>
             <div class="actions">
-                <a href="<?= /* @noEscape */ $block->getLabelUrl() ?>" target="_blank">
+                <a href="<?= /* @noEscape */ $block->getLabelUrl($shipment) ?>" target="_blank">
                     <?= $block->escapeHtml(__('Print label')) ?>
                 </a>
             </div>
             <div class="actions">
-                <a href="<?= /* @noEscape */ $block->getReturnUrl() ?>" target="_blank">
+                <a href="<?= /* @noEscape */ $block->getReturnUrl($shipment) ?>" target="_blank">
                     <?= $block->escapeHtml(__('Return')) ?>
                 </a>
             </div>
         </td>
     </tr>
+    <?php endforeach; ?>
     </tbody>
 </table>
 <?php endif ?>

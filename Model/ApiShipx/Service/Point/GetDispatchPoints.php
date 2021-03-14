@@ -6,6 +6,7 @@ namespace Smartmage\Inpost\Model\ApiShipx\Service\Point;
 use Magento\Framework\App\Response\Http;
 use Smartmage\Inpost\Model\ApiShipx\AbstractService;
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
+use Smartmage\Inpost\Model\ApiShipx\ErrorHandler;
 use Smartmage\Inpost\Model\ConfigProvider;
 
 /**
@@ -32,13 +33,17 @@ class GetDispatchPoints extends AbstractService
     /**
      * GetDispatchPoints constructor.
      * @param \Smartmage\Inpost\Model\ConfigProvider $configProvider
+     * @param ErrorHandler $errorHandler
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function __construct(ConfigProvider $configProvider)
+    public function __construct(
+        ConfigProvider $configProvider,
+        ErrorHandler $errorHandler
+    )
     {
         $organizationId = $configProvider->getOrganizationId();
         $this->callUri = '/v1/organizations/' . $organizationId . '/dispatch_points';
-        parent::__construct($configProvider);
+        parent::__construct($configProvider, $errorHandler);
     }
 
     /**
