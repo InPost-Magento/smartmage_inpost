@@ -96,8 +96,26 @@ abstract class AbstractCreate extends AbstractService
 
                 $receiver     = $response['receiver'];
                 $receiverData = '';
-                $receiverData .= $receiver['first_name'] . ' ';
-                $receiverData .= $receiver['last_name'];
+                if (strpos($response['service'], 'inpost_locker') !== false) {
+                    $receiverData .= $receiver['email'] . '<br>'
+                        . $receiver['phone'] . '<br>'
+                        . $response['custom_attributes']['target_point'];
+                } else {
+                    if (isset($receiver['company_name'])) {
+                        $receiverData .= $receiver['company_name'] . '<br>';
+                    }
+
+                    if (isset($receiver['email'])) {
+                        $receiverData .= $receiver['email'] . '<br>';
+                    }
+
+                    $receiverData .= $receiver['first_name'] . '<br>'
+                        . $receiver['last_name'] . '<br>'
+                        . $receiver['phone'] . '<br>'
+                        . 'ul. ' . $receiver['address']['street'] . ' '
+                        . $receiver['address']['building_number'] . '<br>'
+                        . $receiver['address']['post_code'] . ' ' . $receiver['address']['city'];
+                }
 
                 $formatedData[ShipmentInterface::SHIPMENT_ID]         = $response['id'];
                 $formatedData[ShipmentInterface::STATUS]              = $response['status'];
@@ -150,5 +168,4 @@ abstract class AbstractCreate extends AbstractService
             );
         }
     }
-
 }

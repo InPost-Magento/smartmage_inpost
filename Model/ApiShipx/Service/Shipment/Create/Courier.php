@@ -65,6 +65,10 @@ class Courier extends AbstractCreate
             ],
         ];
 
+        if($data['email']) {
+            $this->requestBody['receiver']['email'] = $data['email'];
+        }
+
         parent::createBody($data, $order);
     }
 
