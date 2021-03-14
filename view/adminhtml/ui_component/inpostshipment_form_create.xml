@@ -149,6 +149,10 @@
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.city</target>
                                     <callback>hide</callback>
                                 </action>
+                                <action name="15">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.weight</target>
+                                    <callback>hide</callback>
+                                </action>
                             </actions>
                         </rule>
                         <rule name="1">
@@ -214,6 +218,10 @@
                                 </action>
                                 <action name="14">
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.city</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="15">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.weight</target>
                                     <callback>hide</callback>
                                 </action>
                             </actions>
@@ -283,6 +291,10 @@
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.city</target>
                                     <callback>hide</callback>
                                 </action>
+                                <action name="15">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.weight</target>
+                                    <callback>hide</callback>
+                                </action>
                             </actions>
                         </rule>
                         <rule name="3">
@@ -348,6 +360,10 @@
                                 </action>
                                 <action name="14">
                                     <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.city</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="15">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.weight</target>
                                     <callback>hide</callback>
                                 </action>
                             </actions>
@@ -1042,7 +1058,7 @@
                     <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Width</item>
                     <item name="validation" xsi:type="array">
                         <item name="required-entry" xsi:type="boolean">true</item>
-                        <item name="validate-digits" xsi:type="boolean">true</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
                         <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
                     </item>
                 </item>
@@ -1059,7 +1075,7 @@
                     <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Length</item>
                     <item name="validation" xsi:type="array">
                         <item name="required-entry" xsi:type="boolean">true</item>
-                        <item name="validate-digits" xsi:type="boolean">true</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
                         <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
                     </item>
                 </item>
@@ -1076,7 +1092,24 @@
                     <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Height</item>
                     <item name="validation" xsi:type="array">
                         <item name="required-entry" xsi:type="boolean">true</item>
-                        <item name="validate-digits" xsi:type="boolean">true</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                        <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="weight">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Weight</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">weight</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Weight</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
                         <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
                     </item>
                 </item>
