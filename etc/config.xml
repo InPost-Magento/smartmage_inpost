@@ -12,6 +12,7 @@
                 <weight_attribute_code>weight</weight_attribute_code>
                 <weight_unit>kg</weight_unit>
                 <automatic_pay_for_package>0</automatic_pay_for_package>
+                <get_shipments_days>60</get_shipments_days>
             </inpost>
         </shipping>
         <carriers>
