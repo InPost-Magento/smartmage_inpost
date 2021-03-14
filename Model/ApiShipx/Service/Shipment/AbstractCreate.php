@@ -19,8 +19,6 @@ abstract class AbstractCreate extends AbstractService
 
     protected $successMessage;
 
-    protected $callUri = 'v1/organizations/71/shipments';
-
     protected $requestBody;
 
     /**
@@ -43,6 +41,10 @@ abstract class AbstractCreate extends AbstractService
         $this->configProvider = $configProvider;
         $this->shippingMethods = $shippingMethods;
         $this->shipmentManagement = $shipmentManagement;
+
+        $organizationId = $configProvider->getOrganizationId();
+        $this->callUri = 'v1/organizations/' . $organizationId . '/shipments';
+
         $this->successMessage = __('The shipment created sccessfully');
         parent::__construct($configProvider, $errorHandler);
     }
