@@ -123,6 +123,7 @@ abstract class AbstractCreate extends AbstractService
     {
         $this->requestBody['service'] = $this->shippingMethods::INPOST_MAPPER[$data['service']];
         $this->requestBody['reference'] = $data['reference'];
+        $this->requestBody['only_choice_of_offer'] = false;
 
         if ($data['insurance']) {
             $this->requestBody['insurance'] = [
