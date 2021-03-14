@@ -34,9 +34,11 @@ class Multiple extends AbstractSearch
 
         $totalPages = 0;
         $totalPagesUpdated = false;
+        $daysAgo = $this->configProvider->getGetShipmentsDays();
+        $daysAgo = date('Y-m-d', strtotime("-" . $daysAgo . " days"));
 
         for ($page = 1; ; $page++) {
-            $result = $this->call(null, ['page' => $page]);
+            $result = $this->call(null, ['page' => $page, 'created_at_gteq' => $daysAgo]);
 
             $logger->info($this->callResult);
 
