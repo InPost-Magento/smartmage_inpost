@@ -10,16 +10,19 @@ use Magento\Framework\Data\OptionSourceInterface;
  */
 class DefaultWaySending implements OptionSourceInterface
 {
-    const INPOST_LOCKER_STANDARD = 'standard';
-    const INPOST_LOCKER_STANDARDEOW = 'standardeow';
-    const INPOST_COURIER_C2C = 'c2c';
-    const INPOST_COURIER_STANDARD = 'courier_standard';
-    const INPOST_COURIER_EXPRESS1000 = 'express1000';
-    const INPOST_COURIER_EXPRESS1200 = 'express1200';
-    const INPOST_COURIER_EXPRESS1700 = 'express1700';
-    const INPOST_COURIER_LOCAL_STANDARD = 'local_standard';
-    const INPOST_COURIER_LOCAL_EXPRESS = 'local_express';
-    const INPOST_COURIER_LOCAL_SUPER_EXPRESS = 'local_super_express';
+    const INPOST_LOCKER_STANDARD = 'inpostlocker_standard';
+    const INPOST_LOCKER_STANDARD_COD = 'inpostlocker_standardcod';
+    const INPOST_LOCKER_STANDARD_EOW = 'inpostlocker_standardeow';
+    const INPOST_LOCKER_STANDARD_EOW_COD = 'inpostlocker_standardeowcod';
+    const INPOST_COURIER_C2C = 'inpostcourier_c2c';
+    const INPOST_COURIER_C2C_COD = 'inpostcourier_c2ccod';
+    const INPOST_COURIER_STANDARD = 'inpostcourier_standard';
+    const INPOST_COURIER_EXPRESS1000 = 'inpostcourier_express1000';
+    const INPOST_COURIER_EXPRESS1200 = 'inpostcourier_express1200';
+    const INPOST_COURIER_EXPRESS1700 = 'inpostcourier_express1700';
+    const INPOST_COURIER_LOCAL_STANDARD = 'inpostcourier_localstandard';
+    const INPOST_COURIER_LOCAL_EXPRESS = 'inpostcourier_localexpress';
+    const INPOST_COURIER_LOCAL_SUPER_EXPRESS = 'inpostcourier_localsuperexpress';
 
     protected $code = '';
 
@@ -39,13 +42,16 @@ class DefaultWaySending implements OptionSourceInterface
     {
         switch ($this->code) {
             case (self::INPOST_LOCKER_STANDARD):
-            case (self::INPOST_LOCKER_STANDARDEOW):
+            case (self::INPOST_LOCKER_STANDARD_COD):
+            case (self::INPOST_LOCKER_STANDARD_EOW):
+            case (self::INPOST_LOCKER_STANDARD_EOW_COD):
                 return [
                     ['value' => 'parcel_locker', 'label' => __('Nadanie w Paczkomacie')],
                     ['value' => 'dispatch_order', 'label' => __('Odbiór przez Kuriera')],
                     ['value' => 'pop', 'label' => __('Nadanie w POP')],
                 ];
             case (self::INPOST_COURIER_C2C):
+            case (self::INPOST_COURIER_C2C_COD):
                 return [
                     ['value' => 'dispatch_order', 'label' => __('Odbiór przez kuriera')],
                     ['value' => 'pop', 'label' => __('Nadanie w POP')],

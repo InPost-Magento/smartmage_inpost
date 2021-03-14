@@ -106,7 +106,9 @@ class Inpost extends AbstractOrder
         $shipments = [];
         if ($inpostShipmentLinks = $this->getOrder()->getExtensionAttributes()->getInpostShipmentLinks()) {
             foreach ($inpostShipmentLinks as $inpostShipmentLink) {
-                $shipments[] = $this->getInpostShippment($inpostShipmentLink->getShipmentId());
+                if ($shipment = $this->getInpostShippment($inpostShipmentLink->getShipmentId())) {
+                    $shipments[] = $shipment;
+                }
             }
         }
         return $shipments;
@@ -172,6 +174,12 @@ class Inpost extends AbstractOrder
      */
     public function getInpostShippment($inpostShipmentId)
     {
-        return $this->shipmentRepository->getByShipmentId($inpostShipmentId);
+        $shipment = null;
+        try {
+            $shipment =  $this->shipmentRepository->getByShipmentId($inpostShipmentId);
+        } catch (\Exception $e) {
+
+        }
+        return $shipment;
     }
 }
