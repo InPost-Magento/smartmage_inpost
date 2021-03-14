@@ -14,27 +14,11 @@ abstract class AbstractPrintout extends AbstractService
 
     protected $successResponseCode = Http::STATUS_CODE_200;
 
-    protected $successMessage;
-
-    protected $callUri = 'v1/organizations/71/shipments/labels';
-
-    protected $fileFormat = 'pdf';
-
-    protected $labelSize = 'a4';
-
     protected $isResponseJson = false;
 
     /**
      * @var ConfigProvider
      */
     protected $configProvider;
-
-
-    public function __construct(
-        ConfigProvider $configProvider
-    ) {
-        $this->configProvider = $configProvider;
-        $this->successMessage = __('The shipment created sccessfully');
-    }
 
 }

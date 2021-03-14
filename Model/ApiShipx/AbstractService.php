@@ -97,6 +97,9 @@ abstract class AbstractService implements ServiceInterface
             $this->requestHeaders['Content-Type'] = "Content-Type: application/json";
 
             $requestBodyJson = json_encode($requestBody);
+            $logger->info(print_r('START - $requestBodyJson -------------', true));
+            $logger->info(print_r($requestBodyJson, true));
+            $logger->info(print_r('END - $requestBodyJson --------------', true));
 
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $requestBodyJson);

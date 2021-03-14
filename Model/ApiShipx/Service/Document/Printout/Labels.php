@@ -4,6 +4,7 @@ namespace Smartmage\Inpost\Model\ApiShipx\Service\Document\Printout;
 
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
 use Smartmage\Inpost\Model\ApiShipx\Service\Document\AbstractPrintout;
+use Smartmage\Inpost\Model\Config\Source\LabelFormat;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\ShipmentManagement;
 use Smartmage\Inpost\Model\ShipmentRepository;
@@ -14,6 +15,8 @@ class Labels extends AbstractPrintout
     public function __construct(
         ConfigProvider $configProvider
     ) {
+        $organizationId = $configProvider->getOrganizationId();
+        $this->callUri = '/v1/organizations/' . $organizationId . '/shipments/labels';
         $this->successMessage = __('The labels has been successfully downloaded');
         parent::__construct($configProvider);
     }
@@ -25,13 +28,17 @@ class Labels extends AbstractPrintout
         $logger->addWriter($writer);
 
         $response = $this->call(null, [
-            'format' => $this->fileFormat,
+            LabelFormat::STRING_SIZE => $labelsData[LabelFormat::STRING_SIZE],
+            LabelFormat::STRING_FORMAT => $labelsData[LabelFormat::STRING_FORMAT],
             'shipment_ids' => $labelsData['ids']
         ]);
 
         //throw if api fail
         if ($this->callResult[CallResult::STRING_STATUS] != CallResult::STATUS_SUCCESS)
-            throw new \Exception($this->callResult[CallResult::STRING_MESSAGE], $this->callResult[CallResult::STRING_RESPONSE_CODE]);
+            throw new \Exception(
+                $this->callResult[CallResult::STRING_MESSAGE],
+                $this->callResult[CallResult::STRING_RESPONSE_CODE]
+            );
 
         //set success message for frontend
         if (

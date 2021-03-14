@@ -12,6 +12,7 @@ use Magento\Ui\Component\MassAction\Filter;
 use Smartmage\Inpost\Api\Data\ShipmentInterface;
 use Smartmage\Inpost\Api\ShipmentRepositoryInterface;
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
+use Smartmage\Inpost\Model\Config\Source\LabelFormat;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\ResourceModel\Shipment\CollectionFactory;
 use Smartmage\Inpost\Model\ApiShipx\Service\Document\Printout\Labels as PrintoutLabels;
@@ -99,14 +100,15 @@ class MassPrintLabel extends MassActionAbstract
             $shipmentIds[] = $shipment->getShipmentId();
         }
 
-//        $labelFormat = $this->configProvider->getLabelFormat();
-        $labelFormat = 'pdf';
+
+        $labelFormat = $this->configProvider->getLabelFormat();
+//        $labelFormat = 'pdf';
         $labelSize = $this->configProvider->getLabelSize();
 
         $labelsData = [
             'ids' => $shipmentIds,
-            'format' => $labelFormat,
-            'size' => $labelSize,
+            LabelFormat::STRING_FORMAT => $labelFormat,
+            LabelFormat::STRING_SIZE => $labelSize,
         ];
 
         $logger->info(print_r('$labelsData', true));
@@ -115,15 +117,15 @@ class MassPrintLabel extends MassActionAbstract
         try {
             $result = $this->printoutLabels->getLabels($labelsData);
 
-            $fileContent = ['type' => 'string', 'value' => $result['file'], 'rm' => true];
+            $fileContent = ['type' => 'string', 'value' => $result[CallResult::STRING_FILE], 'rm' => true];
 
             return $this->fileFactory->create(
-                sprintf('labels-%s.pdf', $this->dateTime->date('Y-m-d_H-i-s')),
+                sprintf('labels-%s.' . $labelFormat, $this->dateTime->date('Y-m-d_H-i-s')),
                 $fileContent,
                 DirectoryList::VAR_DIR,
-                'application/pdf'
+                LabelFormat::LABEL_CONTENT_TYPES[$labelFormat]
             );
-//
+
 //            $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been selected.(MassPrintLabel)', count($selectedIds)));
         } catch (\Exception $e) {
             $logger->info(print_r($e->getMessage(), true));
