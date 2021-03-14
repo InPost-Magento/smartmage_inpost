@@ -6,6 +6,7 @@ use Magento\Framework\App\Response\Http;
 use Smartmage\Inpost\Api\Data\ShipmentInterface;
 use Smartmage\Inpost\Model\ApiShipx\AbstractService;
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
+use Smartmage\Inpost\Model\ApiShipx\ErrorHandler;
 use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\ShipmentManagement;
@@ -36,12 +37,14 @@ abstract class AbstractCreate extends AbstractService
     public function __construct(
         ConfigProvider $configProvider,
         ShippingMethods $shippingMethods,
-        ShipmentManagement $shipmentManagement
+        ShipmentManagement $shipmentManagement,
+        ErrorHandler $errorHandler
     ) {
         $this->configProvider = $configProvider;
         $this->shippingMethods = $shippingMethods;
         $this->shipmentManagement = $shipmentManagement;
         $this->successMessage = __('The shipment created sccessfully');
+        parent::__construct($configProvider, $errorHandler);
     }
 
     public function createShipment()
@@ -56,11 +59,15 @@ abstract class AbstractCreate extends AbstractService
 
         //throw if api fail
         if ($this->callResult[CallResult::STRING_STATUS] != CallResult::STATUS_SUCCESS) {
-            throw new \Exception($this->callResult[CallResult::STRING_MESSAGE], $this->callResult[CallResult::STRING_RESPONSE_CODE]);
+            throw new \Exception(
+                $this->callResult[CallResult::STRING_MESSAGE],
+                $this->callResult[CallResult::STRING_RESPONSE_CODE]
+            );
         }
 
         //set success message for frontend
-        if (!isset($this->callResult[CallResult::STRING_MESSAGE]) ||
+        if (
+            !isset($this->callResult[CallResult::STRING_MESSAGE]) ||
             empty($this->callResult[CallResult::STRING_MESSAGE]) ||
             is_null($this->callResult[CallResult::STRING_MESSAGE])
         ) {
@@ -140,4 +147,5 @@ abstract class AbstractCreate extends AbstractService
             );
         }
     }
+
 }

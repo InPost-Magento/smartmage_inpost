@@ -1,8 +1,8 @@
 <?php
 namespace Smartmage\Inpost\Model\ApiShipx;
 
-use Smartmage\Inpost\Model\ConfigProvider;
 use Magento\Framework\App\Response\Http;
+use Smartmage\Inpost\Model\ConfigProvider;
 
 abstract class AbstractService implements ServiceInterface
 {
@@ -44,10 +44,14 @@ abstract class AbstractService implements ServiceInterface
 
     protected $isResponseJson = true;
 
+    protected $errorHandler;
+
     public function __construct(
-        ConfigProvider $configProvider
+        ConfigProvider $configProvider,
+        ErrorHandler $errorHandler
     ) {
         $this->configProvider = $configProvider;
+        $this->errorHandler = $errorHandler;
     }
 
     public function getMode()
@@ -119,10 +123,10 @@ abstract class AbstractService implements ServiceInterface
         $logger->info(print_r($responseCode, true));
         $logger->info(print_r($response, true));
 
-        if ($responseCode == $this->successResponseCode){
-
-            if ($this->isResponseJson)
+        if ($responseCode == $this->successResponseCode) {
+            if ($this->isResponseJson) {
                 $response = json_decode($response, true);
+            }
             curl_close($ch);
 
             $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_SUCCESS;
@@ -130,38 +134,18 @@ abstract class AbstractService implements ServiceInterface
             $this->callResult[CallResult::STRING_RESPONSE_CODE] = $responseCode;
 
             return $response;
-
-        } else if ($responseCode == Http::STATUS_CODE_400) { //Przy przesyłaniu danych metodą POST lub PUT wystąpiły błędy w walidacji. Szczegółowe błędy walidacji zawarte są pod atrybutem details.
+        } elseif ($responseCode == Http::STATUS_CODE_400) { //Przy przesyłaniu danych metodą POST lub PUT wystąpiły błędy w walidacji. Szczegółowe błędy walidacji zawarte są pod atrybutem details.
 
             $response = json_decode($response, true);
             curl_close($ch);
-
-            $errorsStr = '';
-            if (isset($response[self::API_RESPONSE_DETAILS_KEY])){
-                $logger->info(print_r($response[self::API_RESPONSE_DETAILS_KEY], true));
-                foreach ($response[self::API_RESPONSE_DETAILS_KEY] as $k => $detail) {
-                    $errorsStr .= '[ ' . $k . ' : ';
-                    //TODO rafal ogarnie wyciaganie errora
-//                    if (is_array($detail)) {
-//                        foreach ($detail as $detailItem) {
-//                            $errorsStr .= '( ' . $detailItem . ' ), ';
-//                        }
-//                    } else {
-//                        $errorsStr .= $detail;
-//                    }
-                    $errorsStr .= ' ], ';
-                }
-            }
+            $errorsStr = $this->errorHandler->handle($response);
 
             $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
-            if (isset($response[self::API_RESPONSE_MESSAGE_KEY]))
-                $errorsStr = $response[self::API_RESPONSE_MESSAGE_KEY] . ' - ' . $errorsStr;
             $this->callResult[CallResult::STRING_MESSAGE] = $errorsStr;
             $this->callResult[CallResult::STRING_RESPONSE_CODE] = Http::STATUS_CODE_400;
 
             return $response;
-
-        } else if ($responseCode == Http::STATUS_CODE_401) { //Dostęp do zasobu jest niemożliwy ponieważ zapytanie nie zostało podpisane kluczem access token.
+        } elseif ($responseCode == Http::STATUS_CODE_401) { //Dostęp do zasobu jest niemożliwy ponieważ zapytanie nie zostało podpisane kluczem access token.
 
             $response = json_decode($response, true);
             curl_close($ch);
@@ -171,8 +155,7 @@ abstract class AbstractService implements ServiceInterface
             $this->callResult[CallResult::STRING_RESPONSE_CODE] = Http::STATUS_CODE_401;
 
             return $response;
-
-        } else if ($responseCode == Http::STATUS_CODE_403) { //Dostęp do określone zasobu jest zabroniony dla tego zapytania (np. z powodu braku lub niewłaściwego zakresu uprawnień).
+        } elseif ($responseCode == Http::STATUS_CODE_403) { //Dostęp do określone zasobu jest zabroniony dla tego zapytania (np. z powodu braku lub niewłaściwego zakresu uprawnień).
 
             $response = json_decode($response, true);
             curl_close($ch);
@@ -182,8 +165,7 @@ abstract class AbstractService implements ServiceInterface
             $this->callResult[CallResult::STRING_RESPONSE_CODE] = Http::STATUS_CODE_403;
 
             return $response;
-
-        } else if ($responseCode == Http::STATUS_CODE_404) { //Szukany zasób nie został odnaleziony, np. adres URL jest niepoprawny lub zasób nie istnieje.
+        } elseif ($responseCode == Http::STATUS_CODE_404) { //Szukany zasób nie został odnaleziony, np. adres URL jest niepoprawny lub zasób nie istnieje.
 
             $response = json_decode($response, true);
             curl_close($ch);
@@ -193,8 +175,7 @@ abstract class AbstractService implements ServiceInterface
             $this->callResult[CallResult::STRING_RESPONSE_CODE] = Http::STATUS_CODE_404;
 
             return $response;
-
-        } else if ($responseCode == Http::STATUS_CODE_500) { //Wystąpił błąd po stronie serwera.
+        } elseif ($responseCode == Http::STATUS_CODE_500) { //Wystąpił błąd po stronie serwera.
 
             $response = json_decode($response, true);
             curl_close($ch);
@@ -204,13 +185,11 @@ abstract class AbstractService implements ServiceInterface
             $this->callResult[CallResult::STRING_RESPONSE_CODE] = Http::STATUS_CODE_500;
 
             return $response;
-
         } else {
             $errNo = curl_errno($ch);
             $errStr = curl_error($ch);
 
-            throw new \Exception('Unknown cURL Error - '.$errNo.': '.$errStr, $responseCode);
+            throw new \Exception('Unknown cURL Error - ' . $errNo . ': ' . $errStr, $responseCode);
         }
-
     }
 }
