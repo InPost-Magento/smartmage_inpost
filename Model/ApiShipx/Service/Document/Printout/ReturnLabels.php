@@ -2,6 +2,7 @@
 
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Document\Printout;
 
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
 use Smartmage\Inpost\Model\ApiShipx\ErrorHandler;
 use Smartmage\Inpost\Model\ApiShipx\Service\Document\AbstractPrintout;
@@ -10,15 +11,15 @@ use Smartmage\Inpost\Model\ConfigProvider;
 
 class ReturnLabels extends AbstractPrintout
 {
-
     public function __construct(
+        PsrLoggerInterface $logger,
         ConfigProvider $configProvider,
         ErrorHandler $errorHandler
     ) {
         $organizationId = $configProvider->getOrganizationId();
         $this->callUri = 'v1/organizations/' . $organizationId . '/shipments/return_labels';
         $this->successMessage = __('The return labels has been successfully downloaded');
-        parent::__construct($configProvider, $errorHandler);
+        parent::__construct($logger, $configProvider, $errorHandler);
     }
 
     public function getLabels($labelsData)
@@ -34,11 +35,12 @@ class ReturnLabels extends AbstractPrintout
         ]);
 
         //throw if api fail
-        if ($this->callResult[CallResult::STRING_STATUS] != CallResult::STATUS_SUCCESS)
+        if ($this->callResult[CallResult::STRING_STATUS] != CallResult::STATUS_SUCCESS) {
             throw new \Exception(
                 $this->callResult[CallResult::STRING_MESSAGE],
                 $this->callResult[CallResult::STRING_RESPONSE_CODE]
             );
+        }
 
         //set success message for frontend
         if (

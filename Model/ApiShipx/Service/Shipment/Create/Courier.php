@@ -8,6 +8,7 @@ use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\Order\Processor as OrderProcessor;
 use Smartmage\Inpost\Model\ShipmentManagement;
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 
 class Courier extends AbstractCreate
 {
@@ -18,12 +19,15 @@ class Courier extends AbstractCreate
 
     /**
      * Courier constructor.
+     * @param \Psr\Log\LoggerInterface $logger
      * @param ConfigProvider $configProvider
      * @param ShippingMethods $shippingMethods
      * @param OrderProcessor $orderProcessor
+     * @param \Smartmage\Inpost\Model\ApiShipx\ErrorHandler $errorHandler
      * @param ShipmentManagement $shipmentManagement
      */
     public function __construct(
+        PsrLoggerInterface $logger,
         ConfigProvider $configProvider,
         ShippingMethods $shippingMethods,
         OrderProcessor $orderProcessor,
@@ -31,7 +35,7 @@ class Courier extends AbstractCreate
         ShipmentManagement $shipmentManagement
     ) {
         $this->orderProcessor = $orderProcessor;
-        parent::__construct($configProvider, $shippingMethods, $shipmentManagement, $errorHandler);
+        parent::__construct($logger, $configProvider, $shippingMethods, $shipmentManagement, $errorHandler);
     }
 
     public function createBody($data, $order)
