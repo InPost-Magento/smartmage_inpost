@@ -37,4 +37,13 @@ class Service implements OptionSourceInterface
 
         return $services;
     }
+
+    /**
+     * @param $service
+     * @return \Magento\Framework\Phrase
+     */
+    public function getServiceLabel($service)
+    {
+        return (isset(self::SERVICE_LABEL[$service])) ? __(self::SERVICE_LABEL[$service]) : $service;
+    }
 }

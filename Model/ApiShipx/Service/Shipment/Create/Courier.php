@@ -2,6 +2,7 @@
 
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Create;
 
+use Smartmage\Inpost\Model\ApiShipx\ErrorHandler;
 use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\AbstractCreate;
 use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
 use Smartmage\Inpost\Model\ConfigProvider;
@@ -23,10 +24,11 @@ class Courier extends AbstractCreate
     public function __construct(
         ConfigProvider $configProvider,
         ShippingMethods $shippingMethods,
-        OrderProcessor $orderProcessor
+        OrderProcessor $orderProcessor,
+        ErrorHandler $errorHandler
     ) {
         $this->orderProcessor = $orderProcessor;
-        parent::__construct($configProvider, $shippingMethods);
+        parent::__construct($configProvider, $shippingMethods, $errorHandler);
     }
 
     public function createBody($data, $order)
