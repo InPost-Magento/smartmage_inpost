@@ -16,7 +16,7 @@ class ReturnLabels extends AbstractPrintout
         ErrorHandler $errorHandler
     ) {
         $organizationId = $configProvider->getOrganizationId();
-        $this->callUri = '/v1/organizations/' . $organizationId . '/shipments/return_labels';
+        $this->callUri = 'v1/organizations/' . $organizationId . '/shipments/return_labels';
         $this->successMessage = __('The return labels has been successfully downloaded');
         parent::__construct($configProvider, $errorHandler);
     }
