@@ -61,7 +61,7 @@ Shipment Details,Szczegóły przesyłki
 Print label,Wydrukuj etykietę
 Print return label,Wydrukuj etykietę zwrotu
 Print dispatch order label,Wydrukuj etykietę zlecenia odbioru
-Smartmage Inpost Shipments,Smartmage Inpost Przesyłki
+Inpost Shipments,Inpost Przesyłki
 Small,Gabaryt A
 Medium,Gabaryt B
 Large,Gabaryt C
@@ -108,3 +108,5 @@ Street,Ulica
 Building Number,Numer budynku
 City,Miasto
 Get shipments from x days ago,Pobierz przesyłki z przed x dni
+Order id,Numer zamówienia
+Dispatch order,Zlecenie odbioru zamówienia

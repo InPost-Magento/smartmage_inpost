@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-    <table name="smartmage_inpost_shipment" resource="default" engine="innodb" comment="Smartmage Inpost shipment">
+    <table name="smartmage_inpost_shipment" resource="default" engine="innodb" comment="Inpost shipment">
         <column name="entity_id" xsi:type="int" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity id"/>
         <column name="shipment_id" xsi:type="int" padding="10" unsigned="true" nullable="false" comment="Shipment id"/>
         <column name="tracking_number" xsi:type="varchar" length="255" nullable="true" comment="Shipment tracking number"/>
@@ -17,7 +17,7 @@
         </constraint>
     </table>
 
-    <table name="smartmage_inpost_shipment_order_link" resource="default" engine="innodb" comment="Smartmage Inpost shipment link with order">
+    <table name="smartmage_inpost_shipment_order_link" resource="default" engine="innodb" comment="Inpost shipment link with order">
         <column name="link_id" xsi:type="int" padding="10" unsigned="true" nullable="false" identity="true" comment="Link id"/>
         <column name="shipment_id" xsi:type="int" padding="10" unsigned="true" nullable="false" comment="Shipment id"/>
         <column xsi:type="varchar" name="increment_id" nullable="false" length="32" comment="Increment ID"/>
