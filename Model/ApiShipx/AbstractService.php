@@ -126,7 +126,9 @@ abstract class AbstractService implements ServiceInterface
         ];
 
         $this->logger->info(print_r($responseCode, true));
-        $this->logger->info(print_r($response, true));
+        if ($this->isResponseJson) {
+            $this->logger->info(print_r($response, true));
+        }
 
         if ($responseCode == $this->successResponseCode) {
             if ($this->isResponseJson) {
