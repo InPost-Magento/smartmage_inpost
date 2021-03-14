@@ -6,11 +6,12 @@ class ErrorHandler implements ErrorHandlerInterface
 {
     public function handle($jsonResponse): string
     {
-        $errors = $jsonResponse['message'] . '<br>';
+        $errors = '[' . $jsonResponse['error'] . ']<br>';
+        $errors .= $jsonResponse['message'] . '<br>';
 
         $details = $this->nestedValues($jsonResponse['details']);
         foreach ($details as $detail) {
-            $errors .= '- '.$detail . '<br>';
+            $errors .= '- ' . $detail . '<br>';
         }
 
         return $errors;
