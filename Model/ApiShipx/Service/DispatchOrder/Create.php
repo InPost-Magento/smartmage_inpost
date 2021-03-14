@@ -8,6 +8,7 @@ use Smartmage\Inpost\Model\ApiShipx\AbstractService;
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
 use Smartmage\Inpost\Model\ApiShipx\ErrorHandler;
 use Smartmage\Inpost\Model\ConfigProvider;
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 
 /**
  * Class Create
@@ -41,12 +42,13 @@ class Create extends AbstractService
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function __construct(
+        PsrLoggerInterface $logger,
         ConfigProvider $configProvider,
         ErrorHandler $errorHandler
     ) {
         $organizationId = $configProvider->getOrganizationId();
         $this->callUri = 'v1/organizations/' . $organizationId . '/dispatch_orders';
-        parent::__construct($configProvider, $errorHandler);
+        parent::__construct($logger, $configProvider, $errorHandler);
     }
 
     /**

@@ -14,6 +14,7 @@ use Magento\Store\Model\StoreManagerInterface;
 class ConfigProvider
 {
     const SHIPPING_MODE = 'mode';
+    const DEBUG_ENABLED = 'debug_enabled';
     const SHIPPING_ORGANIZATION_ID = 'organization_id';
     const SHIPPING_ACCESS_TOKEN = 'access_token';
     const SHIPPING_LABEL_FORMAT = 'label_format';
@@ -98,6 +99,12 @@ class ConfigProvider
     public function getMode()
     {
         return $this->getShippingConfigData(self::SHIPPING_MODE);
+    }
+
+
+    public function getDebugEnabled()
+    {
+        return $this->getShippingConfigData(self::DEBUG_ENABLED);
     }
 
     /**
