@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Smartmage\Inpost\Model\ApiShipx\Service\Point;
+namespace Smartmage\Inpost\Model\ApiShipx\Service\DispatchOrder;
 
 use Magento\Framework\App\Response\Http;
 use Smartmage\Inpost\Model\ApiShipx\AbstractService;
@@ -10,25 +10,29 @@ use Smartmage\Inpost\Model\ApiShipx\ErrorHandler;
 use Smartmage\Inpost\Model\ConfigProvider;
 
 /**
- * Class GetDispatchPoints
+ * Class Create
  * @package Smartmage\Inpost\Model\ApiShipx\Service\Point
  */
-class GetDispatchPoints extends AbstractService
+class Create extends AbstractService
 {
     /**
      * @var int
      */
-    protected $method = CURLOPT_HTTPGET;
+    protected $method = CURLOPT_POST;
 
     /**
      * @var int
      */
-    protected $successResponseCode = Http::STATUS_CODE_200;
+    protected $successResponseCode = Http::STATUS_CODE_201;
 
     /**
      * @var string
      */
     protected $callUri;
+    /**
+     * @var
+     */
+    protected $requestBody;
 
     /**
      * GetDispatchPoints constructor.
@@ -41,7 +45,7 @@ class GetDispatchPoints extends AbstractService
         ErrorHandler $errorHandler
     ) {
         $organizationId = $configProvider->getOrganizationId();
-        $this->callUri = 'v1/organizations/' . $organizationId . '/dispatch_points';
+        $this->callUri = 'v1/organizations/' . $organizationId . '/dispatch_orders';
         parent::__construct($configProvider, $errorHandler);
     }
 
@@ -49,24 +53,31 @@ class GetDispatchPoints extends AbstractService
      * @return mixed
      * @throws \Exception
      */
-    public function getAllDispatchPoints()
+    public function createDispatchOrders($dispatchData)
     {
         $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
         $logger = new \Zend\Log\Logger();
         $logger->addWriter($writer);
-        $result = $this->call();
+        $this->createBody($dispatchData);
+        $this->call($this->requestBody);
 
+        //throw if api fail
         if ($this->callResult[CallResult::STRING_STATUS] != CallResult::STATUS_SUCCESS) {
             throw new \Exception(
                 $this->callResult[CallResult::STRING_MESSAGE],
                 $this->callResult[CallResult::STRING_RESPONSE_CODE]
             );
         }
-        if (isset($result['items']) && !empty($result['items'])) {
-            $this->callResult['items'] = $result['items'];
-        }
-        $logger->info('getAllDispatchPoints');
-        $logger->info($result);
+
         return $this->callResult;
+    }
+
+    /**
+     * @param $data
+     */
+    public function createBody($data)
+    {
+        $this->requestBody['shipments'] = $data['shipments'];
+        $this->requestBody['dispatch_point_id'] = $data['dispatch_point_id'];
     }
 }
