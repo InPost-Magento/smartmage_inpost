@@ -754,7 +754,7 @@
                     </depends>
                 </field>
                 <field id="send_email" translate="label" type="select" sortOrder="160" showInDefault="1" showInWebsite="1" canRestore="1">
-                    <label>Generate shipping in order after generating Inpost package</label>
+                    <label>Generate shipping in order after generating InPost package</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="generate_shipping" translate="label" type="select" sortOrder="170" showInDefault="1" showInWebsite="1" canRestore="1">

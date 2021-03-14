@@ -34,7 +34,7 @@ Sender - building number,Nadawca - numer budynku
 Sender - city,Nadawca - miasto
 Sender - postcode,Nadawca - kod pocztowy
 Sender - country code,Nadawca - kod kraju
-Generate shipping in order after generating Inpost package,Czy generować wysyłkę w zamówieniu po wygenerowaniu przesyłki Inpost
+Generate shipping in order after generating InPost package,Czy generować wysyłkę w zamówieniu po wygenerowaniu przesyłki InPost
 After generate package send email to customer,Czy generowanie przesyłki ma wysyłać również maila do klienta
 Become a partner(SzybkieZwroty.pl),Zostań Partnerem (SzybkieZwroty.pl)
 "<a href=""https://szybkiezwroty.pl/pl/business#navigate-buttons"">Become a partner</a>","<a href=""https://szybkiezwroty.pl/pl/business#navigate-buttons"">Zostań partnerem</a>"
@@ -61,7 +61,7 @@ Shipment Details,Szczegóły przesyłki
 Print label,Wydrukuj etykietę
 Print return label,Wydrukuj etykietę zwrotu
 Print dispatch order label,Wydrukuj etykietę zlecenia odbioru
-Inpost Shipments,Inpost Przesyłki
+InPost Shipments List,Lista Przesyłek InPost
 Small,Gabaryt A
 Medium,Gabaryt B
 Large,Gabaryt C
@@ -110,3 +110,4 @@ City,Miasto
 Get shipments from x days ago,Pobierz przesyłki z przed x dni
 Order id,Numer zamówienia
 Dispatch order,Zlecenie odbioru zamówienia
+Refresh list, Odśwież listę
