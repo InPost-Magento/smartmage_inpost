@@ -4,6 +4,7 @@ namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Search;
 
 use Smartmage\Inpost\Api\Data\ShipmentInterface;
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
+use Smartmage\Inpost\Model\ApiShipx\ErrorHandler;
 use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\AbstractSearch;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\ShipmentManagement;
@@ -18,12 +19,13 @@ class Multiple extends AbstractSearch
     public function __construct(
         ConfigProvider $configProvider,
         ShipmentRepository $shipmentRepository,
-        ShipmentManagement $shipmentManagement
+        ShipmentManagement $shipmentManagement,
+        ErrorHandler $errorHandler
     ) {
         $this->shipmentRepository = $shipmentRepository;
         $this->shipmentManagement = $shipmentManagement;
         $this->successMessage = __('The shipment list has been successfully synchronized');
-        parent::__construct($configProvider);
+        parent::__construct($configProvider, $errorHandler);
     }
 
     public function getAllShipments()

@@ -5,6 +5,7 @@ namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment;
 use Magento\Framework\App\Response\Http;
 use Smartmage\Inpost\Model\ApiShipx\AbstractService;
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
+use Smartmage\Inpost\Model\ApiShipx\ErrorHandler;
 use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
 use Smartmage\Inpost\Model\ConfigProvider;
 
@@ -32,11 +33,13 @@ abstract class AbstractCreate extends AbstractService
 
     public function __construct(
         ConfigProvider $configProvider,
-        ShippingMethods $shippingMethods
+        ShippingMethods $shippingMethods,
+        ErrorHandler $errorHandler
     ) {
         $this->configProvider = $configProvider;
         $this->shippingMethods = $shippingMethods;
         $this->successMessage = __('The shipment created sccessfully');
+        parent::__construct($configProvider, $errorHandler);
     }
 
     public function createShipment()
@@ -49,12 +52,15 @@ abstract class AbstractCreate extends AbstractService
         $logger->info($this->callResult);
 
         //throw if api fail
-        if ($this->callResult[CallResult::STRING_STATUS] != CallResult::STATUS_SUCCESS)
-            throw new \Exception($this->callResult[CallResult::STRING_MESSAGE], $this->callResult[CallResult::STRING_RESPONSE_CODE]);
+        if ($this->callResult[CallResult::STRING_STATUS] != CallResult::STATUS_SUCCESS) {
+            throw new \Exception(
+                $this->callResult[CallResult::STRING_MESSAGE],
+                $this->callResult[CallResult::STRING_RESPONSE_CODE]
+            );
+        }
 
         //set success message for frontend
-        if (
-            !isset($this->callResult[CallResult::STRING_MESSAGE]) ||
+        if (!isset($this->callResult[CallResult::STRING_MESSAGE]) ||
             empty($this->callResult[CallResult::STRING_MESSAGE]) ||
             is_null($this->callResult[CallResult::STRING_MESSAGE])
         ) {
@@ -92,5 +98,4 @@ abstract class AbstractCreate extends AbstractService
             );
         }
     }
-
 }
