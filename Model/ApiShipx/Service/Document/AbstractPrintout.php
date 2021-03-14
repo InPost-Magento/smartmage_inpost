@@ -18,9 +18,11 @@ abstract class AbstractPrintout extends AbstractService
 
     protected $callUri = 'v1/organizations/71/shipments/labels';
 
-    protected $fileFormat = 'zpl';
+    protected $fileFormat = 'pdf';
 
     protected $labelSize = 'a4';
+
+    protected $isResponseJson = false;
 
     /**
      * @var ConfigProvider
