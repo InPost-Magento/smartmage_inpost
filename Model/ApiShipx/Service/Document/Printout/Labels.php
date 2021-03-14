@@ -2,7 +2,6 @@
 
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Document\Printout;
 
-use Prophecy\Call\Call;
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
 use Smartmage\Inpost\Model\ApiShipx\ErrorHandler;
 use Smartmage\Inpost\Model\ApiShipx\Service\Document\AbstractPrintout;

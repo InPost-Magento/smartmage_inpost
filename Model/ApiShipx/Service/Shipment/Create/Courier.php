@@ -36,7 +36,6 @@ class Courier extends AbstractCreate
 
     public function createBody($data, $order)
     {
-        $this->orderProcessor->setOrder($order);
         $this->requestBody = [
             "receiver" => [
                 "company_name" => $data['company_name'],
@@ -59,7 +58,7 @@ class Courier extends AbstractCreate
                     "unit" => "mm",
                 ],
                 "weight" => [
-                    "amount" => $this->orderProcessor->getOrderWeight(),
+                    "amount" => $data['weight'],
                     "unit" => $this->configProvider->getShippingConfigData('weight_unit'),
                 ]
             ],

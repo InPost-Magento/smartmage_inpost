@@ -1,14 +1,15 @@
 <?php
 
-namespace Smartmage\Inpost\Ui\Component\Form\Element\Address;
+namespace Smartmage\Inpost\Ui\Component\Form\Element;
 
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\Pricing\PriceCurrencyInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
+use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\Order\Processor as OrderProcessor;
 
-class Street extends \Magento\Ui\Component\Form\Element\Input
+class Weight extends \Magento\Ui\Component\Form\Element\Input
 {
     /**
      * @var Http
@@ -31,12 +32,18 @@ class Street extends \Magento\Ui\Component\Form\Element\Input
     protected $orderProcessor;
 
     /**
-     * OrderDetails constructor.
+     * @var ConfigProvider
+     */
+    protected $configProvider;
+
+    /**
+     * Weight constructor.
      * @param Http $request
      * @param OrderRepositoryInterface $orderRepository
      * @param PriceCurrencyInterface $priceCurrency
      * @param OrderProcessor $orderProcessor
      * @param ContextInterface $context
+     * @param ConfigProvider $configProvider
      * @param array $components
      * @param array $data
      */
@@ -46,6 +53,7 @@ class Street extends \Magento\Ui\Component\Form\Element\Input
         PriceCurrencyInterface $priceCurrency,
         OrderProcessor $orderProcessor,
         ContextInterface $context,
+        ConfigProvider $configProvider,
         array $components = [],
         array $data = []
     ) {
@@ -54,6 +62,7 @@ class Street extends \Magento\Ui\Component\Form\Element\Input
         $this->orderRepository = $orderRepository;
         $this->priceCurrency = $priceCurrency;
         $this->orderProcessor = $orderProcessor;
+        $this->configProvider = $configProvider;
     }
 
     /**
@@ -69,12 +78,14 @@ class Street extends \Magento\Ui\Component\Form\Element\Input
         $data= $this->request->getParams();
         $order = $this->orderRepository->get($data['order_id']);
 
-        if (isset($config['dataScope']) && $config['dataScope'] == 'street') {
-            if (isset($data['street'])) {
-                $config['default'] = $data['street'];
+        if (isset($config['dataScope']) && $config['dataScope'] == 'weight') {
+            $config['label'] = __('Weight') . ' (' . __($this->configProvider->getWeightUnit()) . ')';
+            if (isset($data['weight'])) {
+                $config['default'] = $data['weight'];
             } else {
-                $config['default'] = $this->orderProcessor->setOrder($order)->getStreet();
+                $config['default'] = $this->orderProcessor->setOrder($order)->getOrderWeight();
             }
+
             $this->setData('config', (array)$config);
         }
     }

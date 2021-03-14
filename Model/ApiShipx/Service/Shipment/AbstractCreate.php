@@ -17,10 +17,6 @@ abstract class AbstractCreate extends AbstractService
 
     protected $successResponseCode = Http::STATUS_CODE_201;
 
-    protected $successMessage;
-
-    protected $requestBody;
-
     /**
      * @var ConfigProvider
      */

@@ -24,6 +24,8 @@ class Multiple extends AbstractSearch
     ) {
         $this->shipmentRepository = $shipmentRepository;
         $this->shipmentManagement = $shipmentManagement;
+        $organizationId = $configProvider->getOrganizationId();
+        $this->callUri = 'v1/organizations/' . $organizationId . '/shipments';
         $this->successMessage = __('The shipment list has been successfully synchronized');
         parent::__construct($configProvider, $errorHandler);
     }

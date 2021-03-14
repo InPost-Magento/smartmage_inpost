@@ -74,5 +74,7 @@ class Processor
     public function setOrder($order)
     {
         $this->order = $order;
+
+        return $this;
     }
 }

@@ -71,7 +71,6 @@ class MassPrintReturnLabel extends MassActionAbstract
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $collection = $this->filter->getCollection($this->collectionFactory->create());
-//        $selectedIds = $collection->getAllIds();
         $shipmentIds = $collection->getColumnValues('shipment_id');
 
         $labelFormat = $this->configProvider->getLabelFormat();
@@ -100,10 +99,7 @@ class MassPrintReturnLabel extends MassActionAbstract
 
         } catch (\Exception $e) {
             $logger->info(print_r($e->getMessage(), true));
-
-            $this->messageManager->addExceptionMessage(
-                $e
-            );
+            $this->messageManager->addExceptionMessage($e);
         }
 
         return $resultRedirect->setPath('*/*/');
