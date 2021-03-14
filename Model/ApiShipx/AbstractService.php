@@ -36,11 +36,13 @@ abstract class AbstractService implements ServiceInterface
 
     protected $requestHeaders = [];
 
-    protected $timeout = 60;
+    protected $timeout = 300;
 
     protected $callUri;
 
     protected $configProvider;
+
+    protected $isResponseJson = true;
 
     public function __construct(
         ConfigProvider $configProvider
@@ -107,7 +109,6 @@ abstract class AbstractService implements ServiceInterface
 
         $response = curl_exec($ch);
         $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $response = json_decode($response, true);
 
         $this->callResult = [
             CallResult::STRING_STATUS => CallResult::STATUS_FAIL,
@@ -116,9 +117,12 @@ abstract class AbstractService implements ServiceInterface
         ];
 
         $logger->info(print_r($responseCode, true));
+        $logger->info(print_r($response, true));
 
         if ($responseCode == $this->successResponseCode){
 
+            if ($this->isResponseJson)
+                $response = json_decode($response, true);
             curl_close($ch);
 
             $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_SUCCESS;
@@ -129,6 +133,7 @@ abstract class AbstractService implements ServiceInterface
 
         } else if ($responseCode == Http::STATUS_CODE_400) { //Przy przesyłaniu danych metodą POST lub PUT wystąpiły błędy w walidacji. Szczegółowe błędy walidacji zawarte są pod atrybutem details.
 
+            $response = json_decode($response, true);
             curl_close($ch);
 
             $errorsStr = '';
@@ -136,6 +141,7 @@ abstract class AbstractService implements ServiceInterface
                 $logger->info(print_r($response[self::API_RESPONSE_DETAILS_KEY], true));
                 foreach ($response[self::API_RESPONSE_DETAILS_KEY] as $k => $detail) {
                     $errorsStr .= '[ ' . $k . ' : ';
+                    //TODO rafal ogarnie wyciaganie errora
 //                    if (is_array($detail)) {
 //                        foreach ($detail as $detailItem) {
 //                            $errorsStr .= '( ' . $detailItem . ' ), ';
@@ -148,13 +154,16 @@ abstract class AbstractService implements ServiceInterface
             }
 
             $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
-            $this->callResult[CallResult::STRING_MESSAGE] = $response[self::API_RESPONSE_MESSAGE_KEY] . ' - ' . $errorsStr;
+            if (isset($response[self::API_RESPONSE_MESSAGE_KEY]))
+                $errorsStr = $response[self::API_RESPONSE_MESSAGE_KEY] . ' - ' . $errorsStr;
+            $this->callResult[CallResult::STRING_MESSAGE] = $errorsStr;
             $this->callResult[CallResult::STRING_RESPONSE_CODE] = Http::STATUS_CODE_400;
 
             return $response;
 
         } else if ($responseCode == Http::STATUS_CODE_401) { //Dostęp do zasobu jest niemożliwy ponieważ zapytanie nie zostało podpisane kluczem access token.
 
+            $response = json_decode($response, true);
             curl_close($ch);
 
             $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
@@ -165,6 +174,7 @@ abstract class AbstractService implements ServiceInterface
 
         } else if ($responseCode == Http::STATUS_CODE_403) { //Dostęp do określone zasobu jest zabroniony dla tego zapytania (np. z powodu braku lub niewłaściwego zakresu uprawnień).
 
+            $response = json_decode($response, true);
             curl_close($ch);
 
             $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
@@ -175,6 +185,7 @@ abstract class AbstractService implements ServiceInterface
 
         } else if ($responseCode == Http::STATUS_CODE_404) { //Szukany zasób nie został odnaleziony, np. adres URL jest niepoprawny lub zasób nie istnieje.
 
+            $response = json_decode($response, true);
             curl_close($ch);
 
             $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
@@ -185,6 +196,7 @@ abstract class AbstractService implements ServiceInterface
 
         } else if ($responseCode == Http::STATUS_CODE_500) { //Wystąpił błąd po stronie serwera.
 
+            $response = json_decode($response, true);
             curl_close($ch);
 
             $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;

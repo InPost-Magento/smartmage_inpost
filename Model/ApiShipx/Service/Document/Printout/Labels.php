@@ -44,9 +44,6 @@ class Labels extends AbstractPrintout
 
         $this->callResult['file'] = $response;
 
-        $logger->info('$this->callResult');
-        $logger->info($this->callResult);
-
         return $this->callResult;
     }
 }
