@@ -42,6 +42,8 @@ class Index extends \Smartmage\Inpost\Controller\Adminhtml\Shipments
      */
     public function execute()
     {
+        $this->messageManager->addNoticeMessage('Lista przesyłek jest aktualizowana cyklicznie co 30 minut. Jeśli chcesz zaktualizować bieżący widok kliknij w przycisk - Odśwież listę');
+
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('Smartmage_Inpost::shipmentsmenu');
