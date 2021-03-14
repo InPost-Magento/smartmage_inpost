@@ -2,6 +2,7 @@
 
 namespace Smartmage\Inpost\Model\Order;
 
+use Magento\Catalog\Model\Product\Type;
 use Smartmage\Inpost\Model\ConfigProvider;
 
 class Processor
@@ -29,8 +30,12 @@ class Processor
         $weight = 0;
         $store = $this->order->getStore();
 
-        foreach ($this->order->getAllVisibleItems() as $item) {
+        foreach ($this->order->getItems() as $item) {
             $product = $item->getProduct();
+
+            if ($product->getTypeId() != Type::TYPE_SIMPLE) {
+                continue;
+            }
 
             $productWeight = $product->getResource()->getAttributeRawValue(
                 (int)$item->getProductId(),

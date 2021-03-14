@@ -175,6 +175,6 @@ abstract class AbstractInpostCarrier extends AbstractCarrier
      */
     protected function getQuoteItems()
     {
-        return $this->checkoutSession->getQuote()->getAllVisibleItems();
+        return $this->checkoutSession->getQuote()->getItems();
     }
 }

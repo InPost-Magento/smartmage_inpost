@@ -19,8 +19,6 @@ abstract class AbstractCreate extends AbstractService
 
     protected $successMessage;
 
-    protected $callUri = 'v1/organizations/71/shipments';
-
     protected $requestBody;
 
     /**
@@ -43,6 +41,10 @@ abstract class AbstractCreate extends AbstractService
         $this->configProvider = $configProvider;
         $this->shippingMethods = $shippingMethods;
         $this->shipmentManagement = $shipmentManagement;
+
+        $organizationId = $configProvider->getOrganizationId();
+        $this->callUri = 'v1/organizations/' . $organizationId . '/shipments';
+
         $this->successMessage = __('The shipment created sccessfully');
         parent::__construct($configProvider, $errorHandler);
     }
@@ -94,8 +96,26 @@ abstract class AbstractCreate extends AbstractService
 
                 $receiver     = $response['receiver'];
                 $receiverData = '';
-                $receiverData .= $receiver['first_name'] . ' ';
-                $receiverData .= $receiver['last_name'];
+                if (strpos($response['service'], 'inpost_locker') !== false) {
+                    $receiverData .= $receiver['email'] . '<br>'
+                        . $receiver['phone'] . '<br>'
+                        . $response['custom_attributes']['target_point'];
+                } else {
+                    if (isset($receiver['company_name'])) {
+                        $receiverData .= $receiver['company_name'] . '<br>';
+                    }
+
+                    if (isset($receiver['email'])) {
+                        $receiverData .= $receiver['email'] . '<br>';
+                    }
+
+                    $receiverData .= $receiver['first_name'] . '<br>'
+                        . $receiver['last_name'] . '<br>'
+                        . $receiver['phone'] . '<br>'
+                        . 'ul. ' . $receiver['address']['street'] . ' '
+                        . $receiver['address']['building_number'] . '<br>'
+                        . $receiver['address']['post_code'] . ' ' . $receiver['address']['city'];
+                }
 
                 $formatedData[ShipmentInterface::SHIPMENT_ID]         = $response['id'];
                 $formatedData[ShipmentInterface::STATUS]              = $response['status'];
@@ -123,6 +143,7 @@ abstract class AbstractCreate extends AbstractService
     {
         $this->requestBody['service'] = $this->shippingMethods::INPOST_MAPPER[$data['service']];
         $this->requestBody['reference'] = $data['reference'];
+        $this->requestBody['only_choice_of_offer'] = false;
 
         if ($data['insurance']) {
             $this->requestBody['insurance'] = [
@@ -147,5 +168,4 @@ abstract class AbstractCreate extends AbstractService
             );
         }
     }
-
 }

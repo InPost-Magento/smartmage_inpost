@@ -2,14 +2,13 @@
 
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Document\Printout;
 
-use Prophecy\Call\Call;
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
 use Smartmage\Inpost\Model\ApiShipx\ErrorHandler;
 use Smartmage\Inpost\Model\ApiShipx\Service\Document\AbstractPrintout;
 use Smartmage\Inpost\Model\Config\Source\LabelFormat;
 use Smartmage\Inpost\Model\ConfigProvider;
 
-class Labels extends AbstractPrintout
+class ReturnLabels extends AbstractPrintout
 {
 
     public function __construct(
@@ -17,8 +16,8 @@ class Labels extends AbstractPrintout
         ErrorHandler $errorHandler
     ) {
         $organizationId = $configProvider->getOrganizationId();
-        $this->callUri = 'v1/organizations/' . $organizationId . '/shipments/labels';
-        $this->successMessage = __('The labels has been successfully downloaded');
+        $this->callUri = '/v1/organizations/' . $organizationId . '/shipments/return_labels';
+        $this->successMessage = __('The return labels has been successfully downloaded');
         parent::__construct($configProvider, $errorHandler);
     }
 

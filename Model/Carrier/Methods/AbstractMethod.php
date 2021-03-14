@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Smartmage\Inpost\Model\Carrier\Methods;
 
+use Magento\Catalog\Model\Product\Type;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Smartmage\Inpost\Model\ConfigProvider;
@@ -107,6 +108,10 @@ abstract class AbstractMethod
         $storeId = $this->storeManager->getStore()->getId();
         foreach ($this->quoteItems as $item) {
             $quoteProduct = $item->getProduct();
+
+            if ($quoteProduct->getTypeId() != Type::TYPE_SIMPLE) {
+                continue;
+            }
 
             $productWeight = $quoteProduct->getResource()->getAttributeRawValue(
                 (int)$quoteProduct->getId(),

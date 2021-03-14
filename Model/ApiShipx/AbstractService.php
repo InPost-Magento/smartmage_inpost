@@ -80,6 +80,7 @@ abstract class AbstractService implements ServiceInterface
         $token = $this->configProvider->getAccessToken();
 
         $this->requestHeaders['Authorization'] = "Authorization: Bearer " . $token;
+        $this->requestHeaders['Accept-Language'] = "Accept-Language: pl_PL";
 
         $endpoint = $this->getBaseUri() . '/' . $this->callUri;
 
@@ -101,10 +102,14 @@ abstract class AbstractService implements ServiceInterface
             $this->requestHeaders['Content-Type'] = "Content-Type: application/json";
 
             $requestBodyJson = json_encode($requestBody);
+            $logger->info(print_r('START - $requestBodyJson -------------', true));
+            $logger->info(print_r($requestBodyJson, true));
+            $logger->info(print_r('END - $requestBodyJson --------------', true));
 
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $requestBodyJson);
         }
+        $logger->info(print_r($this->requestHeaders, true));
 
         curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

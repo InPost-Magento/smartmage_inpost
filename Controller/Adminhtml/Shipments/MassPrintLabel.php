@@ -3,15 +3,13 @@ declare(strict_types=1);
 namespace Smartmage\Inpost\Controller\Adminhtml\Shipments;
 
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\Response\Http\FileFactory;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Stdlib\DateTime\DateTime;
 use Magento\Ui\Component\MassAction\Filter;
-use Smartmage\Inpost\Api\Data\ShipmentInterface;
-use Smartmage\Inpost\Api\ShipmentRepositoryInterface;
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
+use Smartmage\Inpost\Model\Config\Source\LabelFormat;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\ResourceModel\Shipment\CollectionFactory;
 use Smartmage\Inpost\Model\ApiShipx\Service\Document\Printout\Labels as PrintoutLabels;
@@ -24,16 +22,6 @@ class MassPrintLabel extends MassActionAbstract
 {
 
     protected $printoutLabels;
-
-    /**
-     * @var \Smartmage\Inpost\Api\ShipmentRepositoryInterface
-     */
-    private $shipmentRepository;
-
-    /**
-     * @var SearchCriteriaBuilder
-     */
-    private $searchCriteriaBuilder;
 
     /**
      * @var FileFactory
@@ -56,15 +44,11 @@ class MassPrintLabel extends MassActionAbstract
         CollectionFactory $collectionFactory,
         ConfigProvider $configProvider,
         PrintoutLabels $printoutLabels,
-        ShipmentRepositoryInterface $shipmentRepository,
-        SearchCriteriaBuilder $searchCriteriaBuilder,
         FileFactory $fileFactory,
         DateTime $dateTime
     ) {
         parent::__construct($context, $filter, $collectionFactory, $configProvider);
         $this->printoutLabels = $printoutLabels;
-        $this->shipmentRepository = $shipmentRepository;
-        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->fileFactory = $fileFactory;
         $this->dateTime = $dateTime;
     }
@@ -82,31 +66,16 @@ class MassPrintLabel extends MassActionAbstract
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $collection = $this->filter->getCollection($this->collectionFactory->create());
-        $selectedIds = $collection->getAllIds();
+//        $selectedIds = $collection->getAllIds();
+        $shipmentIds = $collection->getColumnValues('shipment_id');
 
-        $shipments = null;
-
-        if (!empty($selectedIds)) {
-            $searchCriteria = $this->searchCriteriaBuilder
-                ->addFilter(ShipmentInterface::ENTITY_ID, $selectedIds, 'in')
-                ->create();
-
-            $shipments = $this->shipmentRepository->getList($searchCriteria)->getItems();
-        }
-
-        $shipmentIds = [];
-        foreach ($shipments as $shipment) {
-            $shipmentIds[] = $shipment->getShipmentId();
-        }
-
-//        $labelFormat = $this->configProvider->getLabelFormat();
-        $labelFormat = 'pdf';
+        $labelFormat = $this->configProvider->getLabelFormat();
         $labelSize = $this->configProvider->getLabelSize();
 
         $labelsData = [
             'ids' => $shipmentIds,
-            'format' => $labelFormat,
-            'size' => $labelSize,
+            LabelFormat::STRING_FORMAT => $labelFormat,
+            LabelFormat::STRING_SIZE => $labelSize,
         ];
 
         $logger->info(print_r('$labelsData', true));
@@ -115,16 +84,15 @@ class MassPrintLabel extends MassActionAbstract
         try {
             $result = $this->printoutLabels->getLabels($labelsData);
 
-            $fileContent = ['type' => 'string', 'value' => $result['file'], 'rm' => true];
+            $fileContent = ['type' => 'string', 'value' => $result[CallResult::STRING_FILE], 'rm' => true];
 
             return $this->fileFactory->create(
-                sprintf('labels-%s.pdf', $this->dateTime->date('Y-m-d_H-i-s')),
+                sprintf('labels-%s.' . $labelFormat, $this->dateTime->date('Y-m-d_H-i-s')),
                 $fileContent,
                 DirectoryList::VAR_DIR,
-                'application/pdf'
+                LabelFormat::LABEL_CONTENT_TYPES[$labelFormat]
             );
-//
-//            $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been selected.(MassPrintLabel)', count($selectedIds)));
+
         } catch (\Exception $e) {
             $logger->info(print_r($e->getMessage(), true));
 
