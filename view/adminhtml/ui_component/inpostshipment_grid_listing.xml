@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">inpostshipment_grid_listing.inpostshipment_grid_listing_data_source</item>
@@ -49,6 +50,7 @@
         </argument>
     </dataSource>
     <listingToolbar name="listing_top">
+        <bookmark name="bookmarks"/>
         <filters name="listing_filters">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
