@@ -45,7 +45,7 @@ class Index extends \Smartmage\Inpost\Controller\Adminhtml\Shipments
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('Smartmage_Inpost::shipmentsmenu');
-        $resultPage->getConfig()->getTitle()->prepend(__('Inpost Shipments'));
+        $resultPage->getConfig()->getTitle()->prepend(__('InPost Shipments List'));
 
         return $resultPage;
     }
