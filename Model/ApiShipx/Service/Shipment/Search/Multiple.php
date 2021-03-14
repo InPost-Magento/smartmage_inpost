@@ -78,8 +78,26 @@ class Multiple extends AbstractSearch
 
                         $receiver     = $item['receiver'];
                         $receiverData = '';
-                        $receiverData .= $receiver['first_name'] . ' ';
-                        $receiverData .= $receiver['last_name'];
+                        if (strpos($item['service'], 'inpost_locker') !== false) {
+                            $receiverData .= $receiver['email'] . '<br>'
+                                . $receiver['phone'] . '<br>'
+                                . $item['target_point'];
+                        } else {
+                            if (isset($receiver['company_name'])) {
+                                $receiverData .= $receiver['company_name'] . '<br>';
+                            }
+
+                            if (isset($receiver['email'])) {
+                                $receiverData .= $receiver['email'] . '<br>';
+                            }
+
+                            $receiverData .= $receiver['first_name'] . '<br>'
+                                . $receiver['last_name'] . '<br>'
+                                . $receiver['phone'] . '<br>'
+                                . 'ul. ' . $receiver['address']['street'] . ' '
+                                . $receiver['address']['building_number'] . '<br>'
+                                . $receiver['address']['post_code'] . ' ' . $receiver['address']['city'];
+                        }
 
                         $formatedData[ShipmentInterface::SHIPMENT_ID]         = $item['id'];
                         $formatedData[ShipmentInterface::STATUS]              = $item['status'];
