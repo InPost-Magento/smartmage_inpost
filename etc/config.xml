@@ -5,7 +5,9 @@
             <inpost>
                 <mode>test</mode>
                 <label_format>pdf</label_format>
-                <label_size>a4</label_size>
+                <label_size_pdf>a4</label_size_pdf>
+                <label_size_epl>a4</label_size_epl>
+                <label_size_zpl>a4</label_size_zpl>
                 <change_address>0</change_address>
                 <sender_country_code>PL</sender_country_code>
                 <free_method>G</free_method>
