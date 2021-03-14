@@ -189,4 +189,17 @@
             </argument>
         </arguments>
     </type>
+
+    <virtualType name="InpostGeneralLogHandler" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">Smartmage\Inpost\Logger\Handler\InpostGeneralHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Smartmage\Inpost\Model\ApiShipx\AbstractService">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostGeneralLogHandler</argument>
+        </arguments>
+    </type>
 </config>

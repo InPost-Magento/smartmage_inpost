@@ -2,6 +2,7 @@
 
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Search;
 
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Smartmage\Inpost\Api\Data\ShipmentInterface;
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
 use Smartmage\Inpost\Model\ApiShipx\ErrorHandler;
@@ -17,6 +18,7 @@ class Multiple extends AbstractSearch
     protected $shipmentManagement;
 
     public function __construct(
+        PsrLoggerInterface $logger,
         ConfigProvider $configProvider,
         ShipmentRepository $shipmentRepository,
         ShipmentManagement $shipmentManagement,
@@ -25,7 +27,7 @@ class Multiple extends AbstractSearch
         $this->shipmentRepository = $shipmentRepository;
         $this->shipmentManagement = $shipmentManagement;
         $this->successMessage = __('The shipment list has been successfully synchronized');
-        parent::__construct($configProvider, $errorHandler);
+        parent::__construct($logger, $configProvider, $errorHandler);
     }
 
     public function getAllShipments()
@@ -44,8 +46,9 @@ class Multiple extends AbstractSearch
 
             $logger->info($this->callResult);
 
-            if ($this->callResult[CallResult::STRING_STATUS] != CallResult::STATUS_SUCCESS)
+            if ($this->callResult[CallResult::STRING_STATUS] != CallResult::STATUS_SUCCESS) {
                 throw new \Exception($this->callResult[CallResult::STRING_MESSAGE], $this->callResult[CallResult::STRING_RESPONSE_CODE]);
+            }
 
             if (!$totalPagesUpdated) {
                 $totalPagesRaw = (float)$result['count'] / (float)$result['per_page'];
@@ -88,8 +91,9 @@ class Multiple extends AbstractSearch
                         $formatedData[ShipmentInterface::REFERENCE]           = $item['reference'];
                         $formatedData[ShipmentInterface::TRACKING_NUMBER]     = $item['tracking_number'];
 
-                        if (isset($item['custom_attributes']) && isset($item['custom_attributes']['target_point']))
+                        if (isset($item['custom_attributes']) && isset($item['custom_attributes']['target_point'])) {
                             $formatedData[ShipmentInterface::TARGET_POINT] = $item['custom_attributes']['target_point'];
+                        }
 
                         $this->shipmentManagement->addOrUpdate($formatedData);
                     } catch (\Exception $exception) {
