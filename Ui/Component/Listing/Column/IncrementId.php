@@ -47,8 +47,7 @@ class IncrementId extends Column
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
                 if (isset($item['increment_id'])) {
-                    $order = $this->orderInterface->loadByIncrementId($item['increment_id']);
-                    $url = $this->urlBuilder->getUrl('sales/order/view', ['order_id' => $order->getEntityId()]);
+                    $url = $this->urlBuilder->getUrl('sales/order/view', ['order_id' => $item['order_id']]);
                     $item['increment_id'] =
                         '<a target="blank" href="' . $url . '">' . $item['increment_id'] . '</a>';
                 }

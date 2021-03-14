@@ -18,7 +18,12 @@ class Collection extends SearchResult
                  ['cpe' => new \Zend_Db_Expr('(SELECT * FROM `smartmage_inpost_shipment_order_link`)')],
                  'main_table.shipment_id = cpe.shipment_id',
                  ['increment_id' => 'increment_id']
-             );
+             )
+            ->joinleft(
+                ['so' => new \Zend_Db_Expr('(SELECT entity_id,increment_id FROM `sales_order`)')],
+                'cpe.increment_id = so.increment_id',
+                ['order_id' => 'entity_id']
+            );
 //              ->joinleft(
 //                 ['cpev' => new \Zend_Db_Expr('(SELECT * FROM `catalog_product_entity_varchar` GROUP BY row_id, attribute_id)')],
 //                 'cpe.row_id = cpev.row_id and cpev.attribute_id = 73',
@@ -34,7 +39,7 @@ class Collection extends SearchResult
 //            );
 //        $this->addFilterToMap('alert_stock_id', 'main_table.alert_stock_id');
 //        $this->addFilterToMap('product_name', 'cpev.value');
-//        $this->addFilterToMap('product_season', 'eaov.value');
+        $this->addFilterToMap('increment_id', 'cpe.increment_id');
     }
 
 }
