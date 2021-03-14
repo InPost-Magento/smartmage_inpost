@@ -10,6 +10,7 @@ use Smartmage\Inpost\Model\ApiShipx\ErrorHandler;
 use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\ShipmentManagement;
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 
 abstract class AbstractCreate extends AbstractService
 {
@@ -29,6 +30,7 @@ abstract class AbstractCreate extends AbstractService
     protected $shippingMethods;
 
     public function __construct(
+        PsrLoggerInterface $logger,
         ConfigProvider $configProvider,
         ShippingMethods $shippingMethods,
         ShipmentManagement $shipmentManagement,
@@ -42,7 +44,7 @@ abstract class AbstractCreate extends AbstractService
         $this->callUri = 'v1/organizations/' . $organizationId . '/shipments';
 
         $this->successMessage = __('The shipment created sccessfully');
-        parent::__construct($configProvider, $errorHandler);
+        parent::__construct($logger, $configProvider, $errorHandler);
     }
 
     public function createShipment()
@@ -92,8 +94,26 @@ abstract class AbstractCreate extends AbstractService
 
                 $receiver     = $response['receiver'];
                 $receiverData = '';
-                $receiverData .= $receiver['first_name'] . ' ';
-                $receiverData .= $receiver['last_name'];
+                if (strpos($response['service'], 'inpost_locker') !== false) {
+                    $receiverData .= $receiver['email'] . '<br>'
+                        . $receiver['phone'] . '<br>'
+                        . $response['custom_attributes']['target_point'];
+                } else {
+                    if (isset($receiver['company_name'])) {
+                        $receiverData .= $receiver['company_name'] . '<br>';
+                    }
+
+                    if (isset($receiver['email'])) {
+                        $receiverData .= $receiver['email'] . '<br>';
+                    }
+
+                    $receiverData .= $receiver['first_name'] . '<br>'
+                        . $receiver['last_name'] . '<br>'
+                        . $receiver['phone'] . '<br>'
+                        . 'ul. ' . $receiver['address']['street'] . ' '
+                        . $receiver['address']['building_number'] . '<br>'
+                        . $receiver['address']['post_code'] . ' ' . $receiver['address']['city'];
+                }
 
                 $formatedData[ShipmentInterface::SHIPMENT_ID]         = $response['id'];
                 $formatedData[ShipmentInterface::STATUS]              = $response['status'];
@@ -146,5 +166,4 @@ abstract class AbstractCreate extends AbstractService
             );
         }
     }
-
 }

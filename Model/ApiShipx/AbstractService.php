@@ -3,6 +3,7 @@ namespace Smartmage\Inpost\Model\ApiShipx;
 
 use Magento\Framework\App\Response\Http;
 use Smartmage\Inpost\Model\ConfigProvider;
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 
 abstract class AbstractService implements ServiceInterface
 {
@@ -45,11 +46,14 @@ abstract class AbstractService implements ServiceInterface
     protected $isResponseJson = true;
 
     protected $errorHandler;
+    protected $logger;
 
     public function __construct(
+        PsrLoggerInterface $logger,
         ConfigProvider $configProvider,
         ErrorHandler $errorHandler
     ) {
+        $this->logger = $logger;
         $this->configProvider = $configProvider;
         $this->errorHandler = $errorHandler;
     }
@@ -72,10 +76,6 @@ abstract class AbstractService implements ServiceInterface
 
     public function call($requestBody = null, $parameters = null)
     {
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
-
         $ch = curl_init();
         $token = $this->configProvider->getAccessToken();
 
@@ -84,8 +84,8 @@ abstract class AbstractService implements ServiceInterface
 
         $endpoint = $this->getBaseUri() . '/' . $this->callUri;
 
-        $logger->info(print_r('$parameters', true));
-        $logger->info(print_r($parameters, true));
+        $this->logger->info(print_r('$parameters', true));
+        $this->logger->info(print_r($parameters, true));
 
         if ($this->method === CURLOPT_HTTPGET && is_array($parameters)) {
             $url = $endpoint . '?' . http_build_query($parameters);
@@ -94,7 +94,7 @@ abstract class AbstractService implements ServiceInterface
             $url = $endpoint;
         }
 
-        $logger->info(print_r($url, true));
+        $this->logger->info(print_r($url, true));
 
         curl_setopt($ch, CURLOPT_URL, $url);
 
@@ -102,14 +102,14 @@ abstract class AbstractService implements ServiceInterface
             $this->requestHeaders['Content-Type'] = "Content-Type: application/json";
 
             $requestBodyJson = json_encode($requestBody);
-            $logger->info(print_r('START - $requestBodyJson -------------', true));
-            $logger->info(print_r($requestBodyJson, true));
-            $logger->info(print_r('END - $requestBodyJson --------------', true));
+            $this->logger->info(print_r('START - $requestBodyJson -------------', true));
+            $this->logger->info(print_r($requestBodyJson, true));
+            $this->logger->info(print_r('END - $requestBodyJson --------------', true));
 
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $requestBodyJson);
         }
-        $logger->info(print_r($this->requestHeaders, true));
+        $this->logger->info(print_r($this->requestHeaders, true));
 
         curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -125,8 +125,8 @@ abstract class AbstractService implements ServiceInterface
             CallResult::STRING_RESPONSE_CODE => Http::STATUS_CODE_500
         ];
 
-        $logger->info(print_r($responseCode, true));
-        $logger->info(print_r($response, true));
+        $this->logger->info(print_r($responseCode, true));
+        $this->logger->info(print_r($response, true));
 
         if ($responseCode == $this->successResponseCode) {
             if ($this->isResponseJson) {

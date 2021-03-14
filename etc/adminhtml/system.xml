@@ -657,6 +657,10 @@
                     <label>Mode</label>
                     <source_model>Smartmage\Inpost\Model\Config\Source\Mode</source_model>
                 </field>
+                <field id="debug_enabled" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Enable debug</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
                 <field id="organization_id" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Organization ID</label>
                 </field>
