@@ -82,6 +82,15 @@
                     </item>
                 </argument>
             </action>
+            <action name="dispatch_order">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">dispatch_order</item>
+                        <item name="label" xsi:type="string" translate="true">Dispatch order</item>
+                        <item name="url" xsi:type="url" path="*/*/massDispatchOrder"/>
+                    </item>
+                </argument>
+            </action>
             <action name="print_dispatch_order_label">
                 <argument name="data" xsi:type="array">
                     <item name="config" xsi:type="array">
