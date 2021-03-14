@@ -3,7 +3,9 @@
 namespace Smartmage\Inpost\Ui\Component\Form\Element;
 
 use Magento\Framework\App\Request\Http;
+use Magento\Framework\Message\Manager;
 use Magento\Framework\Pricing\PriceCurrencyInterface;
+use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Smartmage\Inpost\Model\Config\Source\DefaultWaySending;
@@ -31,7 +33,20 @@ class SendingMethod extends \Magento\Ui\Component\Form\Element\Select
      */
     protected $defaultWaySending;
 
+    /**
+     * @var ConfigProvider
+     */
     protected $configProvider;
+
+    /**
+     * @var Manager
+     */
+    protected $messageManager;
+
+    /**
+     * @var UrlInterface
+     */
+    protected $urlBuilder;
 
     /**
      * SendingMethod constructor.
@@ -41,6 +56,8 @@ class SendingMethod extends \Magento\Ui\Component\Form\Element\Select
      * @param ContextInterface $context
      * @param DefaultWaySending $defaultWaySending
      * @param ConfigProvider $configProvider
+     * @param Manager $messageManager
+     * @param UrlInterface $urlBuilder
      * @param null $options
      * @param array $components
      * @param array $data
@@ -52,6 +69,8 @@ class SendingMethod extends \Magento\Ui\Component\Form\Element\Select
         ContextInterface $context,
         DefaultWaySending $defaultWaySending,
         ConfigProvider $configProvider,
+        Manager $messageManager,
+        UrlInterface $urlBuilder,
         $options = null,
         array $components = [],
         array $data = []
@@ -62,6 +81,8 @@ class SendingMethod extends \Magento\Ui\Component\Form\Element\Select
         $this->priceCurrency = $priceCurrency;
         $this->defaultWaySending = $defaultWaySending;
         $this->configProvider = $configProvider;
+        $this->messageManager = $messageManager;
+        $this->urlBuilder = $urlBuilder;
     }
 
     /**
@@ -76,13 +97,28 @@ class SendingMethod extends \Magento\Ui\Component\Form\Element\Select
         $config = $this->getData('config');
         $data= $this->request->getParams();
 
-        //inpostcourier_standard
-
         if (isset($config['dataScope']) && $config['dataScope'] == 'sending_method') {
             $shippingMethod = $data['shipping_method'];
             $codes = explode('_', $shippingMethod);
 
             $this->defaultWaySending->setCode($shippingMethod);
+
+            $defaultSendingPoint = $this->configProvider->getConfigData(
+                $codes[0] . '/' . $codes[1] . '/default_sending_point'
+            );
+
+            if (!$defaultSendingPoint) {
+                $url = $this->urlBuilder->getUrl('adminhtml/system_config/edit/section/carriers');
+                $this->messageManager->addComplexWarningMessage(
+                    'warningInpostMessage',
+                    [
+                        'content' => 'The service does not have a '
+                            . 'default drop point selected. If you send the parcel in a way '
+                            . 'other than "Pickup by courier", please select the point in the',
+                        'url' => $url
+                    ]
+                );
+            }
             $config['options'] = $this->defaultWaySending->toOptionArray();
 
             if (isset($data['sending_method'])) {

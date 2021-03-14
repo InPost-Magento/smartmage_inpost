@@ -118,8 +118,9 @@ Details,Szczegóły
 Return,Zwrot
 Submit,Stwórz przesyłkę
 Choose method,Wybierz metodę
-Full sync,Pełna synchronizacja
 Create sample courier shipment,Stwórz testową przesyłkę kurierską
 Create sample locker shipment,Stwórz testową przesyłkę Paczkomatową
 Shipment id,Numer przesyłki
 Refresh list, Odśwież listę
+"The service does not have a default drop point selected. If you send the parcel in a way other than ""Pickup by courier"", please select the point in the","Usługa nie ma wybranego domyślnego punktu nadania. Jeżeli nadajesz przesyłkę w inny sposób niż ""Odbiór przez kuriera"", należy wybrać punkt w"
+Configuration,konfiguracji
