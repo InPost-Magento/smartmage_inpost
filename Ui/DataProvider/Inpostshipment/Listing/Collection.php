@@ -13,12 +13,13 @@ class Collection extends SearchResult
     protected function _initSelect()
     {
         parent::_initSelect();
-//        $this->getSelect()
-//             ->joinleft(
-//                 ['cpe' => new \Zend_Db_Expr('(SELECT * FROM `catalog_product_entity` GROUP BY entity_id)')],
-//                 'main_table.product_id = cpe.entity_id',
-//                 ['r_id' => 'row_id']
-//             )->joinleft(
+        $this->getSelect()
+             ->joinleft(
+                 ['cpe' => new \Zend_Db_Expr('(SELECT * FROM `smartmage_inpost_shipment_order_link`)')],
+                 'main_table.shipment_id = cpe.shipment_id',
+                 ['increment_id' => 'increment_id']
+             );
+//              ->joinleft(
 //                 ['cpev' => new \Zend_Db_Expr('(SELECT * FROM `catalog_product_entity_varchar` GROUP BY row_id, attribute_id)')],
 //                 'cpe.row_id = cpev.row_id and cpev.attribute_id = 73',
 //                 ['product_name' => 'value']

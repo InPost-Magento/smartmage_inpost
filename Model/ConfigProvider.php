@@ -36,6 +36,13 @@ class ConfigProvider
     const SHIPPING_WEIGHT_UNIT = 'weight_unit';
     const SHIPPING_AUTOMATIC_PAY_FOR_PACKAGE = 'automatic_pay_for_package';
     const SHIPPING_DEFAULT_PICKUP_POINT = 'default_pickup_pont';
+    const SHIPPING_GET_SHIPMENTS_DAYS = 'get_shipments_days';
+    const SHIPPING_LABEL_SIZE_PDF = 'label_size_pdf';
+    const SHIPPING_LABEL_SIZE_EPL = 'label_size_epl';
+    const SHIPPING_LABEL_SIZE_ZPL = 'label_size_zpl';
+    const PDF = 'pdf';
+    const EPL = 'epl';
+    const ZPL = 'zpl';
 
     /**
      * @var ScopeConfigInterface
@@ -126,7 +133,18 @@ class ConfigProvider
      */
     public function getLabelSize()
     {
-        return $this->getShippingConfigData(self::SHIPPING_LABEL_SIZE);
+        $labelFormat = $this->getLabelFormat();
+
+        switch ($labelFormat) {
+            case (self::PDF):
+                return $this->getShippingConfigData(self::SHIPPING_LABEL_SIZE_PDF);
+            case (self::EPL):
+                return $this->getShippingConfigData(self::SHIPPING_LABEL_SIZE_EPL);
+            case (self::ZPL):
+                return $this->getShippingConfigData(self::SHIPPING_LABEL_SIZE_ZPL);
+            default:
+                return null;
+        }
     }
 
     /**
@@ -289,6 +307,15 @@ class ConfigProvider
     public function getDefaultPickupPoint()
     {
         return $this->getShippingConfigData(self::SHIPPING_DEFAULT_PICKUP_POINT);
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getGetShipmentsDays()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_GET_SHIPMENTS_DAYS);
     }
 
     /**

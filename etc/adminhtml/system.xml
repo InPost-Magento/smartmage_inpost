@@ -668,9 +668,26 @@
                     <label>Label format</label>
                     <source_model>Smartmage\Inpost\Model\Config\Source\LabelFormat</source_model>
                 </field>
-                <field id="label_size" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" canRestore="1">
+                <field id="label_size_pdf" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Label size</label>
-                    <source_model>Smartmage\Inpost\Model\Config\Source\LabelSize</source_model>
+                    <source_model>LabelSizePdf</source_model>
+                    <depends>
+                        <field id="label_format">pdf</field>
+                    </depends>
+                </field>
+                <field id="label_size_epl" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Label size</label>
+                    <source_model>LabelSizeEpl</source_model>
+                    <depends>
+                        <field id="label_format">epl</field>
+                    </depends>
+                </field>
+                <field id="label_size_zpl" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Label size</label>
+                    <source_model>LabelSizeZpl</source_model>
+                    <depends>
+                        <field id="label_format">zpl</field>
+                    </depends>
                 </field>
                 <field id="change_address" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Change sender's address</label>
@@ -766,6 +783,10 @@
                     <label>Default pickup point</label>
                     <source_model>Smartmage\Inpost\Model\Config\Source\DefaultPickupPoint</source_model>
                     <comment>If api is unavailable then this field will be empty</comment>
+                </field>
+                <field id="get_shipments_days" translate="label" type="text" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Get shipments from x days ago</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
                 </field>
             </group>
         </section>
