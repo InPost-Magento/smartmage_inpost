@@ -270,7 +270,10 @@ class ConfigProvider
      */
     public function getSzybkiezwrotyUrl()
     {
-        return $this->getShippingConfigData(self::SHIPPING_SZYBKIEZWROTY_URL);
+        if ($this->getShippingConfigData(self::SHIPPING_SZYBKIEZWROTY_URL)) {
+            return $this->getShippingConfigData(self::SHIPPING_SZYBKIEZWROTY_URL);
+        }
+        return 'https://szybkiezwroty.pl/ ';
     }
 
     /**

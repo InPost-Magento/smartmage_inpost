@@ -13,6 +13,7 @@ use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
 use Smartmage\Inpost\Model\Config\Source\Size as SizeConfig;
 use Smartmage\Inpost\Model\Config\Source\Service as ServiceConfig;
 use Smartmage\Inpost\Model\Config\Source\Status as StatusConfig;
+use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\ShipmentRepository;
 use Smartmage\Inpost\Api\Data\ShipmentInterface;
 
@@ -46,6 +47,7 @@ class Inpost extends AbstractOrder
      * @var \Smartmage\Inpost\Model\Config\Source\Status
      */
     protected $statusConfig;
+    protected $configProvider;
 
     /**
      * Inpost constructor.
@@ -68,6 +70,7 @@ class Inpost extends AbstractOrder
         SizeConfig $sizeConfig,
         ServiceConfig $serviceConfig,
         StatusConfig $statusConfig,
+        ConfigProvider $configProvider,
         array $data = [],
         ?ShippingHelper $shippingHelper = null,
         ?TaxHelper $taxHelper = null
@@ -77,6 +80,7 @@ class Inpost extends AbstractOrder
         $this->sizeConfig = $sizeConfig;
         $this->serviceConfig = $serviceConfig;
         $this->statusConfig = $statusConfig;
+        $this->configProvider = $configProvider;
         parent::__construct($context, $registry, $adminHelper, $data, $shippingHelper, $taxHelper);
     }
 
@@ -155,7 +159,10 @@ class Inpost extends AbstractOrder
      */
     public function getLabelUrl($shipment)
     {
-        return $this->getUrl('smartmageinpost/shipments/printLabel', ['id' => $shipment->getShipmentId()]);
+        return $this->getUrl(
+            'smartmageinpost/shipments/printLabel',
+            ['id' => $shipment->getShipmentId(), 'order_id' => $this->getOrder()->getId()]
+        );
     }
 
     /**
@@ -164,7 +171,14 @@ class Inpost extends AbstractOrder
      */
     public function getReturnUrl($shipment)
     {
-        return $this->getUrl('smartmageinpost/shipments/printReturnLabel', ['id' => $shipment->getShipmentId()]);
+        if ($shipment->getService() != 'inpost_locker_standard') {
+            return $this->getUrl(
+                'smartmageinpost/shipments/printReturnLabel',
+                ['id' => $shipment->getShipmentId(), 'order_id' => $this->getOrder()->getId()]
+            );
+        } else {
+            return $this->configProvider->getSzybkiezwrotyUrl();
+        }
     }
 
     /**
@@ -178,7 +192,6 @@ class Inpost extends AbstractOrder
         try {
             $shipment =  $this->shipmentRepository->getByShipmentId($inpostShipmentId);
         } catch (\Exception $e) {
-
         }
         return $shipment;
     }
