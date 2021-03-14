@@ -61,6 +61,7 @@ $orderId = $block->getOrder()->getId();
                 id="shipping_method"
                 class="admin__control-select"
                 name="shipping_method"
+                required
             >
                 <option value=""><?= __('Choose method') ?></option>
                 <?php foreach ($methods as $method) : ?>

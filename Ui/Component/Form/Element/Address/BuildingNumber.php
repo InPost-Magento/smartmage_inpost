@@ -67,13 +67,12 @@ class BuildingNumber extends \Magento\Ui\Component\Form\Element\Input
         $config = $this->getData('config');
         $data= $this->request->getParams();
         $order = $this->orderRepository->get($data['order_id']);
-        $this->orderProcessor->setOrder($order);
 
         if (isset($config['dataScope']) && $config['dataScope'] == 'building_number') {
             if (isset($data['building_number'])) {
                 $config['default'] = $data['building_number'];
             } else {
-                $config['default'] = $this->orderProcessor->getBuildingNumber();
+                $config['default'] = $this->orderProcessor->setOrder($order)->getBuildingNumber();
             }
             $this->setData('config', (array)$config);
         }
