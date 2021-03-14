@@ -6,6 +6,7 @@ use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\AbstractCreate;
 use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\Order\Processor as OrderProcessor;
+use Smartmage\Inpost\Model\ShipmentManagement;
 
 class Courier extends AbstractCreate
 {
@@ -19,14 +20,16 @@ class Courier extends AbstractCreate
      * @param ConfigProvider $configProvider
      * @param ShippingMethods $shippingMethods
      * @param OrderProcessor $orderProcessor
+     * @param ShipmentManagement $shipmentManagement
      */
     public function __construct(
         ConfigProvider $configProvider,
         ShippingMethods $shippingMethods,
-        OrderProcessor $orderProcessor
+        OrderProcessor $orderProcessor,
+        ShipmentManagement $shipmentManagement
     ) {
         $this->orderProcessor = $orderProcessor;
-        parent::__construct($configProvider, $shippingMethods);
+        parent::__construct($configProvider, $shippingMethods, $shipmentManagement);
     }
 
     public function createBody($data, $order)
