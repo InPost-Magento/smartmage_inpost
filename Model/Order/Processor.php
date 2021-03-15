@@ -3,7 +3,9 @@
 namespace Smartmage\Inpost\Model\Order;
 
 use Magento\Catalog\Model\Product\Type;
+use Magento\Sales\Api\OrderRepositoryInterface;
 use Smartmage\Inpost\Model\ConfigProvider;
+use Smartmage\Inpost\Model\Registry\Order as OrderRegistry;
 
 class Processor
 {
@@ -15,13 +17,34 @@ class Processor
     protected $configProvider;
 
     /**
+     * @var DataStorage
+     */
+    protected $dataStorage;
+
+    /**
+     * @var OrderRepositoryInterface
+     */
+    protected $orderRepository;
+
+    /**
+     * @var OrderRegistry
+     */
+    protected $orderRegistry;
+
+    /**
      * Processor constructor.
      * @param ConfigProvider $configProvider
+     * @param OrderRegistry $orderRegistry
+     * @param OrderRepositoryInterface $orderRepository
      */
     public function __construct(
-        ConfigProvider $configProvider
+        ConfigProvider $configProvider,
+        OrderRegistry $orderRegistry,
+        OrderRepositoryInterface $orderRepository
     ) {
         $this->configProvider = $configProvider;
+        $this->orderRegistry = $orderRegistry;
+        $this->orderRepository = $orderRepository;
     }
 
     public function getOrderWeight()
@@ -71,10 +94,32 @@ class Processor
         return $this->order->getShippingAddress()->getStreetLine(1);
     }
 
+    /**
+     * @param $order
+     * @return $this
+     */
     public function setOrder($order)
     {
         $this->order = $order;
 
         return $this;
+    }
+
+    /**
+     * @param $orderId
+     * @return mixed
+     */
+    public function getOrder($orderId)
+    {
+        $order = $this->orderRegistry->get();
+        if ($order->getId()) {
+            $this->setOrder($order);
+            return $order;
+        } else {
+            $order = $this->orderRepository->get($orderId);
+            $this->orderRegistry->set($order);
+            $this->setOrder($order);
+            return $order;
+        }
     }
 }

@@ -2,50 +2,10 @@
 
 namespace Smartmage\Inpost\Ui\Component\Form\Element\Address;
 
-use Magento\Framework\App\Request\Http;
-use Magento\Framework\Pricing\PriceCurrencyInterface;
-use Magento\Framework\View\Element\UiComponent\ContextInterface;
-use Magento\Sales\Api\OrderRepositoryInterface;
+use Smartmage\Inpost\Ui\Component\Form\Element\AbstractInput;
 
-class Postcode extends \Magento\Ui\Component\Form\Element\Input
+class Postcode extends AbstractInput
 {
-    /**
-     * @var Http
-     */
-    protected $request;
-
-    /**
-     * @var OrderRepositoryInterface
-     */
-    protected $orderRepository;
-
-    /**
-     * @var PriceCurrencyInterface
-     */
-    protected $priceCurrency;
-
-    /**
-     * OrderDetails constructor.
-     * @param Http $request
-     * @param OrderRepositoryInterface $orderRepository
-     * @param PriceCurrencyInterface $priceCurrency
-     * @param ContextInterface $context
-     * @param array $components
-     * @param array $data
-     */
-    public function __construct(
-        Http $request,
-        OrderRepositoryInterface $orderRepository,
-        PriceCurrencyInterface $priceCurrency,
-        ContextInterface $context,
-        array $components = [],
-        array $data = []
-    ) {
-        parent::__construct($context, $components, $data);
-        $this->request = $request;
-        $this->orderRepository = $orderRepository;
-        $this->priceCurrency = $priceCurrency;
-    }
 
     /**
      * Prepare component configuration
@@ -58,13 +18,12 @@ class Postcode extends \Magento\Ui\Component\Form\Element\Input
 
         $config = $this->getData('config');
         $data= $this->request->getParams();
-        $order = $this->orderRepository->get($data['order_id']);
 
         if (isset($config['dataScope']) && $config['dataScope'] == 'post_code') {
             if (isset($data['post_code'])) {
                 $config['default'] = $data['post_code'];
             } else {
-                $config['default'] = $order->getShippingAddress()->getPostcode();
+                $config['default'] = $this->order->getShippingAddress()->getPostcode();
             }
             $this->setData('config', (array)$config);
         }

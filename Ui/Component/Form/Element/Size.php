@@ -10,65 +10,8 @@ use Smartmage\Inpost\Model\Config\Source\DefaultWaySending;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\Config\Source\Size as SizeSource;
 
-class Size extends \Magento\Ui\Component\Form\Element\Select
+class Size extends AbstractSelect
 {
-    /**
-     * @var Http
-     */
-    protected $request;
-
-    /**
-     * @var OrderRepositoryInterface
-     */
-    protected $orderRepository;
-
-    /**
-     * @var PriceCurrencyInterface
-     */
-    protected $priceCurrency;
-
-    /**
-     * @var DefaultWaySending
-     */
-    protected $defaultWaySending;
-
-    protected $configProvider;
-
-    /**
-     * @var SizeSource
-     */
-    protected $size;
-
-    /**
-     * Size constructor.
-     * @param Http $request
-     * @param OrderRepositoryInterface $orderRepository
-     * @param PriceCurrencyInterface $priceCurrency
-     * @param ContextInterface $context
-     * @param SizeSource $size
-     * @param ConfigProvider $configProvider
-     * @param null $options
-     * @param array $components
-     * @param array $data
-     */
-    public function __construct(
-        Http $request,
-        OrderRepositoryInterface $orderRepository,
-        PriceCurrencyInterface $priceCurrency,
-        ContextInterface $context,
-        SizeSource $size,
-        ConfigProvider $configProvider,
-        $options = null,
-        array $components = [],
-        array $data = []
-    ) {
-        parent::__construct($context, $options, $components, $data);
-        $this->request = $request;
-        $this->orderRepository = $orderRepository;
-        $this->priceCurrency = $priceCurrency;
-        $this->size = $size;
-        $this->configProvider = $configProvider;
-    }
 
     /**
      * Prepare component configuration

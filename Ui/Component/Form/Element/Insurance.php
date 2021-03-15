@@ -2,57 +2,8 @@
 
 namespace Smartmage\Inpost\Ui\Component\Form\Element;
 
-use Magento\Framework\App\Request\Http;
-use Magento\Framework\Pricing\PriceCurrencyInterface;
-use Magento\Framework\View\Element\UiComponent\ContextInterface;
-use Magento\Framework\View\Element\UiComponentFactory;
-use Magento\Sales\Api\OrderRepositoryInterface;
-use Smartmage\Inpost\Model\ConfigProvider;
-
-class Insurance extends \Magento\Ui\Component\Form\Element\Input
+class Insurance extends AbstractInput
 {
-    /**
-     * @var Http
-     */
-    protected $request;
-
-    /**
-     * @var OrderRepositoryInterface
-     */
-    protected $orderRepository;
-
-    /**
-     * @var PriceCurrencyInterface
-     */
-    protected $priceCurrency;
-
-    protected $configProvider;
-
-    /**
-     * OrderDetails constructor.
-     * @param Http $request
-     * @param OrderRepositoryInterface $orderRepository
-     * @param PriceCurrencyInterface $priceCurrency
-     * @param ContextInterface $context
-     * @param array $components
-     * @param array $data
-     */
-    public function __construct(
-        Http $request,
-        OrderRepositoryInterface $orderRepository,
-        PriceCurrencyInterface $priceCurrency,
-        ContextInterface $context,
-        ConfigProvider $configProvider,
-        UiComponentFactory $uiComponentFactory,
-        array $components = [],
-        array $data = []
-    ) {
-        parent::__construct($context, $components, $data);
-        $this->request = $request;
-        $this->orderRepository = $orderRepository;
-        $this->priceCurrency = $priceCurrency;
-        $this->configProvider = $configProvider;
-    }
 
     /**
      * Prepare component configuration
@@ -66,15 +17,13 @@ class Insurance extends \Magento\Ui\Component\Form\Element\Input
         $config = $this->getData('config');
         $data= $this->request->getParams();
 
-
         if (isset($config['dataScope']) && $config['dataScope'] == 'insurance') {
 
             if (isset($data['insurance'])) {
                 $config['default'] = $data['insurance'];
             } else {
                 if ($this->configProvider->getShippingConfigData('automatic_pay_for_package')) {
-                    $order = $this->orderRepository->get($data['order_id']);
-                    $config['default'] = $this->priceCurrency->convertAndRound($order->getGrandTotal());
+                    $config['default'] = $this->priceCurrency->convertAndRound($this->order->getGrandTotal());
 
                 }
             }
