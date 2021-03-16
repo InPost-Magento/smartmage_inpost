@@ -50,7 +50,6 @@ abstract class AbstractCreate extends AbstractService
     public function createShipment()
     {
         $response = $this->call($this->requestBody);
-
         $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
         $logger = new \Zend\Log\Logger();
         $logger->addWriter($writer);
@@ -66,18 +65,17 @@ abstract class AbstractCreate extends AbstractService
         }
 
         //set success message for frontend
-        if (
-            !isset($this->callResult[CallResult::STRING_MESSAGE]) ||
+        if (!isset($this->callResult[CallResult::STRING_MESSAGE]) ||
             empty($this->callResult[CallResult::STRING_MESSAGE]) ||
             is_null($this->callResult[CallResult::STRING_MESSAGE])
         ) {
             $this->callResult[CallResult::STRING_MESSAGE] = $this->successMessage;
         }
         if (isset($response['id'])) {
+
             $this->callResult[CallResult::STRING_RESPONSE_SHIPMENT_ID] = $response['id'];
             try {
                 $formatedData = [];
-
                 $parcel             = $response['parcels'][0];
                 $shipmentAttributes = '';
                 if ($response['service'] == 'inpost_locker_standard') {

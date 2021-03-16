@@ -32,14 +32,28 @@ class DefaultSendingPoint extends Field
      */
     public function render(AbstractElement $element) : string
     {
+        //inpostlocker_standardeow
         $html = parent::render($element);
+        $points = '';
+
+        switch ($this->points) {
+            case 'standard':
+                $points = json_encode(['parcel_locker', 'pop']);
+                break;
+            case 'parcel_locker':
+                $points = json_encode(['parcel_locker_only']);
+                break;
+            default:
+                $points = json_encode(['pop']);
+                break;
+        }
         return $html . '
         <script type="text/x-magento-init">
             {
                 "*": {
                     "Smartmage_Inpost/js/easyPackWidget": {
                         "wrapper":"' . $this->code . '",
-                        "points": ' . ($this->points === 'standard' ? json_encode(array('parcel_locker', 'pop')) : json_encode(array('pop'))) . '
+                        "points": ' . $points . '
                     }
                 }
             }

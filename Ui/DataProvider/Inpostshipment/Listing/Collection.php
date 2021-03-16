@@ -20,9 +20,9 @@ class Collection extends SearchResult
                  ['increment_id' => 'increment_id']
              )
             ->joinleft(
-                ['so' => new \Zend_Db_Expr('(SELECT entity_id,increment_id FROM `sales_order`)')],
-                'cpe.increment_id = so.increment_id',
-                ['order_id' => 'entity_id']
+                ['so' => new \Zend_Db_Expr('(SELECT entity_id as so_entity_id,increment_id as so_increment_id FROM `sales_order`)')],
+                'cpe.increment_id = so.so_increment_id',
+                ['order_id' => 'so_entity_id']
             );
 //              ->joinleft(
 //                 ['cpev' => new \Zend_Db_Expr('(SELECT * FROM `catalog_product_entity_varchar` GROUP BY row_id, attribute_id)')],

@@ -18,7 +18,7 @@ class Weight extends AbstractInput
         $data= $this->request->getParams();
 
         if (isset($config['dataScope']) && $config['dataScope'] == 'weight') {
-            $config['label'] = __('Weight') . ' (' . __($this->configProvider->getWeightUnit()) . ')';
+            $config['label'] = __('Weight') . ' (' . __('kg') . ')';
             if (isset($data['weight'])) {
                 $config['default'] = $data['weight'];
             } else {

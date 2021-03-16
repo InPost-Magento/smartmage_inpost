@@ -72,6 +72,10 @@ class Processor
             $weight += $productWeight;
         }
 
+        if ($this->configProvider->getWeightUnit() == 'g') {
+            $weight = $weight/1000;
+        }
+
         return $weight;
     }
 

@@ -51,9 +51,9 @@ Insurance Value,Wartość ubezpieczenia
 Reference Number,Numer referencyjny
 Sending Method,Sposób nadania
 Order Number,Numer zamówienia
-Width,Szerokość
-Length,Długość
-Height,Wysokość
+Width (mm),Szerokość (milimetry)
+Length (mm),Długość (milimetry)
+Height (mm),Wysokość (milimetry)
 Service,Usługa
 Size,Gabaryt
 New Shipment,Nowa przesyłka
@@ -84,12 +84,12 @@ Size A,Gabaryt A
 Size B,Gabaryt B
 Size C,Gabaryt C
 Size D,Gabaryt D
-sent in an automatic parcel station,nadanie w paczkomacie
-sent in the Customer Service Point,nadanie w Punkcie Obsługi Klienta
-sent in the Customer Service Point handling shipping of courier shipments,nadanie w Punkcie Obsługi Klienta obsługującym nadawanie przesyłek kurierskich
-sent in a Branch,nadanie w Oddziale
+sent in an automatic parcel station,Nadanie w paczkomacie
+sent in the Customer Service Point,Nadanie w Punkcie Obsługi Klienta
+sent in the Customer Service Point handling shipping of courier shipments,Nadanie w Punkcie Obsługi Klienta obsługującym nadawanie przesyłek kurierskich
+sent in a Branch,Nadanie w Oddziale
 Collection order - courier order,Zlecenie odbioru - zamówienie kuriera
-sent in the Shipment Service Point,nadanie w Punkcie Obsługi Przesyłek
+sent in the Shipment Service Point,Nadanie w Punkcie Obsługi Przesyłek
 Tracking number,Numer trackingowy
 Shipment attributes,Cechy przesyłki
 Sending method,Sposób nadania

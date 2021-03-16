@@ -102,6 +102,7 @@ abstract class AbstractService implements ServiceInterface
             $this->requestHeaders['Content-Type'] = "Content-Type: application/json";
 
             $requestBodyJson = json_encode($requestBody);
+
             $this->logger->info(print_r('START - $requestBodyJson -------------', true));
             $this->logger->info(print_r($requestBodyJson, true));
             $this->logger->info(print_r('END - $requestBodyJson --------------', true));
@@ -117,6 +118,7 @@ abstract class AbstractService implements ServiceInterface
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->requestHeaders);
 
         $response = curl_exec($ch);
+
         $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         $this->callResult = [
@@ -175,6 +177,7 @@ abstract class AbstractService implements ServiceInterface
         } elseif ($responseCode == Http::STATUS_CODE_404) { //Szukany zasób nie został odnaleziony, np. adres URL jest niepoprawny lub zasób nie istnieje.
 
             $response = json_decode($response, true);
+
             curl_close($ch);
 
             $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
