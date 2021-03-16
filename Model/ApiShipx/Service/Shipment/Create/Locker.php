@@ -3,8 +3,6 @@
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Create;
 
 use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\AbstractCreate;
-use Smartmage\Inpost\Model\ConfigProvider;
-use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
 
 class Locker extends AbstractCreate
 {
@@ -23,6 +21,10 @@ class Locker extends AbstractCreate
                 "target_point" => $data['target_locker'],
             ],
         ];
+
+        if (strpos($data['service'], 'eow') !== false) {
+            $this->requestBody['end_of_week_collection'] = true;
+        }
 
         parent::createBody($data, $order);
     }

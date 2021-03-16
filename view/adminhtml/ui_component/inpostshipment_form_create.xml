@@ -1051,7 +1051,7 @@
         <field name="width">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string" translate="true">Width</item>
+                    <item name="label" xsi:type="string" translate="true">Width (mm)</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="dataScope" xsi:type="string">width</item>
@@ -1068,7 +1068,7 @@
         <field name="length">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string" translate="true">Length</item>
+                    <item name="label" xsi:type="string" translate="true">Length (mm)</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="dataScope" xsi:type="string">length</item>
@@ -1085,28 +1085,11 @@
         <field name="height">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string" translate="true">Height</item>
+                    <item name="label" xsi:type="string" translate="true">Height (mm)</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="dataScope" xsi:type="string">height</item>
                     <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Height</item>
-                    <item name="validation" xsi:type="array">
-                        <item name="required-entry" xsi:type="boolean">true</item>
-                        <item name="validate-number" xsi:type="boolean">true</item>
-                        <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
-                    </item>
-                </item>
-            </argument>
-        </field>
-
-        <field name="weight">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string" translate="true">Weight</item>
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="formElement" xsi:type="string">input</item>
-                    <item name="dataScope" xsi:type="string">weight</item>
-                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Weight</item>
                     <item name="validation" xsi:type="array">
                         <item name="required-entry" xsi:type="boolean">true</item>
                         <item name="validate-number" xsi:type="boolean">true</item>
@@ -1127,6 +1110,23 @@
                     <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Size</item>
                     <item name="validation" xsi:type="array">
                         <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="weight">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Weight</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">weight</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Weight</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                        <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
                     </item>
                 </item>
             </argument>

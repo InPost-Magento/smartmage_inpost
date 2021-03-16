@@ -82,13 +82,13 @@
     <virtualType name="DefaultSendingPointStandardEow" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
         <arguments>
             <argument name="code" xsi:type="string">inpostlocker_standardeow</argument>
-            <argument name="points" xsi:type="string">standard</argument>
+            <argument name="points" xsi:type="string">parcel_locker</argument>
         </arguments>
     </virtualType>
     <virtualType name="DefaultSendingPointStandardEowCod" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
         <arguments>
             <argument name="code" xsi:type="string">inpostlocker_standardeowcod</argument>
-            <argument name="points" xsi:type="string">standard</argument>
+            <argument name="points" xsi:type="string">parcel_locker</argument>
         </arguments>
     </virtualType>
     <virtualType name="DefaultSendingPointC2c" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">

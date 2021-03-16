@@ -2,13 +2,13 @@
 
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Create;
 
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Smartmage\Inpost\Model\ApiShipx\ErrorHandler;
 use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\AbstractCreate;
 use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\Order\Processor as OrderProcessor;
 use Smartmage\Inpost\Model\ShipmentManagement;
-use Psr\Log\LoggerInterface as PsrLoggerInterface;
 
 class Courier extends AbstractCreate
 {
@@ -62,13 +62,13 @@ class Courier extends AbstractCreate
                     "unit" => "mm",
                 ],
                 "weight" => [
-                    "amount" => $data['weight'],
-                    "unit" => $this->configProvider->getShippingConfigData('weight_unit'),
+                    "amount" => str_replace(',', '.', $data['weight']),
+                    "unit" => 'kg',
                 ]
             ],
         ];
 
-        if($data['email']) {
+        if ($data['email']) {
             $this->requestBody['receiver']['email'] = $data['email'];
         }
 

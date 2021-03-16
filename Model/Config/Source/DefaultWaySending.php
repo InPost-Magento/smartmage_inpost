@@ -43,12 +43,16 @@ class DefaultWaySending implements OptionSourceInterface
         switch ($this->code) {
             case (self::INPOST_LOCKER_STANDARD):
             case (self::INPOST_LOCKER_STANDARD_COD):
+                return [
+                    ['value' => 'parcel_locker', 'label' => __('Nadanie w Paczkomacie')],
+                    ['value' => 'dispatch_order', 'label' => __('Odbiór przez Kuriera')],
+                    ['value' => 'pop', 'label' => __('Nadanie w POP')],
+                ];
             case (self::INPOST_LOCKER_STANDARD_EOW):
             case (self::INPOST_LOCKER_STANDARD_EOW_COD):
                 return [
                     ['value' => 'parcel_locker', 'label' => __('Nadanie w Paczkomacie')],
                     ['value' => 'dispatch_order', 'label' => __('Odbiór przez Kuriera')],
-                    ['value' => 'pop', 'label' => __('Nadanie w POP')],
                 ];
             case (self::INPOST_COURIER_C2C):
             case (self::INPOST_COURIER_C2C_COD):
