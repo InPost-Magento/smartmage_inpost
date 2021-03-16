@@ -22,7 +22,7 @@ class Cod extends AbstractInput
                 $config['default'] = $data['cod'];
             } else {
                 if (strpos($data['shipping_method'], 'cod') !== false) {
-                    $config['default'] = $this->priceCurrency->convertAndRound($this->order);
+                    $config['default'] = $this->priceCurrency->convertAndRound($this->order->getGrandTotal());
                 }
             }
             $this->setData('config', (array)$config);

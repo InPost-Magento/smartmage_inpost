@@ -54,9 +54,6 @@
                     <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Default sending point</label>
                         <frontend_model>DefaultSendingPointStandard</frontend_model>
-                        <depends>
-                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
-                        </depends>
                     </field>
                 </group>
                 <group id="standardcod" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -97,9 +94,6 @@
                     <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Default sending point</label>
                         <frontend_model>DefaultSendingPointStandardCod</frontend_model>
-                        <depends>
-                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
-                        </depends>
                     </field>
                 </group>
                 <group id="standardeow" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -154,9 +148,6 @@
                     <field id="default_sending_point" translate="comment" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Default sending point</label>
                         <frontend_model>DefaultSendingPointStandardEow</frontend_model>
-                        <depends>
-                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
-                        </depends>
                     </field>
                 </group>
                 <group id="standardeowcod" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -211,9 +202,6 @@
                     <field id="default_sending_point" translate="comment" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Default sending point</label>
                         <frontend_model>DefaultSendingPointStandardEowCod</frontend_model>
-                        <depends>
-                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
-                        </depends>
                     </field>
                 </group>
             </group>
@@ -265,9 +253,6 @@
                     <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Default sending point</label>
                         <frontend_model>DefaultSendingPointC2c</frontend_model>
-                        <depends>
-                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
-                        </depends>
                     </field>
                 </group>
                 <group id="c2ccod" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -309,9 +294,6 @@
                     <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Default sending point</label>
                         <frontend_model>DefaultSendingPointC2cCod</frontend_model>
-                        <depends>
-                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
-                        </depends>
                     </field>
                 </group>
                 <group id="standard" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -353,9 +335,6 @@
                     <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Default sending point</label>
                         <frontend_model>DefaultSendingPointCourierStandard</frontend_model>
-                        <depends>
-                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
-                        </depends>
                     </field>
                 </group>
                 <group id="express1000" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -396,9 +375,6 @@
                     <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Default sending point</label>
                         <frontend_model>DefaultSendingPointExpress1000</frontend_model>
-                        <depends>
-                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
-                        </depends>
                     </field>
                 </group>
                 <group id="express1200" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -439,9 +415,6 @@
                     <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Default sending point</label>
                         <frontend_model>DefaultSendingPointExpress1200</frontend_model>
-                        <depends>
-                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
-                        </depends>
                     </field>
                 </group>
                 <group id="express1700" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -482,9 +455,6 @@
                     <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Default sending point</label>
                         <frontend_model>DefaultSendingPointExpress1700</frontend_model>
-                        <depends>
-                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
-                        </depends>
                     </field>
                 </group>
                 <group id="localstandard" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -525,9 +495,6 @@
                     <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Default sending point</label>
                         <frontend_model>DefaultSendingPointLocalStandard</frontend_model>
-                        <depends>
-                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
-                        </depends>
                     </field>
                 </group>
                 <group id="localexpress" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -568,9 +535,6 @@
                     <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Default sending point</label>
                         <frontend_model>DefaultSendingPointLocalExpress</frontend_model>
-                        <depends>
-                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
-                        </depends>
                     </field>
                 </group>
                 <group id="localsuperexpress" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -611,9 +575,6 @@
                     <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Default sending point</label>
                         <frontend_model>DefaultSendingPointLocalSuperExpress</frontend_model>
-                        <depends>
-                            <field id="default_way_sending" separator="|">pop|parcel_locker</field>
-                        </depends>
                     </field>
                 </group>
                 <group id="palette" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
