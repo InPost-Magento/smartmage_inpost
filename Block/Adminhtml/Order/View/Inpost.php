@@ -81,7 +81,7 @@ class Inpost extends AbstractOrder
         $this->serviceConfig = $serviceConfig;
         $this->statusConfig = $statusConfig;
         $this->configProvider = $configProvider;
-        parent::__construct($context, $registry, $adminHelper, $data, $shippingHelper, $taxHelper);
+        parent::__construct($context, $registry, $adminHelper, $data);
     }
 
     /**
