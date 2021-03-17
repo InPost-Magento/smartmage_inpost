@@ -63,6 +63,7 @@ define([
                     type: 'GET',
                 }).done(function(result) {
                     if(result.status !== 404) {
+                        checkoutData.setShippingInPostPoint(result);
                         resolve(result);
                     }
                 });
@@ -168,7 +169,7 @@ define([
                     self.setPoint(point.name).then(function() {
                         self.cleanPointDataHtml().then(function() {
                             self.pointDataHtml(point, self.selectPointHtml(true), true).then(function() {
-
+                                checkoutData.setShippingInPostPoint(point);
                             });
                         });
                     });
@@ -214,9 +215,8 @@ define([
                             modalMapInPost.addClass('modalMapInPost');
 
                             self.getPoint().then(function(selectedPoint) {
-                                var mySelectedPoint = selectedPoint;
-                                if(mySelectedPoint.length) {
-                                    easyPack.map.searchLockerPoint(mySelectedPoint);
+                                if(selectedPoint) {
+                                    easyPack.map.searchLockerPoint(selectedPoint);
                                 } else {
                                     var postcode = ($('[name="postcode"]').val()) ? $('[name="postcode"]').val() : '';
                                     var city = ($('[name="city"]').val()) ? $('[name="city"]').val() : '';

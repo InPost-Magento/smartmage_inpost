@@ -11,6 +11,9 @@ var config = {
             },
             'Magento_Checkout/js/checkout-loader': {
                 'Smartmage_Inpost/js/mixin/checkout-loader-mixin': true
+            },
+            'Magento_Checkout/js/checkout-data': {
+                'Smartmage_Inpost/js/mixin/checkout-data-mixin': true
             }
         }
     },

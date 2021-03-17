@@ -5,6 +5,7 @@ define(
         'Magento_Checkout/js/model/quote',
         'mage/translate',
         'Magento_Checkout/js/model/shipping-service',
+        'Magento_Checkout/js/checkout-data',
         'inPostPaczkomaty'
     ], function (
         $,
@@ -12,6 +13,7 @@ define(
         quote,
         $t,
         shippingService,
+        checkoutData,
         inPostPaczkomaty
     ) {
         'use strict';
@@ -32,8 +34,16 @@ define(
                     var self = this;
 
                     if (quote.shippingMethod().method_code === 'standard' || quote.shippingMethod().method_code === 'standardcod' || quote.shippingMethod().method_code === 'standardeow' || quote.shippingMethod().method_code === 'standardeowcod' ) {
-                        inPostPaczkomaty.getPoint().then(function(pointId) {
-                            if(pointId.length === 0) {
+                        var pointDataDB = checkoutData.getShippingInPostPoint();
+
+                        if( typeof pointDataDB === 'undefined' || pointDataDB === null ){
+                            self.errorValidationMessage(
+                                $t('Please select a pickup point')
+                            );
+                            return false;
+
+                        } else {
+                            if(pointDataDB.name.length === 0) {
                                 self.errorValidationMessage(
                                     $t('Please select a pickup point')
                                 );
@@ -41,18 +51,19 @@ define(
 
                             } else {
                                 if(quote.shippingMethod().method_code === 'standardcod' || quote.shippingMethod().method_code === 'standardeowcod') {
-                                    inPostPaczkomaty.getPointInformation(pointId).then(function(pointData) {
-                                        if(!pointData.type.includes('parcel_locker')) {
-                                            self.errorValidationMessage(
-                                                $t('The selected point does not support the cash on delivery method')
-                                            );
-                                            return false;
-                                        }
-                                    });
+                                    if(!pointDataDB.type.includes('parcel_locker')) {
+                                        self.errorValidationMessage(
+                                            $t('The selected point does not support the cash on delivery method')
+                                        );
+                                        return false;
+                                    }
                                 }
                             }
-                        });
+                        }
                     }
+
+                    return true;
+
                     this._super();
                 },
             });
