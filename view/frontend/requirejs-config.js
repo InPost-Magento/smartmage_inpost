@@ -9,6 +9,9 @@ var config = {
             'Magento_Checkout/js/view/shipping': {
                 'Smartmage_Inpost/js/mixin/shipping-mixin': true
             },
+            'Magento_Checkout/js/checkout-loader': {
+                'Smartmage_Inpost/js/mixin/checkout-loader-mixin': true
+            }
         }
     },
     paths: {
@@ -17,5 +20,3 @@ var config = {
         ],
     },
 };
-
-
