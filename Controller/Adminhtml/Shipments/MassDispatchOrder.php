@@ -7,13 +7,12 @@ use Magento\Framework\App\Response\Http\FileFactory;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Stdlib\DateTime\DateTime;
 use Magento\Ui\Component\MassAction\Filter;
+use Smartmage\Inpost\Model\ApiShipx\Service\DispatchOrder\Create as DispatchOrderCreate;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\ResourceModel\Shipment\CollectionFactory;
-use Smartmage\Inpost\Model\ApiShipx\Service\DispatchOrder\Create as DispatchOrderCreate;
 
 /**
  * Class MassPrintLabel
- * @package Smartmage\Inpost\Controller\Adminhtml\Shipments
  */
 class MassDispatchOrder extends MassActionAbstract
 {
@@ -56,7 +55,6 @@ class MassDispatchOrder extends MassActionAbstract
         parent::__construct($context, $filter, $collectionFactory, $configProvider);
     }
 
-
     /**
      * @return \Magento\Backend\Model\View\Result\Redirect|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
      * @throws \Magento\Framework\Exception\LocalizedException
@@ -76,9 +74,19 @@ class MassDispatchOrder extends MassActionAbstract
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $collection = $this->filter->getCollection($this->collectionFactory->create());
-        $selectedIds = $collection->getColumnValues('shipment_id');
 
         $defaultPickupPoint = $this->configProvider->getDefaultPickupPoint();
+
+        $selectedIds = [];
+        $omittedIds = [];
+
+        foreach ($collection as $item) {
+            if ($item->getSendingMethod() == 'dispatch_order') {
+                $selectedIds[] = $item->getShipmentId();
+            } else {
+                $omittedIds[] = $item->getShipmentId();
+            }
+        }
 
         $dispatchData = [
             'shipments' => $selectedIds,
@@ -89,9 +97,16 @@ class MassDispatchOrder extends MassActionAbstract
         $logger->info(print_r($dispatchData, true));
 
         try {
-            $this->dispatchOrderCreate->createDispatchOrders($dispatchData);
+            if (!empty($omittedIds)) {
+                $this->messageManager->addWarningMessage((count($omittedIds) > 1 ? __('Shipments') : __('Shipment'))
+                    . ' ' . implode(', ', $omittedIds)
+                    . ' ' . (count($omittedIds) > 1 ? __('have been omitted_m') : __('have been omitted_s')));
+            }
 
-            $this->messageManager->addSuccessMessage(__('Dispatch order was created'));
+            if (!empty($selectedIds)) {
+                $this->dispatchOrderCreate->createDispatchOrders($dispatchData);
+                $this->messageManager->addSuccessMessage(__('Dispatch order was created'));
+            }
         } catch (\Exception $e) {
             $logger->info(print_r($e->getMessage(), true));
 

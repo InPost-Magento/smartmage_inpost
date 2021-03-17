@@ -9,10 +9,20 @@ class ErrorHandler implements ErrorHandlerInterface
         $errors = '[' . $jsonResponse['error'] . ']<br>';
         $errors .= $jsonResponse['message'] . '<br>';
 
-        $details = $this->nestedValues($jsonResponse['details']);
-        foreach ($details as $detail) {
-            $errors .= '- ' . $detail . '<br>';
+        if (is_array($jsonResponse['details'])) {
+            $details = $this->nestedValues($jsonResponse['details']);
+
+            foreach ($details as $detail) {
+                if ($detail) {
+                    $errors .= '- ' . __($detail) . '<br>';
+                }
+            }
+        } else {
+            if ($jsonResponse['details']) {
+                $errors .= '- ' . __($jsonResponse['details']);
+            }
         }
+
 
         return $errors;
     }
