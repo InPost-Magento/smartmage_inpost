@@ -22,14 +22,7 @@ define(
                 inPostPoint: $('[data-shipping-inpost-selected-point]'),
 
                 initialize: function() {
-
                     this._super();
-
-                    shippingService.isLoading.subscribe(function (isLoading) {
-                        if (!isLoading) {
-                            inPostPaczkomaty.init();
-                        }
-                    });
 
                     inPostPaczkomaty.selectInPostPoint();
                     inPostPaczkomaty.hideInPostModalMap();

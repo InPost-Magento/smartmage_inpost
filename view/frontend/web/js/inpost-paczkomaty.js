@@ -96,10 +96,10 @@ define([
             return new Promise(function(resolve, reject) {
                 var self = $('[data-inpost-wrapper]');
                 var html = '<div data-inpost-point-data class="point-data">';
-                    html += '<p>'+ $t('Selected pickup point:') +'</p>';
-                    html += '<p>'+ point.name +' | ' + point.address_details.city + ', '+ point.address.line1 +'</p>';
-                    html += '</div>';
-                    html += selectPoint;
+                html += '<p>'+ $t('Selected pickup point:') +'</p>';
+                html += '<p>'+ point.name +' | ' + point.address_details.city + ', '+ point.address.line1 +'</p>';
+                html += '</div>';
+                html += selectPoint;
 
                 if(insert) {
                     self.prepend(html);
@@ -161,7 +161,8 @@ define([
             var self = this;
 
             return new Promise(function(resolve, reject) {
-                var map = easyPack.modalMap(function(point, modal) {
+                easyPack.modalMap(function(point, modal) {
+                    $('body').removeClass('overlay-modal-carrier');
                     modal.closeModal();
 
                     self.setPoint(point.name).then(function() {
@@ -213,8 +214,9 @@ define([
                             modalMapInPost.addClass('modalMapInPost');
 
                             self.getPoint().then(function(selectedPoint) {
-                                if(selectedPoint.length) {
-                                    easyPack.map.searchLockerPoint(selectedPoint);
+                                var mySelectedPoint = selectedPoint;
+                                if(mySelectedPoint.length) {
+                                    easyPack.map.searchLockerPoint(mySelectedPoint);
                                 } else {
                                     var postcode = ($('[name="postcode"]').val()) ? $('[name="postcode"]').val() : '';
                                     var city = ($('[name="city"]').val()) ? $('[name="city"]').val() : '';
@@ -258,7 +260,14 @@ define([
         },
 
         init: function() {
-            this.renderInPostData();
+            var self = this;
+
+            shippingService.isLoading.subscribe(function (isLoading) {
+                if (!isLoading) {
+                    self.renderInPostData();
+                }
+            });
+            self.renderInPostData();
         }
     }
 });
