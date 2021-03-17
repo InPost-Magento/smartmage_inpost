@@ -14,6 +14,7 @@ interface ShipmentInterface
     const REFERENCE = 'reference';
     const TRACKING_NUMBER = 'tracking_number';
     const TARGET_POINT = 'target_point';
+    const DISPATCH_ORDER_ID = 'dispatch_order_id';
 
     /**
      * Get Id
@@ -84,6 +85,13 @@ interface ShipmentInterface
      * @return string|null
      */
     public function getTargetPoint();
+
+    /**
+     * Get dispatch order id
+     *
+     * @return string|null
+     */
+    public function getDispatchOrderId();
 
     /**
      * Set Id
@@ -164,4 +172,12 @@ interface ShipmentInterface
      * @return $this
      */
     public function setTargetPoint($targetPoint);
+
+    /**
+     * Set dispatch order id
+     *
+     * @param string $dispatchOrderId
+     * @return $this
+     */
+    public function setDispatchOrderId($dispatchOrderId);
 }

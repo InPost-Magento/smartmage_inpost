@@ -43,7 +43,7 @@ class Multiple extends AbstractSearch
         $daysAgo = $this->configProvider->getGetShipmentsDays();
         $daysAgo = date('Y-m-d', strtotime("-" . $daysAgo . " days"));
 
-        for ($page = 1; ; $page++) {
+        for ($page = 1;; $page++) {
             $result = $this->call(null, ['page' => $page, 'created_at_gteq' => $daysAgo]);
 
             $logger->info($this->callResult);
@@ -110,6 +110,11 @@ class Multiple extends AbstractSearch
                         $formatedData[ShipmentInterface::RECEIVER_DATA]       = $receiverData;
                         $formatedData[ShipmentInterface::REFERENCE]           = $item['reference'];
                         $formatedData[ShipmentInterface::TRACKING_NUMBER]     = $item['tracking_number'];
+
+                        if (isset($item['custom_attributes']['dispatch_order_id'])) {
+                            $formatedData[ShipmentInterface::DISPATCH_ORDER_ID]
+                                = $item['custom_attributes']['dispatch_order_id'];
+                        }
 
                         if (isset($item['custom_attributes']) && isset($item['custom_attributes']['target_point'])) {
                             $formatedData[ShipmentInterface::TARGET_POINT] = $item['custom_attributes']['target_point'];
