@@ -10,7 +10,8 @@
             "receiver_data": true,
             "reference": true,
             "tracking_number": true,
-            "target_point": true
+            "target_point": true,
+            "dispatch_order_id": true
         },
         "constraint": {
             "PRIMARY": true
@@ -30,10 +31,12 @@
     "smartmage_inpost_shipment_order_link": {
         "column": {
             "shipment_id": true,
-            "increment_id": true
+            "increment_id": true,
+            "link_id": true
         },
         "constraint": {
-            "FK_F045BA5396005F52F24D55F908B5370B": true
+            "FK_F045BA5396005F52F24D55F908B5370B": true,
+            "PRIMARY": true
         }
     }
 }

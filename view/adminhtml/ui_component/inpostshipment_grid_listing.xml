@@ -185,5 +185,13 @@
                 <resizeDefaultWidth>20</resizeDefaultWidth>
             </settings>
         </column>
+
+        <column name="dispatch_order_id">
+            <settings>
+                <filter>text</filter>
+                <bodyTmpl>ui/grid/cells/text</bodyTmpl>
+                <label translate="true">Dispatch Order Id</label>
+            </settings>
+        </column>
     </columns>
 </listing>

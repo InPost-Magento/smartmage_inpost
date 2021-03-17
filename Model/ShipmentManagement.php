@@ -115,8 +115,16 @@ class ShipmentManagement implements Api\ShipmentManagementInterface
         $shipment->setReceiverData($shipmentData[ShipmentInterface::RECEIVER_DATA]);
         $shipment->setReference($shipmentData[ShipmentInterface::REFERENCE]);
         $shipment->setTrackingNumber($shipmentData[ShipmentInterface::TRACKING_NUMBER]);
-        $shipment->setTargetPoint(isset($shipmentData[ShipmentInterface::TARGET_POINT]) ? $shipmentData[ShipmentInterface::TARGET_POINT] : '');
-
+        $shipment->setTargetPoint(
+            isset($shipmentData[ShipmentInterface::TARGET_POINT])
+                ? $shipmentData[ShipmentInterface::TARGET_POINT]
+                : ''
+        );
+        $shipment->setDispatchOrderId(
+            isset($shipmentData[ShipmentInterface::DISPATCH_ORDER_ID])
+                ? $shipmentData[ShipmentInterface::DISPATCH_ORDER_ID]
+                : ''
+        );
         $this->shipmentRepository->save($shipment);
     }
 
