@@ -68,6 +68,11 @@ Large,Gabaryt C
 X Large,Gabaryt D
 Create Shipment,Stwórz przesyłkę
 Back,Wróć
+Please select a pickup point, Proszę wybrać punkt odbioru
+Please select a pickup point, Wybierz paczkomat
+Change pickup point, Wybierz inny paczkomat
+The selected point does not support the cash on delivery method, Wybrany punkt nie obsługuje metody płatności przy odbiorze
+Selected pickup point:, Wybrany paczkomat:
 "Point: ","Punkt: "
 The shipment list has been successfully synchronized,Lista przesyłek została pomyślnie zsynchronizowana
 Order not exist,Zamówienie nie istnieje
