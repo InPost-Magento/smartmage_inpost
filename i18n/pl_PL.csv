@@ -124,3 +124,9 @@ Shipment id,Numer przesyłki
 Refresh list, Odśwież listę
 "The service does not have a default drop point selected. If you send the parcel in a way other than ""Pickup by courier"", please select the point in the","Usługa nie ma wybranego domyślnego punktu nadania. Jeżeli nadajesz przesyłkę w inny sposób niż ""Odbiór przez kuriera"", należy wybrać punkt w"
 Configuration Page,konfiguracji
+Dispatch order was created,Zlecenie odbioru zostało stworzone
+Shipments,Przesyłki
+Shipment,Przesyłka
+have been omitted_m,zostały pominięte z powodu niedostępnych operacji
+have been omitted_s,została pominięta z powodu niedostępnych operacji
+Shipments Już nadane.,Przesyłki już nadane.

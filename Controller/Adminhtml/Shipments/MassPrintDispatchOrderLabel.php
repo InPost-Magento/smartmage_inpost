@@ -16,11 +16,9 @@ use Smartmage\Inpost\Model\ResourceModel\Shipment\CollectionFactory;
 
 /**
  * Class massPrintDispatchOrderLabel
- * @package Smartmage\Inpost\Controller\Adminhtml\Shipments
  */
 class MassPrintDispatchOrderLabel extends MassActionAbstract
 {
-
     protected $printoutDispatchOrders;
 
     /**
@@ -71,7 +69,17 @@ class MassPrintDispatchOrderLabel extends MassActionAbstract
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $collection = $this->filter->getCollection($this->collectionFactory->create());
-        $shipmentIds = $collection->getColumnValues('shipment_id');
+
+        $shipmentIds = [];
+        $omittedIds = [];
+
+        foreach ($collection as $item) {
+            if ($item->getSendingMethod() == 'dispatch_order') {
+                $shipmentIds[] = $item->getShipmentId();
+            } else {
+                $omittedIds[] = $item->getShipmentId();
+            }
+        }
 
         $labelFormat = $this->configProvider->getLabelFormat();
         $labelSize = $this->configProvider->getLabelSize();
@@ -86,17 +94,24 @@ class MassPrintDispatchOrderLabel extends MassActionAbstract
         $logger->info(print_r($dispatchOrdersData, true));
 
         try {
-            $result = $this->printoutDispatchOrders->getDispatchOrders($dispatchOrdersData);
+            if (!empty($shipmentIds)) {
+                $result = $this->printoutDispatchOrders->getDispatchOrders($dispatchOrdersData);
 
-            $fileContent = ['type' => 'string', 'value' => $result[CallResult::STRING_FILE], 'rm' => true];
+                $fileContent = ['type' => 'string', 'value' => $result[CallResult::STRING_FILE], 'rm' => true];
 
-            return $this->fileFactory->create(
-                sprintf('labels-%s.' . $labelFormat, $this->dateTime->date('Y-m-d_H-i-s')),
-                $fileContent,
-                DirectoryList::VAR_DIR,
-                LabelFormat::LABEL_CONTENT_TYPES[$labelFormat]
-            );
-
+                return $this->fileFactory->create(
+                    sprintf('labels-%s.' . $labelFormat, $this->dateTime->date('Y-m-d_H-i-s')),
+                    $fileContent,
+                    DirectoryList::VAR_DIR,
+                    LabelFormat::LABEL_CONTENT_TYPES[$labelFormat]
+                );
+            } else {
+                if (!empty($omittedIds)) {
+                    $this->messageManager->addWarningMessage((count($omittedIds) > 1 ? __('Shipments') : __('Shipment'))
+                        . ' ' . implode(', ', $omittedIds)
+                        . ' ' . (count($omittedIds) > 1 ? __('have been omitted_m') : __('have been omitted_s')));
+                }
+            }
         } catch (\Exception $e) {
             $logger->info(print_r($e->getMessage(), true));
             $this->messageManager->addExceptionMessage($e);
