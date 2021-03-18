@@ -31,40 +31,42 @@ define(
                 },
 
                 validateShippingInformation: function() {
+
+                    this._super();
                     var self = this;
 
-                    if (quote.shippingMethod().method_code === 'standard' || quote.shippingMethod().method_code === 'standardcod' || quote.shippingMethod().method_code === 'standardeow' || quote.shippingMethod().method_code === 'standardeowcod' ) {
-                        var pointDataDB = checkoutData.getShippingInPostPoint();
+                    if(quote.shippingMethod()) {
+                        if (quote.shippingMethod().method_code === 'standard' || quote.shippingMethod().method_code === 'standardcod' || quote.shippingMethod().method_code === 'standardeow' || quote.shippingMethod().method_code === 'standardeowcod' ) {
+                            var pointDataDB = checkoutData.getShippingInPostPoint();
 
-                        if( typeof pointDataDB === 'undefined' || pointDataDB === null ){
-                            self.errorValidationMessage(
-                                $t('Please select a pickup point')
-                            );
-                            return false;
-
-                        } else {
-                            if(pointDataDB.name.length === 0) {
+                            if( typeof pointDataDB === 'undefined' || pointDataDB === null ){
                                 self.errorValidationMessage(
                                     $t('Please select a pickup point')
                                 );
                                 return false;
 
                             } else {
-                                if(quote.shippingMethod().method_code === 'standardcod' || quote.shippingMethod().method_code === 'standardeowcod') {
-                                    if(!pointDataDB.type.includes('parcel_locker')) {
-                                        self.errorValidationMessage(
-                                            $t('The selected point does not support the cash on delivery method')
-                                        );
-                                        return false;
+                                if(pointDataDB.name.length === 0) {
+                                    self.errorValidationMessage(
+                                        $t('Please select a pickup point')
+                                    );
+                                    return false;
+
+                                } else {
+                                    if(quote.shippingMethod().method_code === 'standardcod' || quote.shippingMethod().method_code === 'standardeowcod') {
+                                        if(!pointDataDB.type.includes('parcel_locker')) {
+                                            self.errorValidationMessage(
+                                                $t('The selected point does not support the cash on delivery method')
+                                            );
+                                            return false;
+                                        }
                                     }
                                 }
                             }
                         }
+
+                        return true;
                     }
-
-                    return true;
-
-                    this._super();
                 },
             });
         }
