@@ -81,7 +81,7 @@ class MassDispatchOrder extends MassActionAbstract
         $omittedIds = [];
 
         foreach ($collection as $item) {
-            if ($item->getSendingMethod() == 'dispatch_order') {
+            if ($item->getSendingMethod() == 'dispatch_order' && !$item->getDispatchOrderId()) {
                 $selectedIds[] = $item->getShipmentId();
             } else {
                 $omittedIds[] = $item->getShipmentId();
