@@ -26,9 +26,13 @@
             <div>
                 <?php $details = $block->getShippingDetails($shipment); ?>
                 <?php foreach ($details as $key => $value): ?>
-                <div class="details-<?= $key ?>">
-                    <?php echo $block->escapeHtml($value) ?>
-                </div>
+                    <div class="details-<?= $key ?>">
+                        <?php echo $block->escapeHtml($value) ?>
+                        <?php if($key == 'target_point') : ?>
+                            <?php $pointName = explode(" ", $value); ?>
+                            <a data-inpost-select-point="<?= $pointName[1] ?>>" href="#"><?= $block->escapeHtml(__('Show on the map')) ?></a>
+                        <?php endif; ?>
+                    </div>
                 <?php endforeach; ?>
             </div>
         </td>
