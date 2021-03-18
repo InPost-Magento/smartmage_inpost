@@ -20,6 +20,7 @@ define([
         initData = function () {
             return {
                 'shippingInPostPointData': null,
+                'shippingInPostModeData': null,
             };
         },
 
@@ -52,6 +53,17 @@ define([
 
             getShippingInPostPoint: function () {
                 return getData().shippingInPostPointData;
+            },
+
+            setShippingInPostMode: function (data) {
+                var obj = getData();
+
+                obj.shippingInPostModeData = data;
+                saveData(obj);
+            },
+
+            getShippingInPostMode: function () {
+                return getData().shippingInPostModeData;
             },
         };
         return $.extend(checkoutData, mixin);
