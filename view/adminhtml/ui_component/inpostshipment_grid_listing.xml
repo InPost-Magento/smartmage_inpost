@@ -186,7 +186,7 @@
             </settings>
         </column>
 
-        <column name="dispatch_order_id">
+        <column name="dispatch_order_id" class="Smartmage\Inpost\Ui\Component\Listing\Column\DispatchOrderId">
             <settings>
                 <filter>text</filter>
                 <bodyTmpl>ui/grid/cells/text</bodyTmpl>
