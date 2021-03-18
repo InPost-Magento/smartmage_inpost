@@ -5,22 +5,38 @@ define([
     'Magento_Checkout/js/model/shipping-service',
     'mage/translate',
     'Magento_Checkout/js/checkout-data',
+    'Magento_Checkout/js/model/full-screen-loader',
     'inPostSdk',
-], function ($, Component, quote, shippingService, $t, checkoutData) {
+], function ($, Component, quote, shippingService, $t, checkoutData, fullScreenLoader) {
     'use strict';
 
     return {
         inPostPointData: 'https://api-shipx-pl.easypack24.net/v1/points/',
+        apiEndpointProduction: 'https://api-pl-points.easypack24.net/v1',
+        apiEndpointTesting: 'https://test-api-pl-points.easypack24.net/v1',
 
         inPostMethod: function() {
             var method = [
                 ['#label_method_standardcod_inpostlocker', 'parcel_locker'],
                 ['#label_method_standard_inpostlocker', 'parcel_locker-pop'],
-                ['#label_method_standardeow_inpostlocker', 'parcel_locker-pop'],
+                ['#label_method_standardeow_inpostlocker', 'parcel_locker'],
                 ['#label_method_standardeowcod_inpostlocker', 'parcel_locker'],
             ];
 
             return method;
+        },
+
+        getMode: function() {
+            return new Promise(function(resolve, reject) {
+                $.ajax({
+                    type: "POST",
+                    url: '/inpost/locker/getmode',
+                    dataType: 'json',
+                }).done(function(data) {
+                    checkoutData.setShippingInPostMode(data.mode);
+                    resolve(data.mode);
+                });
+            });
         },
 
         setPoint: function(dataToSend) {
@@ -139,9 +155,11 @@ define([
         },
 
         InPostConfig: function(pointsTypes) {
+            var self = this;
+
             return new Promise(function(resolve, reject) {
                 easyPack.init({
-                    apiEndpoint: 'https://api-pl-points.easypack24.net/v1',
+                    apiEndpoint: (checkoutData.getShippingInPostMode() === 'prod' ? self.apiEndpointProduction : self.apiEndpointTesting),
                     defaultLocale: 'pl',
                     mapType: 'osm',
                     searchType: 'osm',
@@ -166,10 +184,13 @@ define([
                     $('body').removeClass('overlay-modal-carrier');
                     modal.closeModal();
 
+                    fullScreenLoader.startLoader();
+
                     self.setPoint(point.name).then(function() {
                         self.cleanPointDataHtml().then(function() {
                             self.pointDataHtml(point, self.selectPointHtml(true), true).then(function() {
                                 checkoutData.setShippingInPostPoint(point);
+                                fullScreenLoader.stopLoader();
                             });
                         });
                     });
@@ -236,13 +257,16 @@ define([
         renderInPostData: function() {
             var self = this;
 
+            fullScreenLoader.startLoader();
             self.getPoint().then(function(pointId) {
                 if(pointId) {
                     self.getPointInformation(pointId).then(function(pointData) {
                         $.each(self.inPostMethod(), function(index, value) {
                             if($(value[0]).length) {
                                 self.wrapperPointHtml($(value[0]), value[1]).then(function() {
-                                    self.insertData($(value[0]), pointData).then(function() {});
+                                    self.insertData($(value[0]), pointData).then(function() {
+                                        fullScreenLoader.stopLoader();
+                                    });
                                 });
                             }
                         });
@@ -251,7 +275,9 @@ define([
                     $.each(self.inPostMethod(), function(index, value) {
                         if($(value[0]).length) {
                             self.wrapperPointHtml($(value[0]), value[1]).then(function() {
-                                self.insertData($(value[0]), '').then(function() {});
+                                self.insertData($(value[0]), '').then(function() {
+                                    fullScreenLoader.stopLoader();
+                                });
                             });
                         }
                     });
@@ -267,7 +293,10 @@ define([
                     self.renderInPostData();
                 }
             });
-            self.renderInPostData();
+
+            self.getMode().then(function() {
+                self.renderInPostData();
+            });
         }
     }
 });
