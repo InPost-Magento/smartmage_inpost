@@ -26,9 +26,13 @@
             <div>
                 <?php $details = $block->getShippingDetails($shipment); ?>
                 <?php foreach ($details as $key => $value): ?>
-                <div class="details-<?= $key ?>">
-                    <?php echo $block->escapeHtml($value) ?>
-                </div>
+                    <div class="details-<?= $key ?>">
+                        <?php echo $block->escapeHtml($value) ?>
+                        <?php if($key == 'target_point') : ?>
+                            <?php $pointName = explode(" ", $value); ?>
+                            <a data-inpost-select-point="<?= $pointName[1] ?>" href="#"><?= $block->escapeHtml(__('Show on the map')) ?></a>
+                        <?php endif; ?>
+                    </div>
                 <?php endforeach; ?>
             </div>
         </td>
@@ -54,7 +58,7 @@ $methods = $block->getInpostShippingMethods();
 $selectedMethod = $block->getSelectedMethod();
 $orderId = $block->getOrder()->getId();
 ?>
-    <form action="<?= $this->getUrl('smartmageinpost/shipments/create') ?>">
+    <form action="<?= $this->getUrl('smartmageinpost/shipments/create') ?>" class="inpost-shipments-form">
         <div class="control">
             <input type="hidden" name="order_id" value="<?= $orderId ?>">
             <select
