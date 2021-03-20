@@ -32,6 +32,8 @@ class Size extends AbstractSelect
             $config['options'] = $this->size->toOptionArray();
             if (isset($data['size'])) {
                 $config['default'] = $data['size'];
+            } else {
+                $config['default'] = $this->configProvider->getDefaultSize();
             }
             $this->setData('config', (array)$config);
         }

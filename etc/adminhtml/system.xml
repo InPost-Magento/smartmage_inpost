@@ -660,12 +660,14 @@
                 </field>
                 <field id="sender_name" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Sender - name</label>
+                    <validate>required-entry</validate>
                     <depends>
                         <field id="change_address">1</field>
                     </depends>
                 </field>
                 <field id="sender_surname" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Sender - surname</label>
+                    <validate>required-entry</validate>
                     <depends>
                         <field id="change_address">1</field>
                     </depends>
@@ -678,42 +680,49 @@
                 </field>
                 <field id="sender_email" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1" >
                     <label>Sender - email</label>
+                    <validate>required-entry no-whitespace</validate>
                     <depends>
                         <field id="change_address">1</field>
                     </depends>
                 </field>
                 <field id="sender_phone" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1" >
                     <label>Sender - phone</label>
+                    <validate>required-entry no-whitespace</validate>
                     <depends>
                         <field id="change_address">1</field>
                     </depends>
                 </field>
                 <field id="sender_street" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1" >
                     <label>Sender - street</label>
+                    <validate>required-entry</validate>
                     <depends>
                         <field id="change_address">1</field>
                     </depends>
                 </field>
                 <field id="sender_building_number" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1" >
                     <label>Sender - building number</label>
+                    <validate>required-entry</validate>
                     <depends>
                         <field id="change_address">1</field>
                     </depends>
                 </field>
                 <field id="sender_city" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1" >
                     <label>Sender - city</label>
+                    <validate>required-entry</validate>
                     <depends>
                         <field id="change_address">1</field>
                     </depends>
                 </field>
                 <field id="sender_postcode" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Sender - postcode</label>
+                    <validate>required-entry no-whitespace</validate>
                     <depends>
                         <field id="change_address">1</field>
                     </depends>
                 </field>
                 <field id="sender_country_code" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1" >
                     <label>Sender - country code</label>
+                    <validate>required-entry no-whitespace</validate>
                     <depends>
                         <field id="change_address">1</field>
                     </depends>
@@ -740,16 +749,39 @@
                     <label>Weight unit</label>
                     <source_model>Smartmage\Inpost\Model\Config\Source\WeightUnit</source_model>
                 </field>
-                <field id="automatic_pay_for_package" translate="label" type="select" sortOrder="220" showInDefault="1" showInWebsite="1" canRestore="1">
+                <field id="default_weight" translate="label" type="text" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Default Weight (kg)</label>
+                    <comment>Default value used if the order weight is 0kg</comment>
+                </field>
+
+                <field id="default_width" translate="label" type="text" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Default Width (mm)</label>
+                    <comment>Default value used in shippments</comment>
+                </field>
+                <field id="default_length" translate="label" type="text" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Default Length (mm)</label>
+                    <comment>Default value used in shippments</comment>
+                </field>
+                <field id="default_height" translate="label" type="text" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Default Height (mm)</label>
+                    <comment>Default value used in shippments</comment>
+                </field>
+
+                <field id="default_size" translate="label" type="select" sortOrder="260" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Default Size</label>
+                    <source_model>Smartmage\Inpost\Model\Config\Source\Size</source_model>
+                </field>
+
+                <field id="automatic_pay_for_package" translate="label" type="select" sortOrder="270" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Automatic payment for generated package</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="default_pickup_pont" translate="label comment" type="select" sortOrder="230" showInDefault="1" showInWebsite="1">
+                <field id="default_pickup_pont" translate="label comment" type="select" sortOrder="280" showInDefault="1" showInWebsite="1">
                     <label>Default pickup point</label>
                     <source_model>Smartmage\Inpost\Model\Config\Source\DefaultPickupPoint</source_model>
                     <comment>If api is unavailable then this field will be empty</comment>
                 </field>
-                <field id="get_shipments_days" translate="label" type="text" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <field id="get_shipments_days" translate="label" type="text" sortOrder="290" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Get shipments from x days ago</label>
                     <validate>validate-number validate-zero-or-greater</validate>
                 </field>

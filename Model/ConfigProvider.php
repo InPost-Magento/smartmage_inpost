@@ -44,6 +44,12 @@ class ConfigProvider
     const PDF = 'pdf';
     const EPL = 'epl';
     const ZPL = 'zpl';
+    const DEFAULT_WEIGHT = 'default_weight';
+    const DEFAULT_SIZE = 'default_size';
+    const DEFAULT_WIDTH = 'default_width';
+    const DEFAULT_HEIGHT = 'default_height';
+    const DEFAULT_LENGTH = 'default_length';
+    const SHIPPING_SENDER_COMPANY_NAME = 'sender_company';
 
     /**
      * @var ScopeConfigInterface
@@ -244,6 +250,11 @@ class ConfigProvider
         return $this->getShippingConfigData(self::SHIPPING_SENDER_COUNTRY_CODE);
     }
 
+    public function getSenderCompany()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_SENDER_COMPANY_NAME);
+    }
+
     /**
      * @return mixed
      * @throws \Magento\Framework\Exception\NoSuchEntityException
@@ -360,5 +371,30 @@ class ConfigProvider
             ScopeInterface::SCOPE_STORE,
             $this->storeManager->getStore()
         );
+    }
+
+    public function getDefaultWeight()
+    {
+        return $this->getShippingConfigData(self::DEFAULT_WEIGHT);
+    }
+
+    public function getDefaultSize()
+    {
+        return $this->getShippingConfigData(self::DEFAULT_SIZE);
+    }
+
+    public function getDefaultWidth()
+    {
+        return $this->getShippingConfigData(self::DEFAULT_WIDTH);
+    }
+
+    public function getDefaultLength()
+    {
+        return $this->getShippingConfigData(self::DEFAULT_LENGTH);
+    }
+
+    public function getDefaultHeight()
+    {
+        return $this->getShippingConfigData(self::DEFAULT_HEIGHT);
     }
 }
