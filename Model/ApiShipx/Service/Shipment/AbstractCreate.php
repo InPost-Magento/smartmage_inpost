@@ -43,7 +43,7 @@ abstract class AbstractCreate extends AbstractService
         $organizationId = $configProvider->getOrganizationId();
         $this->callUri = 'v1/organizations/' . $organizationId . '/shipments';
 
-        $this->successMessage = __('The shipment created sccessfully');
+        $this->successMessage = __('The shipment created successfully');
         parent::__construct($logger, $configProvider, $errorHandler);
     }
 
