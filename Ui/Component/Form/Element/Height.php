@@ -20,8 +20,10 @@ class Height extends AbstractInput
         if (isset($config['dataScope']) && $config['dataScope'] == 'height') {
             if (isset($data['height'])) {
                 $config['default'] = $data['height'];
-                $this->setData('config', (array)$config);
+            } else {
+                $config['default'] = $this->configProvider->getDefaultHeight();
             }
+            $this->setData('config', (array)$config);
         }
     }
 }

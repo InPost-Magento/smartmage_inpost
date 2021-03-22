@@ -139,3 +139,18 @@ Shipments Już nadane.,Przesyłki już nadane.
 Custom_attributes target_point Nie istnieje,Wybrany Paczkomat docelowy nie istnieje
 Dispatch Order Id,Numer zlecenia odbioru
 Not applicable,Nie dotyczy
+Default Weight (kg),Domyślna waga (kg)
+Default value used if the order weight is 0kg,"Domyślna wartość używana w paczkach kurierskich, jeżeli waga zamówienia jest równa 0kg"
+Default Width (mm),Domyślna szerokość (mm)
+Default Length (mm),Domyślna długość (mm)
+Default Height (mm),Domyślna wysokość (mm)
+Default value used in shippments,Domyślna wartość używana podczas tworzenia paczek kurierskich
+Default Size,Domyślny gabaryt (paczkomaty)
+Receiver phone Nieprawidłowy,Nieprawidłowy numer telefonu odbiorcy
+Receiver address post_code Nieprawidłowy,Nieprawidłowy kod pocztowy odbiorcy
+Receiver email Nieprawidłowy,Nieprawidłowy adres email odbiorcy
+Parcels dimensions height Mniej niż,Wysokość paczki jest zbyt duża
+Parcels dimensions length Mniej niż,Długość paczki jest zbyt duża
+Parcels dimensions width Mniej niż,Szerokość paczki jest zbyt duża
+Insurance amount Więcej niż,Wartość ubezpieczenia jest mniejsza niż 0
+Insurance amount Nie jest cyfrą,Wartość ubezpieczenia nie jest cyfrą

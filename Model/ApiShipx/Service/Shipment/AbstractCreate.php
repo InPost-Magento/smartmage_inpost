@@ -141,6 +141,23 @@ abstract class AbstractCreate extends AbstractService
         $this->requestBody['reference'] = $data['reference'];
         $this->requestBody['only_choice_of_offer'] = false;
 
+        if ($this->configProvider->getChangeAddress()) {
+            $this->requestBody['sender'] = [
+                'company_name' => $this->configProvider->getSenderCompany(),
+                'email' => $this->configProvider->getSenderEmail(),
+                'phone' => $this->configProvider->getSenderPhone(),
+                'first_name' => $this->configProvider->getSenderName(),
+                'last_name' => $this->configProvider->getSenderSurname(),
+                'address' => [
+                    "street" => $this->configProvider->getSenderStreet(),
+                    "building_number" => $this->configProvider->getSenderBuildingNumber(),
+                    "city" => $this->configProvider->getSenderCity(),
+                    "post_code" => $this->configProvider->getSenderPostcode(),
+                    "country_code" => $this->configProvider->getSenderCountryCode(),
+                ]
+            ];
+        }
+
         if ($data['insurance']) {
             $this->requestBody['insurance'] = [
                 "amount" => $data['insurance'],

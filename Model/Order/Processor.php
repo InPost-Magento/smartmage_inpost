@@ -76,6 +76,10 @@ class Processor
             $weight = $weight/1000;
         }
 
+        if ($weight == 0) {
+            $weight = $this->configProvider->getDefaultWeight();
+        }
+
         return $weight;
     }
 

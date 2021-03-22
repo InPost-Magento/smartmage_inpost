@@ -20,8 +20,10 @@ class Width extends AbstractInput
         if (isset($config['dataScope']) && $config['dataScope'] == 'width') {
             if (isset($data['width'])) {
                 $config['default'] = $data['width'];
-                $this->setData('config', (array)$config);
+            } else {
+                $config['default'] = $this->configProvider->getDefaultWidth();
             }
+            $this->setData('config', (array)$config);
         }
     }
 }

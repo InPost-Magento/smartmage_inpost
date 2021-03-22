@@ -15,6 +15,11 @@
                 <weight_unit>kg</weight_unit>
                 <automatic_pay_for_package>0</automatic_pay_for_package>
                 <get_shipments_days>60</get_shipments_days>
+                <default_size>small</default_size>
+                <default_weight>1</default_weight>
+                <default_width>360</default_width>
+                <default_length>80</default_length>
+                <default_height>640</default_height>
             </inpost>
         </shipping>
         <carriers>

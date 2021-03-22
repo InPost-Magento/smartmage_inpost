@@ -20,8 +20,10 @@ class Length extends AbstractInput
         if (isset($config['dataScope']) && $config['dataScope'] == 'length') {
             if (isset($data['length'])) {
                 $config['default'] = $data['length'];
-                $this->setData('config', (array)$config);
+            } else {
+                $config['default'] = $this->configProvider->getDefaultLength();
             }
+            $this->setData('config', (array)$config);
         }
     }
 }
