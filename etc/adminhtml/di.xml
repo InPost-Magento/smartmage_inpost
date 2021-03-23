@@ -9,6 +9,13 @@
                         <item name="template" xsi:type="string">Smartmage_Inpost::messages/warning_message.phtml</item>
                     </item>
                 </item>
+
+                <item name="errorInpostMassMessage" xsi:type="array">
+                    <item name="renderer" xsi:type="const">\Magento\Framework\View\Element\Message\Renderer\BlockRenderer::CODE</item>
+                    <item name="data" xsi:type="array">
+                        <item name="template" xsi:type="string">Smartmage_Inpost::messages/error_message_mass.phtml</item>
+                    </item>
+                </item>
             </argument>
         </arguments>
     </type>

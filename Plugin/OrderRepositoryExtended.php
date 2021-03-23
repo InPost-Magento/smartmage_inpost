@@ -4,6 +4,7 @@ namespace Smartmage\Inpost\Plugin;
 
 use Magento\Sales\Api\Data\OrderExtensionFactory;
 use Magento\Sales\Api\Data\OrderInterface;
+use Magento\Sales\Api\Data\OrderSearchResultInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterface;
 use Smartmage\Inpost\Api\ShipmentOrderLinksProviderInterface;
@@ -45,6 +46,17 @@ class OrderRepositoryExtended
         return $order;
     }
 
+    public function afterGetList(
+        OrderRepositoryInterface $subject,
+        OrderSearchResultInterface $searchResult
+    ) {
+        foreach ($searchResult->getItems() as $result) {
+            $this->loadExtensionAttributes($result);
+        }
+
+        return $searchResult;
+    }
+
     /**
      * @param \Magento\Sales\Api\Data\OrderInterface $order
      */
@@ -63,6 +75,7 @@ class OrderRepositoryExtended
 
         $order->setExtensionAttributes($orderExtension);
     }
+
 
     /**
      * @param OrderRepositoryInterface $subject

@@ -12,10 +12,25 @@ use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Create\Locker;
 
 class Save extends AbstractSave
 {
-
+    /**
+     * @var ShipmentOrderLinkInterfaceFactory
+     */
     private $orderLinkFactory;
+
+    /**
+     * @var ShipmentOrderLinkRepositoryInterface
+     */
     private $orderLinkRepository;
 
+    /**
+     * Save constructor.
+     * @param Action\Context $context
+     * @param Courier $courier
+     * @param Locker $locker
+     * @param OrderRepositoryInterface $orderRepository
+     * @param ShipmentOrderLinkInterfaceFactory $orderLinkFactory
+     * @param ShipmentOrderLinkRepositoryInterface $orderLinkRepository
+     */
     public function __construct(
         Action\Context $context,
         Courier $courier,
