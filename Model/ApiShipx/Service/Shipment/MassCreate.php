@@ -3,6 +3,8 @@
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment;
 
 use Magento\Framework\Pricing\PriceCurrencyInterface;
+use Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterfaceFactory;
+use Smartmage\Inpost\Api\ShipmentOrderLinkRepositoryInterface;
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
 use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Create\Courier;
 use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Create\Locker;
@@ -46,6 +48,16 @@ class MassCreate
     protected $orderProcessor;
 
     /**
+     * @var ShipmentOrderLinkInterfaceFactory
+     */
+    private $orderLinkFactory;
+
+    /**
+     * @var ShipmentOrderLinkRepositoryInterface
+     */
+    private $orderLinkRepository;
+
+    /**
      * MassCreate constructor.
      * @param ShippingMethods $shippingMethods
      * @param Locker $locker
@@ -53,6 +65,8 @@ class MassCreate
      * @param ConfigProvider $configProvider
      * @param PriceCurrencyInterface $priceCurrency
      * @param OrderProcessor $orderProcessor
+     * @param ShipmentOrderLinkInterfaceFactory $orderLinkFactory
+     * @param ShipmentOrderLinkRepositoryInterface $orderLinkRepository
      */
     public function __construct(
         ShippingMethods $shippingMethods,
@@ -60,7 +74,9 @@ class MassCreate
         Courier $courier,
         ConfigProvider $configProvider,
         PriceCurrencyInterface $priceCurrency,
-        OrderProcessor $orderProcessor
+        OrderProcessor $orderProcessor,
+        ShipmentOrderLinkInterfaceFactory $orderLinkFactory,
+        ShipmentOrderLinkRepositoryInterface $orderLinkRepository
     ) {
         $this->shippingMethods = $shippingMethods;
         $this->locker = $locker;
@@ -68,6 +84,8 @@ class MassCreate
         $this->configProvider = $configProvider;
         $this->priceCurrency = $priceCurrency;
         $this->orderProcessor = $orderProcessor;
+        $this->orderLinkFactory = $orderLinkFactory;
+        $this->orderLinkRepository = $orderLinkRepository;
     }
 
     /**
@@ -119,6 +137,11 @@ class MassCreate
 
                 if (isset($result['status']) && $result['status'] == CallResult::STATUS_SUCCESS) {
                     $successOrderIds[] = $order->getIncrementId();
+
+                    $orderLink = $this->orderLinkFactory->create();
+                    $orderLink->setIncrementId($order->getIncrementId());
+                    $orderLink->setShipmentId($result[CallResult::STRING_RESPONSE_SHIPMENT_ID]);
+                    $this->orderLinkRepository->save($orderLink);
                 }
             } else {
                 $notInpostMethods[] = $order->getIncrementId();
