@@ -4,16 +4,16 @@
         <policy id="script-src">
             <values>
                 <value id="inpost-geowidget" type="host">https://geowidget.easypack24.net</value>
+                <value id="easypack" type="host">*.easypack24.net</value>
+                <value id="inpost" type="host">*.inpost.pl</value>
+                <value id="osm" type="host">*.openstreetmap.org</value>
             </values>
         </policy>
         <policy id="connect-src">
             <values>
-                <value id="inpost-api-production" type="host">https://api-shipx-pl.easypack24.net</value>
-                <value id="inpost-api-test" type="host">https://sandbox-api-shipx-pl.easypack24.net</value>
-                <value id="inpost-geowidget" type="host">https://api-pl-points.easypack24.net</value>
-                <value id="inpost-osm" type="host">https://osm.inpost.pl</value>
-                <value id="inpost-shipx" type="host">https://api-shipx-pl.easypack24.net</value>
-                <value id="inpost-geowidget-test" type="host">https://test-api-pl-points.easypack24.net</value>
+                <value id="easypack" type="host">*.easypack24.net</value>
+                <value id="inpost" type="host">*.inpost.pl</value>
+                <value id="osm" type="host">*.openstreetmap.org</value>
             </values>
         </policy>
         <policy id="media-src">
@@ -24,6 +24,9 @@
         <policy id="img-src">
             <values>
                 <value id="inpost-geowidget" type="host">https://geowidget.easypack24.net</value>
+                <value id="easypack" type="host">*.easypack24.net</value>
+                <value id="inpost" type="host">*.inpost.pl</value>
+                <value id="osm" type="host">*.openstreetmap.org</value>
             </values>
         </policy>
         <policy id="style-src">
