@@ -29,8 +29,6 @@ class ConfigProvider
     const SHIPPING_SENDER_CITY = 'sender_city';
     const SHIPPING_SENDER_POSTCODE = 'sender_postcode';
     const SHIPPING_SENDER_COUNTRY_CODE = 'sender_country_code';
-    const SHIPPING_SEND_EMAIL = 'send_email';
-    const SHIPPING_GENERATE_SHIPPING = 'generate_shipping';
     const SHIPPING_BECOME_PARTNER = 'become_partner';
     const SHIPPING_SZYBKIEZWROTY_URL = 'szybkiezwroty_url';
     const SHIPPING_WEIGHT_ATTRIBUTE_CODE = 'weight_attribute_code';
@@ -253,24 +251,6 @@ class ConfigProvider
     public function getSenderCompany()
     {
         return $this->getShippingConfigData(self::SHIPPING_SENDER_COMPANY_NAME);
-    }
-
-    /**
-     * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
-     */
-    public function getSendEmail()
-    {
-        return $this->getShippingConfigData(self::SHIPPING_SEND_EMAIL);
-    }
-
-    /**
-     * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
-     */
-    public function getGenerateShipping()
-    {
-        return $this->getShippingConfigData(self::SHIPPING_GENERATE_SHIPPING);
     }
 
     /**
