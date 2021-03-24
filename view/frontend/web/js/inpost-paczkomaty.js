@@ -13,7 +13,7 @@ define([
     return {
         inPostPointData: 'https://api-shipx-pl.easypack24.net/v1/points/',
         apiEndpointProduction: 'https://api-pl-points.easypack24.net/v1',
-        apiEndpointTesting: 'https://test-api-pl-points.easypack24.net/v1',
+        apiEndpointTesting: 'https://sandbox-api-shipx-pl.easypack24.net/v1',
 
         inPostAllMethod: function(type) {
             var method = [
