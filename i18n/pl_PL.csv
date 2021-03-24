@@ -1,11 +1,11 @@
 Block send with Locker,Zablokuj wysyłkę do Paczkomatu
 Block send with InPost Courier,Zablokuj wysyłkę kurierem InPost
 Block send with InPost Palette,Zablokuj wysyłkę kurierem InPost na palecie
-Show only delivery in weekend,Pokazuj tylko dostawę w weekend
+Show only delivery in weekend,Pokazuj tylko dostawę w weekend gdy aktywna
 "If set on Yes, normal parcel delivery will be hidden if weekend delivery will be available","Jeśli ustawiona na Tak to zwykła dostawa do Paczkomatu będzie ukrywana gdy dostawa w weekend będzie aktywna"
 Method name,Nazwa metody
 Max cart weight,Maksymalna waga koszyka
-"The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the ""Inpost - general configuration"" section",Domyślna wartość 25 odnosi się do maksymalnej wagi paczki jaką Inpost dostarcza wyrażonej w kilogramach. Jeśli używasz innej jednostki dostosuj tą wartość oraz ustaw odpowiednią jednostkę w sekcji ""Inpost - konfiguracja ogólna""
+"The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the ""Inpost - general configuration"" section",Domyślna wartość 25 odnosi się do maksymalnej wagi paczki jaką InPost dostarcza wyrażonej w kilogramach. Jeśli używasz innej jednostki dostosuj tą wartość oraz ustaw odpowiednią jednostkę w sekcji ""Inpost - konfiguracja ogólna""
 Default way of sending,Domyślny sposób nadania
 Default sending point,Domyślny punkt nadania
 Day of the week starting delivery in weekend,Dzień tygodnia startu dostawy w weekend
@@ -21,7 +21,7 @@ Saturday,Sobota
 Sunday,Niedziela
 Organization ID,ID organizacji
 Access Token, Token dostępu
-Label format,Format etkiety
+Label format,Format etykiety
 Label size,Rozmiar etykiety
 Change sender's address,Zmiana adresu nadawcy
 Sender - name,Nadawca - Imię
@@ -161,3 +161,6 @@ The shipment created successfully,Przesyłka wygenerowana poprawnie
 For the order,Dla zamówienia
 no Inpost shipment was generated due to:,nie została wygenerowana przesyłka InPost z powodu:
 Sender address post_code Nieprawidłowy,Kod pocztowy nadawcy jest nieprawidłowy
+Enable debug,Włącz debugowanie
+The inpost_courier_c2c service addressed to an individual customer,Usługa inpost_courier_c2c skierowana do klienta indywidualnego
+

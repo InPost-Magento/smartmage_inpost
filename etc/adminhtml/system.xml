@@ -3,7 +3,7 @@
     <system>
         <section id="carriers">
             <group id="inpostlocker" translate="label" type="text" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Inpost - Paczkomaty</label>
+                <label>InPost - Paczkomaty</label>
                 <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -17,7 +17,7 @@
                     <comment>If set on Yes, normal parcel delivery will be hidden if weekend delivery will be available</comment>
                 </field>
                 <group id="standard" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Inpost - Paczkomaty 24/7</label>
+                    <label>InPost - Paczkomaty 24/7</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -57,7 +57,7 @@
                     </field>
                 </group>
                 <group id="standardcod" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Inpost - Paczkomaty 24/7 - płatność przy odbiorze</label>
+                    <label>InPost - Paczkomaty 24/7 - płatność przy odbiorze</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -97,7 +97,7 @@
                     </field>
                 </group>
                 <group id="standardeow" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Inpost - Paczkomaty 24/7 - dostawa w weekend</label>
+                    <label>InPost - Paczkomaty 24/7 - dostawa w weekend</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -131,12 +131,12 @@
                         <label>Day of the week starting delivery in weekend</label>
                         <source_model>Smartmage\Inpost\Model\Config\Source\DayOfTheWeek</source_model>
                     </field>
-                    <field id="end_day" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1">
+                    <field id="start_hour" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1">
+                        <label>Hour starting delivery in weekend</label>
+                    </field>
+                    <field id="end_day" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="1">
                         <label>Day of the week ending delivery in weekend</label>
                         <source_model>Smartmage\Inpost\Model\Config\Source\DayOfTheWeek</source_model>
-                    </field>
-                    <field id="start_hour" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1">
-                        <label>Hour starting delivery in weekend</label>
                     </field>
                     <field id="end_hour" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1">
                         <label>Hour ending delivery in weekend</label>
@@ -151,7 +151,7 @@
                     </field>
                 </group>
                 <group id="standardeowcod" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Inpost - Paczkomaty 24/7 - dostawa w weekend - płatność przy odbiorze</label>
+                    <label>InPost - Paczkomaty 24/7 - dostawa w weekend - płatność przy odbiorze</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -185,12 +185,12 @@
                         <label>Day of the week starting delivery in weekend</label>
                         <source_model>Smartmage\Inpost\Model\Config\Source\DayOfTheWeek</source_model>
                     </field>
-                    <field id="end_day" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1">
+                    <field id="start_hour" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1">
+                        <label>Hour starting delivery in weekend</label>
+                    </field>
+                    <field id="end_day" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="1">
                         <label>Day of the week ending delivery in weekend</label>
                         <source_model>Smartmage\Inpost\Model\Config\Source\DayOfTheWeek</source_model>
-                    </field>
-                    <field id="start_hour" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1">
-                        <label>Hour starting delivery in weekend</label>
                     </field>
                     <field id="end_hour" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1">
                         <label>Hour ending delivery in weekend</label>
@@ -206,7 +206,7 @@
                 </group>
             </group>
             <group id="inpostcourier" translate="label" type="text" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Inpost - Przesyłka kurierska</label>
+                <label>InPost - Przesyłka kurierska</label>
                 <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -215,7 +215,7 @@
                     <label>Title</label>
                 </field>
                 <group id="c2c" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Inpost - Przesyłka kurierska InPost Kurier Standard</label>
+                    <label>InPost - Przesyłka kurierska InPost Kurier Standard</label>
                     <field id="active" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -256,7 +256,7 @@
                     </field>
                 </group>
                 <group id="c2ccod" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Inpost - Przesyłka kurierska InPost Kurier Standard – za pobraniem</label>
+                    <label>InPost - Przesyłka kurierska InPost Kurier Standard – za pobraniem</label>
                     <field id="active" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -297,7 +297,7 @@
                     </field>
                 </group>
                 <group id="standard" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Inpost - Przesyłka kurierska standardowa</label>
+                    <label>InPost - Przesyłka kurierska standardowa</label>
                     <field id="active" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -338,7 +338,7 @@
                     </field>
                 </group>
                 <group id="express1000" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Inpost - Przesyłka kurierska z doręczeniem do 10:00</label>
+                    <label>InPost - Przesyłka kurierska z doręczeniem do 10:00</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -378,7 +378,7 @@
                     </field>
                 </group>
                 <group id="express1200" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Inpost - Przesyłka kurierska z doręczeniem do 12:00</label>
+                    <label>InPost - Przesyłka kurierska z doręczeniem do 12:00</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -418,7 +418,7 @@
                     </field>
                 </group>
                 <group id="express1700" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Inpost - Przesyłka kurierska z doręczeniem do 17:00</label>
+                    <label>InPost - Przesyłka kurierska z doręczeniem do 17:00</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -458,7 +458,7 @@
                     </field>
                 </group>
                 <group id="localstandard" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Inpost - Przesyłka kurierska lokalna standardowa</label>
+                    <label>InPost - Przesyłka kurierska lokalna standardowa</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -498,7 +498,7 @@
                     </field>
                 </group>
                 <group id="localexpress" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Inpost - Przesyłka kurierska lokalna Expresowa</label>
+                    <label>InPost - Przesyłka kurierska lokalna Expresowa</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -538,7 +538,7 @@
                     </field>
                 </group>
                 <group id="localsuperexpress" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Inpost - Przesyłka kurierska lokalna Super Expresowa</label>
+                    <label>InPost - Przesyłka kurierska lokalna Super Expresowa</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -578,7 +578,7 @@
                     </field>
                 </group>
                 <group id="palette" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Inpost - Przesyłka kurierska paleta standard</label>
+                    <label>InPost - Przesyłka kurierska paleta standard</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -727,17 +727,9 @@
                         <field id="change_address">1</field>
                     </depends>
                 </field>
-                <field id="send_email" translate="label" type="select" sortOrder="160" showInDefault="1" showInWebsite="1" canRestore="1">
-                    <label>Generate shipping in order after generating InPost package</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
-                <field id="generate_shipping" translate="label" type="select" sortOrder="170" showInDefault="1" showInWebsite="1" canRestore="1">
-                    <label>After generate package send email to customer</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
                 <field id="become_partner" translate="label comment" type="label" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Become a partner(SzybkieZwroty.pl)</label>
-                    <comment><![CDATA[<a href="https://szybkiezwroty.pl/pl/business#navigate-buttons">Become a partner</a>]]></comment>
+                    <comment><![CDATA[<a traget="_blank" href="https://szybkiezwroty.pl/pl/business#navigate-buttons">Become a partner</a>]]></comment>
                 </field>
                 <field id="szybkiezwroty_url" translate="label" type="text" sortOrder="190" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Url for szybkiezwroty</label>
