@@ -11,7 +11,6 @@ define([
     'use strict';
 
     return {
-        inPostPointData: 'https://api-shipx-pl.easypack24.net/v1/points/',
         apiEndpointProduction: 'https://api-pl-points.easypack24.net/v1',
         apiEndpointTesting: 'https://sandbox-api-shipx-pl.easypack24.net/v1',
 
@@ -96,7 +95,7 @@ define([
 
             return new Promise(function(resolve, reject) {
                 $.ajax({
-                    url: self.inPostPointData + pointId,
+                    url: (checkoutData.getShippingInPostMode() === 'prod' ? self.apiEndpointProduction : self.apiEndpointTesting) + '/points/' + pointId,
                     type: 'GET',
                 }).done(function(result) {
                     if(result.status !== 404) {
