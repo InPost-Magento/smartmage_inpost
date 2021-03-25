@@ -84,7 +84,7 @@ class Multiple extends AbstractSearch
                         if (strpos($item['service'], 'inpost_locker') !== false) {
                             $receiverData .= $receiver['email'] . '<br>'
                                 . $receiver['phone'] . '<br>'
-                                . $item['target_point'];
+                                . $item['custom_attributes']['target_point'];
                         } else {
                             if (isset($receiver['company_name'])) {
                                 $receiverData .= $receiver['company_name'] . '<br>';
