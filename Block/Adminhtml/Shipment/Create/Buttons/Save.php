@@ -15,7 +15,7 @@ class Save extends Generic implements ButtonProviderInterface
     public function getButtonData()
     {
         return [
-            'label' => __('Create Shipment'),
+            'label' => __('Create InPost Shipment'),
             'class' => 'save primary',
             'data_attribute' => [
                 'mage-init' => ['button' => ['event' => 'save']],

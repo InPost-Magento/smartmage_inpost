@@ -30,6 +30,7 @@ class Create extends \Smartmage\Inpost\Controller\Adminhtml\Shipments
     {
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
+        $resultPage->getConfig()->getTitle()->set(__('New InPost Shipment'));
 
         return $resultPage;
     }
