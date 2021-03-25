@@ -5,7 +5,7 @@
             <item name="provider" xsi:type="string">inpostshipment_form_create.inpostshipment_form_create_data_source</item>
             <item name="deps" xsi:type="string">inpostshipment_form_create.inpostshipment_form_create_data_source</item>
         </item>
-        <item name="label" xsi:type="string" translate="true">New Shipment</item>
+        <item name="label" xsi:type="string" translate="true">New InPost Shipment</item>
         <item name="layout" xsi:type="array">
             <item name="type" xsi:type="string">tabs</item>
         </item>
@@ -1168,9 +1168,6 @@
                     <item name="dataScope" xsi:type="string">reference</item>
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Reference</item>
-                    <item name="validation" xsi:type="array">
-                        <item name="required-entry" xsi:type="boolean">true</item>
-                    </item>
                 </item>
             </argument>
         </field>

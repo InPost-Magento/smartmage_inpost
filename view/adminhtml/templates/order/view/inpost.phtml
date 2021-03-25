@@ -2,80 +2,86 @@
 /**
  * @var $block \Smartmage\Inpost\Block\Adminhtml\Order\View\Inpost
  */ ?>
-<div class="field">
-<?php if ($shipments = $block->getInpostShipments()) : ?>
-<table class="data-table admin__table-primary">
-    <thead class="headings">
-    <tr>
-        <th><?= __('Tracking number') ?></th>
-        <th><?= __('Service') ?></th>
-        <th><?= __('Details') ?></th>
-        <th><?= __('Actions') ?></th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($shipments as $shipment) : ?>
-    <tr>
-        <td>
-            <a href="<?= $block->getShippingTrackingUrl($shipment); ?>"><?= $shipment->getTrackingNumber(); ?></a>
-        </td>
-        <td>
-            <?= $block->getShippingService($shipment); ?>
-        </td>
-        <td>
-            <div>
-                <?php $details = $block->getShippingDetails($shipment); ?>
-                <?php foreach ($details as $key => $value): ?>
-                    <div class="details-<?= $key ?>">
-                        <?php echo $block->escapeHtml($value) ?>
-                        <?php if($key == 'target_point') : ?>
-                            <?php $pointName = explode(" ", $value); ?>
-                            <a data-inpost-select-point="<?= $pointName[1] ?>" href="#"><?= $block->escapeHtml(__('Show on the map')) ?></a>
-                        <?php endif; ?>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </td>
-        <td>
-            <div class="actions">
-                <a href="<?= /* @noEscape */ $block->getLabelUrl($shipment) ?>">
-                    <?= $block->escapeHtml(__('Print label')) ?>
-                </a>
-            </div>
-            <div class="actions">
-                <a href="<?= /* @noEscape */ $block->getReturnUrl($shipment) ?>">
-                    <?= $block->escapeHtml(__('Return')) ?>
-                </a>
-            </div>
-        </td>
-    </tr>
-    <?php endforeach; ?>
-    </tbody>
-</table>
-<?php endif ?>
-<?php
-$methods = $block->getInpostShippingMethods();
-$selectedMethod = $block->getSelectedMethod();
-$orderId = $block->getOrder()->getId();
-?>
-    <form action="<?= $this->getUrl('smartmageinpost/shipments/create') ?>" class="inpost-shipments-form">
-        <div class="control">
-            <input type="hidden" name="order_id" value="<?= $orderId ?>">
-            <select
-                id="shipping_method"
-                class="admin__control-select"
-                name="shipping_method"
-                required
-            >
-                <option value=""><?= __('Choose method') ?></option>
-                <?php foreach ($methods as $method) : ?>
-                    <option value="<?= $method['value'] ?>"<?php if ($selectedMethod == $method['value']) : ?> selected<?php endif; ?>><?= $method['label'] ?></option>
-                <?php endforeach; ?>
-            </select>
+<section class="admin__page-section">
+    <div class="admin__page-section-title">
+        <span class="title"><?= __('Przesyłki InPost') ?></span>
+    </div>
+    <div class="admin__table-wrapper">
+        <div class="field">
+            <?php if ($shipments = $block->getInpostShipments()) : ?>
+                <table class="data-table admin__table-primary">
+                    <thead class="headings">
+                    <tr>
+                        <th><?= __('Tracking number') ?></th>
+                        <th><?= __('Service') ?></th>
+                        <th><?= __('Details') ?></th>
+                        <th><?= __('Actions') ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($shipments as $shipment) : ?>
+                        <tr>
+                            <td>
+                                <a href="<?= $block->getShippingTrackingUrl($shipment); ?>"><?= $shipment->getTrackingNumber(); ?></a>
+                            </td>
+                            <td>
+                                <?= $block->getShippingService($shipment); ?>
+                            </td>
+                            <td>
+                                <div>
+                                    <?php $details = $block->getShippingDetails($shipment); ?>
+                                    <?php foreach ($details as $key => $value): ?>
+                                        <div class="details-<?= $key ?>">
+                                            <?php echo $block->escapeHtml($value) ?>
+                                            <?php if($key == 'target_point') : ?>
+                                                <?php $pointName = explode(" ", $value); ?>
+                                                <a data-inpost-select-point="<?= $pointName[1] ?>" href="#"><?= $block->escapeHtml(__('Show on the map')) ?></a>
+                                            <?php endif; ?>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="actions">
+                                    <a href="<?= /* @noEscape */ $block->getLabelUrl($shipment) ?>">
+                                        <?= $block->escapeHtml(__('Print label')) ?>
+                                    </a>
+                                </div>
+                                <div class="actions">
+                                    <a href="<?= /* @noEscape */ $block->getReturnUrl($shipment) ?>">
+                                        <?= $block->escapeHtml(__('Return')) ?>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php endif ?>
+            <?php
+            $methods = $block->getInpostShippingMethods();
+            $selectedMethod = $block->getSelectedMethod();
+            $orderId = $block->getOrder()->getId();
+            ?>
+            <form action="<?= $this->getUrl('smartmageinpost/shipments/create') ?>" class="inpost-shipments-form">
+                <div class="control">
+                    <input type="hidden" name="order_id" value="<?= $orderId ?>">
+                    <select
+                        id="shipping_method"
+                        class="admin__control-select"
+                        name="shipping_method"
+                        required
+                    >
+                        <option value=""><?= __('Choose method') ?></option>
+                        <?php foreach ($methods as $method) : ?>
+                            <option value="<?= $method['value'] ?>"<?php if ($selectedMethod == $method['value']) : ?> selected<?php endif; ?>><?= $method['label'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <button id="submit" title="Submit" type="submit" class="action-default scalable edit primary">
+                    <span><?= __('Submit') ?></span>
+                </button>
+            </form>
         </div>
-        <button id="submit" title="Submit" type="submit" class="action-default scalable edit primary">
-            <span><?= __('Submit') ?></span>
-        </button>
-    </form>
-</div>
-
+    </div>
+</section>

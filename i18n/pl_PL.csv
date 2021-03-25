@@ -56,7 +56,7 @@ Length (mm),Długość (milimetry)
 Height (mm),Wysokość (milimetry)
 Service,Usługa
 Size,Gabaryt
-New Shipment,Nowa przesyłka
+New InPost Shipment,Nowa przesyłka InPost
 Shipment Details,Szczegóły przesyłki
 Print label,Wydrukuj etykietę
 Print return label,Wydrukuj etykietę zwrotu
@@ -66,7 +66,7 @@ Small,Gabaryt A
 Medium,Gabaryt B
 Large,Gabaryt C
 X Large,Gabaryt D
-Create Shipment,Stwórz przesyłkę
+Create InPost Shipment,Utwórz przesyłkę
 Back,Wróć
 Please select a pickup point,Proszę wybrać punkt odbioru
 Please select a pickup point,Wybierz paczkomat
