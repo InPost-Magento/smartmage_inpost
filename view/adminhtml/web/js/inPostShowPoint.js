@@ -5,10 +5,27 @@ requirejs([
     'use strict';
 
     var inPostModal = {
-        config: function(pointsTypes) {
+        apiEndpointProduction: 'https://api-pl-points.easypack24.net/v1',
+        apiEndpointTesting: 'https://sandbox-api-shipx-pl.easypack24.net/v1',
+
+        getMode: function() {
+            return new Promise(function(resolve, reject) {
+                $.ajax({
+                    type: "POST",
+                    url: '/inpost/locker/getmode',
+                    dataType: 'json',
+                }).done(function(data) {
+                    resolve(data.mode);
+                });
+            });
+        },
+
+        config: function(mode, pointsTypes) {
+            var self = this;
+
             return new Promise(function(resolve, reject) {
                 easyPack.init({
-                    apiEndpoint: 'https://api-pl-points.easypack24.net/v1',
+                    apiEndpoint: (mode === 'prod' ? self.apiEndpointProduction : self.apiEndpointTesting),
                     defaultLocale: 'pl',
                     mapType: 'osm',
                     searchType: 'osm',
@@ -61,16 +78,18 @@ requirejs([
             $(document).on('click', '[data-inpost-select-point]', function(e) {
                 e.preventDefault();
                 var point = $(this).data('inpost-select-point');
-                self.config(['parcel_locker', 'pop']).then(function() {
-                    self.Modal().then(function() {
-                        if(point.length > 0) {
-                            easyPack.map.searchLockerPoint(point);
-                        }
-                        var modalMapInPost = $('#widget-modal');
-                        $('body').addClass('overlay-modal-carrier');
-                        modalMapInPost.parent().css('background', 'rgba(0,0,0, .6)');
-                        modalMapInPost.parent().css('overflow-y', 'auto');
-                        modalMapInPost.addClass('modalMapInPost');
+                self.getMode().then(function(mode) {
+                    self.config(mode, ['parcel_locker', 'pop']).then(function() {
+                        self.Modal().then(function() {
+                            if(point.length > 0) {
+                                easyPack.map.searchLockerPoint(point);
+                            }
+                            var modalMapInPost = $('#widget-modal');
+                            $('body').addClass('overlay-modal-carrier');
+                            modalMapInPost.parent().css('background', 'rgba(0,0,0, .6)');
+                            modalMapInPost.parent().css('overflow-y', 'auto');
+                            modalMapInPost.addClass('modalMapInPost');
+                        });
                     });
                 });
             });
