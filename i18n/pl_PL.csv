@@ -69,14 +69,14 @@ X Large,Gabaryt D
 Create InPost Shipment,Utwórz przesyłkę
 Back,Wróć
 Please select a pickup point,Proszę wybrać punkt odbioru
-Please select a pickup point,Wybierz paczkomat
-Change pickup point,Wybierz inny paczkomat
+Please select a pickup point,Wybierz Paczkomat
+Change pickup point,Wybierz inny Paczkomat
 The selected point does not support the cash on delivery method,Wybrany punkt nie obsługuje metody płatności przy odbiorze
-Selected pickup point:,Wybrany paczkomat:
+Selected pickup point:,Wybrany Paczkomat:
 "Point: ","Punkt: "
 The shipment list has been successfully synchronized,Lista przesyłek została pomyślnie zsynchronizowana
 Order not exist,Zamówienie nie istnieje
-Standard parcel locker delivery,Przesyłka paczkomatowa standardowa
+Standard parcel locker delivery,Przesyłka Paczkomatowa standardowa
 Standard courier shipment,Przesyłka kurierska standardowa
 Courier shipment with delivery until 10:00 on the next day,Przesyłka kurierska z doręczeniem do godziny 10:00 następnego dnia
 Courier shipment with delivery until 12:00 on the next day,Przesyłka kurierska z doręczeniem do godziny 12:00 następnego dnia
@@ -145,7 +145,7 @@ Default Width (mm),Domyślna szerokość (mm)
 Default Length (mm),Domyślna długość (mm)
 Default Height (mm),Domyślna wysokość (mm)
 Default value used in shippments,Domyślna wartość używana podczas tworzenia paczek kurierskich
-Default Size,Domyślny gabaryt (paczkomaty)
+Default Size,Domyślny gabaryt (Paczkomaty)
 Receiver phone Nieprawidłowy,Nieprawidłowy numer telefonu odbiorcy
 Receiver address post_code Nieprawidłowy,Nieprawidłowy kod pocztowy odbiorcy
 Receiver email Nieprawidłowy,Nieprawidłowy adres email odbiorcy

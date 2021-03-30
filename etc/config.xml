@@ -25,7 +25,7 @@
         <carriers>
             <inpostlocker>
                 <model>Smartmage\Inpost\Model\Carrier\InpostLocker</model>
-                <title>Inpost Paczkomaty</title>
+                <title>InPost Paczkomaty</title>
                 <active>1</active>
                 <show_only_delivery_eow>0</show_only_delivery_eow>
                 <standard>
@@ -59,7 +59,7 @@
             </inpostlocker>
             <inpostcourier>
                 <model>Smartmage\Inpost\Model\Carrier\InpostCourier</model>
-                <title>Inpost Kurier</title>
+                <title>InPost Kurier</title>
                 <active>1</active>
                 <c2c>
                     <active>0</active>
