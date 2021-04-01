@@ -75,8 +75,6 @@ class MassDispatchOrder extends MassActionAbstract
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $collection = $this->filter->getCollection($this->collectionFactory->create());
 
-        $defaultPickupPoint = $this->configProvider->getDefaultPickupPoint();
-
         $selectedIds = [];
         $omittedIds = [];
 
@@ -90,7 +88,13 @@ class MassDispatchOrder extends MassActionAbstract
 
         $dispatchData = [
             'shipments' => $selectedIds,
-            'dispatch_point_id' => $defaultPickupPoint
+            'address' => [
+                'street' => $this->configProvider->getDefaultPickupStreet(),
+                'building_number' => $this->configProvider->getDefaultPickupBuildingNumber(),
+                'city' => $this->configProvider->getDefaultPickupCity(),
+                'post_code' => $this->configProvider->getDefaultPickupPostCode(),
+                'country_code' => $this->configProvider->getDefaultPickupCountryCode(),
+            ],
         ];
 
         $logger->info(print_r('$labelsData', true));

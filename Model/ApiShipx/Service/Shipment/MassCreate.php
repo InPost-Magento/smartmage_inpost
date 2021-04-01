@@ -105,6 +105,7 @@ class MassCreate
 
         $notInpostMethods = [];
         $successOrderIds = [];
+        $shipmentIds = [];
         foreach ($orders as $order) {
             $this->orderProcessor->setOrder($order);
             $service = $this->shippingMethods->getInpostMethod($order->getShippingMethod());
@@ -142,6 +143,7 @@ class MassCreate
                     $orderLink->setIncrementId($order->getIncrementId());
                     $orderLink->setShipmentId($result[CallResult::STRING_RESPONSE_SHIPMENT_ID]);
                     $this->orderLinkRepository->save($orderLink);
+                    $shipmentIds[] = $result[CallResult::STRING_RESPONSE_SHIPMENT_ID];
                 }
             } else {
                 $notInpostMethods[] = $order->getIncrementId();
@@ -155,6 +157,7 @@ class MassCreate
             'notInpost' => !empty($notInpostMethods) ? $notInpostMethodsMsg : false,
             'success' => !empty($successOrderIds) ? $successMsg : false,
             'error' => !empty($errorMsg) ? $errorMsg : false,
+            'shipment_ids' => $shipmentIds,
         ];
     }
 

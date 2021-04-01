@@ -154,7 +154,7 @@ Parcels dimensions length Mniej niż,Długość paczki jest zbyt duża
 Parcels dimensions width Mniej niż,Szerokość paczki jest zbyt duża
 Insurance amount Więcej niż,Wartość ubezpieczenia jest mniejsza niż 0
 Insurance amount Nie jest cyfrą,Wartość ubezpieczenia nie jest cyfrą
-Create InPost Shipments,Stwórz przesyłki InPost
+Create InPost Shipments,Stwórz przesyłki InPost i wydrukuj
 The following orders do not have InPost shipment created due to different delivery methods:,Następujące zamówienia nie mają utworzonej przesyłki InPost ze względu na inne metody dostawy:
 InPost shipments were generated for orders:,Wygenerowano przesyłki InPost dla zamówień:
 The shipment created successfully,Przesyłka wygenerowana poprawnie
@@ -163,4 +163,10 @@ no Inpost shipment was generated due to:,nie została wygenerowana przesyłka In
 Sender address post_code Nieprawidłowy,Kod pocztowy nadawcy jest nieprawidłowy
 Enable debug,Włącz debugowanie
 The inpost_courier_c2c service addressed to an individual customer,Usługa inpost_courier_c2c skierowana do klienta indywidualnego
+Pickup Street,Adres odbioru - ulica
+Pickup Building Number,Adres odbioru - numer budynku
+Pickup City,Adres odbioru - miasto
+Pickup Post Code,Adres odbioru - kod pocztowy
+Pickup Country Code,Adres odbioru - kod kraju
+
 

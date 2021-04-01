@@ -20,6 +20,7 @@
                 <default_width>360</default_width>
                 <default_length>80</default_length>
                 <default_height>640</default_height>
+                <pickup_country_code>PL</pickup_country_code>
             </inpost>
         </shipping>
         <carriers>
