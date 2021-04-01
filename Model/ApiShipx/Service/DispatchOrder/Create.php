@@ -80,6 +80,12 @@ class Create extends AbstractService
     public function createBody($data)
     {
         $this->requestBody['shipments'] = $data['shipments'];
-        $this->requestBody['dispatch_point_id'] = $data['dispatch_point_id'];
+        $this->requestBody['address'] = [
+            'street' => $this->configProvider->getDefaultPickupStreet(),
+            'building_number' => $this->configProvider->getDefaultPickupBuildingNumber(),
+            'city' => $this->configProvider->getDefaultPickupCity(),
+            'post_code' => $this->configProvider->getDefaultPickupPostCode(),
+            'country_code' => $this->configProvider->getDefaultPickupCountryCode(),
+        ];
     }
 }

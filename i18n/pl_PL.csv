@@ -1,7 +1,7 @@
 Block send with Locker,Zablokuj wysyłkę do Paczkomatu
 Block send with InPost Courier,Zablokuj wysyłkę kurierem InPost
 Block send with InPost Palette,Zablokuj wysyłkę kurierem InPost na palecie
-Show only delivery in weekend,Pokazuj tylko dostawę w weekend gdy aktywna
+Show only delivery in weekend,Pokazuj tylko Paczkę w Weekend gdy aktywna
 "If set on Yes, normal parcel delivery will be hidden if weekend delivery will be available","Jeśli ustawiona na Tak to zwykła dostawa do Paczkomatu będzie ukrywana gdy dostawa w weekend będzie aktywna"
 Method name,Nazwa metody
 Max cart weight,Maksymalna waga koszyka
@@ -10,8 +10,8 @@ Default way of sending,Domyślny sposób nadania
 Default sending point,Domyślny punkt nadania
 Day of the week starting delivery in weekend,Dzień tygodnia startu dostawy w weekend
 Day of the week ending delivery in weekend,Dzień tygodnia końca dostawy w weekend
-Hour starting delivery in weekend,Godzina startu dostawy w weekend
-Hour ending delivery in weekend,Godzina końca dostawy w weekend
+Hour starting delivery in weekend,Godzina startu Paczki w Weekend
+Hour ending delivery in weekend,Godzina końca Paczki w Weekend
 Monday,Poniedziałek
 Tuesday,Wtorek
 Wednesday,Środa
@@ -69,14 +69,14 @@ X Large,Gabaryt D
 Create InPost Shipment,Utwórz przesyłkę
 Back,Wróć
 Please select a pickup point,Proszę wybrać punkt odbioru
-Please select a pickup point,Wybierz paczkomat
-Change pickup point,Wybierz inny paczkomat
+Please select a pickup point,Wybierz Paczkomat
+Change pickup point,Wybierz inny Paczkomat
 The selected point does not support the cash on delivery method,Wybrany punkt nie obsługuje metody płatności przy odbiorze
-Selected pickup point:,Wybrany paczkomat:
+Selected pickup point:,Wybrany Paczkomat:
 "Point: ","Punkt: "
 The shipment list has been successfully synchronized,Lista przesyłek została pomyślnie zsynchronizowana
 Order not exist,Zamówienie nie istnieje
-Standard parcel locker delivery,Przesyłka paczkomatowa standardowa
+Standard parcel locker delivery,Przesyłka Paczkomatowa standardowa
 Standard courier shipment,Przesyłka kurierska standardowa
 Courier shipment with delivery until 10:00 on the next day,Przesyłka kurierska z doręczeniem do godziny 10:00 następnego dnia
 Courier shipment with delivery until 12:00 on the next day,Przesyłka kurierska z doręczeniem do godziny 12:00 następnego dnia
@@ -145,7 +145,7 @@ Default Width (mm),Domyślna szerokość (mm)
 Default Length (mm),Domyślna długość (mm)
 Default Height (mm),Domyślna wysokość (mm)
 Default value used in shippments,Domyślna wartość używana podczas tworzenia paczek kurierskich
-Default Size,Domyślny gabaryt (paczkomaty)
+Default Size,Domyślny gabaryt (Paczkomaty)
 Receiver phone Nieprawidłowy,Nieprawidłowy numer telefonu odbiorcy
 Receiver address post_code Nieprawidłowy,Nieprawidłowy kod pocztowy odbiorcy
 Receiver email Nieprawidłowy,Nieprawidłowy adres email odbiorcy
@@ -154,7 +154,7 @@ Parcels dimensions length Mniej niż,Długość paczki jest zbyt duża
 Parcels dimensions width Mniej niż,Szerokość paczki jest zbyt duża
 Insurance amount Więcej niż,Wartość ubezpieczenia jest mniejsza niż 0
 Insurance amount Nie jest cyfrą,Wartość ubezpieczenia nie jest cyfrą
-Create InPost Shipments,Stwórz przesyłki InPost
+Create InPost Shipments,Stwórz przesyłki InPost i wydrukuj
 The following orders do not have InPost shipment created due to different delivery methods:,Następujące zamówienia nie mają utworzonej przesyłki InPost ze względu na inne metody dostawy:
 InPost shipments were generated for orders:,Wygenerowano przesyłki InPost dla zamówień:
 The shipment created successfully,Przesyłka wygenerowana poprawnie
@@ -163,4 +163,10 @@ no Inpost shipment was generated due to:,nie została wygenerowana przesyłka In
 Sender address post_code Nieprawidłowy,Kod pocztowy nadawcy jest nieprawidłowy
 Enable debug,Włącz debugowanie
 The inpost_courier_c2c service addressed to an individual customer,Usługa inpost_courier_c2c skierowana do klienta indywidualnego
+Pickup Street,Adres odbioru - ulica
+Pickup Building Number,Adres odbioru - numer budynku
+Pickup City,Adres odbioru - miasto
+Pickup Post Code,Adres odbioru - kod pocztowy
+Pickup Country Code,Adres odbioru - kod kraju
+
 

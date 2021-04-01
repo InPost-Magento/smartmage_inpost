@@ -48,6 +48,11 @@ class ConfigProvider
     const DEFAULT_HEIGHT = 'default_height';
     const DEFAULT_LENGTH = 'default_length';
     const SHIPPING_SENDER_COMPANY_NAME = 'sender_company';
+    const SHIPPING_PICKUP_STREET = 'pickup_street';
+    const SHIPPING_PICKUP_BUILDING_NUMBER = 'pickup_building_number';
+    const SHIPPING_PICKUP_CITY = 'pickup_city';
+    const SHIPPING_PICKUP_POST_CODE = 'pickup_post_code';
+    const SHIPPING_PICKUP_COUNTRY_CODE = 'pickup_country_code';
 
     /**
      * @var ScopeConfigInterface
@@ -305,15 +310,6 @@ class ConfigProvider
      * @return mixed
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getDefaultPickupPoint()
-    {
-        return $this->getShippingConfigData(self::SHIPPING_DEFAULT_PICKUP_POINT);
-    }
-
-    /**
-     * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
-     */
     public function getGetShipmentsDays()
     {
         return $this->getShippingConfigData(self::SHIPPING_GET_SHIPMENTS_DAYS);
@@ -376,5 +372,30 @@ class ConfigProvider
     public function getDefaultHeight()
     {
         return $this->getShippingConfigData(self::DEFAULT_HEIGHT);
+    }
+
+    public function getDefaultPickupStreet()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_PICKUP_STREET);
+    }
+
+    public function getDefaultPickupBuildingNumber()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_PICKUP_BUILDING_NUMBER);
+    }
+
+    public function getDefaultPickupCity()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_PICKUP_CITY);
+    }
+
+    public function getDefaultPickupPostCode()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_PICKUP_POST_CODE);
+    }
+
+    public function getDefaultPickupCountryCode()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_PICKUP_COUNTRY_CODE);
     }
 }

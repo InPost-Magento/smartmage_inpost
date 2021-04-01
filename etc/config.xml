@@ -20,12 +20,13 @@
                 <default_width>360</default_width>
                 <default_length>80</default_length>
                 <default_height>640</default_height>
+                <pickup_country_code>PL</pickup_country_code>
             </inpost>
         </shipping>
         <carriers>
             <inpostlocker>
                 <model>Smartmage\Inpost\Model\Carrier\InpostLocker</model>
-                <title>Inpost Paczkomaty</title>
+                <title>InPost Paczkomaty</title>
                 <active>1</active>
                 <show_only_delivery_eow>0</show_only_delivery_eow>
                 <standard>
@@ -40,7 +41,7 @@
                 </standardcod>
                 <standardeow>
                     <active>0</active>
-                    <name>Paczkomaty 24/7 - dostawa w weekend</name>
+                    <name>Paczka w Weekend</name>
                     <max_cart_weight>25</max_cart_weight>
                     <start_day>4</start_day>
                     <end_day>6</end_day>
@@ -49,7 +50,7 @@
                 </standardeow>
                 <standardeowcod>
                     <active>0</active>
-                    <name>Paczkomaty 24/7 - dostawa w weekend i płatność przy odbiorze</name>
+                    <name>Paczka w Weekend - płatność przy odbiorze</name>
                     <max_cart_weight>25</max_cart_weight>
                     <start_day>4</start_day>
                     <end_day>6</end_day>
@@ -59,7 +60,7 @@
             </inpostlocker>
             <inpostcourier>
                 <model>Smartmage\Inpost\Model\Carrier\InpostCourier</model>
-                <title>Inpost Kurier</title>
+                <title>InPost Kurier</title>
                 <active>1</active>
                 <c2c>
                     <active>0</active>

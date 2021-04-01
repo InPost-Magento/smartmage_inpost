@@ -97,7 +97,7 @@
                     </field>
                 </group>
                 <group id="standardeow" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>InPost - Paczkomaty 24/7 - dostawa w weekend</label>
+                    <label>Paczka w Weekend</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -151,7 +151,7 @@
                     </field>
                 </group>
                 <group id="standardeowcod" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>InPost - Paczkomaty 24/7 - dostawa w weekend - płatność przy odbiorze</label>
+                    <label>Paczka w Weekend - płatność przy odbiorze</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -768,12 +768,33 @@
                     <label>Automatic payment for generated package</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="default_pickup_pont" translate="label comment" type="select" sortOrder="280" showInDefault="1" showInWebsite="1">
+                <!--<field id="default_pickup_pont" translate="label comment" type="select" sortOrder="280" showInDefault="1" showInWebsite="1">
                     <label>Default pickup point</label>
                     <source_model>Smartmage\Inpost\Model\Config\Source\DefaultPickupPoint</source_model>
                     <comment>If api is unavailable then this field will be empty</comment>
+                </field>-->
+
+                <field id="pickup_street" translate="label" type="text" sortOrder="280" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Pickup Street</label>
                 </field>
-                <field id="get_shipments_days" translate="label" type="text" sortOrder="290" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+
+                <field id="pickup_building_number" translate="label" type="text" sortOrder="290" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Pickup Building Number</label>
+                </field>
+
+                <field id="pickup_city" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Pickup City</label>
+                </field>
+
+                <field id="pickup_post_code" translate="label" type="text" sortOrder="310" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Pickup Post Code</label>
+                </field>
+
+                <field id="pickup_country_code" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Pickup Country Code</label>
+                </field>
+
+                <field id="get_shipments_days" translate="label" type="text" sortOrder="330" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Get shipments from x days ago</label>
                     <validate>validate-number validate-zero-or-greater</validate>
                 </field>

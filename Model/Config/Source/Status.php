@@ -111,7 +111,7 @@ class Status implements OptionSourceInterface
         'missing' => 'Zaginiona.',
         'stack_in_customer_service_point' => 'Paczka magazynowana w PaczkoPunkcie.',
         'stack_parcel_pickup_time_expired' => 'Upłynął termin odbioru paczki magazynowanej.',
-        'unstack_from_customer_service_point' => 'W drodze do wybranego paczkomatu.',
+        'unstack_from_customer_service_point' => 'W drodze do wybranego Paczkomatu.',
         'courier_avizo_in_customer_service_point' => 'Oczekuje na odbiór.',
         'taken_by_courier_from_customer_service_point' => 'Zwrócona do nadawcy.',
         'stack_in_box_machine' => 'Paczka magazynowana w Paczkomacie tymczasowym',
