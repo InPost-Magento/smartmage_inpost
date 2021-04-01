@@ -41,7 +41,7 @@
                 </standardcod>
                 <standardeow>
                     <active>0</active>
-                    <name>Paczkomaty 24/7 - dostawa w weekend</name>
+                    <name>Paczka w Weekend</name>
                     <max_cart_weight>25</max_cart_weight>
                     <start_day>4</start_day>
                     <end_day>6</end_day>
@@ -50,7 +50,7 @@
                 </standardeow>
                 <standardeowcod>
                     <active>0</active>
-                    <name>Paczkomaty 24/7 - dostawa w weekend i płatność przy odbiorze</name>
+                    <name>Paczka w Weekend - płatność przy odbiorze</name>
                     <max_cart_weight>25</max_cart_weight>
                     <start_day>4</start_day>
                     <end_day>6</end_day>

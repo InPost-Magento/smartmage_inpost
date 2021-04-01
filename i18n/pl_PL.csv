@@ -1,7 +1,7 @@
 Block send with Locker,Zablokuj wysyłkę do Paczkomatu
 Block send with InPost Courier,Zablokuj wysyłkę kurierem InPost
 Block send with InPost Palette,Zablokuj wysyłkę kurierem InPost na palecie
-Show only delivery in weekend,Pokazuj tylko dostawę w weekend gdy aktywna
+Show only delivery in weekend,Pokazuj tylko Paczkę w Weekend gdy aktywna
 "If set on Yes, normal parcel delivery will be hidden if weekend delivery will be available","Jeśli ustawiona na Tak to zwykła dostawa do Paczkomatu będzie ukrywana gdy dostawa w weekend będzie aktywna"
 Method name,Nazwa metody
 Max cart weight,Maksymalna waga koszyka
@@ -10,8 +10,8 @@ Default way of sending,Domyślny sposób nadania
 Default sending point,Domyślny punkt nadania
 Day of the week starting delivery in weekend,Dzień tygodnia startu dostawy w weekend
 Day of the week ending delivery in weekend,Dzień tygodnia końca dostawy w weekend
-Hour starting delivery in weekend,Godzina startu dostawy w weekend
-Hour ending delivery in weekend,Godzina końca dostawy w weekend
+Hour starting delivery in weekend,Godzina startu Paczki w Weekend
+Hour ending delivery in weekend,Godzina końca Paczki w Weekend
 Monday,Poniedziałek
 Tuesday,Wtorek
 Wednesday,Środa

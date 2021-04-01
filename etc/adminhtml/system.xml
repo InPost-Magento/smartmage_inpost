@@ -97,7 +97,7 @@
                     </field>
                 </group>
                 <group id="standardeow" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>InPost - Paczkomaty 24/7 - dostawa w weekend</label>
+                    <label>Paczka w Weekend</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -151,7 +151,7 @@
                     </field>
                 </group>
                 <group id="standardeowcod" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>InPost - Paczkomaty 24/7 - dostawa w weekend - płatność przy odbiorze</label>
+                    <label>Paczka w Weekend - płatność przy odbiorze</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
