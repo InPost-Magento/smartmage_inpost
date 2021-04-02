@@ -78,6 +78,7 @@ The shipment list has been successfully synchronized,Lista przesyłek została p
 Order not exist,Zamówienie nie istnieje
 Standard parcel locker delivery,Przesyłka Paczkomatowa standardowa
 Standard courier shipment,Przesyłka kurierska standardowa
+Standard courier shipment c2c,Przesyłka kurierska standardowa dla klientów indywidualnych
 Courier shipment with delivery until 10:00 on the next day,Przesyłka kurierska z doręczeniem do godziny 10:00 następnego dnia
 Courier shipment with delivery until 12:00 on the next day,Przesyłka kurierska z doręczeniem do godziny 12:00 następnego dnia
 Courier shipment with delivery until 17:00 on the next day,Przesyłka kurierska z doręczeniem do godziny 17:00 następnego dnia
