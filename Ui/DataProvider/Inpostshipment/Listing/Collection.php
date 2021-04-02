@@ -40,6 +40,7 @@ class Collection extends SearchResult
 //        $this->addFilterToMap('alert_stock_id', 'main_table.alert_stock_id');
 //        $this->addFilterToMap('product_name', 'cpev.value');
         $this->addFilterToMap('increment_id', 'cpe.increment_id');
+        $this->addFilterToMap('shipment_id', 'main_table.shipment_id');
     }
 
 }
