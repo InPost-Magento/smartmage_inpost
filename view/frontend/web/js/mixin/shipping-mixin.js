@@ -36,7 +36,10 @@ define(
                     var self = this;
 
                     if(quote.shippingMethod()) {
-                        if (quote.shippingMethod().method_code === 'standard' || quote.shippingMethod().method_code === 'standardcod' || quote.shippingMethod().method_code === 'standardeow' || quote.shippingMethod().method_code === 'standardeowcod' ) {
+
+                        var ShippingMethodCode = quote.shippingMethod().method_code+'_'+quote.shippingMethod().carrier_code;
+
+                        if (ShippingMethodCode === 'standard_inpostlocker' || ShippingMethodCode === 'standardcod_inpostlocker' || ShippingMethodCode === 'standardeow_inpostlocker' || ShippingMethodCode === 'standardeowcod_inpostlocker' ) {
                             var pointDataDB = checkoutData.getShippingInPostPoint();
 
                             if( typeof pointDataDB === 'undefined' || pointDataDB === null || pointDataDB.name.length === 0){
@@ -46,7 +49,7 @@ define(
                                 return false;
 
                             } else {
-                                if(quote.shippingMethod().method_code === 'standardcod' || quote.shippingMethod().method_code === 'standardeowcod') {
+                                if(ShippingMethodCode === 'standardcod_inpostlocker' || ShippingMethodCode === 'standardeowcod_inpostlocker') {
                                     if(!pointDataDB.type.includes('parcel_locker')) {
                                         self.errorValidationMessage(
                                             $t('The selected point does not support the cash on delivery method')
