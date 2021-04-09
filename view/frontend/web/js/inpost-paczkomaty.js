@@ -216,8 +216,16 @@ define([
 
             return new Promise(function(resolve, reject) {
                 $.each(self.inPostAllMethod('method'), function(index, value) {
+                    var codeMethod = value[0].split('_');
+                    var logoWrapper = $(value[0]).find('[data-inpost-logo-'+codeMethod[2]+'-'+codeMethod[3]+']');
+
                     if($(value[0]).length) {
-                        $(value[0]).prepend('<div>' + value[1] + '</div>');
+                        if(logoWrapper.length > 0) {
+                            logoWrapper.remove();
+                            $(value[0]).prepend('<div data-inpost-logo-'+codeMethod[2]+'-'+codeMethod[3]+'>' + value[1] + '</div>');
+                        } else {
+                            $(value[0]).prepend('<div data-inpost-logo-'+codeMethod[2]+'-'+codeMethod[3]+'>' + value[1] + '</div>');
+                        }
                     }
                 });
 
