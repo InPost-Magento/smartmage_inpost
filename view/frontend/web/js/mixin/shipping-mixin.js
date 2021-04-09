@@ -39,33 +39,29 @@ define(
                         if (quote.shippingMethod().method_code === 'standard' || quote.shippingMethod().method_code === 'standardcod' || quote.shippingMethod().method_code === 'standardeow' || quote.shippingMethod().method_code === 'standardeowcod' ) {
                             var pointDataDB = checkoutData.getShippingInPostPoint();
 
-                            if( typeof pointDataDB === 'undefined' || pointDataDB === null ){
+                            if( typeof pointDataDB === 'undefined' || pointDataDB === null || pointDataDB.name.length === 0){
                                 self.errorValidationMessage(
                                     $t('Please select a pickup point')
                                 );
                                 return false;
 
                             } else {
-                                if(pointDataDB.name.length === 0) {
-                                    self.errorValidationMessage(
-                                        $t('Please select a pickup point')
-                                    );
-                                    return false;
-
-                                } else {
-                                    if(quote.shippingMethod().method_code === 'standardcod' || quote.shippingMethod().method_code === 'standardeowcod') {
-                                        if(!pointDataDB.type.includes('parcel_locker')) {
-                                            self.errorValidationMessage(
-                                                $t('The selected point does not support the cash on delivery method')
-                                            );
-                                            return false;
-                                        }
+                                if(quote.shippingMethod().method_code === 'standardcod' || quote.shippingMethod().method_code === 'standardeowcod') {
+                                    if(!pointDataDB.type.includes('parcel_locker')) {
+                                        self.errorValidationMessage(
+                                            $t('The selected point does not support the cash on delivery method')
+                                        );
+                                        return false;
+                                    } else {
+                                        return true;
                                     }
+                                } else {
+                                    return true;
                                 }
                             }
+                        } else {
+                            return true;
                         }
-
-                        return true;
                     }
                 },
             });
