@@ -86,7 +86,7 @@ define([
                     dataType: 'json',
                 }).done(function(data) {
                     resolve(data.inpost_locker_id);
-                });
+                })
             });
         },
 
@@ -107,15 +107,11 @@ define([
         },
 
         wrapperPointHtml: function(inPostCarrier, pointType) {
-            return new Promise(function(resolve, reject) {
-                var html = '<div data-inpost-wrapper="'+ pointType +'" class="inpost-carrier-wrapper"></div>';
-
-                if(inPostCarrier.find('[data-inpost-wrapper]').length === 0) {
-                    inPostCarrier.append(html);
-
-                    resolve('True');
-                }
-            });
+            var html = '<div data-inpost-wrapper="'+ pointType +'" class="inpost-carrier-wrapper"></div>';
+            inPostCarrier.find('div').remove();
+            if(inPostCarrier.find('[data-inpost-wrapper]').length === 0) {
+                inPostCarrier.append(html);
+            }
         },
 
         cleanPointDataHtml: function() {
@@ -125,7 +121,7 @@ define([
                 if(self.length > 0) {
                     self.html('');
                 }
-                resolve('True');
+                resolve(true);
             });
         },
 
@@ -153,25 +149,19 @@ define([
 
         insertData: function(carrierMethod, pointData) {
             var self = this;
-            return new Promise(function(resolve, reject) {
+            var wrapperPoint = carrierMethod.find('[data-inpost-wrapper]');
+            var html = '';
 
-                var wrapperPoint = carrierMethod.find('[data-inpost-wrapper]');
-                var html = '';
-                if(wrapperPoint.length) {
-                    if(pointData) {
-                        self.pointDataHtml(pointData, self.selectPointHtml(true), false).then(function(htmlDataPoint) {
-                            wrapperPoint.append(htmlDataPoint);
-
-                            resolve('True');
-                        });
-                    } else {
-                        html = self.selectPointHtml(false);
-                        wrapperPoint.append(html);
-
-                        resolve('True');
-                    }
+            if(wrapperPoint.length) {
+                if(pointData) {
+                    self.pointDataHtml(pointData, self.selectPointHtml(true), false).then(function(htmlDataPoint) {
+                        wrapperPoint.append(htmlDataPoint);
+                    });
+                } else {
+                    html = self.selectPointHtml(false);
+                    wrapperPoint.append(html);
                 }
-            });
+            }
         },
 
         InPostConfig: function(pointsTypes) {
@@ -192,7 +182,7 @@ define([
                     }
                 });
 
-                resolve('True');
+                resolve(true);
             });
         },
 
@@ -217,7 +207,7 @@ define([
 
                 }, {width: document.documentElement.clientWidth, height: document.documentElement.clientHeight});
 
-                resolve('True');
+                resolve(true);
             });
         },
 
@@ -237,7 +227,7 @@ define([
                     }
                 });
 
-                resolve('True');
+                resolve(true);
             });
         },
 
@@ -248,7 +238,7 @@ define([
                 if(modalMapInPost.length) {
                     modalMapInPost.parent().remove();
                 }
-                resolve('true');
+                resolve(true);
             });
         },
 
@@ -295,6 +285,20 @@ define([
             });
         },
 
+        renderInPostDataHtml: function(pointData) {
+            var self = this;
+
+            return new Promise(function(resolve, reject) {
+                $.each(self.inPostMethod(), function(index, value) {
+                    if($(value[0]).length) {
+                        self.wrapperPointHtml($(value[0]), value[1]);
+                        self.insertData($(value[0]), (pointData ? pointData : ''));
+                    }
+                });
+                resolve(true);
+            });
+        },
+
         renderInPostData: function() {
             var self = this;
 
@@ -303,25 +307,13 @@ define([
                 self.getPoint().then(function(pointId) {
                     if(pointId) {
                         self.getPointInformation(pointId).then(function(pointData) {
-                            $.each(self.inPostMethod(), function(index, value) {
-                                if($(value[0]).length) {
-                                    self.wrapperPointHtml($(value[0]), value[1]).then(function() {
-                                        self.insertData($(value[0]), pointData).then(function() {
-                                            resolve('True');
-                                        });
-                                    });
-                                }
+                            self.renderInPostDataHtml(pointData).then(function() {
+                                resolve(true);
                             });
                         });
                     } else {
-                        $.each(self.inPostMethod(), function(index, value) {
-                            if($(value[0]).length) {
-                                self.wrapperPointHtml($(value[0]), value[1]).then(function() {
-                                    self.insertData($(value[0]), '').then(function() {
-                                        resolve('True');
-                                    });
-                                });
-                            }
+                        self.renderInPostDataHtml().then(function() {
+                            resolve(true);
                         });
                     }
                 });
