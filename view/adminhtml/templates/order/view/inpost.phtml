@@ -33,7 +33,7 @@
                                     <?php foreach ($details as $key => $value): ?>
                                         <div class="details-<?= $key ?>">
                                             <?php echo $block->escapeHtml($value) ?>
-                                            <?php if($key == 'target_point') : ?>
+                                            <?php if ($key == 'target_point') : ?>
                                                 <?php $pointName = explode(" ", $value); ?>
                                                 <a data-inpost-select-point="<?= $pointName[1] ?>" href="#"><?= $block->escapeHtml(__('Show on the map')) ?></a>
                                             <?php endif; ?>
@@ -42,13 +42,13 @@
                                 </div>
                             </td>
                             <td>
-                                <div class="actions">
-                                    <a href="<?= /* @noEscape */ $block->getLabelUrl($shipment) ?>">
+                                <div class="actions" style="padding: 5px;">
+                                    <a class="action-default primary" href="<?= /* @noEscape */ $block->getLabelUrl($shipment) ?>">
                                         <?= $block->escapeHtml(__('Print label')) ?>
                                     </a>
                                 </div>
-                                <div class="actions">
-                                    <a href="<?= /* @noEscape */ $block->getReturnUrl($shipment) ?>" <?php if($block->isUrlBlank($shipment)) : ?> target="_blank" <?php endif; ?> >
+                                <div class="actions" style="padding: 5px;">
+                                    <a class="action-default primary" href="<?= /* @noEscape */ $block->getReturnUrl($shipment) ?>" <?php if ($block->isUrlBlank($shipment)) : ?> target="_blank" <?php endif; ?> >
                                         <?= $block->escapeHtml(__('Return')) ?>
                                     </a>
                                 </div>
