@@ -11,8 +11,7 @@ class ErrorHandler implements ErrorHandlerInterface
 
         if (is_array($jsonResponse['details'])) {
             $details = $this->nestedValues($jsonResponse['details']);
-
-            foreach ($details as $detail) {
+            foreach ($details as $key => $detail) {
                 if ($detail) {
                     $errors .= '- ' . __($detail) . '<br>';
                 }
@@ -35,7 +34,11 @@ class ErrorHandler implements ErrorHandlerInterface
             if (is_array($value)) {
                 $output = array_merge($output, $this->nestedValues($value, $nested_value));
             } else {
-                $output[] = ucfirst($path) . $value;
+                $tmpValue = ucfirst($path) . $value;
+                if ($key == 'shipment_id') {
+                    $tmpValue = 'Parcel ID: ' . $tmpValue;
+                }
+                $output[] = $tmpValue;
             }
         }
         return $output;
