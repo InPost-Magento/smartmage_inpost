@@ -48,7 +48,7 @@
                                     </a>
                                 </div>
                                 <div class="actions">
-                                    <a href="<?= /* @noEscape */ $block->getReturnUrl($shipment) ?>">
+                                    <a href="<?= /* @noEscape */ $block->getReturnUrl($shipment) ?>" <?php if($block->isUrlBlank($shipment)) : ?> target="_blank" <?php endif; ?> >
                                         <?= $block->escapeHtml(__('Return')) ?>
                                     </a>
                                 </div>

@@ -6,13 +6,16 @@ namespace Smartmage\Inpost\Ui\Component\Listing\Column;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
+use Smartmage\Inpost\Model\Config\Source\Status as StatusSource;
 
 /**
- * Class TrackingNumber
- * @package Smartmage\Inpost\Ui\Component\Listing\Column
+ * Class Status for rendering url to tracking
  */
-class TrackingNumber extends Column
+class Status extends Column
 {
+
+    protected $statusSource;
+
     /**
      * TrackingNumber constructor.
      * @param \Magento\Framework\View\Element\UiComponent\ContextInterface $context
@@ -23,12 +26,13 @@ class TrackingNumber extends Column
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
+        StatusSource $statusSource,
         array $components = [],
         array $data = []
     ) {
+        $this->statusSource = $statusSource;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
-
 
     /**
      * @param array $dataSource
@@ -37,12 +41,16 @@ class TrackingNumber extends Column
     public function prepareDataSource(array $dataSource)
     {
         if (isset($dataSource['data']['items'])) {
-            foreach ($dataSource['data']['items'] as $key=> & $item) {
-                if (isset($item['tracking_number'])) {
-                    $item['tracking_number_tmp'] = $item['tracking_number'];
-                    $item['tracking_number'] =
-                        '<a target="blank" href="https://inpost.pl/sledzenie-przesylek?number='
-                        . $item['tracking_number'] . '">' . $item['tracking_number'] . '</a>';
+            foreach ($dataSource['data']['items'] as & $item) {
+                if (isset($item['status'])) {
+
+                    if (isset($item['tracking_number_tmp'])) {
+                        $item['status'] =
+                            '<a target="blank" href="https://inpost.pl/sledzenie-przesylek?number='
+                            . $item['tracking_number_tmp'] . '">' . $this->statusSource->getStatusLabel($item['status']) . '</a>';
+                    } else {
+                        $item['status'] = $this->statusSource->getStatusLabel($item['status']);
+                    }
                 }
             }
         }

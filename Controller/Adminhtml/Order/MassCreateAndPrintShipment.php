@@ -16,7 +16,7 @@ use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\MassCreate;
 use Smartmage\Inpost\Model\Config\Source\LabelFormat;
 use Smartmage\Inpost\Model\ConfigProvider;
 
-class MassCreateShipment extends Action
+class MassCreateAndPrintShipment extends Action
 {
 
     /**
@@ -116,7 +116,59 @@ class MassCreateShipment extends Action
             }
         }
 
+        $labelFormat = $this->configProvider->getLabelFormat();
+        $labelSize = $this->configProvider->getLabelSize();
+
+        if (count($messages['shipment_ids']) > 0) {
+            for ($x = 0; $x <= 10; $x++) {
+                try {
+                    if (!empty($messages['shipment_ids'])) {
+                        $labelsData = [
+                            'ids' => $messages['shipment_ids'],
+                            LabelFormat::STRING_FORMAT => $labelFormat,
+                            LabelFormat::STRING_SIZE => $labelSize,
+                        ];
+
+                        $result = $this->labels->getLabels($labelsData);
+
+                        $fileContent = ['type' => 'string', 'value' => $result[CallResult::STRING_FILE], 'rm' => true];
+
+                        return $this->fileFactory->create(
+                            sprintf('labels-%s.' . $labelFormat, $this->dateTime->date('Y-m-d_H-i-s')),
+                            $fileContent,
+                            DirectoryList::VAR_DIR,
+                            LabelFormat::LABEL_CONTENT_TYPES[$labelFormat]
+                        );
+                    }
+
+                } catch (\Exception $e) {
+                    $matches = [];
+                    preg_match("/.+(\ .+<br>)$/", $e->getMessage(), $matches);
+
+                    if (isset($matches[1]) &&
+                        ($key = array_search(strip_tags(trim($matches[1])), $messages['shipment_ids']))
+                        !== false
+                    ) {
+                        $logger->info(print_r($e->getMessage(), true));
+
+                        $this->messageManager->addExceptionMessage(
+                            $e
+                        );
+                        unset($messages['shipment_ids'][$key]);
+                        continue;
+                    }
+
+                    $logger->info(print_r($e->getMessage(), true));
+
+                    $this->messageManager->addExceptionMessage(
+                        $e
+                    );
+                }
+            }
+        }
+
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+
         return $resultRedirect->setPath('sales/order/index');
     }
 }
