@@ -13,6 +13,7 @@ class LabelFormat implements OptionSourceInterface
     const PDF = 'pdf';
     const EPL = 'epl';
     const ZPL = 'zpl';
+    const ZIP = 'zip';
 
     const STRING_SIZE = 'size';
     const STRING_FORMAT = 'format';
@@ -20,7 +21,8 @@ class LabelFormat implements OptionSourceInterface
     const LABEL_CONTENT_TYPES = [
         self::PDF => 'application/pdf',
         self::EPL => 'application/epl2',
-        self::ZPL => 'application/zpl'
+        self::ZPL => 'application/zpl',
+        self::ZIP => 'application/zip',
     ];
 
     /**

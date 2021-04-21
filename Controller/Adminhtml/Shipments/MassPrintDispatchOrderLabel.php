@@ -70,6 +70,8 @@ class MassPrintDispatchOrderLabel extends MassActionAbstract
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $collection = $this->filter->getCollection($this->collectionFactory->create());
 
+        $services = array_count_values($collection->getColumnValues('service'));
+
         $shipmentIds = [];
         $omittedIds = [];
 
@@ -98,6 +100,10 @@ class MassPrintDispatchOrderLabel extends MassActionAbstract
                 $result = $this->printoutDispatchOrders->getDispatchOrders($dispatchOrdersData);
 
                 $fileContent = ['type' => 'string', 'value' => $result[CallResult::STRING_FILE], 'rm' => true];
+
+                if (count($services) > 1) {
+                    $labelFormat = 'zip';
+                }
 
                 return $this->fileFactory->create(
                     sprintf('labels-%s.' . $labelFormat, $this->dateTime->date('Y-m-d_H-i-s')),

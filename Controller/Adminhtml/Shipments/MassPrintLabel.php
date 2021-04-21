@@ -9,10 +9,10 @@ use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Stdlib\DateTime\DateTime;
 use Magento\Ui\Component\MassAction\Filter;
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
+use Smartmage\Inpost\Model\ApiShipx\Service\Document\Printout\Labels as PrintoutLabels;
 use Smartmage\Inpost\Model\Config\Source\LabelFormat;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\ResourceModel\Shipment\CollectionFactory;
-use Smartmage\Inpost\Model\ApiShipx\Service\Document\Printout\Labels as PrintoutLabels;
 
 /**
  * Class MassPrintLabel
@@ -20,7 +20,6 @@ use Smartmage\Inpost\Model\ApiShipx\Service\Document\Printout\Labels as Printout
  */
 class MassPrintLabel extends MassActionAbstract
 {
-
     protected $printoutLabels;
 
     /**
@@ -66,8 +65,9 @@ class MassPrintLabel extends MassActionAbstract
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $collection = $this->filter->getCollection($this->collectionFactory->create());
-//        $selectedIds = $collection->getAllIds();
         $shipmentIds = $collection->getColumnValues('shipment_id');
+
+        $services = array_count_values($collection->getColumnValues('service'));
 
         $labelFormat = $this->configProvider->getLabelFormat();
         $labelSize = $this->configProvider->getLabelSize();
@@ -84,6 +84,10 @@ class MassPrintLabel extends MassActionAbstract
         try {
             $result = $this->printoutLabels->getLabels($labelsData);
 
+            if (count($services) > 1) {
+                $labelFormat = 'zip';
+            }
+
             $fileContent = ['type' => 'string', 'value' => $result[CallResult::STRING_FILE], 'rm' => true];
 
             return $this->fileFactory->create(
@@ -92,7 +96,6 @@ class MassPrintLabel extends MassActionAbstract
                 DirectoryList::VAR_DIR,
                 LabelFormat::LABEL_CONTENT_TYPES[$labelFormat]
             );
-
         } catch (\Exception $e) {
             $logger->info(print_r($e->getMessage(), true));
 

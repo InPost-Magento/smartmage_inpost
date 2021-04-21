@@ -22,7 +22,6 @@ class ErrorHandler implements ErrorHandlerInterface
             }
         }
 
-
         return $errors;
     }
 

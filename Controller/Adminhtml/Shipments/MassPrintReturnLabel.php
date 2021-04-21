@@ -84,6 +84,7 @@ class MassPrintReturnLabel extends MassActionAbstract
         //etykieta zwrotna tylko dla usług kurierskich
         foreach ($collection as $item) {
             if (substr($item->getService(), 0, 14) === "inpost_courier") {
+                $services[$item->getService()] = 1;
                 $shipmentIds[] = $item->getShipmentId();
             } else {
                 $omittedIds[] = $item->getShipmentId();
@@ -104,6 +105,10 @@ class MassPrintReturnLabel extends MassActionAbstract
                 $result = $this->printoutReturnLabels->getLabels($labelsData);
 
                 $fileContent = ['type' => 'string', 'value' => $result[CallResult::STRING_FILE], 'rm' => true];
+
+                if (count($services) > 1) {
+                    $labelFormat = 'zip';
+                }
 
                 return $this->fileFactory->create(
                     sprintf('labels-%s.' . $labelFormat, $this->dateTime->date('Y-m-d_H-i-s')),
