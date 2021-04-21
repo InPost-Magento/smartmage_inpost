@@ -80,6 +80,7 @@ class MassPrintReturnLabel extends MassActionAbstract
 
         $shipmentIds = [];
         $omittedIds = [];
+        $services = [];
 
         //etykieta zwrotna tylko dla usług kurierskich
         foreach ($collection as $item) {
