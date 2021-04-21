@@ -181,6 +181,15 @@ class Inpost extends AbstractOrder
         }
     }
 
+    public function isUrlBlank($shipment)
+    {
+        if ($shipment->getService() != 'inpost_locker_standard') {
+            return false;
+        }
+
+        return true;
+    }
+
     /**
      * @param $inpostShipmentId
      * @return \Magento\Framework\Model\AbstractModel|\Smartmage\Inpost\Api\Data\ShipmentInterface

@@ -131,12 +131,13 @@
                 <label translate="true">Order id</label>
             </settings>
         </column>
-        <column name="status" component="Magento_Ui/js/grid/columns/select">
+        <column name="status"  class="Smartmage\Inpost\Ui\Component\Listing\Column\Status">
             <settings>
                 <filter>select</filter>
                 <options class="Smartmage\Inpost\Model\Config\Source\Status"/>
                 <dataType>select</dataType>
                 <label translate="true">Status</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
             </settings>
         </column>
 
