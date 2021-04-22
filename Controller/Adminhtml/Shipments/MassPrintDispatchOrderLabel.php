@@ -70,13 +70,14 @@ class MassPrintDispatchOrderLabel extends MassActionAbstract
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $collection = $this->filter->getCollection($this->collectionFactory->create());
 
-        $services = array_count_values($collection->getColumnValues('service'));
 
         $shipmentIds = [];
         $omittedIds = [];
+        $services = [];
 
         foreach ($collection as $item) {
             if ($item->getSendingMethod() == 'dispatch_order') {
+                $services[$item->getService()] = 1;
                 $shipmentIds[] = $item->getShipmentId();
             } else {
                 $omittedIds[] = $item->getShipmentId();
