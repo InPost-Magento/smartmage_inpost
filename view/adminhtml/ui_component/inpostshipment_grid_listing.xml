@@ -60,6 +60,10 @@
                         <item name="type" xsi:type="string">print_label</item>
                         <item name="label" xsi:type="string" translate="true">Print label</item>
                         <item name="url" xsi:type="url" path="*/*/massPrintLabel"/>
+                        <item name="callback" xsi:type="array">
+                            <item name="provider" xsi:type="string">inpostshipment_grid_listing.inpostshipment_grid_listing.listing_top.listing_massaction</item>
+                            <item name="target" xsi:type="string">applyActionAndResetSelected</item>
+                        </item>
                     </item>
                 </argument>
             </action>
