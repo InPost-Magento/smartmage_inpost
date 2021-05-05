@@ -140,7 +140,7 @@
                 <filter>select</filter>
                 <options class="Smartmage\Inpost\Model\Config\Source\Status"/>
                 <dataType>select</dataType>
-                <label translate="true">Status</label>
+                <label translate="true">Shipment Status</label>
                 <bodyTmpl>ui/grid/cells/html</bodyTmpl>
             </settings>
         </column>
