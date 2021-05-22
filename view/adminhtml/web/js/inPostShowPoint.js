@@ -45,8 +45,18 @@ requirejs([
         Modal: function() {
             return new Promise(function(resolve, reject) {
                 easyPack.modalMap(function(point, modal) {
+                    var targetLocker = $('input[name="shipment_fieldset[target_locker]"]');
+                    var btnShowPoint = $('[data-inpost-select-point]');
+
+                    if(targetLocker.length) {
+                        targetLocker.val(point.name);
+                        btnShowPoint.attr('data-inpost-select-point', point.name);
+                    }
+
                     $('body').removeClass('overlay-modal-carrier');
                     modal.closeModal();
+                    inPostModal.closeModal();
+
 
                 }, {width: document.documentElement.clientWidth, height: document.documentElement.clientHeight});
 
@@ -77,9 +87,11 @@ requirejs([
 
             $(document).on('click', '[data-inpost-select-point]', function(e) {
                 e.preventDefault();
-                var point = $(this).data('inpost-select-point');
+                var point = $(this).attr('data-inpost-select-point');
+                var configType = $(this).data('inpost-point-type');
+
                 self.getMode().then(function(mode) {
-                    self.config(mode, ['parcel_locker', 'pop']).then(function() {
+                    self.config(mode, (configType ? configType.split('-') : ['parcel_locker', 'pop'])).then(function() {
                         self.Modal().then(function() {
                             if(point.length > 0) {
                                 easyPack.map.searchLockerPoint(point);

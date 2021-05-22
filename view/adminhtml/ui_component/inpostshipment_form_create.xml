@@ -1029,6 +1029,7 @@
                 <dataType>text</dataType>
                 <label translate="true">Target Locker</label>
                 <dataScope>target_locker</dataScope>
+                <elementTmpl>Smartmage_Inpost/form/element/target-locker</elementTmpl>
             </settings>
         </field>
 
