@@ -1,7 +1,8 @@
 requirejs([
     'jquery',
+    'ko',
     'inPostSdk',
-], function ($) {
+], function ($, ko) {
     'use strict';
 
     var inPostModal = {
@@ -49,7 +50,7 @@ requirejs([
                     var btnShowPoint = $('[data-inpost-select-point]');
 
                     if(targetLocker.length) {
-                        targetLocker.val(point.name);
+                        ko.dataFor(targetLocker.get(0)).value(point.name);
                         btnShowPoint.attr('data-inpost-select-point', point.name);
                     }
 
