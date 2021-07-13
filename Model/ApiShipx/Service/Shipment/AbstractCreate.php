@@ -140,7 +140,7 @@ abstract class AbstractCreate extends AbstractService
         $this->requestBody['service'] = $this->shippingMethods::INPOST_MAPPER[$data['service']];
         $this->requestBody['reference'] = $data['reference'];
         $this->requestBody['only_choice_of_offer'] = false;
-        $this->requestBody['external_customer_id'] = 'magento';
+        $this->requestBody['external_customer_id'] = 'Magento';
 
         if ($this->configProvider->getChangeAddress()) {
             $this->requestBody['sender'] = [
