@@ -64,12 +64,12 @@
                 <active>1</active>
                 <c2c>
                     <active>0</active>
-                    <name>Kurier</name>
+                    <name>Kurier C2C</name>
                     <max_cart_weight>25</max_cart_weight>
                 </c2c>
                 <c2ccod>
                     <active>0</active>
-                    <name>Kurier - płatność przy odbiorze</name>
+                    <name>Kurier C2C - płatność przy odbiorze</name>
                     <max_cart_weight>25</max_cart_weight>
                 </c2ccod>
                 <standard>
