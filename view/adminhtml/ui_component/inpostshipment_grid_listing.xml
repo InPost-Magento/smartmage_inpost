@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">inpostshipment_grid_listing.inpostshipment_grid_listing_data_source</item>
+            <item name="deps" xsi:type="string">inpostshipment_grid_listing.inpostshipment_grid_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">inpostshipment_grid_columns</item>
+        <item name="buttons" xsi:type="array">
+            <item name="full_sync" xsi:type="array">
+                <item name="name" xsi:type="string">full_sync</item>
+                <item name="label" xsi:type="string" translate="true">Refresh list</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">smartmageinpost/shipments/fullsync</item>
+            </item>
+        </item>
+    </argument>
+    <dataSource name="inpostshipment_grid_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Smartmage\Inpost\Ui\DataProvider\Inpostshipment\ListingDataProvider</argument>
+            <argument name="name" xsi:type="string">inpostshipment_grid_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">entity_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">entity_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <bookmark name="bookmarks"/>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="templates" xsi:type="array">
+                        <item name="filters" xsi:type="array">
+                            <item name="select" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                                <item name="template" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </filters>
+        <massaction name="listing_massaction">
+            <action name="print_label">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">print_label</item>
+                        <item name="label" xsi:type="string" translate="true">Print label</item>
+                        <item name="url" xsi:type="url" path="*/*/massPrintLabel"/>
+                        <item name="callback" xsi:type="array">
+                            <item name="provider" xsi:type="string">inpostshipment_grid_listing.inpostshipment_grid_listing.listing_top.listing_massaction</item>
+                            <item name="target" xsi:type="string">applyActionAndResetSelected</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="print_return_label">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">print_return_label</item>
+                        <item name="label" xsi:type="string" translate="true">Print return label</item>
+                        <item name="url" xsi:type="url" path="*/*/massPrintReturnLabel"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="dispatch_order">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">dispatch_order</item>
+                        <item name="label" xsi:type="string" translate="true">Dispatch order</item>
+                        <item name="url" xsi:type="url" path="*/*/massDispatchOrder"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="print_dispatch_order_label">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">print_dispatch_order_label</item>
+                        <item name="label" xsi:type="string" translate="true">Print dispatch order label</item>
+                        <item name="url" xsi:type="url" path="*/*/massPrintDispatchOrderLabel"/>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+<!--        <exportButton name="export_button"/>-->
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="inpostshipment_grid_columns">
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+        <column name="entity_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <resizeDefaultWidth>25</resizeDefaultWidth>
+            </settings>
+        </column>
+        <column name="shipment_id">
+            <settings>
+                <filter>text</filter>
+                <bodyTmpl>ui/grid/cells/text</bodyTmpl>
+                <label translate="true">Shipment id</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="tracking_number" class="Smartmage\Inpost\Ui\Component\Listing\Column\TrackingNumber">
+            <settings>
+                <filter>text</filter>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <label translate="true">Tracking number</label>
+            </settings>
+        </column>
+        <column name="increment_id" class="Smartmage\Inpost\Ui\Component\Listing\Column\IncrementId">
+            <settings>
+                <filter>text</filter>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <label translate="true">Order id</label>
+            </settings>
+        </column>
+        <column name="status"  class="Smartmage\Inpost\Ui\Component\Listing\Column\Status">
+            <settings>
+                <filter>select</filter>
+                <options class="Smartmage\Inpost\Model\Config\Source\Status"/>
+                <dataType>select</dataType>
+                <label translate="true">Shipment Status</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+            </settings>
+        </column>
+
+        <column name="service" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <options class="Smartmage\Inpost\Model\Config\Source\Service"/>
+                <dataType>select</dataType>
+                <label translate="true">Service</label>
+            </settings>
+        </column>
+        <column name="shipment_attributes" class="Smartmage\Inpost\Ui\Component\Listing\Column\ShipmentAttributes">
+            <settings>
+                <sortable>false</sortable>
+                <bodyTmpl>ui/grid/cells/text</bodyTmpl>
+                <label translate="true">Shipment attributes</label>
+                <resizeDefaultWidth>25</resizeDefaultWidth>
+            </settings>
+        </column>
+        <column name="sending_method" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <options class="Smartmage\Inpost\Model\Config\Source\SendingMethod"/>
+                <label translate="true">Sending method</label>
+                <dataType>select</dataType>
+            </settings>
+        </column>
+        <column name="receiver_data">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <bodyTmpl>ui/grid/cells/text</bodyTmpl>
+                <label translate="true">Receiver data</label>
+                <resizeDefaultWidth>20</resizeDefaultWidth>
+            </settings>
+        </column>
+        <column name="reference">
+            <settings>
+                <filter>text</filter>
+                <bodyTmpl>ui/grid/cells/text</bodyTmpl>
+                <label translate="true">Reference</label>
+                <resizeDefaultWidth>20</resizeDefaultWidth>
+            </settings>
+        </column>
+
+        <column name="dispatch_order_id" class="Smartmage\Inpost\Ui\Component\Listing\Column\DispatchOrderId">
+            <settings>
+                <filter>text</filter>
+                <bodyTmpl>ui/grid/cells/text</bodyTmpl>
+                <label translate="true">Dispatch Order Id</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

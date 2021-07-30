@@ -1,0 +1,205 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Smartmage\Inpost\Api\Data\ShipmentSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Smartmage\Inpost\Api\Data\ShipmentInterface" type="Smartmage\Inpost\Model\Shipment" />
+    <preference for="Smartmage\Inpost\Api\ShipmentRepositoryInterface" type="Smartmage\Inpost\Model\ShipmentRepository" />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="inpostshipment_grid_listing_data_source" xsi:type="string">SmartmageInpostShipmentCollection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="SmartmageInpostShipmentCollection" type="Smartmage\Inpost\Ui\DataProvider\Inpostshipment\Listing\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">smartmage_inpost_shipment</argument>
+            <argument name="resourceModel" xsi:type="string">Smartmage\Inpost\Model\ResourceModel\Shipment</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultWaySendingStandard" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostlocker_standard</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultWaySendingC2c" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_c2c</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultWaySendingC2cCod" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_c2ccod</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultWaySendingCourierStandard" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_standard</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultWaySendingExpress1000" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_express1000</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultWaySendingExpress1200" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_express1200</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultWaySendingExpress1700" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_express1700</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultWaySendingLocalStandard" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_localstandard</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultWaySendingLocalExpress" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_localexpress</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultWaySendingLocalSuperExpress" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_localsuperexpress</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="DefaultSendingPointStandard" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostlocker_standard</argument>
+            <argument name="points" xsi:type="string">standard</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointStandardCod" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostlocker_standardcod</argument>
+            <argument name="points" xsi:type="string">standard</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointStandardEow" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostlocker_standardeow</argument>
+            <argument name="points" xsi:type="string">parcel_locker</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointStandardEowCod" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostlocker_standardeowcod</argument>
+            <argument name="points" xsi:type="string">parcel_locker</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointC2c" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_c2c</argument>
+            <argument name="points" xsi:type="string">standard</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointC2cCod" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_c2ccod</argument>
+            <argument name="points" xsi:type="string">standard</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointCourierStandard" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_standard</argument>
+            <argument name="points" xsi:type="string">pop</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointExpress1000" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_express1000</argument>
+            <argument name="points" xsi:type="string">pop</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointExpress1200" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_express1200</argument>
+            <argument name="points" xsi:type="string">pop</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointExpress1700" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_express1700</argument>
+            <argument name="points" xsi:type="string">pop</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointLocalStandard" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_localstandard</argument>
+            <argument name="points" xsi:type="string">pop</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointLocalExpress" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_localexpress</argument>
+            <argument name="points" xsi:type="string">pop</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointLocalSuperExpress" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_localsuperexpress</argument>
+            <argument name="points" xsi:type="string">pop</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="LabelSizePdf" type="Smartmage\Inpost\Model\Config\Source\LabelSize">
+        <arguments>
+            <argument name="code" xsi:type="string">pdf</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="LabelSizeEpl" type="Smartmage\Inpost\Model\Config\Source\LabelSize">
+        <arguments>
+            <argument name="code" xsi:type="string">epl</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="LabelSizeZpl" type="Smartmage\Inpost\Model\Config\Source\LabelSize">
+        <arguments>
+            <argument name="code" xsi:type="string">zpl</argument>
+        </arguments>
+    </virtualType>
+
+    <preference for="Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterface"
+                type="Smartmage\Inpost\Model\ShipmentOrderLink"/>
+    <preference for="Smartmage\Inpost\Api\ShipmentOrderLinksProviderInterface"
+                type="Smartmage\Inpost\Model\ShipmentOrderLink\Provider"/>
+    <preference for="Smartmage\Inpost\Api\Data\ShipmentOrderLinkSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Smartmage\Inpost\Api\ShipmentOrderLinkRepositoryInterface" type="Smartmage\Inpost\Model\ShipmentOrderLinkRepository" />
+
+    <type name="Magento\Quote\Api\CartRepositoryInterface">
+        <plugin name="quote_inpost_locker_id_attribute" type="Smartmage\Inpost\Plugin\CartRepositoryExtended" />
+    </type>
+
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="order_inpost_attributes" type="Smartmage\Inpost\Plugin\OrderRepositoryExtended" />
+    </type>
+
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">smartmage_inpost_shipment_order_link</item>
+                    <item name="identifierField" xsi:type="string">link_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="InpostGeneralLogHandler" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">Smartmage\Inpost\Logger\Handler\InpostGeneralHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Smartmage\Inpost\Model\ApiShipx\AbstractService">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostGeneralLogHandler</argument>
+        </arguments>
+    </type>
+</config>

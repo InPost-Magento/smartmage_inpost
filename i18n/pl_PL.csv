@@ -1,0 +1,175 @@
+Block send with Locker,Zablokuj wysyłkę do Paczkomatu
+Block send with InPost Courier,Zablokuj wysyłkę kurierem InPost
+Block send with InPost Palette,Zablokuj wysyłkę kurierem InPost na palecie
+Show only delivery in weekend,Pokazuj tylko Paczkę w Weekend gdy aktywna
+"If set on Yes, normal parcel delivery will be hidden if weekend delivery will be available","Jeśli ustawiona na Tak to zwykła dostawa do Paczkomatu będzie ukrywana gdy dostawa w weekend będzie aktywna"
+Method name,Nazwa metody
+Max cart weight,Maksymalna waga koszyka
+"The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the ""Inpost - general configuration"" section",Domyślna wartość 25 odnosi się do maksymalnej wagi paczki jaką InPost dostarcza wyrażonej w kilogramach. Jeśli używasz innej jednostki dostosuj tą wartość oraz ustaw odpowiednią jednostkę w sekcji ""Inpost - konfiguracja ogólna""
+Default way of sending,Domyślny sposób nadania
+Default sending point,Domyślny punkt nadania
+Day of the week starting delivery in weekend,Dzień tygodnia startu dostawy w weekend
+Day of the week ending delivery in weekend,Dzień tygodnia końca dostawy w weekend
+Hour starting delivery in weekend,Godzina startu Paczki w Weekend
+Hour ending delivery in weekend,Godzina końca Paczki w Weekend
+Monday,Poniedziałek
+Tuesday,Wtorek
+Wednesday,Środa
+Thursday,Czwartek
+Friday,Piątek
+Saturday,Sobota
+Sunday,Niedziela
+Organization ID,ID organizacji
+Access Token, Token dostępu
+Label format,Format etykiety
+Label size,Rozmiar etykiety
+Change sender's address,Zmiana adresu nadawcy
+Sender - name,Nadawca - Imię
+Sender - surname,Nadawca - Nazwisko
+Sender - company,Nadawca - nazwa firmy
+Sender - email,Nadawca - email
+Sender - phone,Nadawca - telefon
+Sender - street,Nadawca - ulica
+Sender - building number,Nadawca - numer budynku
+Sender - city,Nadawca - miasto
+Sender - postcode,Nadawca - kod pocztowy
+Sender - country code,Nadawca - kod kraju
+Generate shipping in order after generating InPost package,Czy generować wysyłkę w zamówieniu po wygenerowaniu przesyłki InPost
+After generate package send email to customer,Czy generowanie przesyłki ma wysyłać również maila do klienta
+Become a partner(SzybkieZwroty.pl),Zostań Partnerem (SzybkieZwroty.pl)
+"<a href=""https://szybkiezwroty.pl/pl/business#navigate-buttons"">Become a partner</a>","<a href=""https://szybkiezwroty.pl/pl/business#navigate-buttons"">Zostań partnerem</a>"
+Url for szybkiezwroty, Adres URL do szybkiezwroty.pl
+Weight attribute code,Kod cechy produktu z wagą
+Weight unit,Jednostka wagi
+Automatic payment for generated package,Generowane przesyłki automatycznie ubezpieczaj
+Default pickup point,Domyślny punkt odbioru
+Kilograms,Kilogramy
+Grams,Gramy
+Target Locker,Paczkomat docelowy
+Cash on Delivery Value,Wartość pobrania
+Insurance Value,Wartość ubezpieczenia
+Reference Number,Numer referencyjny
+Sending Method,Sposób nadania
+Order Number,Numer zamówienia
+Width (mm),Szerokość (milimetry)
+Length (mm),Długość (milimetry)
+Height (mm),Wysokość (milimetry)
+Service,Usługa
+Size,Gabaryt
+New Shipment,Nowa przesyłka
+Shipment Details,Szczegóły przesyłki
+Print label,Wydrukuj etykietę
+Print return label,Wydrukuj etykietę zwrotu
+Print dispatch order label,Wydrukuj potwierdzenie nadania
+InPost Shipments List,Lista Przesyłek InPost
+Small,Gabaryt A
+Medium,Gabaryt B
+Large,Gabaryt C
+X Large,Gabaryt D
+Create InPost Shipment,Utwórz przesyłkę
+Back,Wróć
+Please select a pickup point,Proszę wybrać punkt odbioru
+Please select a pickup point,Wybierz Paczkomat
+Change pickup point,Wybierz inny Paczkomat
+The selected point does not support the cash on delivery method,Wybrany punkt nie obsługuje metody płatności przy odbiorze
+Selected pickup point:,Wybrany Paczkomat:
+"Point: ","Punkt: "
+The shipment list has been successfully synchronized,Lista przesyłek została pomyślnie zsynchronizowana
+Order not exist,Zamówienie nie istnieje
+Standard parcel locker delivery,Przesyłka Paczkomatowa standardowa
+Standard courier shipment,Przesyłka kurierska standardowa
+Standard courier shipment c2c,Przesyłka kurierska standardowa dla klientów indywidualnych
+Courier shipment with delivery until 10:00 on the next day,Przesyłka kurierska z doręczeniem do godziny 10:00 następnego dnia
+Courier shipment with delivery until 12:00 on the next day,Przesyłka kurierska z doręczeniem do godziny 12:00 następnego dnia
+Courier shipment with delivery until 17:00 on the next day,Przesyłka kurierska z doręczeniem do godziny 17:00 następnego dnia
+Local Standard courier shipment,Przesyłka kurierska Lokalna Standardowa
+Local Express courier shipment,Przesyłka kurierska Lokalna Expresowa
+Super Express courier shipment,Przesyłka kurierska Lokalna Super Expresowa
+Paleta Standard courier shipment,Przesyłka kurierska Paleta Standard
+Size A,Gabaryt A
+Size B,Gabaryt B
+Size C,Gabaryt C
+Size D,Gabaryt D
+sent in an automatic parcel station,Nadanie w paczkomacie
+sent in the Customer Service Point,Nadanie w Punkcie Obsługi Klienta
+sent in the Customer Service Point handling shipping of courier shipments,Nadanie w Punkcie Obsługi Klienta obsługującym nadawanie przesyłek kurierskich
+sent in a Branch,Nadanie w Oddziale
+Collection order - courier order,Zlecenie odbioru - zamówienie kuriera
+sent in the Shipment Service Point,Nadanie w Punkcie Obsługi Przesyłek
+Tracking number,Numer trackingowy
+Shipment attributes,Cechy przesyłki
+Sending method,Sposób nadania
+Receiver data,Dane odbiorcy
+Reference,Numer referencyjny
+"If api is unavailable then this field will be empty","Jeśli interfejs API jest niedostępny, to pole będzie puste"
+"You Don't have any dispatch points","Nie masz żadnych punktów wysyłki"
+Address Details,Dane Adresowe
+Verify that the "Street" and "Building number" fields have been correctly filled in,Zweryfikuj czy pola "Ulica" i "Numer budynku" zostały poprawnie wypełnione
+Company Name,Nazwa firmy
+Phone,Numer telefonu
+First Name,Imię
+Last Name,Nazwisko
+Postcode,Kod pocztowy
+Street,Ulica
+Building Number,Numer budynku
+City,Miasto
+Get shipments from x days ago,Pobierz przesyłki z przed x dni
+Order id,Numer zamówienia
+Dispatch order,Zlecenie odbioru zamówienia
+Weight,Waga
+kg,kilogramy
+g,gramy
+Show on the map,Pokaż na mapie
+Actions,Operacje
+Details,Szczegóły
+Return,Zwrot
+Submit,Stwórz przesyłkę
+Choose method,Wybierz metodę
+Create sample courier shipment,Stwórz testową przesyłkę kurierską
+Create sample locker shipment,Stwórz testową przesyłkę Paczkomatową
+Shipment id,Numer przesyłki
+Refresh list, Odśwież listę
+"The service does not have a default drop point selected. If you send the parcel in a way other than ""Pickup by courier"", please select the point in the","Usługa nie ma wybranego domyślnego punktu nadania. Jeżeli nadajesz przesyłkę w inny sposób niż ""Odbiór przez kuriera"", należy wybrać punkt w"
+Configuration Page,konfiguracji
+Dispatch order was created,Zlecenie odbioru zostało stworzone
+Shipments,Przesyłki
+Shipment,Przesyłka
+have been omitted_m,zostały pominięte z powodu niedostępnych operacji
+have been omitted_s,została pominięta z powodu niedostępnych operacji
+Shipments Już nadane.,Przesyłki już nadane.
+Custom_attributes target_point Nie istnieje,Wybrany Paczkomat docelowy nie istnieje
+Dispatch Order Id,Numer zlecenia odbioru
+Not applicable,Nie dotyczy
+Default Weight (kg),Domyślna waga (kg)
+Default value used if the order weight is 0kg,"Domyślna wartość używana w paczkach kurierskich, jeżeli waga zamówienia jest równa 0kg"
+Default Width (mm),Domyślna szerokość (mm)
+Default Length (mm),Domyślna długość (mm)
+Default Height (mm),Domyślna wysokość (mm)
+Default value used in shippments,Domyślna wartość używana podczas tworzenia paczek kurierskich
+Default Size,Domyślny gabaryt (Paczkomaty)
+Receiver phone Nieprawidłowy,Nieprawidłowy numer telefonu odbiorcy
+Receiver address post_code Nieprawidłowy,Nieprawidłowy kod pocztowy odbiorcy
+Receiver email Nieprawidłowy,Nieprawidłowy adres email odbiorcy
+Parcels dimensions height Mniej niż,Wysokość paczki jest zbyt duża
+Parcels dimensions length Mniej niż,Długość paczki jest zbyt duża
+Parcels dimensions width Mniej niż,Szerokość paczki jest zbyt duża
+Insurance amount Więcej niż,Wartość ubezpieczenia jest mniejsza niż 0
+Insurance amount Nie jest cyfrą,Wartość ubezpieczenia nie jest cyfrą
+Create InPost Shipments,Stwórz przesyłki InPost
+Create and print InPost Shipments,Stwórz przesyłki InPost i wydrukuj
+The following orders do not have InPost shipment created due to different delivery methods:,Następujące zamówienia nie mają utworzonej przesyłki InPost ze względu na inne metody dostawy:
+InPost shipments were generated for orders:,Wygenerowano przesyłki InPost dla zamówień:
+The shipment created successfully,Przesyłka wygenerowana poprawnie
+For the order,Dla zamówienia
+no Inpost shipment was generated due to:,nie została wygenerowana przesyłka InPost z powodu:
+Sender address post_code Nieprawidłowy,Kod pocztowy nadawcy jest nieprawidłowy
+Enable debug,Włącz debugowanie
+The inpost_courier_c2c service addressed to an individual customer,Usługa inpost_courier_c2c skierowana do klienta indywidualnego
+Pickup Street,Adres odbioru - ulica
+Pickup Building Number,Adres odbioru - numer budynku
+Pickup City,Adres odbioru - miasto
+Pickup Post Code,Adres odbioru - kod pocztowy
+Pickup Country Code,Adres odbioru - kod kraju
+Shipment Status,Status
+
+

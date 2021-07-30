@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+        <massaction name="listing_massaction">
+            <action name="mass_order_inpost_create_shipment">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">order_create_inpost_shipment</item>
+                        <item name="label" xsi:type="string" translate="true">Create InPost Shipments</item>
+                        <item name="url" xsi:type="url" path="smartmageinpost/order/massCreateShipment"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="mass_order_inpost_create_print_shipment">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">order_create_print_inpost_shipment</item>
+                        <item name="label" xsi:type="string" translate="true">Create and print InPost Shipments</item>
+                        <item name="url" xsi:type="url" path="smartmageinpost/order/massCreateAndPrintShipment"/>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+    </listingToolbar>
+</listing>

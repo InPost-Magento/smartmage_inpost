@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="smartmage_inpost_shipment" resource="default" engine="innodb" comment="Inpost shipment">
+        <column name="entity_id" xsi:type="int" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity id"/>
+        <column name="shipment_id" xsi:type="int" padding="10" unsigned="true" nullable="false" comment="Shipment id"/>
+        <column name="tracking_number" xsi:type="varchar" length="255" nullable="true" comment="Shipment tracking number"/>
+        <column name="status" xsi:type="varchar" length="255" nullable="true" comment="Shipment status"/>
+        <column name="service" xsi:type="varchar" length="255" nullable="true" comment="Shipment service"/>
+        <column name="shipment_attributes" xsi:type="varchar" length="255" nullable="true" comment="Shipment attributes"/>
+        <column name="target_point" xsi:type="varchar" length="255" nullable="true" comment="Target point"/>
+        <column name="sending_method" xsi:type="varchar" length="255" nullable="true" comment="Sending method"/>
+        <column name="receiver_data" xsi:type="varchar" length="255" nullable="true" comment="Receiver data"/>
+        <column name="reference" xsi:type="varchar" length="255" nullable="true" comment="Reference"/>
+        <column name="dispatch_order_id" xsi:type="varchar" length="255" nullable="true" comment="Dispatch Order ID"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+
+    <table name="smartmage_inpost_shipment_order_link" resource="default" engine="innodb" comment="Inpost shipment link with order">
+        <column name="link_id" xsi:type="int" padding="10" unsigned="true" nullable="false" identity="true" comment="Link id"/>
+        <column name="shipment_id" xsi:type="int" padding="10" unsigned="true" nullable="false" comment="Shipment id"/>
+        <column xsi:type="varchar" name="increment_id" nullable="false" length="32" comment="Increment ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="link_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="SM_INPOST_SHIPMENT_ORDER_INCREMENT_ID_SALES_ORDER_INCREMENT_ID"
+                    table="smartmage_inpost_shipment_order_link" column="increment_id"
+                    referenceTable="sales_order" referenceColumn="increment_id" onDelete="NO ACTION"/>
+    </table>
+
+    <table name="quote" resource="default" engine="innodb">
+        <column name="inpost_locker_id" xsi:type="varchar" length="10" />
+    </table>
+
+    <table name="sales_order" resource="default" engine="innodb">
+        <column name="inpost_locker_id" xsi:type="varchar" length="10" />
+    </table>
+</schema>

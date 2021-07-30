@@ -1,0 +1,1328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/Ui/etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">inpostshipment_form_create.inpostshipment_form_create_data_source</item>
+            <item name="deps" xsi:type="string">inpostshipment_form_create.inpostshipment_form_create_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">New InPost Shipment</item>
+        <item name="layout" xsi:type="array">
+            <item name="type" xsi:type="string">tabs</item>
+        </item>
+    </argument>
+
+    <settings>
+        <buttons>
+            <button name="save" class="Smartmage\Inpost\Block\Adminhtml\Shipment\Create\Buttons\Save" />
+            <button name="back" class="Smartmage\Inpost\Block\Adminhtml\Shipment\Create\Buttons\Back" />
+        </buttons>
+        <namespace>inpostshipment_form_create</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>inpostshipment_form_create.inpostshipment_form_create_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="inpostshipment_form_create_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Smartmage\Inpost\Ui\DataProvider\Inpostshipment\CreateDataProvider</argument>
+            <argument name="name" xsi:type="string">inpostshipment_form_create_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+                <item name="submit_url" path="*/*/save" xsi:type="url" />
+            </item>
+        </argument>
+    </dataSource>
+
+    <fieldset name="shipment_fieldset" sortOrder="10">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Shipment Details</item>
+            </item>
+        </argument>
+
+        <field name="order_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="dataScope" xsi:type="string">order_id</item>
+                    <item name="formElement" xsi:type="string">hidden</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\OrderId</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="order_details">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Order Number</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\OrderDetails</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="disabled" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">order_details</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="service" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">inpostshipment_form_create</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Service</item>
+                    <item name="disabled" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+
+            <settings>
+                <switcherConfig>
+                    <rules>
+                        <rule name="0">
+                            <value>inpostlocker_standard</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.target_locker</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="1">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="2">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>hide</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="14">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.city</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="15">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.weight</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="1">
+                            <value>inpostlocker_standardcod</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.target_locker</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="1">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="2">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>show</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>hide</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="14">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.city</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="15">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.weight</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="2">
+                            <value>inpostlocker_standardeow</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.target_locker</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="1">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>show</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>hide</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="14">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.city</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="15">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.weight</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="3">
+                            <value>inpostlocker_standardeowcod</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.target_locker</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="1">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="2">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>show</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>hide</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="14">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.city</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="15">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.weight</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+
+                        <rule name="4">
+                            <value>inpostcourier_standard</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.target_locker</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="1">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="5">
+                            <value>inpostcourier_c2c</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.target_locker</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="1">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="6">
+                            <value>inpostcourier_c2ccod</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.target_locker</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="1">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="2">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="7">
+                            <value>inpostcourier_express1000</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.target_locker</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="1">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="8">
+                            <value>inpostcourier_express1200</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.target_locker</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="1">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="9">
+                            <value>inpostcourier_express1700</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.target_locker</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="1">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="10">
+                            <value>inpostcourier_localstandard</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.target_locker</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="1">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="11">
+                            <value>inpostcourier_localexpress</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.target_locker</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="1">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="12">
+                            <value>inpostcourier_localsuperexpress</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.target_locker</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="1">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="13">
+                            <value>inpostcourier_palette</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.target_locker</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="1">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>hide</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                    </rules>
+                    <enabled>true</enabled>
+                </switcherConfig>
+                <label translate="true">Service</label>
+                <dataScope>service</dataScope>
+                <dataType>text</dataType>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Smartmage\Inpost\Model\Config\Source\ShippingMethods"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="target_locker" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">inpostshipment_form_create</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\TargetLocker</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Target Locker</label>
+                <dataScope>target_locker</dataScope>
+                <elementTmpl>Smartmage_Inpost/form/element/target-locker</elementTmpl>
+            </settings>
+        </field>
+
+        <field name="sending_method">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Sending Method</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">inpostshipment_form_create</item>
+                    <item name="dataScope" xsi:type="string">sending_method</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\SendingMethod</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="width">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Width (mm)</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">width</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Width</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                        <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="length">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Length (mm)</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">length</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Length</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                        <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="height">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Height (mm)</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">height</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Height</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                        <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="size">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Size</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">inpostshipment_form_create</item>
+                    <item name="dataScope" xsi:type="string">size</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Size</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="weight">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Weight</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">weight</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Weight</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                        <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="cod">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Cash on Delivery Value</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">cod</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Cod</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="insurance">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Insurance Value</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">insurance</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Insurance</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="reference">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Reference Number</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="dataScope" xsi:type="string">reference</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Reference</item>
+                </item>
+            </argument>
+        </field>
+
+        <htmlContent name="address_title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalClasses" xsi:type="string">admin__field</item>
+                </item>
+            </argument>
+            <argument name="block" xsi:type="object">Smartmage\Inpost\Block\Adminhtml\Shipment\Create\Address</argument>
+        </htmlContent>
+
+        <field name="email">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Email</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">email</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Address\Email</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="phone">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Phone</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">phone</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Address\Phone</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="company_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Company Name</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">company_name</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Address\CompanyName</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="first_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">First Name</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">first_name</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Address\FirstName</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="last_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Last Name</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">last_name</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Address\LastName</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="city">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">City</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">city</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Address\City</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="post_code">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Postcode</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">post_code</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Address\Postcode</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <htmlContent name="street_info">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalClasses" xsi:type="string">admin__field</item>
+                </item>
+            </argument>
+            <argument name="block" xsi:type="object">Smartmage\Inpost\Block\Adminhtml\Shipment\Create\StreetInfo</argument>
+        </htmlContent>
+
+        <field name="street">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Street</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">street</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Address\Street</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="building_number">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Building Number</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">building_number</item>
+                    <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Address\BuildingNumber</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+
+    </fieldset>
+</form>

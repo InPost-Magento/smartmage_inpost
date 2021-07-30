@@ -1,0 +1,21 @@
+<input class="admin__control-text" type="text"
+       data-bind="
+        event: {change: userChanges},
+        value: value,
+        hasFocus: focused,
+        valueUpdate: valueUpdate,
+        attr: {
+            name: inputName,
+            placeholder: placeholder,
+            'aria-describedby': noticeId,
+            id: uid,
+            disabled: disabled,
+            maxlength: 255
+    }"/>
+<a data-bind="
+text: $t('Please select a pickup point'),
+attr: {
+'data-inpost-select-point' : value,
+'data-inpost-point-type' :pointType
+}"
+   href="#"></a>
