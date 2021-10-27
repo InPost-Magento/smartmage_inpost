@@ -38,6 +38,7 @@ abstract class AbstractSave extends Action
             'inpostlocker_standardeow' => $this->locker,
             'inpostlocker_standardeowcod' => $this->locker,
             'inpostcourier_standard' => $this->courier,
+            'inpostcourier_standardcod' => $this->courier,
             'inpostcourier_c2c' => $this->courier,
             'inpostcourier_c2ccod' => $this->courier,
             'inpostcourier_express1000' => $this->courier,
