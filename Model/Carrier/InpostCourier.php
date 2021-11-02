@@ -20,6 +20,7 @@ use Smartmage\Inpost\Model\Carrier\Methods\Courier\LocalStandard;
 use Smartmage\Inpost\Model\Carrier\Methods\Courier\LocalSuperExpress;
 use Smartmage\Inpost\Model\Carrier\Methods\Courier\Palette;
 use Smartmage\Inpost\Model\Carrier\Methods\Courier\Standard;
+use Smartmage\Inpost\Model\Carrier\Methods\Courier\StandardCod;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Magento\Checkout\Model\Session;
 
@@ -50,6 +51,7 @@ class InpostCourier extends AbstractInpostCarrier implements CarrierInterface
      * @param LocalSuperExpress $localSuperExpress
      * @param Palette $palette
      * @param Standard $standard
+     * @param StandardCod $standardCod
      * @param Session $checkoutSession
      * @param ConfigProvider $configProvider
      * @param array $data
@@ -70,6 +72,7 @@ class InpostCourier extends AbstractInpostCarrier implements CarrierInterface
         LocalSuperExpress $localSuperExpress,
         Palette $palette,
         Standard $standard,
+        StandardCod $standardCod,
         Session $checkoutSession,
         ConfigProvider $configProvider,
         array $data = []
@@ -86,7 +89,8 @@ class InpostCourier extends AbstractInpostCarrier implements CarrierInterface
             $localStandard,
             $localSuperExpress,
             $palette,
-            $standard
+            $standard,
+            $standardCod
         ];
 
         parent::__construct(

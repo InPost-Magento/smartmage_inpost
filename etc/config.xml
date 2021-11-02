@@ -77,6 +77,11 @@
                     <name>Kurier</name>
                     <max_cart_weight>25</max_cart_weight>
                 </standard>
+                <standardcod>
+                    <active>0</active>
+                    <name>Kurier - płatność przy odbiorze</name>
+                    <max_cart_weight>25</max_cart_weight>
+                </standardcod>
                 <express1000>
                     <active>0</active>
                     <name>Kurier - doręczenie do 10:00</name>

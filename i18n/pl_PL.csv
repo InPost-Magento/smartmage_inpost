@@ -165,6 +165,7 @@ no Inpost shipment was generated due to:,nie została wygenerowana przesyłka In
 Sender address post_code Nieprawidłowy,Kod pocztowy nadawcy jest nieprawidłowy
 Enable debug,Włącz debugowanie
 The inpost_courier_c2c service addressed to an individual customer,Usługa inpost_courier_c2c skierowana do klienta indywidualnego
+The inpost_courier_standard service addressed to the business client,Usługa inpost_courier_standard skierowana do klienta biznesowego
 Pickup Street,Adres odbioru - ulica
 Pickup Building Number,Adres odbioru - numer budynku
 Pickup City,Adres odbioru - miasto
