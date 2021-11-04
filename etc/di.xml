@@ -109,6 +109,12 @@
             <argument name="points" xsi:type="string">pop</argument>
         </arguments>
     </virtualType>
+    <virtualType name="DefaultSendingPointCourierStandardCod" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_standardcod</argument>
+            <argument name="points" xsi:type="string">pop</argument>
+        </arguments>
+    </virtualType>
     <virtualType name="DefaultSendingPointExpress1000" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
         <arguments>
             <argument name="code" xsi:type="string">inpostcourier_express1000</argument>

@@ -17,6 +17,7 @@ class DefaultWaySending implements OptionSourceInterface
     const INPOST_COURIER_C2C = 'inpostcourier_c2c';
     const INPOST_COURIER_C2C_COD = 'inpostcourier_c2ccod';
     const INPOST_COURIER_STANDARD = 'inpostcourier_standard';
+    const INPOST_COURIER_STANDARD_COD = 'inpostcourier_standardcod';
     const INPOST_COURIER_EXPRESS1000 = 'inpostcourier_express1000';
     const INPOST_COURIER_EXPRESS1200 = 'inpostcourier_express1200';
     const INPOST_COURIER_EXPRESS1700 = 'inpostcourier_express1700';
@@ -62,6 +63,7 @@ class DefaultWaySending implements OptionSourceInterface
                     ['value' => 'parcel_locker', 'label' => __('Nadanie w paczkomacie')]
                 ];
             case (self::INPOST_COURIER_STANDARD):
+            case (self::INPOST_COURIER_STANDARD_COD):
             case (self::INPOST_COURIER_EXPRESS1000):
             case (self::INPOST_COURIER_EXPRESS1200):
             case (self::INPOST_COURIER_EXPRESS1700):

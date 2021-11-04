@@ -433,6 +433,69 @@
                             </actions>
                         </rule>
                         <rule name="5">
+                            <value>inpostcourier_standardcod</value>
+                            <actions>
+                                <action name="0">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.target_locker</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="1">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.cod</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="2">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.size</target>
+                                    <callback>hide</callback>
+                                </action>
+
+                                <action name="3">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.width</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.length</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="5">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.height</target>
+                                    <callback>show</callback>
+                                </action>
+
+                                <action name="6">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.company_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="7">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.first_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="8">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.last_name</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="9">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.post_code</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="10">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.street</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="11">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.building_number</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="12">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.email</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="13">
+                                    <target>inpostshipment_form_create.areas.shipment_fieldset.shipment_fieldset.phone</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="6">
                             <value>inpostcourier_c2c</value>
                             <actions>
                                 <action name="0">
@@ -495,7 +558,7 @@
                                 </action>
                             </actions>
                         </rule>
-                        <rule name="6">
+                        <rule name="7">
                             <value>inpostcourier_c2ccod</value>
                             <actions>
                                 <action name="0">
@@ -558,7 +621,7 @@
                                 </action>
                             </actions>
                         </rule>
-                        <rule name="7">
+                        <rule name="8">
                             <value>inpostcourier_express1000</value>
                             <actions>
                                 <action name="0">
@@ -621,7 +684,7 @@
                                 </action>
                             </actions>
                         </rule>
-                        <rule name="8">
+                        <rule name="9">
                             <value>inpostcourier_express1200</value>
                             <actions>
                                 <action name="0">
@@ -684,7 +747,7 @@
                                 </action>
                             </actions>
                         </rule>
-                        <rule name="9">
+                        <rule name="10">
                             <value>inpostcourier_express1700</value>
                             <actions>
                                 <action name="0">
@@ -747,7 +810,7 @@
                                 </action>
                             </actions>
                         </rule>
-                        <rule name="10">
+                        <rule name="11">
                             <value>inpostcourier_localstandard</value>
                             <actions>
                                 <action name="0">
@@ -810,7 +873,7 @@
                                 </action>
                             </actions>
                         </rule>
-                        <rule name="11">
+                        <rule name="12">
                             <value>inpostcourier_localexpress</value>
                             <actions>
                                 <action name="0">
@@ -873,7 +936,7 @@
                                 </action>
                             </actions>
                         </rule>
-                        <rule name="12">
+                        <rule name="13">
                             <value>inpostcourier_localsuperexpress</value>
                             <actions>
                                 <action name="0">
@@ -936,7 +999,7 @@
                                 </action>
                             </actions>
                         </rule>
-                        <rule name="13">
+                        <rule name="14">
                             <value>inpostcourier_palette</value>
                             <actions>
                                 <action name="0">
