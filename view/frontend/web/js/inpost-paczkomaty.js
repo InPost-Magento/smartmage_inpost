@@ -176,6 +176,7 @@ define([
                     searchType: 'osm',
                     points: {
                         types: pointsTypes,
+                        functions: ['parcel_collect']
                     },
                     map: {
                         useGeolocation: true,

@@ -15,16 +15,19 @@ class DefaultSendingPoint extends Field
 {
     protected $code = '';
     protected $points = '';
+    protected $functions = '';
 
     public function __construct(
         Context $context,
         array $data = [],
         $code = null,
-        $points = null
+        $points = null,
+        $functions = null
     ) {
         parent::__construct($context, $data);
         $this->code = $code;
         $this->points = $points;
+        $this->functions = $functions;
     }
 
     /**
@@ -35,6 +38,7 @@ class DefaultSendingPoint extends Field
         //inpostlocker_standardeow
         $html = parent::render($element);
         $points = '';
+        $functions = json_encode(explode(',',$this->functions));
 
         switch ($this->points) {
             case 'standard':
@@ -47,13 +51,15 @@ class DefaultSendingPoint extends Field
                 $points = json_encode(['pop']);
                 break;
         }
+                $points = json_encode(['parcel_locker', 'pop']);
         return $html . '
         <script type="text/x-magento-init">
             {
                 "*": {
                     "Smartmage_Inpost/js/easyPackWidget": {
                         "wrapper":"' . $this->code . '",
-                        "points": ' . $points . '
+                        "points": ' . $points . ',
+                        "functions": ' . $functions . '
                     }
                 }
             }
