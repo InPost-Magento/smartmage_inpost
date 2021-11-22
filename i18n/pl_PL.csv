@@ -172,5 +172,10 @@ Pickup City,Adres odbioru - miasto
 Pickup Post Code,Adres odbioru - kod pocztowy
 Pickup Country Code,Adres odbioru - kod kraju
 Shipment Status,Status
-
-
+Enable Free Shipping Threshold,Włącz próg darmowej wysyłki
+Price,Cena
+Enabled,Włączone
+Free Shipping Amount Threshold,Próg darmowej wysyłki
+Position,Pozycja
+Enable,Włącz
+Disable,Wyłącz

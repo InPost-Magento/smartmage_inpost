@@ -12,11 +12,17 @@ use Psr\Log\LoggerInterface as PsrLoggerInterface;
 class Labels extends AbstractPrintout
 {
 
+    /**
+     * @var PsrLoggerInterface
+     */
+    protected $logger;
+
     public function __construct(
         PsrLoggerInterface $logger,
         ConfigProvider $configProvider,
         ErrorHandler $errorHandler
     ) {
+        $this->logger = $logger;
         $organizationId = $configProvider->getOrganizationId();
         $this->callUri = 'v1/organizations/' . $organizationId . '/shipments/labels';
         $this->successMessage = __('The labels has been successfully downloaded');
@@ -25,10 +31,6 @@ class Labels extends AbstractPrintout
 
     public function getLabels($labelsData)
     {
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
-
         $response = $this->call(null, [
             LabelFormat::STRING_SIZE => $labelsData[LabelFormat::STRING_SIZE],
             LabelFormat::STRING_FORMAT => $labelsData[LabelFormat::STRING_FORMAT],

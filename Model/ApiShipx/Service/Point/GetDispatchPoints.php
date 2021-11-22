@@ -32,6 +32,11 @@ class GetDispatchPoints extends AbstractService
     protected $callUri;
 
     /**
+     * @var PsrLoggerInterface
+     */
+    protected $logger;
+
+    /**
      * GetDispatchPoints constructor.
      * @param \Smartmage\Inpost\Model\ConfigProvider $configProvider
      * @param ErrorHandler $errorHandler
@@ -42,6 +47,7 @@ class GetDispatchPoints extends AbstractService
         ConfigProvider $configProvider,
         ErrorHandler $errorHandler
     ) {
+        $this->logger = $logger;
         $organizationId = $configProvider->getOrganizationId();
         $this->callUri = 'v1/organizations/' . $organizationId . '/dispatch_points';
         parent::__construct($logger, $configProvider, $errorHandler);
@@ -53,9 +59,6 @@ class GetDispatchPoints extends AbstractService
      */
     public function getAllDispatchPoints()
     {
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
         $result = $this->call();
 
         if ($this->callResult[CallResult::STRING_STATUS] != CallResult::STATUS_SUCCESS) {
@@ -67,8 +70,8 @@ class GetDispatchPoints extends AbstractService
         if (isset($result['items']) && !empty($result['items'])) {
             $this->callResult['items'] = $result['items'];
         }
-        $logger->info('getAllDispatchPoints');
-        $logger->info($result);
+        $this->logger->info('getAllDispatchPoints');
+        $this->logger->info(print_r($result,true));
         return $this->callResult;
     }
 }

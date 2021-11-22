@@ -29,6 +29,11 @@ abstract class AbstractCreate extends AbstractService
      */
     protected $shippingMethods;
 
+    /**
+     * @var PsrLoggerInterface
+     */
+    protected $logger;
+
     public function __construct(
         PsrLoggerInterface $logger,
         ConfigProvider $configProvider,
@@ -36,6 +41,7 @@ abstract class AbstractCreate extends AbstractService
         ShipmentManagement $shipmentManagement,
         ErrorHandler $errorHandler
     ) {
+        $this->logger = $logger;
         $this->configProvider = $configProvider;
         $this->shippingMethods = $shippingMethods;
         $this->shipmentManagement = $shipmentManagement;
@@ -50,11 +56,8 @@ abstract class AbstractCreate extends AbstractService
     public function createShipment()
     {
         $response = $this->call($this->requestBody);
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
-        $logger->info($this->callResult);
-        $logger->info($response);
+        $this->logger->info(print_r($this->callResult, true));
+        $this->logger->info(print_r($response, true));
 
         //throw if api fail
         if ($this->callResult[CallResult::STRING_STATUS] != CallResult::STATUS_SUCCESS) {
@@ -128,7 +131,7 @@ abstract class AbstractCreate extends AbstractService
 
                 $this->shipmentManagement->addOrUpdate($formatedData);
             } catch (\Exception $exception) {
-                $logger->info($exception->getMessage());
+                $this->logger->info($exception->getMessage());
             }
         }
 

@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace Smartmage\Inpost\Controller\Adminhtml\Shipments;
 
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\Response\Http\FileFactory;
@@ -32,6 +33,11 @@ class MassPrintDispatchOrderLabel extends MassActionAbstract
     protected $dateTime;
 
     /**
+     * @var PsrLoggerInterface
+     */
+    protected $logger;
+
+    /**
      * @return \Magento\Backend\Model\View\Result\Redirect|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws \Magento\Framework\Exception\NotFoundException
@@ -43,8 +49,10 @@ class MassPrintDispatchOrderLabel extends MassActionAbstract
         ConfigProvider $configProvider,
         PrintoutDispatchOrders $printoutDispatchOrders,
         FileFactory $fileFactory,
-        DateTime $dateTime
+        DateTime $dateTime,
+        PsrLoggerInterface $logger
     ) {
+        $this->logger = $logger;
         parent::__construct($context, $filter, $collectionFactory, $configProvider);
         $this->printoutDispatchOrders = $printoutDispatchOrders;
         $this->fileFactory = $fileFactory;
@@ -61,10 +69,6 @@ class MassPrintDispatchOrderLabel extends MassActionAbstract
         if (!$this->getRequest()->isPost()) {
             throw new \Magento\Framework\Exception\NotFoundException(__('Page not found.'));
         }
-
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
 
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
@@ -93,8 +97,8 @@ class MassPrintDispatchOrderLabel extends MassActionAbstract
             LabelFormat::STRING_SIZE => $labelSize,
         ];
 
-        $logger->info(print_r('$labelsData', true));
-        $logger->info(print_r($dispatchOrdersData, true));
+        $this->logger->info(print_r('$labelsData', true));
+        $this->logger->info(print_r($dispatchOrdersData, true));
 
         try {
             if (!empty($shipmentIds)) {
@@ -120,7 +124,7 @@ class MassPrintDispatchOrderLabel extends MassActionAbstract
                 }
             }
         } catch (\Exception $e) {
-            $logger->info(print_r($e->getMessage(), true));
+            $this->logger->info(print_r($e->getMessage(), true));
             $this->messageManager->addExceptionMessage($e);
         }
 

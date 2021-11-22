@@ -116,6 +116,7 @@
                     <active>0</active>
                     <name>Kurier - przesyłka na palecie</name>
                     <max_cart_weight>25</max_cart_weight>
+                    <default_way_sending>dispatch_order</default_way_sending>
                 </palette>
             </inpostcourier>
         </carriers>

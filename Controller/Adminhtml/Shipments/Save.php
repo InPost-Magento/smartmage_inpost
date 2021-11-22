@@ -2,6 +2,7 @@
 
 namespace Smartmage\Inpost\Controller\Adminhtml\Shipments;
 
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Magento\Backend\App\Action;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
@@ -23,6 +24,11 @@ class Save extends AbstractSave
     private $orderLinkRepository;
 
     /**
+     * @var PsrLoggerInterface
+     */
+    protected $logger;
+
+    /**
      * Save constructor.
      * @param Action\Context $context
      * @param Courier $courier
@@ -37,8 +43,10 @@ class Save extends AbstractSave
         Locker $locker,
         OrderRepositoryInterface $orderRepository,
         ShipmentOrderLinkInterfaceFactory $orderLinkFactory,
-        ShipmentOrderLinkRepositoryInterface $orderLinkRepository
+        ShipmentOrderLinkRepositoryInterface $orderLinkRepository,
+        PsrLoggerInterface $logger
     ) {
+        $this->logger = $logger;
         $this->orderLinkFactory = $orderLinkFactory;
         $this->orderLinkRepository = $orderLinkRepository;
         parent::__construct($context, $courier, $locker, $orderRepository);
@@ -56,14 +64,11 @@ class Save extends AbstractSave
 
         $response = $shipmentClass->createShipment();
 
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
-        $logger->info('odpowiedz');
-        $logger->info($response);
+        $this->logger->info('odpowiedz');
+        $this->logger->info(print_r($response,true));
 
         if (isset($response[CallResult::STRING_RESPONSE_SHIPMENT_ID])) {
-            $logger->info('weszlo do tworzenia');
+            $this->logger->info('weszlo do tworzenia');
 
             $orderLink = $this->orderLinkFactory->create();
             $orderLink->setIncrementId($order->getIncrementId());

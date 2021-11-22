@@ -73,6 +73,7 @@ class MassCreateShipment extends Action
         FileFactory $fileFactory,
         DateTime $dateTime
     ) {
+
         parent::__construct($context);
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
@@ -85,10 +86,6 @@ class MassCreateShipment extends Action
 
     public function execute()
     {
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
-
         if (!$this->getRequest()->isPost()) {
             throw new \Magento\Framework\Exception\NotFoundException(__('Page not found.'));
         }

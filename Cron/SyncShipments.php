@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace Smartmage\Inpost\Cron;
 
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Search\Multiple as SearchMultiple;
 
 /**
@@ -16,11 +17,19 @@ class SyncShipments
     private $searchMultiple;
 
     /**
+     * @var PsrLoggerInterface
+     */
+    protected $logger;
+
+    /**
      * SyncShipments constructor.
      * @param \Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Search\Multiple $searchMultiple
      */
-    public function __construct(SearchMultiple $searchMultiple)
-    {
+    public function __construct(
+        SearchMultiple $searchMultiple,
+        PsrLoggerInterface $logger
+    ) {
+        $this->logger = $logger;
         $this->searchMultiple = $searchMultiple;
     }
 
@@ -30,13 +39,9 @@ class SyncShipments
      */
     public function execute()
     {
-
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost_cron.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
-        $logger->info('inpost syn start');
+        $this->logger->info('inpost syn start');
         $this->searchMultiple->getAllShipments();
-        $logger->info('inpost syn end');
+        $this->logger->info('inpost syn end');
 
         return $this;
     }

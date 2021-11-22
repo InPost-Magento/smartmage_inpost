@@ -24,10 +24,6 @@ class DispatchOrders extends AbstractPrintout
 
     public function getDispatchOrders($dispatchOrdersData)
     {
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
-
         $response = $this->call(null, [
             LabelFormat::STRING_FORMAT => $dispatchOrdersData[LabelFormat::STRING_FORMAT],
             'shipment_ids' => $dispatchOrdersData['ids']

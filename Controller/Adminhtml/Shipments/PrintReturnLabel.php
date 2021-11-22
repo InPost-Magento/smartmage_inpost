@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace Smartmage\Inpost\Controller\Adminhtml\Shipments;
 
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Filesystem\DirectoryList;
@@ -25,13 +26,20 @@ class PrintReturnLabel extends Action
     protected $printoutReturnLabels;
     protected $dateTime;
 
+    /**
+     * @var PsrLoggerInterface
+     */
+    protected $logger;
+
     public function __construct(
         FileFactory $fileFactory,
         Context $context,
         ConfigProvider $configProvider,
         PrintoutReturnLabels $printoutReturnLabels,
-        DateTime $dateTime
+        DateTime $dateTime,
+        PsrLoggerInterface $logger
     ) {
+        $this->logger = $logger;
         $this->fileFactory           = $fileFactory;
         $this->configProvider      = $configProvider;
         $this->printoutReturnLabels  = $printoutReturnLabels;
@@ -46,10 +54,6 @@ class PrintReturnLabel extends Action
      */
     public function execute()
     {
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
-
         $shipmentId = $this->getRequest()->getParam('id');
         $labelFormat = $this->configProvider->getLabelFormat();
         $labelSize = $this->configProvider->getLabelSize();
@@ -72,7 +76,7 @@ class PrintReturnLabel extends Action
             );
 
         } catch (\Exception $e) {
-            $logger->info(print_r($e->getMessage(), true));
+            $this->logger->info(print_r($e->getMessage(), true));
 
             $this->messageManager->addExceptionMessage(
                 $e

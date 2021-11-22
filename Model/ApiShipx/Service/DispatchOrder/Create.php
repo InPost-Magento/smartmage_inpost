@@ -57,9 +57,6 @@ class Create extends AbstractService
      */
     public function createDispatchOrders($dispatchData)
     {
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
         $this->createBody($dispatchData);
         $this->call($this->requestBody);
 

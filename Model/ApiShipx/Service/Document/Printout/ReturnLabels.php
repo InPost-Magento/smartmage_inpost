@@ -2,20 +2,27 @@
 
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Document\Printout;
 
-use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
 use Smartmage\Inpost\Model\ApiShipx\ErrorHandler;
 use Smartmage\Inpost\Model\ApiShipx\Service\Document\AbstractPrintout;
 use Smartmage\Inpost\Model\Config\Source\LabelFormat;
 use Smartmage\Inpost\Model\ConfigProvider;
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 
 class ReturnLabels extends AbstractPrintout
 {
+
+    /**
+     * @var PsrLoggerInterface
+     */
+    protected $logger;
+
     public function __construct(
         PsrLoggerInterface $logger,
         ConfigProvider $configProvider,
         ErrorHandler $errorHandler
     ) {
+        $this->logger = $logger;
         $organizationId = $configProvider->getOrganizationId();
         $this->callUri = 'v1/organizations/' . $organizationId . '/shipments/return_labels';
         $this->successMessage = __('The return labels has been successfully downloaded');
@@ -24,10 +31,6 @@ class ReturnLabels extends AbstractPrintout
 
     public function getLabels($labelsData)
     {
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
-
         $response = $this->call(null, [
             LabelFormat::STRING_SIZE => $labelsData[LabelFormat::STRING_SIZE],
             LabelFormat::STRING_FORMAT => $labelsData[LabelFormat::STRING_FORMAT],

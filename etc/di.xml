@@ -66,6 +66,11 @@
             <argument name="code" xsi:type="string">inpostcourier_localsuperexpress</argument>
         </arguments>
     </virtualType>
+    <virtualType name="DefaultWaySendingPallette" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_palette</argument>
+        </arguments>
+    </virtualType>
 
     <virtualType name="DefaultSendingPointStandard" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
         <arguments>
@@ -203,9 +208,123 @@
             </argument>
         </arguments>
     </virtualType>
+    <virtualType name="InpostDataLogHandler" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">Smartmage\Inpost\Logger\Handler\InpostDataHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="InpostCronLogHandler" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">Smartmage\Inpost\Logger\Handler\InpostCronHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
     <type name="Smartmage\Inpost\Model\ApiShipx\AbstractService">
         <arguments>
-            <argument name="logger" xsi:type="object">InpostGeneralLogHandler</argument>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Search\Multiple">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Model\ShipmentManagement">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Controller\Adminhtml\Shipments\MassPrintLabel">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Controller\Adminhtml\Order\MassCreateAndPrintShipment">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Controller\Adminhtml\Shipments\MassDispatchOrder">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Controller\Adminhtml\Shipments\MassPrintDispatchOrderLabel">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Controller\Adminhtml\Shipments\MassPrintLabel">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Controller\Adminhtml\Shipments\MassPrintReturnLabel">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Controller\Adminhtml\Shipments\PrintLabel">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Controller\Adminhtml\Shipments\PrintReturnLabel">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Controller\Adminhtml\Shipments\Save">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Model\ApiShipx\AbstractService">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Model\ApiShipx\Service\DispatchOrder\Create">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Model\ApiShipx\Service\Document\Printout\DispatchOrders">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Model\ApiShipx\Service\Point\GetDispatchPoints">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Model\ApiShipx\Service\Point\GetPoint">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Model\ApiShipx\Service\Shipment\AbstractCreate">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Create\Courier">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Model\Config\Source\DefaultPickupPoint">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
+    <type name="Smartmage\Inpost\Cron\SyncShipments">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostCronLogHandler</argument>
         </arguments>
     </type>
 </config>

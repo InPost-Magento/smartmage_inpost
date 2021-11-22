@@ -88,10 +88,6 @@ class ShipmentManagement implements Api\ShipmentManagementInterface
      */
     public function addOrUpdate($shipmentData)
     {
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
-
         $searchCriteria = $this->searchCriteriaBuilder
             ->addFilter(ShipmentInterface::SHIPMENT_ID, $shipmentData[ShipmentInterface::SHIPMENT_ID])
             ->create();

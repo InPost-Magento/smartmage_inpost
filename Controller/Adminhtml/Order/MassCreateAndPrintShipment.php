@@ -2,6 +2,7 @@
 
 namespace Smartmage\Inpost\Controller\Adminhtml\Order;
 
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Filesystem\DirectoryList;
@@ -61,6 +62,11 @@ class MassCreateAndPrintShipment extends Action
     protected $shippingMethods;
 
     /**
+     * @var PsrLoggerInterface
+     */
+    protected $logger;
+
+    /**
      * MassCreateAndPrintShipment constructor.
      * @param Context $context
      * @param Filter $filter
@@ -81,8 +87,10 @@ class MassCreateAndPrintShipment extends Action
         Labels $labels,
         FileFactory $fileFactory,
         DateTime $dateTime,
-        ShippingMethods $shippingMethods
+        ShippingMethods $shippingMethods,
+        PsrLoggerInterface $logger
     ) {
+        $this->logger = $logger;
         parent::__construct($context);
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
@@ -96,9 +104,6 @@ class MassCreateAndPrintShipment extends Action
 
     public function execute()
     {
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
 
         if (!$this->getRequest()->isPost()) {
             throw new \Magento\Framework\Exception\NotFoundException(__('Page not found.'));
@@ -170,7 +175,7 @@ class MassCreateAndPrintShipment extends Action
                         ($key = array_search(strip_tags(trim($matches[1])), $messages['shipment_ids']))
                         !== false
                     ) {
-                        $logger->info(print_r($e->getMessage(), true));
+                        $this->logger->info(print_r($e->getMessage(), true));
 
                         $this->messageManager->addExceptionMessage(
                             $e
@@ -179,7 +184,7 @@ class MassCreateAndPrintShipment extends Action
                         continue;
                     }
 
-                    $logger->info(print_r($e->getMessage(), true));
+                    $this->logger->info(print_r($e->getMessage(), true));
 
                     $this->messageManager->addExceptionMessage(
                         $e

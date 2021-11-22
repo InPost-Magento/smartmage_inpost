@@ -24,6 +24,7 @@ class DefaultWaySending implements OptionSourceInterface
     const INPOST_COURIER_LOCAL_STANDARD = 'inpostcourier_localstandard';
     const INPOST_COURIER_LOCAL_EXPRESS = 'inpostcourier_localexpress';
     const INPOST_COURIER_LOCAL_SUPER_EXPRESS = 'inpostcourier_localsuperexpress';
+    const INPOST_COURIER_PALETTE = 'inpostcourier_palette';
 
     protected $code = '';
 
@@ -73,6 +74,10 @@ class DefaultWaySending implements OptionSourceInterface
                 return [
                     ['value' => 'dispatch_order', 'label' => __('Odbiór przez Kuriera')],
                     ['value' => 'pop', 'label' => __('Nadanie w POP')],
+                ];
+            case (self::INPOST_COURIER_PALETTE):
+                return [
+                    ['value' => 'dispatch_order', 'label' => __('Odbiór przez Kuriera')]
                 ];
             default:
                 return [];

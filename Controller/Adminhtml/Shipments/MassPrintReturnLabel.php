@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace Smartmage\Inpost\Controller\Adminhtml\Shipments;
 
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\Response\Http\FileFactory;
@@ -32,6 +33,11 @@ class MassPrintReturnLabel extends MassActionAbstract
     protected $dateTime;
 
     /**
+     * @var PsrLoggerInterface
+     */
+    protected $logger;
+
+    /**
      * MassPrintReturnLabel constructor.
      * @param Context $context
      * @param Filter $filter
@@ -48,8 +54,10 @@ class MassPrintReturnLabel extends MassActionAbstract
         ConfigProvider $configProvider,
         PrintoutReturnLabels $printoutReturnLabels,
         FileFactory $fileFactory,
-        DateTime $dateTime
+        DateTime $dateTime,
+        PsrLoggerInterface $logger
     ) {
+        $this->logger = $logger;
         parent::__construct($context, $filter, $collectionFactory, $configProvider);
         $this->printoutReturnLabels = $printoutReturnLabels;
         $this->fileFactory = $fileFactory;
@@ -66,10 +74,6 @@ class MassPrintReturnLabel extends MassActionAbstract
         if (!$this->getRequest()->isPost()) {
             throw new \Magento\Framework\Exception\NotFoundException(__('Page not found.'));
         }
-
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
 
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
@@ -98,8 +102,8 @@ class MassPrintReturnLabel extends MassActionAbstract
             LabelFormat::STRING_SIZE => $labelSize,
         ];
 
-        $logger->info(print_r('$labelsData', true));
-        $logger->info(print_r($labelsData, true));
+        $this->logger->info(print_r('$labelsData', true));
+        $this->logger->info(print_r($labelsData, true));
 
         try {
             if (!empty($shipmentIds)) {
@@ -126,7 +130,7 @@ class MassPrintReturnLabel extends MassActionAbstract
             }
 
         } catch (\Exception $e) {
-            $logger->info(print_r($e->getMessage(), true));
+            $this->logger->info(print_r($e->getMessage(), true));
             $this->messageManager->addExceptionMessage($e);
         }
 

@@ -649,6 +649,10 @@
                         <label>Max cart weight</label>
                         <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
                     </field>
+                    <field id="default_way_sending" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1">
+                        <label>Default way of sending</label>
+                        <source_model>DefaultWaySendingPallette</source_model>
+                    </field>
                 </group>
             </group>
         </section>

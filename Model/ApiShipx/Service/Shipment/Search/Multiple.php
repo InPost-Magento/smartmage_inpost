@@ -17,6 +17,11 @@ class Multiple extends AbstractSearch
 
     protected $shipmentManagement;
 
+    /**
+     * @var PsrLoggerInterface
+     */
+    protected $logger;
+
     public function __construct(
         PsrLoggerInterface $logger,
         ConfigProvider $configProvider,
@@ -24,6 +29,7 @@ class Multiple extends AbstractSearch
         ShipmentManagement $shipmentManagement,
         ErrorHandler $errorHandler
     ) {
+        $this->logger = $logger;
         $this->shipmentRepository = $shipmentRepository;
         $this->shipmentManagement = $shipmentManagement;
         $organizationId = $configProvider->getOrganizationId();
@@ -34,10 +40,6 @@ class Multiple extends AbstractSearch
 
     public function getAllShipments()
     {
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
-
         $totalPages = 0;
         $totalPagesUpdated = false;
         $daysAgo = $this->configProvider->getGetShipmentsDays();
@@ -46,7 +48,7 @@ class Multiple extends AbstractSearch
         for ($page = 1;; $page++) {
             $result = $this->call(null, ['page' => $page, 'created_at_gteq' => $daysAgo]);
 
-            $logger->info($this->callResult);
+            $this->logger->info(print_r($this->callResult,true));
 
             if ($this->callResult[CallResult::STRING_STATUS] != CallResult::STATUS_SUCCESS) {
                 throw new \Exception($this->callResult[CallResult::STRING_MESSAGE], $this->callResult[CallResult::STRING_RESPONSE_CODE]);
@@ -54,9 +56,9 @@ class Multiple extends AbstractSearch
 
             if (!$totalPagesUpdated) {
                 $totalPagesRaw = (float)$result['count'] / (float)$result['per_page'];
-                $logger->info($totalPagesRaw);
+                $this->logger->info(print_r($totalPagesRaw,true));
                 $totalPages = ceil($totalPagesRaw);
-                $logger->info($totalPages);
+                $this->logger->info(print_r($totalPages,true));
                 $totalPagesUpdated = true;
             }
 
@@ -122,7 +124,7 @@ class Multiple extends AbstractSearch
 
                         $this->shipmentManagement->addOrUpdate($formatedData);
                     } catch (\Exception $exception) {
-                        $logger->info($exception->getMessage());
+                        $this->logger->info(print_r($exception->getMessage(),true));
                     }
                 }
             } else { // If no shipments from api end for loop

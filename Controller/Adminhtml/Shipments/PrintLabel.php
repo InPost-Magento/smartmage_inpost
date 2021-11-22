@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace Smartmage\Inpost\Controller\Adminhtml\Shipments;
 
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Filesystem\DirectoryList;
@@ -22,8 +23,6 @@ class PrintLabel extends Action
     protected $fileFactory;
     protected $configProvider;
     protected $printoutLabels;
-    protected $dateTime;
-
     /**
      * PrintLabel constructor.
      * @param \Magento\Framework\App\Response\Http\FileFactory $fileFactory
@@ -37,8 +36,10 @@ class PrintLabel extends Action
         Context $context,
         ConfigProvider $configProvider,
         PrintoutLabels $printoutLabels,
-        DateTime $dateTime
+        DateTime $dateTime,
+        PsrLoggerInterface $logger
     ) {
+        $this->logger = $logger;
         $this->fileFactory           = $fileFactory;
         $this->configProvider      = $configProvider;
         $this->printoutLabels           = $printoutLabels;
@@ -46,16 +47,19 @@ class PrintLabel extends Action
         parent::__construct($context);
     }
 
+    protected $dateTime;
+
+    /**
+     * @var PsrLoggerInterface
+     */
+    protected $logger;
+
     /**
      * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
      * @throws \Exception
      */
     public function execute()
     {
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
-
         $shipmentId = $this->getRequest()->getParam('id');
         $labelFormat = $this->configProvider->getLabelFormat();
         $labelSize = $this->configProvider->getLabelSize();
@@ -78,7 +82,7 @@ class PrintLabel extends Action
             );
 
         } catch (\Exception $e) {
-            $logger->info(print_r($e->getMessage(), true));
+            $this->logger->info(print_r($e->getMessage(), true));
 
             $this->messageManager->addExceptionMessage(
                 $e

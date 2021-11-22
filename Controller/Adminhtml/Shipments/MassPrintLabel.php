@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace Smartmage\Inpost\Controller\Adminhtml\Shipments;
 
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\Response\Http\FileFactory;
@@ -33,11 +34,17 @@ class MassPrintLabel extends MassActionAbstract
     protected $dateTime;
 
     /**
+     * @var PsrLoggerInterface
+     */
+    protected $logger;
+
+    /**
      * @return \Magento\Backend\Model\View\Result\Redirect|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws \Magento\Framework\Exception\NotFoundException
      */
     public function __construct(
+        PsrLoggerInterface $logger,
         Context $context,
         Filter $filter,
         CollectionFactory $collectionFactory,
@@ -50,6 +57,7 @@ class MassPrintLabel extends MassActionAbstract
         $this->printoutLabels = $printoutLabels;
         $this->fileFactory = $fileFactory;
         $this->dateTime = $dateTime;
+        $this->logger = $logger;
     }
 
     public function execute()
@@ -57,10 +65,6 @@ class MassPrintLabel extends MassActionAbstract
         if (!$this->getRequest()->isPost()) {
             throw new \Magento\Framework\Exception\NotFoundException(__('Page not found.'));
         }
-
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
 
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
@@ -78,8 +82,8 @@ class MassPrintLabel extends MassActionAbstract
             LabelFormat::STRING_SIZE => $labelSize,
         ];
 
-        $logger->info(print_r('$labelsData', true));
-        $logger->info(print_r($labelsData, true));
+        $this->logger->info(print_r('$labelsData', true));
+        $this->logger->info(print_r($labelsData, true));
 
         try {
             $result = $this->printoutLabels->getLabels($labelsData);
@@ -97,7 +101,7 @@ class MassPrintLabel extends MassActionAbstract
                 LabelFormat::LABEL_CONTENT_TYPES[$labelFormat]
             );
         } catch (\Exception $e) {
-            $logger->info(print_r($e->getMessage(), true));
+            $this->logger->info(print_r($e->getMessage(), true));
 
             $this->messageManager->addExceptionMessage(
                 $e

@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace Smartmage\Inpost\Controller\Adminhtml\Shipments;
 
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Response\Http\FileFactory;
 use Magento\Framework\Controller\ResultFactory;
@@ -37,6 +38,11 @@ class MassDispatchOrder extends MassActionAbstract
     protected $dateTime;
 
     /**
+     * @var PsrLoggerInterface
+     */
+    protected $logger;
+
+    /**
      * MassDispatchOrder constructor.
      * @param \Magento\Backend\App\Action\Context $context
      * @param \Magento\Ui\Component\MassAction\Filter $filter
@@ -49,8 +55,10 @@ class MassDispatchOrder extends MassActionAbstract
         Filter $filter,
         CollectionFactory $collectionFactory,
         ConfigProvider $configProvider,
-        DispatchOrderCreate $dispatchOrderCreate
+        DispatchOrderCreate $dispatchOrderCreate,
+        PsrLoggerInterface $logger
     ) {
+        $this->logger = $logger;
         $this->dispatchOrderCreate = $dispatchOrderCreate;
         parent::__construct($context, $filter, $collectionFactory, $configProvider);
     }
@@ -66,10 +74,6 @@ class MassDispatchOrder extends MassActionAbstract
         if (!$this->getRequest()->isPost()) {
             throw new \Magento\Framework\Exception\NotFoundException(__('Page not found.'));
         }
-
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/inpost.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
 
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
@@ -97,8 +101,8 @@ class MassDispatchOrder extends MassActionAbstract
             ],
         ];
 
-        $logger->info(print_r('$labelsData', true));
-        $logger->info(print_r($dispatchData, true));
+        $this->logger->info(print_r('$labelsData', true));
+        $this->logger->info(print_r($dispatchData, true));
 
         try {
             if (!empty($omittedIds)) {
@@ -112,7 +116,7 @@ class MassDispatchOrder extends MassActionAbstract
                 $this->messageManager->addSuccessMessage(__('Dispatch order was created'));
             }
         } catch (\Exception $e) {
-            $logger->info(print_r($e->getMessage(), true));
+            $this->logger->info(print_r($e->getMessage(), true));
 
             $this->messageManager->addExceptionMessage(
                 $e
