@@ -90,7 +90,7 @@ abstract class AbstractInpostCarrier extends AbstractCarrier
         /** @var Result $result */
         $result = $this->rateResultFactory->create();
 
-        $this->getActiveAllowedMethods();
+        $this->getActiveAllowedMethods($request);
 
         foreach ($this->allowedMethods as $method) {
             $result->append(
@@ -104,11 +104,11 @@ abstract class AbstractInpostCarrier extends AbstractCarrier
     /**
      * @return array
      */
-    public function getActiveAllowedMethods()
+    public function getActiveAllowedMethods(RateRequest $request)
     {
         $allowedMethods = [];
         $methods = [];
-        $quoteItems = $this->getQuoteItems();
+        $quoteItems = $request->getAllItems();
 
         foreach ($this->methods as $method) {
             $method->setItems($quoteItems);
