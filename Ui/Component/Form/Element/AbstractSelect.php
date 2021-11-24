@@ -1,6 +1,6 @@
 <?php
 
-namespace Smartmage\Inpost\Ui\Component\Form\ELement;
+namespace Smartmage\Inpost\Ui\Component\Form\Element;
 
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\Message\Manager;
