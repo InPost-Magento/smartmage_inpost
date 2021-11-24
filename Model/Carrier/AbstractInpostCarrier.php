@@ -122,7 +122,7 @@ abstract class AbstractInpostCarrier extends AbstractCarrier
                     'sort' => $this->configProvider->getConfigData(
                         $this->_code . '/' . $method->getKey() . '/position'
                     ),
-                    'price' => $method->calculatePrice()
+                    'price' => $method->calculatePrice($request)
                 ];
 
                 $methods[$this->_code] = $method->getName();
