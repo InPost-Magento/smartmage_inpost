@@ -33,11 +33,15 @@
                     <active>0</active>
                     <name>Paczkomaty 24/7</name>
                     <max_cart_weight>25</max_cart_weight>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
                 </standard>
                 <standardcod>
                     <active>0</active>
                     <name>Paczkomaty 24/7 - płatność przy odbiorze</name>
                     <max_cart_weight>25</max_cart_weight>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
                 </standardcod>
                 <standardeow>
                     <active>0</active>
@@ -47,6 +51,8 @@
                     <end_day>6</end_day>
                     <start_hour>20:00</start_hour>
                     <end_hour>13:00</end_hour>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
                 </standardeow>
                 <standardeowcod>
                     <active>0</active>
@@ -56,6 +62,8 @@
                     <end_day>6</end_day>
                     <start_hour>20:00</start_hour>
                     <end_hour>13:00</end_hour>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
                 </standardeowcod>
             </inpostlocker>
             <inpostcourier>
@@ -66,57 +74,79 @@
                     <active>0</active>
                     <name>Kurier C2C</name>
                     <max_cart_weight>25</max_cart_weight>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
                 </c2c>
                 <c2ccod>
                     <active>0</active>
                     <name>Kurier C2C - płatność przy odbiorze</name>
                     <max_cart_weight>25</max_cart_weight>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
                 </c2ccod>
                 <standard>
                     <active>0</active>
                     <name>Kurier</name>
                     <max_cart_weight>25</max_cart_weight>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
                 </standard>
                 <standardcod>
                     <active>0</active>
                     <name>Kurier - płatność przy odbiorze</name>
                     <max_cart_weight>25</max_cart_weight>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
                 </standardcod>
                 <express1000>
                     <active>0</active>
                     <name>Kurier - doręczenie do 10:00</name>
                     <max_cart_weight>25</max_cart_weight>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
                 </express1000>
                 <express1200>
                     <active>0</active>
                     <name>Kurier - doręczenie do 12:00</name>
                     <max_cart_weight>25</max_cart_weight>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
                 </express1200>
                 <express1700>
                     <active>0</active>
                     <name>Kurier - doręczenie do 17:00</name>
                     <max_cart_weight>25</max_cart_weight>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
                 </express1700>
                 <localstandard>
                     <active>0</active>
                     <name>Kurier - przesyłka lokalna expresowa</name>
                     <max_cart_weight>25</max_cart_weight>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
                 </localstandard>
                 <localexpress>
                     <active>0</active>
                     <name>Kurier - przesyłka lokalna expresowa</name>
                     <max_cart_weight>25</max_cart_weight>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
                 </localexpress>
                 <localsuperexpress>
                     <active>0</active>
                     <name>Kurier - przesyłka lokalna super expresowa</name>
                     <max_cart_weight>25</max_cart_weight>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
                 </localsuperexpress>
                 <palette>
                     <active>0</active>
                     <name>Kurier - przesyłka na palecie</name>
                     <max_cart_weight>25</max_cart_weight>
                     <default_way_sending>dispatch_order</default_way_sending>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
                 </palette>
             </inpostcourier>
         </carriers>

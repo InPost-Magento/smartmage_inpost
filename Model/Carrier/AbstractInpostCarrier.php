@@ -113,6 +113,7 @@ abstract class AbstractInpostCarrier extends AbstractCarrier
         foreach ($this->methods as $method) {
             $method->setItems($quoteItems);
             if ($method->isAllowed()
+                && $this->isShipCountryApplicable($request->getDestCountryId(), $method->getKey())
             ) {
                 if (in_array($method->getKey(), $this->eowMethods)) {
                     $this->eowAvailable = true;
@@ -135,6 +136,30 @@ abstract class AbstractInpostCarrier extends AbstractCarrier
         $this->allowedMethods = $allowedMethods;
 
         return $methods;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isShipCountryApplicable($destCountryId, $methodKey)
+    {
+        $speCountriesAllow = $this->configProvider->getConfigData($this->_code . '/' . $methodKey . '/sallowspecific');
+        /*
+         * for specific countries, the flag will be 1
+         */
+        if ($speCountriesAllow && $speCountriesAllow == 1) {
+            $availableCountries = [];
+            if ($this->configProvider->getConfigData($this->_code . '/' . $methodKey . '/specificcountry')) {
+                $availableCountries = explode(',', $this->configProvider->getConfigData($this->_code . '/' . $methodKey . '/specificcountry'));
+            }
+            if ($availableCountries && in_array($destCountryId, $availableCountries)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

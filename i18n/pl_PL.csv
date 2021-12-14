@@ -123,7 +123,7 @@ Show on the map,Pokaż na mapie
 Actions,Operacje
 Details,Szczegóły
 Return,Zwrot
-Submit,Stwórz przesyłkę
+Create shipment,Stwórz przesyłkę
 Choose method,Wybierz metodę
 Create sample courier shipment,Stwórz testową przesyłkę kurierską
 Create sample locker shipment,Stwórz testową przesyłkę Paczkomatową
@@ -180,3 +180,5 @@ Free Shipping Amount Including Tax,Czy próg darmowej wysyłki jest z podatkiem
 Position,Pozycja
 Enable,Włącz
 Disable,Wyłącz
+Ship to Applicable Countries,Wysyłka do wybranych krajów
+Ship to Specific Countries,Wybrane kraje
