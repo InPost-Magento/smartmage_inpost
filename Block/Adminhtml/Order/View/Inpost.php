@@ -167,6 +167,18 @@ class Inpost extends AbstractOrder
 
     /**
      * @param $shipment
+     * @return boolean
+     */
+    public function isReturnPossible($shipment)
+    {
+        if (in_array($shipment->getService(), ['inpost_courier_c2c', 'inpost_courier_c2ccod'])) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @param $shipment
      * @return string
      */
     public function getReturnUrl($shipment)

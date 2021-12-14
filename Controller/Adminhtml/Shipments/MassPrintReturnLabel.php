@@ -86,9 +86,9 @@ class MassPrintReturnLabel extends MassActionAbstract
         $omittedIds = [];
         $services = [];
 
-        //etykieta zwrotna tylko dla usług kurierskich
+        //etykieta zwrotna tylko dla usług kurierskich oraz nie dla C2C
         foreach ($collection as $item) {
-            if (substr($item->getService(), 0, 14) === "inpost_courier") {
+            if (substr($item->getService(), 0, 14) === "inpost_courier" && !in_array($item->getService(), ['inpost_courier_c2c', 'inpost_courier_c2ccod'])) {
                 $services[$item->getService()] = 1;
                 $shipmentIds[] = $item->getShipmentId();
             } else {

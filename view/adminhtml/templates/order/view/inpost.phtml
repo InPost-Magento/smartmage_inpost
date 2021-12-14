@@ -47,11 +47,13 @@
                                         <?= $block->escapeHtml(__('Print label')) ?>
                                     </a>
                                 </div>
-                                <div class="actions" style="padding: 5px;">
-                                    <a class="action-default primary" href="<?= /* @noEscape */ $block->getReturnUrl($shipment) ?>" <?php if ($block->isUrlBlank($shipment)) : ?> target="_blank" <?php endif; ?> >
-                                        <?= $block->escapeHtml(__('Return')) ?>
-                                    </a>
-                                </div>
+                                <?php if($block->isReturnPossible($shipment)) : ?>
+                                    <div class="actions" style="padding: 5px;">
+                                        <a class="action-default primary" href="<?= /* @noEscape */ $block->getReturnUrl($shipment) ?>" <?php if ($block->isUrlBlank($shipment)) : ?> target="_blank" <?php endif; ?> >
+                                            <?= $block->escapeHtml(__('Return')) ?>
+                                        </a>
+                                    </div>
+                                <?php endif ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
