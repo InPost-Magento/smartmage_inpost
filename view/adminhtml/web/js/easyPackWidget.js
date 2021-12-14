@@ -14,9 +14,9 @@ define([
             });
         },
 
-        createWrapperEasyPack: function(fieldWrapper, wrapperEasyPackWidget, pointsTypes) {
+        createWrapperEasyPack: function(fieldWrapper, wrapperEasyPackWidget, pointsTypes, pointFunctions) {
             return new Promise(function(resolve, reject) {
-                fieldWrapper.prepend('<div id="'+ wrapperEasyPackWidget +'" data-inpost-carrier-default-points-types="'+ pointsTypes +'"></div>');
+                fieldWrapper.prepend('<div id="'+ wrapperEasyPackWidget +'" data-inpost-carrier-default-points-types="'+ pointsTypes +'" data-inpost-carrier-default-points-functions="'+ pointFunctions +'"></div>');
 
                 resolve('True');
             });
@@ -35,7 +35,7 @@ define([
             });
         },
 
-        configEasyPack: function(pointsTypes) {
+        configEasyPack: function(pointsTypes, pointFunctions) {
             return new Promise(function(resolve, reject) {
                 easyPack.init({
                     instance: 'pl',
@@ -43,6 +43,7 @@ define([
                     searchType: 'osm',
                     points: {
                         types: pointsTypes,
+                        functions: pointFunctions 
                     },
                     map: {
                         useGeolocation: true,
@@ -73,13 +74,15 @@ define([
                 $(document).on('click', '[data-inpost-carrier-default-points-types]', function() {
                     var pointsTypes = $(this).data('inpost-carrier-default-points-types');
                     var createArrayPointTypes = pointsTypes.split(',');
+                    var pointFunctions = $(this).data('inpost-carrier-default-points-functions');
+                    var createArrayPointFunctions = pointsTypes.split(',');
 
-                    initializeDW.configEasyPack(createArrayPointTypes).then(function() {  });
+                    initializeDW.configEasyPack(createArrayPointTypes, createArrayPointFunctions).then(function() {  });
                 });
             }
         },
 
-        init: function(fieldWrapper, pointsTypes) {
+        init: function(fieldWrapper, pointsTypes, pointFunctions) {
 
             var self = this;
             var wrapperDefaultSendingPoint = $('#row_carriers_'+ fieldWrapper +'_default_sending_point td.value');
@@ -88,8 +91,8 @@ define([
 
             return new Promise(function(resolve, reject) {
                 self.hideInputDefaultSendingPoint(wrapperDefaultSendingPoint).then(function() {
-                    self.createWrapperEasyPack(wrapperDefaultSendingPoint, wrapperEasyPackWidget, pointsTypes).then(function() {
-                        self.configEasyPack(pointsTypes).then(function() {
+                    self.createWrapperEasyPack(wrapperDefaultSendingPoint, wrapperEasyPackWidget, pointsTypes, pointFunctions).then(function() {
+                        self.configEasyPack(pointsTypes, pointFunctions).then(function() {
                             self.initializeDropdownWidget(wrapperEasyPackWidget, defaultSendingPointValue, pointsTypes).then(function() {
 
                                 if(defaultSendingPointValue.val().length) {
