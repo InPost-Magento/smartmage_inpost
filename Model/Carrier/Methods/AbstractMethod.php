@@ -8,6 +8,7 @@ use Magento\Catalog\Model\Product\Type;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Smartmage\Inpost\Model\ConfigProvider;
+use Magento\Quote\Model\Quote\Address\RateRequest;
 
 abstract class AbstractMethod
 {
@@ -155,9 +156,9 @@ abstract class AbstractMethod
     /**
      * @return int
      */
-    public function calculatePrice()
+    public function calculatePrice($request)
     {
-        if ($this->isFreeShipping()) {
+        if ($this->isFreeShipping($request)) {
             return 0;
         }
 
@@ -169,7 +170,7 @@ abstract class AbstractMethod
     /**
      * @return mixed
      */
-    public function isFreeShipping()
+    public function isFreeShipping($request)
     {
         if ($this->configProvider->getConfigFlag(
             $this->carrierCode . '/' . $this->methodKey . '/free_shipping_enable'
@@ -178,7 +179,7 @@ abstract class AbstractMethod
                 $this->carrierCode . '/' . $this->methodKey . '/free_shipping_subtotal'
             );
 
-            $total = $this->getQuoteTotal();
+            $total = $this->getQuoteTotal($request);
 
             if ($total >= $freeShippingFrom) {
                 return true;
@@ -196,12 +197,12 @@ abstract class AbstractMethod
         return $this->methodKey;
     }
 
-    protected function getQuoteTotal()
+    protected function getQuoteTotal(RateRequest $request)
     {
-        $total = 0;
-
-        foreach ($this->quoteItems as $item) {
-            $total += $item->getQty()*$item->getPrice();
+        $total = $request->getPackageValueWithDiscount();
+        if ($request->getBaseSubtotalWithDiscountInclTax()
+            && $this->configProvider->getConfigFlag('tax_including')) {
+            $total = $request->getBaseSubtotalWithDiscountInclTax();
         }
 
         return $total;

@@ -40,6 +40,13 @@
                             <field id="free_shipping_enable">1</field>
                         </depends>
                     </field>
+                    <field id="tax_including" translate="label" type="select" sortOrder="61" showInDefault="1" showInWebsite="1">
+                        <label>Free Shipping Amount Including Tax</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="free_shipping_enable">1</field>
+                        </depends>
+                    </field>
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
                     </field>
@@ -80,6 +87,13 @@
                             <field id="free_shipping_enable">1</field>
                         </depends>
                     </field>
+                    <field id="tax_including" translate="label" type="select" sortOrder="61" showInDefault="1" showInWebsite="1">
+                        <label>Free Shipping Amount Including Tax</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="free_shipping_enable">1</field>
+                        </depends>
+                    </field>
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
                     </field>
@@ -116,6 +130,13 @@
                     <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
                         <label>Free Shipping Amount Threshold</label>
                         <validate>validate-number validate-zero-or-greater</validate>
+                        <depends>
+                            <field id="free_shipping_enable">1</field>
+                        </depends>
+                    </field>
+                    <field id="tax_including" translate="label" type="select" sortOrder="61" showInDefault="1" showInWebsite="1">
+                        <label>Free Shipping Amount Including Tax</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                         <depends>
                             <field id="free_shipping_enable">1</field>
                         </depends>
@@ -170,6 +191,13 @@
                     <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
                         <label>Free Shipping Amount Threshold</label>
                         <validate>validate-number validate-zero-or-greater</validate>
+                        <depends>
+                            <field id="free_shipping_enable">1</field>
+                        </depends>
+                    </field>
+                    <field id="tax_including" translate="label" type="select" sortOrder="61" showInDefault="1" showInWebsite="1">
+                        <label>Free Shipping Amount Including Tax</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                         <depends>
                             <field id="free_shipping_enable">1</field>
                         </depends>
@@ -239,6 +267,13 @@
                             <field id="free_shipping_enable">1</field>
                         </depends>
                     </field>
+                    <field id="tax_including" translate="label" type="select" sortOrder="61" showInDefault="1" showInWebsite="1">
+                        <label>Free Shipping Amount Including Tax</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="free_shipping_enable">1</field>
+                        </depends>
+                    </field>
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
                     </field>
@@ -276,6 +311,13 @@
                     <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
                         <label>Free Shipping Amount Threshold</label>
                         <validate>validate-number validate-zero-or-greater</validate>
+                        <depends>
+                            <field id="free_shipping_enable">1</field>
+                        </depends>
+                    </field>
+                    <field id="tax_including" translate="label" type="select" sortOrder="61" showInDefault="1" showInWebsite="1">
+                        <label>Free Shipping Amount Including Tax</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                         <depends>
                             <field id="free_shipping_enable">1</field>
                         </depends>
@@ -321,6 +363,13 @@
                             <field id="free_shipping_enable">1</field>
                         </depends>
                     </field>
+                    <field id="tax_including" translate="label" type="select" sortOrder="61" showInDefault="1" showInWebsite="1">
+                        <label>Free Shipping Amount Including Tax</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="free_shipping_enable">1</field>
+                        </depends>
+                    </field>
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
                     </field>
@@ -358,6 +407,13 @@
                     <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
                         <label>Free Shipping Amount Threshold</label>
                         <validate>validate-number validate-zero-or-greater</validate>
+                        <depends>
+                            <field id="free_shipping_enable">1</field>
+                        </depends>
+                    </field>
+                    <field id="tax_including" translate="label" type="select" sortOrder="61" showInDefault="1" showInWebsite="1">
+                        <label>Free Shipping Amount Including Tax</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                         <depends>
                             <field id="free_shipping_enable">1</field>
                         </depends>
@@ -402,6 +458,13 @@
                             <field id="free_shipping_enable">1</field>
                         </depends>
                     </field>
+                    <field id="tax_including" translate="label" type="select" sortOrder="61" showInDefault="1" showInWebsite="1">
+                        <label>Free Shipping Amount Including Tax</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="free_shipping_enable">1</field>
+                        </depends>
+                    </field>
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
                     </field>
@@ -438,6 +501,13 @@
                     <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
                         <label>Free Shipping Amount Threshold</label>
                         <validate>validate-number validate-zero-or-greater</validate>
+                        <depends>
+                            <field id="free_shipping_enable">1</field>
+                        </depends>
+                    </field>
+                    <field id="tax_including" translate="label" type="select" sortOrder="61" showInDefault="1" showInWebsite="1">
+                        <label>Free Shipping Amount Including Tax</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                         <depends>
                             <field id="free_shipping_enable">1</field>
                         </depends>
@@ -482,6 +552,13 @@
                             <field id="free_shipping_enable">1</field>
                         </depends>
                     </field>
+                    <field id="tax_including" translate="label" type="select" sortOrder="61" showInDefault="1" showInWebsite="1">
+                        <label>Free Shipping Amount Including Tax</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="free_shipping_enable">1</field>
+                        </depends>
+                    </field>
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
                     </field>
@@ -518,6 +595,13 @@
                     <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
                         <label>Free Shipping Amount Threshold</label>
                         <validate>validate-number validate-zero-or-greater</validate>
+                        <depends>
+                            <field id="free_shipping_enable">1</field>
+                        </depends>
+                    </field>
+                    <field id="tax_including" translate="label" type="select" sortOrder="61" showInDefault="1" showInWebsite="1">
+                        <label>Free Shipping Amount Including Tax</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                         <depends>
                             <field id="free_shipping_enable">1</field>
                         </depends>
@@ -562,6 +646,13 @@
                             <field id="free_shipping_enable">1</field>
                         </depends>
                     </field>
+                    <field id="tax_including" translate="label" type="select" sortOrder="61" showInDefault="1" showInWebsite="1">
+                        <label>Free Shipping Amount Including Tax</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="free_shipping_enable">1</field>
+                        </depends>
+                    </field>
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
                     </field>
@@ -602,6 +693,13 @@
                             <field id="free_shipping_enable">1</field>
                         </depends>
                     </field>
+                    <field id="tax_including" translate="label" type="select" sortOrder="61" showInDefault="1" showInWebsite="1">
+                        <label>Free Shipping Amount Including Tax</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="free_shipping_enable">1</field>
+                        </depends>
+                    </field>
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
                     </field>
@@ -638,6 +736,13 @@
                     <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
                         <label>Free Shipping Amount Threshold</label>
                         <validate>validate-number validate-zero-or-greater</validate>
+                        <depends>
+                            <field id="free_shipping_enable">1</field>
+                        </depends>
+                    </field>
+                    <field id="tax_including" translate="label" type="select" sortOrder="61" showInDefault="1" showInWebsite="1">
+                        <label>Free Shipping Amount Including Tax</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                         <depends>
                             <field id="free_shipping_enable">1</field>
                         </depends>
