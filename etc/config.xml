@@ -35,6 +35,7 @@
                     <max_cart_weight>25</max_cart_weight>
                     <sallowspecific>1</sallowspecific>
                     <specificcountry>PL</specificcountry>
+                    <popenabled>1</popenabled>
                 </standard>
                 <standardcod>
                     <active>0</active>

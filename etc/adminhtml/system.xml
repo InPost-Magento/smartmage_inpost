@@ -72,6 +72,10 @@
                         <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
                         <can_be_empty>1</can_be_empty>
                     </field>
+                    <field id="popenabled" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" canRestore="1">
+                        <label>POP points enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
                 </group>
                 <group id="standardcod" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>InPost - Paczkomaty 24/7 - płatność przy odbiorze</label>

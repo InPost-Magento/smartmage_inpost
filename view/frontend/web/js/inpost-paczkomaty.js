@@ -39,9 +39,9 @@ define([
         inPostMethod: function() {
             var method = [
                 ['#label_method_standardcod_inpostlocker', 'parcel_locker'],
-                ['#label_method_standard_inpostlocker', 'parcel_locker-pop'],
+                ['#label_method_standard_inpostlocker', window.checkoutConfig.standard_inpostlocker],
                 ['#label_method_standardeow_inpostlocker', 'parcel_locker'],
-                ['#label_method_standardeowcod_inpostlocker', 'parcel_locker'],
+                ['#label_method_standardeowcod_inpostlocker', 'parcel_locker']
             ];
 
             return method;
