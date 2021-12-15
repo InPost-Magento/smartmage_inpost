@@ -17,13 +17,15 @@ class FirstName extends AbstractInput
         parent::prepare();
 
         $config = $this->getData('config');
-        $data= $this->request->getParams();
+        $data = $this->request->getParams();
 
         if (isset($config['dataScope']) && $config['dataScope'] == 'first_name') {
             if (isset($data['first_name'])) {
                 $config['default'] = $data['first_name'];
-            } else {
+            } elseif($this->order->getCustomerFirstname()) {
                 $config['default'] = $this->order->getCustomerFirstname();
+            } else {
+                $config['default'] = $this->order->getShippingAddress()->getFirstname();
             }
             $this->setData('config', (array)$config);
         }
