@@ -25,11 +25,10 @@ class TargetLocker extends AbstractInput
                 $config['default'] = $extensionAttributes->getInpostLockerId();
             }
 
-            if (strpos($data['shipping_method'], 'cod') !== false ||
-                strpos($data['shipping_method'], 'eow')) {
-                $config['pointType'] = 'parcel_locker';
-            } else {
+            if ((bool)$this->configProvider->getConfigData(str_replace('_','/',$data['shipping_method']) . '/popenabled')) {
                 $config['pointType'] = 'parcel_locker-pop';
+            } else {
+                $config['pointType'] = 'parcel_locker';
             }
 
             $this->setData('config', (array)$config);
