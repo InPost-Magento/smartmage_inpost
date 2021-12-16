@@ -8,5 +8,10 @@
         <referenceContainer name="order_additional_info">
             <block class="Smartmage\Inpost\Block\Adminhtml\Order\View\Inpost" name="inpost" template="Smartmage_Inpost::order/view/inpost.phtml" />
         </referenceContainer>
+        <referenceBlock name="order_shipping_view">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Smartmage_Inpost::order/view/info.phtml</argument>
+            </action>
+        </referenceBlock>
     </body>
 </page>
