@@ -30,9 +30,7 @@ define(
                     inPostPaczkomaty.hideInPostModalMap();
                 },
 
-                validateShippingInformation: function() {
-
-                    this._super();
+                validateSelectedShippingPoint: function() {
                     var self = this;
 
                     if(quote.shippingMethod()) {
@@ -55,17 +53,18 @@ define(
                                             $t('The selected point does not support the cash on delivery method')
                                         );
                                         return false;
-                                    } else {
-                                        return true;
                                     }
-                                } else {
-                                    return true;
                                 }
                             }
-                        } else {
-                            return true;
                         }
                     }
+                },
+
+                validateShippingInformation: function() {
+                    var result = this.validateSelectedShippingPoint();
+                    result = this._super();
+
+                    return result;
                 },
             });
         }
