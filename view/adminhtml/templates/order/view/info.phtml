@@ -12,7 +12,7 @@
 /** @var \Magento\Shipping\Helper\Data $shippingHelper */
 $shippingHelper = $block->getData('shippingHelper');
 /** @var \Magento\Tax\Helper\Data $taxHelper */
-$taxHelper = $block->getData('taxHelper');
+$taxHelper = ($block->getData('taxHelper')) ? $block->getData('taxHelper') : $this->helper(Magento\Tax\Helper\Data::class);
 ?>
 <?php $order = $block->getOrder() ?>
 <?php if ($order->getIsVirtual()):
@@ -57,11 +57,11 @@ endif; ?>
         <?php endif; ?>
     </div>
     <?php
-        $targetPoint = $order->getData('inpost_locker_id');
-        if($targetPoint) : ?>
-            <div class="admin__page-section-item-content">
-                <br/>
-                <?php echo __('Selected Paczkomat:') . ' ' . $targetPoint; ?>
-            </div>
-        <?php endif; ?>
+    $targetPoint = $order->getData('inpost_locker_id');
+    if($targetPoint) : ?>
+        <div class="admin__page-section-item-content">
+            <br/>
+            <?php echo __('Selected Paczkomat:') . ' ' . $targetPoint; ?>
+        </div>
+    <?php endif; ?>
 </div>
