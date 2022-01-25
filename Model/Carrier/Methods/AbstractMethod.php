@@ -199,11 +199,23 @@ abstract class AbstractMethod
 
     protected function getQuoteTotal(RateRequest $request)
     {
-        $total = $request->getPackageValueWithDiscount();
-        if ($request->getBaseSubtotalWithDiscountInclTax()
-            && $this->configProvider->getConfigFlag('tax_including')) {
-            $total = $request->getBaseSubtotalWithDiscountInclTax();
+        $total = 0;
+        $discountAmount = 0;
+        if ($request->getAllItems()) {
+            foreach ($request->getAllItems() as $item) {
+                if ($item->getProduct()->isVirtual() || $item->getParentItem()) {
+                    continue;
+                }
+                $discountAmount += $item->getBaseDiscountAmount();
+            }
         }
+        
+        if ($this->configProvider->getConfigData($this->carrierCode . '/' . $this->methodKey . '/tax_including')) {
+            $subTotal = $request->getBaseSubtotalInclTax();
+        } else {
+            $subTotal = $item->getQuote()->getBaseSubtotal();
+        }
+        $total = $subTotal - $discountAmount;
 
         return $total;
     }
