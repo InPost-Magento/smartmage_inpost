@@ -30,11 +30,10 @@ define(
                     inPostPaczkomaty.hideInPostModalMap();
                 },
 
-                validateSelectedShippingPoint: function() {
+                validateShippingInformation: function() {
                     var self = this;
 
                     if(quote.shippingMethod()) {
-
                         var ShippingMethodCode = quote.shippingMethod().method_code+'_'+quote.shippingMethod().carrier_code;
 
                         if (ShippingMethodCode === 'standard_inpostlocker' || ShippingMethodCode === 'standardcod_inpostlocker' || ShippingMethodCode === 'standardeow_inpostlocker' || ShippingMethodCode === 'standardeowcod_inpostlocker' ) {
@@ -58,13 +57,8 @@ define(
                             }
                         }
                     }
-                },
 
-                validateShippingInformation: function() {
-                    var result = this.validateSelectedShippingPoint();
-                    result = this._super();
-
-                    return result;
+                    return this._super();
                 },
             });
         }
