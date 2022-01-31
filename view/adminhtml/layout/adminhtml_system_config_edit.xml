@@ -2,7 +2,6 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-        <script src="Smartmage_Inpost::js/configEasyPack.js" />
         <css src="https://geowidget.easypack24.net/css/easypack.css" media="all" src_type="url"/>
     </head>
 </page>
