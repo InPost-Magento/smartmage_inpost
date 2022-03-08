@@ -185,6 +185,22 @@ abstract class AbstractMethod
                 return true;
             }
         }
+        
+        // cart rules
+        if ($allItems = $request->getAllItems()) {
+            $hasAllItemsFreeshipping = true;
+            foreach ($allItems as $item) {
+                if ($item->getProduct()->isVirtual()) {
+                    continue;
+                }
+                if(!$item->getFreeShipping()) {
+                    $hasAllItemsFreeshipping = false;
+                    break;
+                }
+            }
+            
+            return $hasAllItemsFreeshipping;
+        }
 
         return false;
     }
