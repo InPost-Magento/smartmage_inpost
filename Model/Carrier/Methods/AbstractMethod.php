@@ -123,8 +123,7 @@ abstract class AbstractMethod
             if (is_array($productWeight)) {
                 $productWeight = 0;
             }
-            $weight += $productWeight;
-
+            $weight += $productWeight * $item->getQty();
         }
 
         return $weight;
@@ -185,7 +184,7 @@ abstract class AbstractMethod
                 return true;
             }
         }
-        
+
         // cart rules
         if ($allItems = $request->getAllItems()) {
             $hasAllItemsFreeshipping = true;
@@ -198,7 +197,7 @@ abstract class AbstractMethod
                     break;
                 }
             }
-            
+
             return $hasAllItemsFreeshipping;
         }
 
@@ -225,7 +224,7 @@ abstract class AbstractMethod
                 $discountAmount += $item->getBaseDiscountAmount();
             }
         }
-        
+
         if ($this->configProvider->getConfigData($this->carrierCode . '/' . $this->methodKey . '/tax_including')) {
             $subTotal = $request->getBaseSubtotalInclTax();
         } else {
