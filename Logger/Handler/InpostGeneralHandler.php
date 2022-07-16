@@ -53,7 +53,7 @@ class InpostGeneralHandler extends BaseHandler
     /**
      * @param array $record
      */
-    public function write(array $record)
+    public function write(array $record): void
     {
         if ($this->configProvider->getDebugEnabled()) {
             parent::write($record);
