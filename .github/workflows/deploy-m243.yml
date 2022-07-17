@@ -8,10 +8,10 @@ jobs:
     name: Start deploy on https://m243.kamilborkowski.pl/
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
 
-      - run: npm install
+      - run: npm ci
       - run: npm run build
 
       - name: Install SSH Key
