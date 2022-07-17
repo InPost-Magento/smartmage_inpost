@@ -21,13 +21,13 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         env:
             SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-            ARGS: "-rltgoDzvO --delete"
+            ARGS: "-rltgoDzvO --delete --ignore-existing"
             SOURCE: "/"
             REMOTE_HOST: ${{ secrets.SSH_HOST }}
             REMOTE_USER: ${{ secrets.SSH_USER }}
             TARGET: "/var/www/chroot/m243/web/app/code/Smartmage/Inpost/"
             EXCLUDE: "/.github/, /.git/, package.json, package-lock.json"
-      - name: Maintenance mode
+      - name: Magento commands
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -37,3 +37,7 @@ jobs:
           script: |
             cd /var/www/chroot/m243/web/
             php7.4 bin/magento maintenance:enable
+            php7.4 bin/magento setup:upgrade
+            php7.4 bin/magento setup:di:compile
+            php7.4 bin/magento cache:flush
+            php7.4 bin/magento maintenance:disable
