@@ -4,35 +4,26 @@ on:
     branches:
       - master
 jobs:
-  build-and-deploy:
+  build:
     name: Start deploy on https://m243.kamilborkowski.pl/
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-
-      - run: npm ci
-      - run: npm test
-
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
+      - uses: actions/checkout@v1
+      - name: Install Node.js
+        uses: actions/setup-node@v1
         with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: temp_placeholder
-
-      - name: Adding Known Hosts
-        run: ssh-keyscan -p ${{ secrets.SSH_PORT}} -H ${{ secrets.SSH_HOST }}  >> ~/.ssh/known_hosts
-
-      - name: Deploy with rsync
-        run: rsync -avz -e "ssh -p ${{ secrets.SSH_PORT }}" ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/chroot/m243/web/app/code/Smartmage/Inpost/
-
-      - name: Restart Node Server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            cd /var/www/chroot/m243/web/
-            php7.4 bin/magento maintenance:enable
+          node-version: '10.x'
+      - name: Install npm dependencies
+        run: npm install
+      - name: Run build task
+        run: npm run build --if-present
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@main
+        env:
+            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            ARGS: "-rltgoDzvO --delete"
+            SOURCE: "dist/"
+            REMOTE_HOST: ${{ secrets.SSH_HOST }}
+            REMOTE_USER: ${{ secrets.SSH_USER }}
+            TARGET: "/var/www/chroot/m243/web/app/code/Smartmage/Inpost/"
+            EXCLUDE: ""
