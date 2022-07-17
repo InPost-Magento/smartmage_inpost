@@ -26,4 +26,14 @@ jobs:
             REMOTE_HOST: ${{ secrets.SSH_HOST }}
             REMOTE_USER: ${{ secrets.SSH_USER }}
             TARGET: "/var/www/chroot/m243/web/app/code/Smartmage/Inpost/"
-            EXCLUDE: ""
+            EXCLUDE: "/.github/, /.git/, package.json, package-lock.json"
+      - name: Maintenance mode
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd /var/www/chroot/m243/web/
+            php7.4 bin/magento maintenance:enable
