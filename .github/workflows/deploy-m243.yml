@@ -22,7 +22,7 @@ jobs:
         env:
             SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
             ARGS: "-rltgoDzvO --delete"
-            SOURCE: "dist/"
+            SOURCE: "/"
             REMOTE_HOST: ${{ secrets.SSH_HOST }}
             REMOTE_USER: ${{ secrets.SSH_USER }}
             TARGET: "/var/www/chroot/m243/web/app/code/Smartmage/Inpost/"
