@@ -27,8 +27,9 @@ jobs:
             REMOTE_USER: ${{ secrets.SSH_USER }}
             TARGET: "/var/www/chroot/m243/web/app/code/Smartmage/Inpost/"
             EXCLUDE: "/.github/, /.git/, package.json, package-lock.json"
-      - name: Magento commands
+      - name: Get tag name
         run: echo "TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+      - name: Magento commands
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
