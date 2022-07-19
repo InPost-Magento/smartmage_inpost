@@ -12,7 +12,14 @@ jobs:
       contents: write
     steps:
     - uses: actions/checkout@v2
-    - uses: ncipollo/release-action@v1
+    - name: Release archive
+      uses: thedoctor0/zip-release@main
+      with:
+        type: 'zip'
+        filename: 'release.zip'
+        exclusions: '*.git* *.github* package.json'
+    - name: Upload Release
+      uses: ncipollo/release-action@v1
       with:
         artifacts: "release.zip"
         token: ${{ secrets.TOKEN }}

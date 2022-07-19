@@ -42,15 +42,4 @@ jobs:
             #php7.4 bin/magento cache:flush
             #php7.4 bin/magento maintenance:disable
             #zip -r pub/release/smartmage_inpost.zip app/code/Smartmage/Inpost/
-      - name: Release archive
-        uses: thedoctor0/zip-release@main
-        with:
-          type: 'zip'
-          filename: 'release.zip'
-          exclusions: '*.git* *.github* package.json'
-      - name: Upload Release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "release.zip"
-          token: ${{ secrets.TOKEN }}
           
