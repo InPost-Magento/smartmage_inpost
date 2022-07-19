@@ -35,7 +35,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            #cd /var/www/chroot/m243/web/
+            cd /var/www/chroot/m243/web/
             #php7.4 bin/magento maintenance:enable
             #php7.4 bin/magento setup:upgrade
             #php7.4 bin/magento setup:di:compile
