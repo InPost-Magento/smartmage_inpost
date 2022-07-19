@@ -35,12 +35,13 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            cd /var/www/chroot/m243/web/
-            php7.4 bin/magento maintenance:enable
-            php7.4 bin/magento setup:upgrade
-            php7.4 bin/magento setup:di:compile
-            php7.4 bin/magento cache:flush
-            php7.4 bin/magento maintenance:disable
+            #cd /var/www/chroot/m243/web/
+            #php7.4 bin/magento maintenance:enable
+            #php7.4 bin/magento setup:upgrade
+            #php7.4 bin/magento setup:di:compile
+            #php7.4 bin/magento cache:flush
+            #php7.4 bin/magento maintenance:disable
+            zip -r ../../../../pub/release/smartmage_inpost${GITHUB_REF##*/}.zip ./
       - name: Release archive
         uses: thedoctor0/zip-release@main
         with:
