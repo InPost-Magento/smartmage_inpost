@@ -48,4 +48,9 @@ jobs:
           type: 'zip'
           filename: 'release.zip'
           exclusions: '*.git* *.github* package.json'
+      - name: Upload Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "release.zip"
+          token: ${{ secrets.TOKEN }}
           
