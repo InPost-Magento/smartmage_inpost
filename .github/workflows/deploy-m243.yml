@@ -43,7 +43,7 @@ jobs:
             #php7.4 bin/magento setup:di:compile
             #php7.4 bin/magento cache:flush
             #php7.4 bin/magento maintenance:disable
-            zip -r pub/release/smartmage_inpost${{ env.TAG }}.zip app/code/Smartmage/Inpost/
+            #zip -r pub/release/smartmage_inpost${{ env.TAG }}.zip app/code/Smartmage/Inpost/
       - name: Release archive
         uses: thedoctor0/zip-release@main
         with:
