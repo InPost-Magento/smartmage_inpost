@@ -47,5 +47,5 @@ jobs:
         with:
           type: 'zip'
           filename: 'release.zip'
-          exclusions: '*.git* /.github package.json'
+          exclusions: '*.git* *.github* package.json'
           
