@@ -19,7 +19,7 @@ var config = {
     },
     paths: {
         'inPostSdk': [
-            'https://geowidget.easypack24.net/js/sdk-for-javascript'
+            'https://geowidget.inpost.pl/inpost-geowidget'
         ],
     },
 };

@@ -13,9 +13,10 @@ define([
     return {
         apiEndpointProduction: 'https://api-pl-points.easypack24.net/v1',
         apiEndpointTesting: 'https://sandbox-api-shipx-pl.easypack24.net/v1',
+        apiToken: 'eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzQlpXVzFNZzVlQnpDYU1XU3JvTlBjRWFveFpXcW9Ua2FuZVB3X291LWxvIn0.eyJleHAiOjE5NjYwODA1MjcsImlhdCI6MTY1MDcyMDUyNywianRpIjoiMWI3ZTlmYzEtNjk5Ny00MzEyLTgzMWMtN2Q4ZTY5MWJmMDQ5IiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5pbnBvc3QucGwvYXV0aC9yZWFsbXMvZXh0ZXJuYWwiLCJzdWIiOiJmOjEyNDc1MDUxLTFjMDMtNGU1OS1iYTBjLTJiNDU2OTVlZjUzNTpNeFVub2t4dTdOOW9ZTmpQWFFXVE1CWWkyYUtxX05PQUNxMFYwZHlLOWUwIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoic2hpcHgiLCJzZXNzaW9uX3N0YXRlIjoiN2FhMWQwMjYtNTIxZi00YWNhLTk5YzctNTI3ODc4MjBkZjZjIiwiYWNyIjoiMSIsInNjb3BlIjoib3BlbmlkIGFwaTphcGlwb2ludHMiLCJhbGxvd2VkX3JlZmVycmVycyI6IiIsInV1aWQiOiJlOTAxNmU1Yy0xNzdkLTQ5NTgtYmY3NS1kYzE2NmVjMWJiN2YifQ.Zo5djVDHcAathxsI1zdiBOmrkY_jm4HDqLLfIPG7e5xcBlxorVxtcNKUm7_wezUHfTECuOqAxFCjuzB89jBKC5TtY8lJgmbm8bWWiDpyJ6mULjkeA-PGIw351wKGH46wH472RR06PUjYZx2B5WpLCFquZNPeIItsJVtsYg52JpAwiYyfYmm4g1CFk3tU7TtXy7GAYfkdZ5aGBsO_r0_sS6BmOfjd_UCo0egcWLRFW_yVR88uhQdtY0GjGkwzg0p7klSsZPCUQjOCTtZKYhoMvKHnV8sAhwgPg9h2VqyXj07DnKqlUHnaX5l0nlqt3zp5FfVoPhmB0oAPTSYQFSHVDQ',
 
         inPostAllMethod: function(type) {
-            var method = [
+            const method = [
                 ['#label_'+ type +'_standardcod_inpostlocker', '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="Warstwa_1" x="0" y="0" height="15px" viewBox="0 0 269.29 28.35" xml:space="preserve"><style>.st1p{fill:#404042}.st2p{fill:#fff}</style><path fill="#feca09" d="M3.12 1.86h67.26v24.89H3.12z"/><path class="st1p" d="M23.97 21.9h-2.43v-7.01c0-1.47-.65-2.27-1.83-2.36-.73-.06-1.9.12-2.74.31v9.06h-2.43V11.1s2.96-.66 5.63-.66c1.16 0 2.08.42 2.77 1.11.69.69 1.04 1.66 1.04 2.9v7.45zM65 21.97c-.4.1-.81.15-1.24.15-1.37 0-2.28-.31-2.72-.92-.35-.48-.53-1.39-.53-2.73V7.24h2.4v3.17h2.13v1.97h-2.13v5.94c0 .64.08 1.07.24 1.27.19.26.6.39 1.23.39.18 0 .38-.02.62-.05v2.04zM9.65 7.23h2.48v14.66H9.65zM34.52 12.24c0-1.78-.87-2.66-2.6-2.66h-3.06v5.29h3.02c.83 0 1.48-.23 1.94-.69.46-.47.7-1.11.7-1.94m2.51 0c0 1.5-.47 2.7-1.39 3.62-.93.91-2.18 1.36-3.77 1.36h-3.01v4.63h-2.48V7.19h5.31c1.72 0 3.04.45 3.96 1.34.91.9 1.38 2.13 1.38 3.71M46 16.09c0-1.1-.26-1.98-.77-2.62-.51-.65-1.19-.97-2.04-.97-.85 0-1.52.33-2.04.98-.51.66-.76 1.52-.76 2.61 0 1.1.25 1.98.76 2.63.51.65 1.19.97 2.04.97.85 0 1.52-.32 2.04-.97.51-.65.77-1.53.77-2.63m2.51-.01c0 1.76-.49 3.18-1.48 4.26-.99 1.08-2.26 1.61-3.83 1.61-1.57 0-2.85-.54-3.83-1.61-.99-1.08-1.48-2.5-1.48-4.26 0-1.76.49-3.18 1.48-4.25.99-1.07 2.27-1.61 3.83-1.61 1.59 0 2.87.54 3.85 1.61.97 1.07 1.46 2.48 1.46 4.25M59.07 18.11c0 1.11-.43 2.02-1.29 2.73-.86.72-1.99 1.07-3.4 1.07-2.19 0-3.89-.65-5.09-1.96l1.85-1.55c.92.9 1.99 1.35 3.22 1.35.68 0 1.22-.13 1.62-.4.4-.27.6-.61.6-1.02 0-.47-.23-.79-.69-.96-.27-.1-.98-.24-2.14-.42-1.39-.2-2.39-.51-2.98-.92-.7-.49-1.04-1.24-1.04-2.23 0-1 .42-1.84 1.27-2.52.85-.67 1.97-1.01 3.38-1.01 1.7 0 3.16.56 4.35 1.68l-1.44 1.53c-.88-.77-1.87-1.16-2.98-1.16-1.42 0-2.13.4-2.13 1.2 0 .47.33.78.98.96.92.15 1.83.3 2.74.46 2.11.39 3.17 1.45 3.17 3.17"/><g><path class="st1p" d="M70.38 1.86h196.76v24.89H70.38z"/><path class="st2p" d="M93.1 12.2c0 3.04-2.25 4.91-5.88 4.91H84.1v3.98h-2.56V7.29h5.68c3.64 0 5.88 1.85 5.88 4.91m-2.58 0c0-1.74-1.16-2.74-3.41-2.74h-3v5.48h3c2.25 0 3.41-1 3.41-2.74M104.14 14.92v6.17h-2.33v-1.28c-.59.91-1.74 1.42-3.31 1.42-2.41 0-3.92-1.32-3.92-3.16 0-1.76 1.18-3.14 4.38-3.14h2.72v-.16c0-1.44-.87-2.29-2.62-2.29-1.18 0-2.41.4-3.2 1.04l-.97-1.79c1.12-.87 2.76-1.3 4.46-1.3 3.04.02 4.79 1.46 4.79 4.49m-2.46 2.88v-1.22h-2.54c-1.68 0-2.13.63-2.13 1.4 0 .89.75 1.46 2.01 1.46 1.2 0 2.24-.55 2.66-1.64M106.53 15.83c0-3.16 2.37-5.38 5.7-5.38 2.05 0 3.69.85 4.5 2.44l-1.9 1.11c-.63-1.01-1.58-1.46-2.62-1.46-1.82 0-3.2 1.26-3.2 3.29 0 2.05 1.38 3.29 3.2 3.29 1.04 0 1.99-.45 2.62-1.46l1.89 1.1c-.81 1.58-2.45 2.47-4.5 2.47-3.33 0-5.69-2.24-5.69-5.4M126.97 19.12v1.98h-9.09v-1.56l5.78-7H118v-1.98h8.82v1.56l-5.8 7zM133.54 16.58l-1.84 1.73v2.79h-2.46V6.46h2.46v8.84l5.11-4.74h2.96l-4.4 4.42 4.82 6.12h-3zM140.48 15.83c0-3.16 2.37-5.38 5.6-5.38 3.27 0 5.62 2.23 5.62 5.38s-2.35 5.4-5.62 5.4c-3.24 0-5.6-2.24-5.6-5.4m8.73 0c0-2.01-1.34-3.29-3.13-3.29-1.77 0-3.12 1.28-3.12 3.29s1.34 3.29 3.12 3.29c1.79 0 3.13-1.28 3.13-3.29M171.67 15.06v6.04h-2.47v-5.72c0-1.87-.87-2.78-2.37-2.78-1.62 0-2.74 1.07-2.74 3.16v5.35h-2.47v-5.72c0-1.87-.87-2.78-2.37-2.78-1.64 0-2.74 1.07-2.74 3.16v5.35h-2.47V10.56h2.35v1.34c.79-.95 2.01-1.46 3.45-1.46 1.54 0 2.82.57 3.55 1.76.85-1.09 2.27-1.76 3.95-1.76 2.56.01 4.33 1.45 4.33 4.62M183.64 14.92v6.17h-2.33v-1.28c-.59.91-1.74 1.42-3.31 1.42-2.41 0-3.92-1.32-3.92-3.16 0-1.76 1.18-3.14 4.38-3.14h2.72v-.16c0-1.44-.87-2.29-2.62-2.29-1.18 0-2.41.4-3.2 1.04l-.97-1.79c1.12-.87 2.76-1.3 4.46-1.3 3.03.02 4.79 1.46 4.79 4.49m-2.47 2.88v-1.22h-2.54c-1.68 0-2.13.63-2.13 1.4 0 .89.75 1.46 2.01 1.46 1.2 0 2.25-.55 2.66-1.64M193.12 20.52c-.59.47-1.48.71-2.37.71-2.31 0-3.63-1.22-3.63-3.55v-5.07h-1.74v-1.97h1.74v-2.4h2.47v2.41h2.82v1.97h-2.82v5.01c0 1.03.51 1.58 1.46 1.58.51 0 1.01-.14 1.38-.43l.69 1.74z"/><path class="st2p" d="M204.81 10.56l-4.93 11.38c-.97 2.39-2.31 3.12-4.06 3.12-1.04 0-2.15-.35-2.82-.97l.98-1.82c.47.45 1.14.73 1.82.73.87 0 1.38-.41 1.85-1.46l.18-.41-4.6-10.57h2.56l3.31 7.79 3.33-7.79h2.38zM221.04 18.93v2.17h-10.18v-1.72l5.48-5.21c1.34-1.28 1.58-2.09 1.58-2.86 0-1.26-.87-1.99-2.56-1.99-1.34 0-2.47.45-3.23 1.44l-1.79-1.38c1.06-1.44 2.98-2.29 5.25-2.29 3 0 4.93 1.52 4.93 3.96 0 1.34-.37 2.56-2.29 4.36l-3.69 3.51h6.5zM234.53 17.96h-2.45v3.14h-2.48v-3.14h-7.58v-1.77l6.81-8.9h2.74l-6.41 8.5h4.51v-2.78h2.41v2.78h2.45zM241.15 4.49h2.21l-6.51 18.58h-2.21zM254.02 7.29v1.72l-5.36 12.09h-2.74l5.18-11.64h-5.42v2.35h-2.38V7.29z"/></g></svg>'],
                 ['#label_'+ type +'_standard_inpostlocker', '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="Warstwa_1" x="0" y="0" height="15px" viewBox="0 0 269.29 28.35" xml:space="preserve"><style>.st1po{fill:#404042}.st2po{fill:#fff}</style><path fill="#feca09" d="M3.12 1.86h67.26v24.89H3.12z"/><path class="st1po" d="M23.97 21.9h-2.43v-7.01c0-1.47-.65-2.27-1.83-2.36-.73-.06-1.9.12-2.74.31v9.06h-2.43V11.1s2.96-.66 5.63-.66c1.16 0 2.08.42 2.77 1.11.69.69 1.04 1.66 1.04 2.9v7.45zM65 21.97c-.4.1-.81.15-1.24.15-1.37 0-2.28-.31-2.72-.92-.35-.48-.53-1.39-.53-2.73V7.24h2.4v3.17h2.13v1.97h-2.13v5.94c0 .64.08 1.07.24 1.27.19.26.6.39 1.23.39.18 0 .38-.02.62-.05v2.04zM9.65 7.23h2.48v14.66H9.65zM34.52 12.24c0-1.78-.87-2.66-2.6-2.66h-3.06v5.29h3.02c.83 0 1.48-.23 1.94-.69.46-.47.7-1.11.7-1.94m2.51 0c0 1.5-.47 2.7-1.39 3.62-.93.91-2.18 1.36-3.77 1.36h-3.01v4.63h-2.48V7.19h5.31c1.72 0 3.04.45 3.96 1.34.91.9 1.38 2.13 1.38 3.71M46 16.09c0-1.1-.26-1.98-.77-2.62-.51-.65-1.19-.97-2.04-.97-.85 0-1.52.33-2.04.98-.51.66-.76 1.52-.76 2.61 0 1.1.25 1.98.76 2.63.51.65 1.19.97 2.04.97.85 0 1.52-.32 2.04-.97.51-.65.77-1.53.77-2.63m2.51-.01c0 1.76-.49 3.18-1.48 4.26-.99 1.08-2.26 1.61-3.83 1.61-1.57 0-2.85-.54-3.83-1.61-.99-1.08-1.48-2.5-1.48-4.26 0-1.76.49-3.18 1.48-4.25.99-1.07 2.27-1.61 3.83-1.61 1.59 0 2.87.54 3.85 1.61.97 1.07 1.46 2.48 1.46 4.25M59.07 18.11c0 1.11-.43 2.02-1.29 2.73-.86.72-1.99 1.07-3.4 1.07-2.19 0-3.89-.65-5.09-1.96l1.85-1.55c.92.9 1.99 1.35 3.22 1.35.68 0 1.22-.13 1.62-.4.4-.27.6-.61.6-1.02 0-.47-.23-.79-.69-.96-.27-.1-.98-.24-2.14-.42-1.39-.2-2.39-.51-2.98-.92-.7-.49-1.04-1.24-1.04-2.23 0-1 .42-1.84 1.27-2.52.85-.67 1.97-1.01 3.38-1.01 1.7 0 3.16.56 4.35 1.68l-1.44 1.53c-.88-.77-1.87-1.16-2.98-1.16-1.42 0-2.13.4-2.13 1.2 0 .47.33.78.98.96.92.15 1.83.3 2.74.46 2.11.39 3.17 1.45 3.17 3.17"/><g><path class="st1po" d="M70.38 1.86h196.76v24.89H70.38z"/><path class="st2po" d="M93.1 12.2c0 3.04-2.25 4.91-5.88 4.91H84.1v3.98h-2.56V7.29h5.68c3.64 0 5.88 1.85 5.88 4.91m-2.58 0c0-1.74-1.16-2.74-3.41-2.74h-3v5.48h3c2.25 0 3.41-1 3.41-2.74M104.14 14.92v6.17h-2.33v-1.28c-.59.91-1.74 1.42-3.31 1.42-2.41 0-3.92-1.32-3.92-3.16 0-1.76 1.18-3.14 4.38-3.14h2.72v-.16c0-1.44-.87-2.29-2.62-2.29-1.18 0-2.41.4-3.2 1.04l-.97-1.79c1.12-.87 2.76-1.3 4.46-1.3 3.04.02 4.79 1.46 4.79 4.49m-2.46 2.88v-1.22h-2.54c-1.68 0-2.13.63-2.13 1.4 0 .89.75 1.46 2.01 1.46 1.2 0 2.24-.55 2.66-1.64M106.53 15.83c0-3.16 2.37-5.38 5.7-5.38 2.05 0 3.69.85 4.5 2.44l-1.9 1.11c-.63-1.01-1.58-1.46-2.62-1.46-1.82 0-3.2 1.26-3.2 3.29 0 2.05 1.38 3.29 3.2 3.29 1.04 0 1.99-.45 2.62-1.46l1.89 1.1c-.81 1.58-2.45 2.47-4.5 2.47-3.33 0-5.69-2.24-5.69-5.4M126.97 19.12v1.98h-9.09v-1.56l5.78-7H118v-1.98h8.82v1.56l-5.8 7zM133.54 16.58l-1.84 1.73v2.79h-2.46V6.46h2.46v8.84l5.11-4.74h2.96l-4.4 4.42 4.82 6.12h-3zM140.48 15.83c0-3.16 2.37-5.38 5.6-5.38 3.27 0 5.62 2.23 5.62 5.38s-2.35 5.4-5.62 5.4c-3.24 0-5.6-2.24-5.6-5.4m8.73 0c0-2.01-1.34-3.29-3.13-3.29-1.77 0-3.12 1.28-3.12 3.29s1.34 3.29 3.12 3.29c1.79 0 3.13-1.28 3.13-3.29M171.67 15.06v6.04h-2.47v-5.72c0-1.87-.87-2.78-2.37-2.78-1.62 0-2.74 1.07-2.74 3.16v5.35h-2.47v-5.72c0-1.87-.87-2.78-2.37-2.78-1.64 0-2.74 1.07-2.74 3.16v5.35h-2.47V10.56h2.35v1.34c.79-.95 2.01-1.46 3.45-1.46 1.54 0 2.82.57 3.55 1.76.85-1.09 2.27-1.76 3.95-1.76 2.56.01 4.33 1.45 4.33 4.62M183.64 14.92v6.17h-2.33v-1.28c-.59.91-1.74 1.42-3.31 1.42-2.41 0-3.92-1.32-3.92-3.16 0-1.76 1.18-3.14 4.38-3.14h2.72v-.16c0-1.44-.87-2.29-2.62-2.29-1.18 0-2.41.4-3.2 1.04l-.97-1.79c1.12-.87 2.76-1.3 4.46-1.3 3.03.02 4.79 1.46 4.79 4.49m-2.47 2.88v-1.22h-2.54c-1.68 0-2.13.63-2.13 1.4 0 .89.75 1.46 2.01 1.46 1.2 0 2.25-.55 2.66-1.64M193.12 20.52c-.59.47-1.48.71-2.37.71-2.31 0-3.63-1.22-3.63-3.55v-5.07h-1.74v-1.97h1.74v-2.4h2.47v2.41h2.82v1.97h-2.82v5.01c0 1.03.51 1.58 1.46 1.58.51 0 1.01-.14 1.38-.43l.69 1.74z"/><path class="st2po" d="M204.81 10.56l-4.93 11.38c-.97 2.39-2.31 3.12-4.06 3.12-1.04 0-2.15-.35-2.82-.97l.98-1.82c.47.45 1.14.73 1.82.73.87 0 1.38-.41 1.85-1.46l.18-.41-4.6-10.57h2.56l3.31 7.79 3.33-7.79h2.38zM221.04 18.93v2.17h-10.18v-1.72l5.48-5.21c1.34-1.28 1.58-2.09 1.58-2.86 0-1.26-.87-1.99-2.56-1.99-1.34 0-2.47.45-3.23 1.44l-1.79-1.38c1.06-1.44 2.98-2.29 5.25-2.29 3 0 4.93 1.52 4.93 3.96 0 1.34-.37 2.56-2.29 4.36l-3.69 3.51h6.5zM234.53 17.96h-2.45v3.14h-2.48v-3.14h-7.58v-1.77l6.81-8.9h2.74l-6.41 8.5h4.51v-2.78h2.41v2.78h2.45zM241.15 4.49h2.21l-6.51 18.58h-2.21zM254.02 7.29v1.72l-5.36 12.09h-2.74l5.18-11.64h-5.42v2.35h-2.38V7.29z"/></g></svg>'],
                 ['#label_'+ type +'_standardeow_inpostlocker', '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="Warstwa_1" x="0" y="0" height="15px" viewBox="0 0 269.63 28.35" xml:space="preserve"><style>.st1{fill:#fff}.st3{fill:#404042}</style><path fill="#693b88" d="M68.82 2.07h198.93v24.89H68.82z"/><path class="st1" d="M89.87 13.01c0 2.77-2.05 4.48-5.36 4.48h-2.84v3.64h-2.34V8.53h5.18c3.3 0 5.36 1.69 5.36 4.48m-2.36 0c0-1.58-1.06-2.5-3.11-2.5h-2.74v5h2.74c2.05 0 3.11-.91 3.11-2.5M99.94 15.5v5.63h-2.12v-1.17c-.54.83-1.58 1.3-3.02 1.3-2.2 0-3.58-1.21-3.58-2.88 0-1.6 1.08-2.86 4-2.86h2.48v-.14c0-1.31-.79-2.09-2.39-2.09-1.08 0-2.2.36-2.92.95l-.89-1.64c1.03-.79 2.52-1.19 4.07-1.19 2.77 0 4.37 1.31 4.37 4.09m-2.25 2.62V17h-2.32c-1.53 0-1.94.58-1.94 1.28 0 .81.68 1.33 1.84 1.33 1.09.01 2.05-.5 2.42-1.49M102.12 16.32c0-2.88 2.16-4.91 5.2-4.91 1.87 0 3.36.77 4.1 2.23l-1.73 1.01c-.58-.92-1.44-1.33-2.39-1.33-1.66 0-2.92 1.15-2.92 3.01 0 1.87 1.26 3.01 2.92 3.01.95 0 1.82-.41 2.39-1.33l1.73 1.01c-.74 1.44-2.23 2.25-4.1 2.25-3.04-.01-5.2-2.07-5.2-4.95M120.78 19.33v1.8h-8.29v-1.42l5.27-6.39h-5.17v-1.8h8.05v1.42l-5.29 6.39zM126.78 17.01l-1.68 1.58v2.54h-2.25V7.77h2.25v8.07l4.67-4.32h2.69l-4.01 4.03 4.39 5.58h-2.73zM142.17 15.5v5.63h-2.12v-1.17c-.54.83-1.58 1.3-3.02 1.3-2.2 0-3.58-1.21-3.58-2.88 0-1.6 1.08-2.86 4-2.86h2.48v-.14c0-1.31-.79-2.09-2.39-2.09-1.08 0-2.2.36-2.92.95l-.88-1.64c1.03-.79 2.52-1.19 4.07-1.19 2.75 0 4.36 1.31 4.36 4.09m-2.25 2.62V17h-2.32c-1.53 0-1.94.58-1.94 1.28 0 .81.68 1.33 1.84 1.33 1.08.01 2.04-.5 2.42-1.49M165 11.52l-3.54 9.61h-2.16l-2.49-6.62-2.51 6.62h-2.17l-3.52-9.61h2.12l2.54 7.09 2.64-7.09h1.9l2.59 7.13 2.61-7.13zM190.15 8.53l-4.18 12.6h-2.48l-3.12-9.32-3.16 9.32h-2.51l-4.17-12.6h2.43l3.13 9.58 3.26-9.58h2.16l3.19 9.63 3.22-9.63zM200.12 17.04h-7.54c.27 1.4 1.44 2.3 3.11 2.3 1.08 0 1.93-.34 2.61-1.04l1.21 1.39c-.86 1.03-2.21 1.57-3.87 1.57-3.22 0-5.31-2.07-5.31-4.93s2.11-4.91 4.97-4.91c2.81 0 4.86 1.96 4.86 4.97-.01.17-.02.44-.04.65m-7.56-1.49h5.45c-.18-1.39-1.24-2.34-2.72-2.34-1.46 0-2.52.94-2.73 2.34M211.31 17.04h-7.54c.27 1.4 1.44 2.3 3.11 2.3 1.08 0 1.93-.34 2.61-1.04l1.21 1.39c-.86 1.03-2.21 1.57-3.87 1.57-3.22 0-5.31-2.07-5.31-4.93s2.11-4.91 4.97-4.91c2.81 0 4.86 1.96 4.86 4.97 0 .17-.02.44-.04.65m-7.56-1.49h5.45c-.18-1.39-1.24-2.34-2.72-2.34-1.45 0-2.51.94-2.73 2.34M217.43 17.01l-1.67 1.58v2.54h-2.25V7.77h2.25v8.07l4.66-4.32h2.7l-4.02 4.03 4.4 5.58h-2.74zM233.56 17.04h-7.54c.27 1.4 1.44 2.3 3.11 2.3 1.08 0 1.93-.34 2.61-1.04l1.21 1.39c-.86 1.03-2.21 1.57-3.87 1.57-3.22 0-5.31-2.07-5.31-4.93s2.11-4.91 4.97-4.91c2.81 0 4.86 1.96 4.86 4.97-.01.17-.03.44-.04.65M226 15.55h5.45c-.18-1.39-1.24-2.34-2.72-2.34-1.46 0-2.52.94-2.73 2.34M245.22 15.62v5.51h-2.25v-5.22c0-1.71-.85-2.54-2.29-2.54-1.6 0-2.68.97-2.68 2.9v4.86h-2.25v-9.61h2.14v1.24c.74-.88 1.91-1.35 3.31-1.35 2.31 0 4.02 1.31 4.02 4.21M257.58 7.77v13.36h-2.16v-1.24c-.76.92-1.87 1.37-3.19 1.37-2.79 0-4.86-1.94-4.86-4.93 0-2.99 2.07-4.91 4.86-4.91 1.24 0 2.34.41 3.1 1.29V7.77h2.25zm-2.21 8.55c0-1.84-1.24-3.01-2.86-3.01-1.62 0-2.86 1.17-2.86 3.01 0 1.84 1.24 3.01 2.86 3.01 1.62 0 2.86-1.17 2.86-3.01"/><g><path fill="#feca09" d="M1.35 2.07h67.26v24.89H1.35z"/><path class="st3" d="M22.19 22.11h-2.43V15.1c0-1.47-.65-2.27-1.83-2.36-.73-.06-1.9.12-2.74.31v9.06h-2.43V11.32s2.96-.66 5.63-.66c1.16 0 2.08.42 2.77 1.11s1.04 1.66 1.04 2.9v7.44zM63.22 22.18c-.4.1-.81.15-1.24.15-1.37 0-2.28-.31-2.72-.92-.35-.48-.53-1.39-.53-2.73V7.46h2.4v3.17h2.13v1.97h-2.13v5.94c0 .64.08 1.07.24 1.27.19.26.6.39 1.23.39.18 0 .38-.02.62-.05v2.03zM7.87 7.45h2.48v14.66H7.87zM32.74 12.45c0-1.78-.87-2.66-2.6-2.66h-3.06v5.29h3.02c.83 0 1.48-.23 1.94-.69.47-.46.7-1.11.7-1.94m2.51 0c0 1.5-.47 2.7-1.39 3.62-.93.91-2.18 1.36-3.77 1.36h-3.01v4.63H24.6V7.4h5.31c1.72 0 3.04.45 3.96 1.34.91.9 1.38 2.14 1.38 3.71M44.22 16.3c0-1.1-.26-1.98-.77-2.62-.51-.65-1.19-.97-2.04-.97-.85 0-1.52.33-2.04.98-.51.66-.76 1.52-.76 2.61 0 1.1.25 1.98.76 2.63.51.65 1.19.97 2.04.97.85 0 1.52-.32 2.04-.97.51-.65.77-1.53.77-2.63m2.51-.01c0 1.76-.49 3.18-1.48 4.26-.99 1.08-2.26 1.61-3.83 1.61-1.57 0-2.85-.54-3.83-1.61-.99-1.08-1.48-2.5-1.48-4.26s.49-3.18 1.48-4.25c.99-1.07 2.27-1.61 3.83-1.61 1.59 0 2.87.54 3.85 1.61.97 1.07 1.46 2.49 1.46 4.25M57.29 18.32c0 1.11-.43 2.02-1.29 2.73-.86.72-1.99 1.07-3.4 1.07-2.19 0-3.89-.65-5.09-1.96l1.85-1.55c.92.9 1.99 1.35 3.22 1.35.68 0 1.22-.13 1.62-.4.4-.27.6-.61.6-1.02 0-.47-.23-.79-.69-.96-.27-.1-.98-.24-2.14-.42-1.39-.2-2.39-.51-2.98-.92-.7-.49-1.04-1.24-1.04-2.23 0-1 .42-1.84 1.27-2.52.85-.67 1.97-1.01 3.38-1.01 1.7 0 3.16.56 4.35 1.68l-1.44 1.53c-.88-.77-1.87-1.16-2.98-1.16-1.42 0-2.13.4-2.13 1.2 0 .47.33.78.98.96.92.15 1.83.3 2.74.46 2.11.4 3.17 1.45 3.17 3.17"/></g></svg>'],
@@ -37,11 +38,11 @@ define([
         },
 
         inPostMethod: function() {
-            var method = [
-                ['#label_method_standardcod_inpostlocker', 'parcel_locker'],
-                ['#label_method_standard_inpostlocker', window.checkoutConfig.standard_inpostlocker],
-                ['#label_method_standardeow_inpostlocker', 'parcel_locker'],
-                ['#label_method_standardeowcod_inpostlocker', 'parcel_locker']
+            const method = [
+                ['#label_method_standardcod_inpostlocker', 'parcelCollectPayment'],
+                ['#label_method_standard_inpostlocker', 'parcelCollect'],
+                ['#label_method_standardeow_inpostlocker', 'parcelCollect247'],
+                ['#label_method_standardeowcod_inpostlocker', 'parcelCollect247']
             ];
 
             return method;
@@ -92,7 +93,7 @@ define([
         },
 
         getPointInformation: function(pointId) {
-            var self = this;
+            const self = this;
 
             return new Promise(function(resolve, reject) {
                 $.ajax({
@@ -108,7 +109,7 @@ define([
         },
 
         wrapperPointHtml: function(inPostCarrier, pointType) {
-            var html = '<div data-inpost-wrapper="'+ pointType +'" class="inpost-carrier-wrapper"></div>';
+            const html = '<div data-inpost-wrapper="'+ pointType +'" class="inpost-carrier-wrapper"></div>';
             inPostCarrier.find('div').remove();
             if(inPostCarrier.find('[data-inpost-wrapper]').length === 0) {
                 inPostCarrier.append(html);
@@ -117,7 +118,7 @@ define([
 
         cleanPointDataHtml: function() {
             return new Promise(function(resolve, reject) {
-                var self = $('[data-inpost-wrapper]');
+                const self = $('[data-inpost-wrapper]');
 
                 if(self.length > 0) {
                     self.html('');
@@ -128,8 +129,8 @@ define([
 
         pointDataHtml: function(point, selectPoint, insert) {
             return new Promise(function(resolve, reject) {
-                var self = $('[data-inpost-wrapper]');
-                var html = '<div data-inpost-point-data class="point-data">';
+                const self = $('[data-inpost-wrapper]');
+                let html = '<div data-inpost-point-data class="point-data">';
                 html += '<p>'+ $t('Selected pickup point:') +'</p>';
                 html += '<p>'+ point.name +' | ' + point.address_details.city + ', '+ point.address.line1 +'</p>';
                 html += '</div>';
@@ -149,9 +150,9 @@ define([
         },
 
         insertData: function(carrierMethod, pointData) {
-            var self = this;
-            var wrapperPoint = carrierMethod.find('[data-inpost-wrapper]');
-            var html = '';
+            const self = this;
+            const wrapperPoint = carrierMethod.find('[data-inpost-wrapper]');
+            let html = '';
 
             if(wrapperPoint.length) {
                 if(pointData) {
@@ -165,61 +166,13 @@ define([
             }
         },
 
-        InPostConfig: function(pointsTypes) {
-            var self = this;
-
-            return new Promise(function(resolve, reject) {
-                easyPack.init({
-                    apiEndpoint: (checkoutData.getShippingInPostMode() === 'prod' ? self.apiEndpointProduction : self.apiEndpointTesting),
-                    defaultLocale: 'pl',
-                    mapType: 'osm',
-                    searchType: 'osm',
-                    points: {
-                        types: pointsTypes,
-                        functions: ['parcel_collect']
-                    },
-                    map: {
-                        useGeolocation: true,
-                        initialTypes: pointsTypes
-                    }
-                });
-
-                resolve(true);
-            });
-        },
-
-        inPostModalMap: function() {
-            var self = this;
-
-            return new Promise(function(resolve, reject) {
-                easyPack.modalMap(function(point, modal) {
-                    $('body').removeClass('overlay-modal-carrier');
-                    modal.closeModal();
-
-                    fullScreenLoader.startLoader();
-
-                    self.setPoint(point.name).then(function() {
-                        self.cleanPointDataHtml().then(function() {
-                            self.pointDataHtml(point, self.selectPointHtml(true), true).then(function() {
-                                checkoutData.setShippingInPostPoint(point);
-                                fullScreenLoader.stopLoader();
-                            });
-                        });
-                    });
-
-                }, {width: document.documentElement.clientWidth, height: document.documentElement.clientHeight});
-
-                resolve(true);
-            });
-        },
-
         insertLogoInPost: function() {
-            var self = this;
+            const self = this;
 
             return new Promise(function(resolve, reject) {
                 $.each(self.inPostAllMethod('method'), function(index, value) {
-                    var codeMethod = value[0].split('_');
-                    var logoWrapper = $(value[0]).find('[data-inpost-logo-'+codeMethod[2]+'-'+codeMethod[3]+']');
+                    const codeMethod = value[0].split('_');
+                    const logoWrapper = $(value[0]).find('[data-inpost-logo-'+codeMethod[2]+'-'+codeMethod[3]+']');
 
                     if($(value[0]).length) {
                         if(logoWrapper.length > 0) {
@@ -241,62 +194,19 @@ define([
             });
         },
 
-        removeInPostModalMap: function() {
-            return new Promise(function(resolve, reject) {
-                var modalMapInPost = $('#widget-modal');
+        createModal: function(pointType) {
+            let html = '<div data-inpost-modal class="inpost-modal is-active">';
+                html += '<div class="inpost-modal__container">';
+                html += '<div data-inpost-modal-btn-close class="btn-close"></div>';
+                html += '<inpost-geowidget onpoint="onpointselect" token="'+ this.apiToken +'" language="pl"  config="'+ pointType +'"></inpost-geowidget>';
+                html += '</div>';
+                html += '</div>';
 
-                if(modalMapInPost.length) {
-                    modalMapInPost.parent().remove();
-                }
-                resolve(true);
-            });
-        },
-
-        hideInPostModalMap: function() {
-            $(document).on('click', '#widget-modal .widget-modal__close', function(e) {
-                $('body').removeClass('overlay-modal-carrier');
-            });
-        },
-
-        selectInPostPoint: function() {
-            var self = this;
-
-            $(document).on('click', '[data-inpost-select-point]', function(e) {
-                e.preventDefault();
-
-                var getPointType = $(this).parent().data('inpost-wrapper');
-                var configPointType = getPointType.split('-');
-
-                self.removeInPostModalMap().then(function() {
-                    self.InPostConfig(configPointType).then(function() {
-                        self.inPostModalMap().then(function() {
-                            var modalMapInPost = $('#widget-modal');
-                            $('body').addClass('overlay-modal-carrier');
-                            modalMapInPost.parent().css('background', 'rgba(0,0,0, .6)');
-                            modalMapInPost.parent().css('overflow-y', 'auto');
-                            modalMapInPost.addClass('modalMapInPost');
-
-                            self.getPoint().then(function(selectedPoint) {
-                                if(selectedPoint) {
-                                    easyPack.map.searchLockerPoint(selectedPoint);
-                                } else {
-                                    var postcode = ($('[name="postcode"]').val()) ? $('[name="postcode"]').val() : '';
-                                    var city = ($('[name="city"]').val()) ? $('[name="city"]').val() : '';
-
-                                    if(postcode || city) {
-                                        var searchBy = postcode + ' ' + city;
-                                        easyPack.map.searchPlace(searchBy);
-                                    }
-                                }
-                            });
-                        });
-                    });
-                });
-            });
+            $('body').append(html);
         },
 
         renderInPostDataHtml: function(pointData) {
-            var self = this;
+            const self = this;
 
             return new Promise(function(resolve, reject) {
                 $.each(self.inPostMethod(), function(index, value) {
@@ -310,7 +220,7 @@ define([
         },
 
         renderInPostData: function() {
-            var self = this;
+            const self = this;
 
             return new Promise(function(resolve, reject) {
                 fullScreenLoader.startLoader();
@@ -330,8 +240,9 @@ define([
             });
         },
 
+
         init: function() {
-            var self = this;
+            const self = this;
 
             shippingService.isLoading.subscribe(function (isLoading) {
                 if (!isLoading) {
@@ -352,4 +263,6 @@ define([
             });
         }
     }
+
+
 });
