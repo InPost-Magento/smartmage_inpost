@@ -204,6 +204,10 @@
         <plugin name="order_inpost_attributes" type="Smartmage\Inpost\Plugin\OrderRepositoryExtended" />
     </type>
 
+    <type name="Magento\Shipping\Helper\Data">
+        <plugin name="inpost_shipping_url" type="Smartmage\Inpost\Plugin\ShippingDataExtended" />
+    </type>
+
     <type name="Magento\Framework\EntityManager\MetadataPool">
         <arguments>
             <argument name="metadata" xsi:type="array">

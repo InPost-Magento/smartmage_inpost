@@ -106,8 +106,6 @@ class OrderRepositoryExtended
 
             if ($extensionAttributes && $extensionAttributes->getInpostShipmentLinks()) {
                 $shipmentLinks = $extensionAttributes->getInpostShipmentLinks();
-                \Magento\Framework\App\ObjectManager::getInstance()->get(\Psr\Log\LoggerInterface::class)->error('$shipmentLinks');
-                \Magento\Framework\App\ObjectManager::getInstance()->get(\Psr\Log\LoggerInterface::class)->error(print_r(count($shipmentLinks), true));
                 if (is_array($shipmentLinks)) {
                     /** @var ShipmentOrderLinkInterface $link */
                     foreach ($shipmentLinks as $link) {
