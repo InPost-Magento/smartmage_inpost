@@ -25,7 +25,7 @@ Label format,Format etykiety
 Label size,Rozmiar etykiety
 Automatically create order shipment,Automatycznie twórz przesyłkę do zamówienia
 Order shipment will be created after receiving InPost tracking number,Przesyłka do zamówienia zostanie utworzona po otrzymaniu numeru śledzenia z API InPostu
-Notify customer about order shipment,Powiadamiej klienta o utworzeniu przesyłki do zamówienia
+Notify customer about order shipment,Powiadamiaj klienta o utworzeniu przesyłki do zamówienia
 After creating order shipment change order status to,Po utworzeniu przesyłki do zamówienia zmień status zamówienia na
 You can't create an shipment for order %1.,Nie można utworzyć przesyłki do zamówienia %1.
 Change sender's address,Zmiana adresu nadawcy
