@@ -125,7 +125,7 @@
                 </express1700>
                 <localstandard>
                     <active>0</active>
-                    <name>Kurier - przesyłka lokalna expresowa</name>
+                    <name>Kurier - przesyłka lokalna standardowa</name>
                     <max_cart_weight>25</max_cart_weight>
                     <sallowspecific>1</sallowspecific>
                     <specificcountry>PL</specificcountry>

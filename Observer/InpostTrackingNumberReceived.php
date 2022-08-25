@@ -17,6 +17,7 @@ use Magento\Store\Model\StoreManagerInterface;
 use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Smartmage\Inpost\Api\ShipmentOrderLinksProviderInterface;
 use Smartmage\Inpost\Model\Config\Source\Service as InpostService;
+use Smartmage\Inpost\Model\ConfigProvider;
 
 class InpostTrackingNumberReceived implements ObserverInterface
 {
@@ -36,6 +37,7 @@ class InpostTrackingNumberReceived implements ObserverInterface
     private ConvertOrder $convertOrder;
     private ShipmentTrackInterfaceFactory $trackFactory;
     private InpostService $inpostService;
+    protected ConfigProvider $configProvider;
 
     public function __construct(
         MessageManagerInterface             $messageManager,
@@ -48,7 +50,8 @@ class InpostTrackingNumberReceived implements ObserverInterface
         ConvertOrder                        $convertOrder,
         ShipmentTrackInterfaceFactory       $trackFactory,
         OrderRepository                     $orderRepository,
-        InpostService                       $inpostService
+        InpostService                       $inpostService,
+        ConfigProvider                      $configProvider
     ) {
         $this->logger = $logger;
         $this->messageManager = $messageManager;
@@ -61,6 +64,7 @@ class InpostTrackingNumberReceived implements ObserverInterface
         $this->trackFactory = $trackFactory;
         $this->orderRepository = $orderRepository;
         $this->inpostService = $inpostService;
+        $this->configProvider = $configProvider;
     }
 
     public function execute(Observer $observer)
@@ -120,7 +124,7 @@ class InpostTrackingNumberReceived implements ObserverInterface
 
             // create track
             $carrierCode = (substr($inpostShipment->getService(), 0, 13) ==  'inpost_locker') ? 'inpostlocker' : 'inpostcourier';
-            $trackTitle = $this->inpostService->getServiceLabel($inpostShipment->getService());
+            $trackTitle = $this->getShippingMethodTitle($inpostShipment->getShippingMethod());
             $data = [
                 'carrier_code' => $carrierCode,
                 'title' => $trackTitle,
@@ -162,5 +166,17 @@ class InpostTrackingNumberReceived implements ObserverInterface
         }
 
         return true;
+    }
+
+    public function getShippingMethodTitle($shippingMethodCode)
+    {
+        if($shippingMethodCode) {
+            $carrierMethod = explode('_',$shippingMethodCode);
+            return $this->configProvider->getConfigData(
+                $carrierMethod[0] . '/' . $carrierMethod[1] . '/name'
+            );
+        } else {
+            return '';
+        }
     }
 }

@@ -57,7 +57,7 @@ class ShippingMethods implements OptionSourceInterface
     /**
      * {@inheritdoc}
      */
-    public function toOptionArray($isActiveOnlyFlag = false) : array
+    public function toOptionArray($isActiveOnlyFlag = false, $onlyMethodTitle = false) : array
     {
         $methods = [['value' => '', 'label' => '']];
         $carriers = $this->shippingConfig->getAllCarriers();
@@ -81,9 +81,11 @@ class ShippingMethods implements OptionSourceInterface
                 if (!$methodCode) {
                     continue;
                 }
+
+                $label = ($onlyMethodTitle) ? $methodTitle : '[' . $carrierTitle . '] ' . $methodTitle;
                 $methods[] = [
                     'value' => $carrierCode . '_' . $methodCode,
-                    'label' => '[' . $carrierTitle . '] ' . $methodTitle,
+                    'label' => $label,
                 ];
             }
         }
