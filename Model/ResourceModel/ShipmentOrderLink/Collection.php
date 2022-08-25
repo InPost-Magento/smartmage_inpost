@@ -6,11 +6,6 @@ use Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterface;
 use Smartmage\Inpost\Model;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
-/**
- * Class Collection
- *
- * @package Smartmage\Inpost\Model\ResourceModel\ShipmentOrderLink
- */
 class Collection extends AbstractCollection
 {
     /**

@@ -5,11 +5,6 @@ namespace Smartmage\Inpost\Model\ResourceModel;
 use Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterface;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
-/**
- * Class ShipmentOrderLink
- *
- * @package Smartmage\Inpost\Model\ResourceModel
- */
 class ShipmentOrderLink extends AbstractDb
 {
     const TABLE_NAME = 'smartmage_inpost_shipment_order_link';
@@ -22,5 +17,4 @@ class ShipmentOrderLink extends AbstractDb
     {
         $this->_init(self::TABLE_NAME, ShipmentOrderLinkInterface::LINK_ID);
     }
-
 }

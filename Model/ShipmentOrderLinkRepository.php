@@ -14,10 +14,6 @@ use Magento\Framework\Exception;
 use Magento\Framework\Api\SortOrder;
 use Magento\Store\Model\StoreManagerInterface;
 
-/**
- * Class ShipmentOrderLinkRepository
- * @package Smartmage\Inpost\Model
- */
 class ShipmentOrderLinkRepository implements ShipmentOrderLinkRepositoryInterface
 {
     /**

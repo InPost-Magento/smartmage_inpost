@@ -10,10 +10,6 @@ use Smartmage\Inpost\Model\ApiShipx\ErrorHandler;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Psr\Log\LoggerInterface as PsrLoggerInterface;
 
-/**
- * Class Create
- * @package Smartmage\Inpost\Model\ApiShipx\Service\Point
- */
 class Create extends AbstractService
 {
     /**

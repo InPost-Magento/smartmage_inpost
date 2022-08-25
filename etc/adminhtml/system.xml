@@ -958,6 +958,25 @@
                         <field id="label_format">zpl</field>
                     </depends>
                 </field>
+                <field id="create_order_shipment" translate="label comment" type="select" sortOrder="45" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Automatically create order shipment</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Order shipment will be created after receiving InPost tracking number]]></comment>
+                </field>
+                <field id="notify_order_shipment" translate="label" type="select" sortOrder="46" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Notify customer about order shipment</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="create_order_shipment">1</field>
+                    </depends>
+                </field>
+                <field id="order_shipment_status" translate="label" type="select" sortOrder="47" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>After creating order shipment change order status to</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                    <depends>
+                        <field id="create_order_shipment">1</field>
+                    </depends>
+                </field>
                 <field id="change_address" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Change sender's address</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>

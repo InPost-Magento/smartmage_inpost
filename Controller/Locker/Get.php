@@ -7,9 +7,6 @@ use Magento\Framework\Controller\ResultFactory;
 use Smartmage\Inpost\Model\Checkout\Processor;
 use Smartmage\Inpost\Model\ApiShipx\Service\Point\GetPoint;
 
-/**
- * Class Save
- */
 class Get extends \Magento\Framework\App\Action\Action
 {
     /**

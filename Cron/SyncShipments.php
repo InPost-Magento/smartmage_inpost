@@ -5,10 +5,6 @@ namespace Smartmage\Inpost\Cron;
 use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Search\Multiple as SearchMultiple;
 
-/**
- * Class SyncShipments
- * @package Smartmage\Inpost\Cron
- */
 class SyncShipments
 {
     /**

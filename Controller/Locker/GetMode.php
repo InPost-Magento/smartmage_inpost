@@ -8,9 +8,6 @@ use Magento\Framework\Controller\ResultFactory;
 use Smartmage\Inpost\Model\Checkout\Processor;
 use Smartmage\Inpost\Model\ConfigProvider;
 
-/**
- * Class Save
- */
 class GetMode extends Action
 {
 

@@ -8,10 +8,6 @@ use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 use Smartmage\Inpost\Model\Config\Source\Size as SizeConfig;
 
-/**
- * Class ShipmentAttributes
- * @package Smartmage\Inpost\Ui\Component\Listing\Column
- */
 class ShipmentAttributes extends Column
 {
     /**

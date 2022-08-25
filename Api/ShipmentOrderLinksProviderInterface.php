@@ -3,7 +3,6 @@ namespace Smartmage\Inpost\Api;
 
 /**
  * Interface ShipmentOrderLinksProviderInterface
- * @package Smartmage\Inpost\Api
  */
 interface ShipmentOrderLinksProviderInterface
 {

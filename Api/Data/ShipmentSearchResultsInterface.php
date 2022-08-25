@@ -7,7 +7,7 @@ use Magento\Framework\Api\SearchResultsInterface;
 /**
  * Interface ShipmentSearchResultsInterface
  *
- * @package Smartmage\ProductEmailAlert\Api\Data
+ *
  */
 interface ShipmentSearchResultsInterface extends SearchResultsInterface
 {

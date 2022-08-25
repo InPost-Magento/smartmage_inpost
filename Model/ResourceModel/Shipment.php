@@ -5,11 +5,6 @@ namespace Smartmage\Inpost\Model\ResourceModel;
 use Smartmage\Inpost\Api\Data\ShipmentInterface;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
-/**
- * Class Shipment
- *
- * @package Smartmage\Inpost\Model\ResourceModel
- */
 class Shipment extends AbstractDb
 {
     const TABLE_NAME = 'smartmage_inpost_shipment';
@@ -39,5 +34,4 @@ class Shipment extends AbstractDb
     {
         $this->_init(self::TABLE_NAME, ShipmentInterface::ENTITY_ID);
     }
-
 }

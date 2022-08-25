@@ -22,7 +22,7 @@ class LastName extends AbstractInput
         if (isset($config['dataScope']) && $config['dataScope'] == 'last_name') {
             if (isset($data['last_name'])) {
                 $config['default'] = $data['last_name'];
-            } elseif($this->order->getCustomerLastname()) {
+            } elseif ($this->order->getCustomerLastname()) {
                 $config['default'] = $this->order->getCustomerLastname();
             } else {
                 $config['default'] = $this->order->getShippingAddress()->getLastname();

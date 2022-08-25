@@ -8,6 +8,9 @@
                 <label_size_pdf>a4</label_size_pdf>
                 <label_size_epl>a4</label_size_epl>
                 <label_size_zpl>a4</label_size_zpl>
+                <create_order_shipment>0</create_order_shipment>
+                <notify_order_shipment>1</notify_order_shipment>
+                <order_shipment_status>processing</order_shipment_status>
                 <change_address>0</change_address>
                 <sender_country_code>PL</sender_country_code>
                 <free_method>G</free_method>

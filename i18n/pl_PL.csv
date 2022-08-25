@@ -23,6 +23,11 @@ Organization ID,ID organizacji
 Access Token, Token dostępu
 Label format,Format etykiety
 Label size,Rozmiar etykiety
+Automatically create order shipment,Automatycznie twórz przesyłkę do zamówienia
+Order shipment will be created after receiving InPost tracking number,Przesyłka do zamówienia zostanie utworzona po otrzymaniu numeru śledzenia z API InPostu
+Notify customer about order shipment,Powiadamiaj klienta o utworzeniu przesyłki do zamówienia
+After creating order shipment change order status to,Po utworzeniu przesyłki do zamówienia zmień status zamówienia na
+You can't create an shipment for order %1.,Nie można utworzyć przesyłki do zamówienia %1.
 Change sender's address,Zmiana adresu nadawcy
 Sender - name,Nadawca - Imię
 Sender - surname,Nadawca - Nazwisko
@@ -123,7 +128,7 @@ Show on the map,Pokaż na mapie
 Actions,Operacje
 Details,Szczegóły
 Return,Zwrot
-Create shipment,Stwórz przesyłkę
+Create shipment,Stwórz przesyłkę InPost
 Choose method,Wybierz metodę
 Create sample courier shipment,Stwórz testową przesyłkę kurierską
 Create sample locker shipment,Stwórz testową przesyłkę Paczkomatową

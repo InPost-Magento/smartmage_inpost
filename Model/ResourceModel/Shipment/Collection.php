@@ -6,11 +6,6 @@ use Smartmage\Inpost\Api\Data\ShipmentInterface;
 use Smartmage\Inpost\Model;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
-/**
- * Class Collection
- *
- * @package Smartmage\Inpost\Model\ResourceModel\Shipment
- */
 class Collection extends AbstractCollection
 {
     /**
