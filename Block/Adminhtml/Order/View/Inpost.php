@@ -20,7 +20,7 @@ use Smartmage\Inpost\Api\Data\ShipmentInterface;
 class Inpost extends AbstractOrder
 {
     /**
-     * @var \Smartmage\Inpost\Model\Config\Source\ShippingMethods
+     * @var ShippingMethods
      */
     protected $shippingMethods;
     /**
@@ -50,7 +50,7 @@ class Inpost extends AbstractOrder
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Sales\Helper\Admin $adminHelper
-     * @param \Smartmage\Inpost\Model\Config\Source\ShippingMethods $shippingMethods
+     * @param ShippingMethods $shippingMethods
      * @param \Smartmage\Inpost\Model\ShipmentRepository $shipmentRepository
      * @param \Smartmage\Inpost\Model\Config\Source\Size $sizeConfig
      * @param array $data

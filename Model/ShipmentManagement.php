@@ -127,6 +127,11 @@ class ShipmentManagement implements Api\ShipmentManagementInterface
                 ? $shipmentData[ShipmentInterface::DISPATCH_ORDER_ID]
                 : ''
         );
+
+        if(isset($shipmentData[ShipmentInterface::SHIPPING_METHOD])) {
+            $shipment->setShippingMethod($shipmentData[ShipmentInterface::SHIPPING_METHOD]);
+        }
+
         if (!$trackingNumberExisted && $shipmentData[ShipmentInterface::TRACKING_NUMBER]) {
             $this->eventManager->dispatch('inpost_trackingnumber_received', ['inpostShipment' => $shipment]);
         }

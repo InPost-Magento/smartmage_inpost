@@ -116,7 +116,7 @@ class MassCreate
 
                     $this->locker->createBody($data, $order);
                     try {
-                        $result = $this->locker->createShipment();
+                        $result = $this->locker->createShipment($order);
                     } catch (\Exception $e) {
                         $errorMsg[] = __('For the order') . ' ' . $order->getIncrementId()
                             . ' '
@@ -127,7 +127,7 @@ class MassCreate
                     $data = $this->prepareData($order, self::COURIER_SERVICE);
                     $this->courier->createBody($data, $order);
                     try {
-                        $result = $this->courier->createShipment();
+                        $result = $this->courier->createShipment($order);
                     } catch (\Exception $e) {
                         $errorMsg[] = __('For the order') . ' ' . $order->getIncrementId()
                             . ' '
@@ -183,8 +183,8 @@ class MassCreate
             case (self::COURIER_SERVICE):
                 $data = [
                     'company_name' => $order->getShippingAddress()->getCompany(),
-                    'first_name' => $order->getCustomerFirstname(),
-                    'last_name' => $order->getCustomerLastname(),
+                    'first_name' => $order->getShippingAddress()->getFirstname(),
+                    'last_name' => $order->getShippingAddress()->getLastname(),
                     "street" => $this->orderProcessor->getStreet(),
                     "building_number" => $this->orderProcessor->getBuildingNumber(),
                     "city" => $order->getShippingAddress()->getCity(),
