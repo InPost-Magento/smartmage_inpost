@@ -4,11 +4,7 @@ declare(strict_types=1);
 namespace Smartmage\Inpost\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
-
-/**
- * Class WeightUnit
- */
-class WeightUnit implements OptionSourceInterface
+ghtUnit implements OptionSourceInterface
 {
     const KILOGRAM = 'kg';
     const GRAM = 'g';

@@ -6,11 +6,6 @@ use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\EntityManager\MetadataPool;
 use Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterface;
 
-/**
- * Class Loader
- *
- * @package Smartmage\Inpost\Model\ResourceModel\ShipmentOrderLink
- */
 class Loader
 {
     /** @var  \Magento\Framework\EntityManager\MetadataPool */

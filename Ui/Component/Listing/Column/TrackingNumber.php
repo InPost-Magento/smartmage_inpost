@@ -7,10 +7,6 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 
-/**
- * Class TrackingNumber
- * @package Smartmage\Inpost\Ui\Component\Listing\Column
- */
 class TrackingNumber extends Column
 {
     /**
@@ -37,7 +33,7 @@ class TrackingNumber extends Column
     public function prepareDataSource(array $dataSource)
     {
         if (isset($dataSource['data']['items'])) {
-            foreach ($dataSource['data']['items'] as $key=> & $item) {
+            foreach ($dataSource['data']['items'] as $key => & $item) {
                 if (isset($item['tracking_number'])) {
                     $item['tracking_number_tmp'] = $item['tracking_number'];
                     $item['tracking_number'] =

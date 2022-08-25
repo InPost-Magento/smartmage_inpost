@@ -6,10 +6,6 @@ namespace Smartmage\Inpost\Model;
 use Magento\Framework\Model\AbstractModel;
 use Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterface;
 
-/**
- * Class ShipmentOrderLink
- * @package Smartmage\Inpost\Model
- */
 class ShipmentOrderLink extends AbstractModel implements ShipmentOrderLinkInterface
 {
     /** @var  array  */

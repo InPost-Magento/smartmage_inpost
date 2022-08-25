@@ -124,5 +124,4 @@ class Shipment extends AbstractModel implements ShipmentInterface
     {
         return $this->setData(self::DISPATCH_ORDER_ID, $dispatchOrderId);
     }
-
 }

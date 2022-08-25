@@ -72,17 +72,19 @@ class InpostTrackingNumberReceived implements ObserverInterface
         } catch (\Exception $e) {
             $this->logger->info(print_r($e->getMessage(), true));
         }
-        if($orderIncrementId === FALSE) return false;
+        if ($orderIncrementId === false) {
+            return false;
+        }
 
         $order = $this->orderFactory->create()->loadByIncrementId($orderIncrementId);
 
         $createOrderShipment = $this->scopeConfig->getValue(
-                self::CONFIG_CREATE_ORDER_SHIPMENT,
-                ScopeInterface::SCOPE_STORE,
-                $order->getStore()->getId()
-            );
+            self::CONFIG_CREATE_ORDER_SHIPMENT,
+            ScopeInterface::SCOPE_STORE,
+            $order->getStore()->getId()
+        );
 
-        if($createOrderShipment) {
+        if ($createOrderShipment) {
             $this->generateOrderShipment($order, $inpostShipment);
         }
 
@@ -98,14 +100,14 @@ class InpostTrackingNumberReceived implements ObserverInterface
             }
 
             $orderShipment = $order->getShipmentsCollection()->getFirstItem();
-            if(!$orderShipment->getId()) {
+            if (!$orderShipment->getId()) {
                 if (!$order->canShip()) {
                     throw new LocalizedException(
                         __('You can\'t create an shipment for order %1.', $order->getIncrementId())
                     );
                 }
                 $orderShipment = $this->convertOrder->toShipment($order);
-                foreach ($order->getAllItems() AS $orderItem) {
+                foreach ($order->getAllItems() as $orderItem) {
                     if (!$orderItem->getQtyToShip() || $orderItem->getIsVirtual()) {
                         continue;
                     }
@@ -119,11 +121,11 @@ class InpostTrackingNumberReceived implements ObserverInterface
             // create track
             $carrierCode = (substr($inpostShipment->getService(), 0, 13) ==  'inpost_locker') ? 'inpostlocker' : 'inpostcourier';
             $trackTitle = $this->inpostService->getServiceLabel($inpostShipment->getService());
-            $data = array(
+            $data = [
                 'carrier_code' => $carrierCode,
                 'title' => $trackTitle,
                 'number' => $inpostShipment->getTrackingNumber()
-            );
+            ];
             $track = $this->trackFactory->create()->addData($data);
             $orderShipment->addTrack($track);
 
@@ -133,7 +135,7 @@ class InpostTrackingNumberReceived implements ObserverInterface
                 ScopeInterface::SCOPE_STORE,
                 $order->getStore()->getId()
             );
-            if($orderShipmentChangeStatus) {
+            if ($orderShipmentChangeStatus) {
                 $order->setStatus($orderShipmentChangeStatus);
             }
 

@@ -17,7 +17,7 @@ use Smartmage\Inpost\Model\ResourceModel\Shipment\CollectionFactory;
 
 /**
  * Class MassPrintLabel
- * @package Smartmage\Inpost\Controller\Adminhtml\Shipments
+ * Allow printing many InPost shipment labels
  */
 class MassPrintLabel extends MassActionAbstract
 {

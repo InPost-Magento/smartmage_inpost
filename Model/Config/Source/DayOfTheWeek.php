@@ -5,9 +5,6 @@ namespace Smartmage\Inpost\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
-/**
- * Class DayOfTheWeek
- */
 class DayOfTheWeek implements OptionSourceInterface
 {
     const MONDAY = 1;

@@ -9,10 +9,6 @@ use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 use Magento\Sales\Api\Data\OrderInterface;
 
-/**
- * Class IncrementId
- * @package Smartmage\Inpost\Ui\Component\Listing\Column
- */
 class IncrementId extends Column
 {
     private $orderInterface;

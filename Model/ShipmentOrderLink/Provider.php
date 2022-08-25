@@ -8,10 +8,6 @@ use Smartmage\Inpost\Api\ShipmentOrderLinksProviderInterface;
 use Smartmage\Inpost\Model\ResourceModel\ShipmentOrderLink\Loader;
 use Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterfaceFactory;
 
-/**
- * Class Provider
- * @package Smartmage\Inpost\Model\ShipmentOrderLink
- */
 class Provider implements ShipmentOrderLinksProviderInterface
 {
     /** @var  EntityManager */

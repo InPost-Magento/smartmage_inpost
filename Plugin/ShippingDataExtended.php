@@ -19,7 +19,7 @@ class ShippingDataExtended
 
     public function afterGetTrackingPopupUrlBySalesModel(
         Data               $subject,
-                           $result,
+        $result,
         AbstractModel      $model
     ): string {
         $trackNumber = false;
@@ -32,33 +32,36 @@ class ShippingDataExtended
         } elseif ($model instanceof \Magento\Sales\Model\Order\Shipment) {
             $trackNumber = $this->getShipmentTrackingNumber($model, $allowedMethods);
         } elseif ($model instanceof \Magento\Sales\Model\Order\Shipment\Track) {
-            if(in_array($model->getCarrierCode(),$allowedMethods)) {
+            if (in_array($model->getCarrierCode(), $allowedMethods)) {
                 $trackNumber = $model->getTrackNumber();
             }
         }
 
-        if($trackNumber) {
+        if ($trackNumber) {
             return 'https://inpost.pl/sledzenie-przesylek?number=' . $trackNumber;
         }
         return $result;
     }
 
-    public function getOrderTrackingNumber($order, $allowedMethods) {
+    public function getOrderTrackingNumber($order, $allowedMethods)
+    {
         foreach ($order->getShipmentsCollection() as $shipment) {
             $shipmentTrackingNumber = $this->getShipmentTrackingNumber($shipment, $allowedMethods);
-            if($shipmentTrackingNumber) return $shipmentTrackingNumber;
-        }
-        return false;
-    }
-
-    public function getShipmentTrackingNumber($shipment, $allowedMethods) {
-        $tracksCollection = $shipment->getTracksCollection();
-        foreach ($tracksCollection->getItems() as $track) {
-            if(in_array($track->getCarrierCode(),$allowedMethods)) {
-                return $track->getTrackNumber();
+            if ($shipmentTrackingNumber) {
+                return $shipmentTrackingNumber;
             }
         }
         return false;
     }
 
+    public function getShipmentTrackingNumber($shipment, $allowedMethods)
+    {
+        $tracksCollection = $shipment->getTracksCollection();
+        foreach ($tracksCollection->getItems() as $track) {
+            if (in_array($track->getCarrierCode(), $allowedMethods)) {
+                return $track->getTrackNumber();
+            }
+        }
+        return false;
+    }
 }

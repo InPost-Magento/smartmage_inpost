@@ -14,10 +14,6 @@ use Smartmage\Inpost\Model\ApiShipx\Service\Document\Printout\Labels as Printout
 use Smartmage\Inpost\Model\Config\Source\LabelFormat;
 use Smartmage\Inpost\Model\ConfigProvider;
 
-/**
- * Class PrintLabel
- * @package Smartmage\Inpost\Controller\Adminhtml\Shipments
- */
 class PrintLabel extends Action
 {
     protected $fileFactory;

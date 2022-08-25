@@ -8,9 +8,6 @@ use Magento\Framework\Data\OptionSourceInterface;
 use Magento\Shipping\Model\Config;
 use Magento\Store\Model\ScopeInterface;
 
-/**
- * Class ShippingMethods
- */
 class ShippingMethods implements OptionSourceInterface
 {
     const INPOST_MAPPER = [

@@ -11,10 +11,6 @@ use Magento\Store\Model\StoreManagerInterface;
 use Smartmage\Inpost\Api;
 use Smartmage\Inpost\Api\Data\ShipmentInterface;
 
-/**
- * Class ShipmentManagement
- * @package Smartmage\Inpost\Model
- */
 class ShipmentManagement implements Api\ShipmentManagementInterface
 {
 
@@ -131,10 +127,9 @@ class ShipmentManagement implements Api\ShipmentManagementInterface
                 ? $shipmentData[ShipmentInterface::DISPATCH_ORDER_ID]
                 : ''
         );
-        if(!$trackingNumberExisted && $shipmentData[ShipmentInterface::TRACKING_NUMBER]) {
+        if (!$trackingNumberExisted && $shipmentData[ShipmentInterface::TRACKING_NUMBER]) {
             $this->eventManager->dispatch('inpost_trackingnumber_received', ['inpostShipment' => $shipment]);
         }
         $this->shipmentRepository->save($shipment);
     }
-
 }

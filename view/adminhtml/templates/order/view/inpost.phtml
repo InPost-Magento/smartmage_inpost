@@ -8,7 +8,7 @@
     </div>
     <div class="admin__table-wrapper">
         <div class="field">
-            <?php if ($shipments = $block->getInpostShipments()) : ?>
+            <?php if ($shipments = $block->getInpostShipments()): ?>
                 <table class="data-table admin__table-primary">
                     <thead class="headings">
                     <tr>
@@ -19,7 +19,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($shipments as $shipment) : ?>
+                    <?php foreach ($shipments as $shipment): ?>
                         <tr>
                             <td>
                                 <a href="<?= $block->getShippingTrackingUrl($shipment); ?>"><?= $shipment->getTrackingNumber(); ?></a>
@@ -33,7 +33,7 @@
                                     <?php foreach ($details as $key => $value): ?>
                                         <div class="details-<?= $key ?>">
                                             <?php echo $block->escapeHtml($value) ?>
-                                            <?php if ($key == 'target_point') : ?>
+                                            <?php if ($key == 'target_point'): ?>
                                                 <?php $pointName = explode(" ", $value); ?>
                                                 <a data-inpost-select-point="<?= $pointName[1] ?>" href="#"><?= $block->escapeHtml(__('Show on the map')) ?></a>
                                             <?php endif; ?>
@@ -47,9 +47,9 @@
                                         <?= $block->escapeHtml(__('Print label')) ?>
                                     </a>
                                 </div>
-                                <?php if($block->isReturnPossible($shipment)) : ?>
+                                <?php if ($block->isReturnPossible($shipment)): ?>
                                     <div class="actions" style="padding: 5px;">
-                                        <a class="action-default primary" href="<?= /* @noEscape */ $block->getReturnUrl($shipment) ?>" <?php if ($block->isUrlBlank($shipment)) : ?> target="_blank" <?php endif; ?> >
+                                        <a class="action-default primary" href="<?= /* @noEscape */ $block->getReturnUrl($shipment) ?>" <?php if ($block->isUrlBlank($shipment)): ?> target="_blank" <?php endif; ?> >
                                             <?= $block->escapeHtml(__('Return')) ?>
                                         </a>
                                     </div>
@@ -75,8 +75,8 @@
                         required
                     >
                         <option value=""><?= __('Choose method') ?></option>
-                        <?php foreach ($methods as $method) : ?>
-                            <option value="<?= $method['value'] ?>"<?php if ($selectedMethod == $method['value']) : ?> selected<?php endif; ?>><?= $method['label'] ?></option>
+                        <?php foreach ($methods as $method): ?>
+                            <option value="<?= $method['value'] ?>"<?php if ($selectedMethod == $method['value']): ?> selected<?php endif; ?>><?= $method['label'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

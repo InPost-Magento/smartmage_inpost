@@ -17,10 +17,6 @@ use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\ShipmentRepository;
 use Smartmage\Inpost\Api\Data\ShipmentInterface;
 
-/**
- * Class Inpost
- * @package Smartmage\Inpost\Block\Adminhtml\Order\View
- */
 class Inpost extends AbstractOrder
 {
     /**

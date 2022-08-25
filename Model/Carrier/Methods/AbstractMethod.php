@@ -192,7 +192,7 @@ abstract class AbstractMethod
                 if ($item->getProduct()->isVirtual()) {
                     continue;
                 }
-                if(!$item->getFreeShipping()) {
+                if (!$item->getFreeShipping()) {
                     $hasAllItemsFreeshipping = false;
                     break;
                 }

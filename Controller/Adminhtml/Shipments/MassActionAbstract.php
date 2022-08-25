@@ -8,10 +8,6 @@ use Magento\Ui\Component\MassAction\Filter;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\ResourceModel\Shipment\CollectionFactory;
 
-/**
- * Class MassActionAbstract
- * @package Smartmage\Inpost\Controller\Adminhtml\Shipments
- */
 abstract class MassActionAbstract extends Action
 {
     /**
