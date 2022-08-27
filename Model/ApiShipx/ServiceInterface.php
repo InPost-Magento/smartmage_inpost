@@ -11,5 +11,4 @@ interface ServiceInterface
     public function getBaseUri();
 
 //    public function call();
-
 }

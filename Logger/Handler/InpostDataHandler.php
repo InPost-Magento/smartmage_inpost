@@ -5,9 +5,6 @@ namespace Smartmage\Inpost\Logger\Handler;
 use Magento\Framework\Logger\Handler\Base as BaseHandler;
 use Monolog\Logger as MonologLogger;
 
-/**
- * Class InpostGeneralHandler
- */
 class InpostDataHandler extends BaseHandler
 {
     /**

@@ -8,9 +8,6 @@ use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 use Smartmage\Inpost\Model\Config\Source\Status as StatusSource;
 
-/**
- * Class Status for rendering url to tracking
- */
 class Status extends Column
 {
 

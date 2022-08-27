@@ -1,0 +1,45 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    name: Start deploy on https://m243.kamilborkowski.pl/
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: Install npm dependencies
+        run: npm install
+      - name: Run build task
+        run: npm run build --if-present
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@main
+        env:
+            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            ARGS: "-avzr --delete --delete-excluded"
+            SOURCE: "/"
+            REMOTE_HOST: ${{ secrets.SSH_HOST }}
+            REMOTE_USER: ${{ secrets.SSH_USER }}
+            TARGET: "/var/www/chroot/m243/web/app/code/Smartmage/Inpost/"
+            EXCLUDE: "/.github/, /.git/, package.json, package-lock.json"
+      - name: Magento commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd /var/www/chroot/m243/web/
+            #php7.4 bin/magento maintenance:enable
+            #php7.4 bin/magento setup:upgrade
+            #php7.4 bin/magento setup:di:compile
+            #php7.4 bin/magento cache:flush
+            #php7.4 bin/magento maintenance:disable
+            #zip -r pub/release/smartmage_inpost.zip app/code/Smartmage/Inpost/
+          

@@ -8,8 +8,7 @@ use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 
 /**
- * Class TrackingNumber
- * @package Smartmage\Inpost\Ui\Component\Listing\Column
+ *
  */
 class DispatchOrderId extends Column
 {

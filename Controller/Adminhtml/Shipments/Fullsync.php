@@ -4,9 +4,7 @@ namespace Smartmage\Inpost\Controller\Adminhtml\Shipments;
 
 use \Magento\Backend\App\Action;
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
-use \Smartmage\Inpost\{
-    Model\ApiShipx\Service\Shipment\Search\Multiple as SearchMultiple
-};
+use \Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Search\Multiple as SearchMultiple;
 
 class Fullsync extends \Smartmage\Inpost\Controller\Adminhtml\Shipments
 {
@@ -40,5 +38,4 @@ class Fullsync extends \Smartmage\Inpost\Controller\Adminhtml\Shipments
 
         return $this->resultRedirectFactory->create()->setPath('smartmageinpost/shipments/index');
     }
-
 }

@@ -15,9 +15,6 @@ use Smartmage\Inpost\Model\Config\Source\LabelFormat;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\ResourceModel\Shipment\CollectionFactory;
 
-/**
- * Class massPrintDispatchOrderLabel
- */
 class MassPrintDispatchOrderLabel extends MassActionAbstract
 {
     protected $printoutDispatchOrders;
@@ -73,7 +70,6 @@ class MassPrintDispatchOrderLabel extends MassActionAbstract
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $collection = $this->filter->getCollection($this->collectionFactory->create());
-
 
         $shipmentIds = [];
         $omittedIds = [];

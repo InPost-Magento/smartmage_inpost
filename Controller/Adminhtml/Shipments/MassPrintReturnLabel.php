@@ -15,9 +15,6 @@ use Smartmage\Inpost\Model\Config\Source\LabelFormat;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\ResourceModel\Shipment\CollectionFactory;
 
-/**
- * Class MassPrintReturnLabel
- */
 class MassPrintReturnLabel extends MassActionAbstract
 {
     protected $printoutReturnLabels;

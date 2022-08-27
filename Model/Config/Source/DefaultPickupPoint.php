@@ -8,9 +8,6 @@ use Magento\Framework\Data\OptionSourceInterface;
 use Magento\Framework\Message\ManagerInterface as MessageManagerInterface;
 use Smartmage\Inpost\Model\ApiShipx\Service\Point\GetDispatchPoints;
 
-/**
- * Class DefaultPickupPoint
- */
 class DefaultPickupPoint implements OptionSourceInterface
 {
     /**
@@ -68,7 +65,7 @@ class DefaultPickupPoint implements OptionSourceInterface
                 ];
             }
         } catch (\Exception $e) {
-            $this->logger->info(print_r($e,true));
+            $this->logger->info(print_r($e, true));
         }
 
         return $data;

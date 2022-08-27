@@ -108,5 +108,4 @@ class AddProductBlockSendWithLockerAttribute implements DataPatchInterface, Patc
     {
         return [];
     }
-
 }

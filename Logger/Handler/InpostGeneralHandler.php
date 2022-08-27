@@ -8,9 +8,6 @@ use Magento\Framework\Stdlib\DateTime\Timezone as Timezone;
 use Monolog\Logger as MonologLogger;
 use Smartmage\Inpost\Model\ConfigProvider;
 
-/**
- * Class InpostGeneralHandler
- */
 class InpostGeneralHandler extends BaseHandler
 {
     /**
@@ -53,7 +50,7 @@ class InpostGeneralHandler extends BaseHandler
     /**
      * @param array $record
      */
-    public function write(array $record)
+    public function write(array $record): void
     {
         if ($this->configProvider->getDebugEnabled()) {
             parent::write($record);

@@ -5,9 +5,6 @@ namespace Smartmage\Inpost\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
-/**
- * Class Mode
- */
 class Mode implements OptionSourceInterface
 {
     const TEST = 'test';

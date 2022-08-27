@@ -6,9 +6,6 @@ use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Controller\ResultFactory;
 use Smartmage\Inpost\Model\Checkout\Processor;
 
-/**
- * Class Save
- */
 class Save extends \Magento\Framework\App\Action\Action
 {
     /**
