@@ -40,6 +40,5 @@ class StreetInfo extends Template
             $this->_template = null;
         }
         parent::__construct($context, $data);
-
     }
 }

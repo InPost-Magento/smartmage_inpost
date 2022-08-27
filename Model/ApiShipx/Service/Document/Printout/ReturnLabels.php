@@ -46,8 +46,7 @@ class ReturnLabels extends AbstractPrintout
         }
 
         //set success message for frontend
-        if (
-            !isset($this->callResult[CallResult::STRING_MESSAGE]) ||
+        if (!isset($this->callResult[CallResult::STRING_MESSAGE]) ||
             empty($this->callResult[CallResult::STRING_MESSAGE]) ||
             is_null($this->callResult[CallResult::STRING_MESSAGE])
         ) {

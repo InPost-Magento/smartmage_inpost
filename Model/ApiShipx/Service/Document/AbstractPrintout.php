@@ -12,5 +12,4 @@ abstract class AbstractPrintout extends AbstractService
     protected $successResponseCode = Http::STATUS_CODE_200;
 
     protected $isResponseJson = false;
-
 }

@@ -10,10 +10,6 @@ use Smartmage\Inpost\Model\ApiShipx\ErrorHandler;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Psr\Log\LoggerInterface as PsrLoggerInterface;
 
-/**
- * Class GetDispatchPoints
- * @package Smartmage\Inpost\Model\ApiShipx\Service\Point
- */
 class GetDispatchPoints extends AbstractService
 {
     /**
@@ -71,7 +67,7 @@ class GetDispatchPoints extends AbstractService
             $this->callResult['items'] = $result['items'];
         }
         $this->logger->info('getAllDispatchPoints');
-        $this->logger->info(print_r($result,true));
+        $this->logger->info(print_r($result, true));
         return $this->callResult;
     }
 }

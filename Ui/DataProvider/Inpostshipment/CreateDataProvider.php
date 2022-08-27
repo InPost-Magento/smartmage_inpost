@@ -9,9 +9,6 @@ use Magento\Framework\App\RequestInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 use Magento\Sales\Api\OrderRepositoryInterface;
 
-/**
- * Class DataProvider
- */
 class CreateDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
     /**
@@ -28,7 +25,4 @@ class CreateDataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
     {
         return;
     }
-
-
-
 }

@@ -7,10 +7,6 @@ use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 
-/**
- * Class DefaultSendingPoint
- * @package Smartmage\Inpost\Block\Adminhtml\Config\Form\Field
- */
 class DefaultSendingPoint extends Field
 {
     protected $code = '';
@@ -38,7 +34,7 @@ class DefaultSendingPoint extends Field
         //inpostlocker_standardeow
         $html = parent::render($element);
         $points = '';
-        $functions = json_encode(explode(',',$this->functions));
+        $functions = json_encode(explode(',', $this->functions));
 
         switch ($this->points) {
             case 'standard':

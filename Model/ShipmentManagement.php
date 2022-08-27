@@ -5,54 +5,56 @@ namespace Smartmage\Inpost\Model;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\SortOrderBuilder;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Event\ManagerInterface as EventManager;
 use Magento\Framework\Stdlib\DateTime\DateTimeFactory;
 use Magento\Store\Model\StoreManagerInterface;
 use Smartmage\Inpost\Api;
 use Smartmage\Inpost\Api\Data\ShipmentInterface;
 
-/**
- * Class ShipmentManagement
- * @package Smartmage\Inpost\Model
- */
 class ShipmentManagement implements Api\ShipmentManagementInterface
 {
 
     /**
      * @var Api\Data\ShipmentInterfaceFactory
      */
-    private $shipmentFactory;
+    private Api\Data\ShipmentInterfaceFactory $shipmentFactory;
 
     /**
      * @var Api\ShipmentRepositoryInterface
      */
-    private $shipmentRepository;
+    private Api\ShipmentRepositoryInterface $shipmentRepository;
 
     /**
      * @var SearchCriteriaBuilder
      */
-    private $searchCriteriaBuilder;
+    private SearchCriteriaBuilder $searchCriteriaBuilder;
 
     /**
      * @var SortOrderBuilder
      */
-    private $sortOrderBuilder;
+    private SortOrderBuilder $sortOrderBuilder;
 
     /**
      * @var StoreManagerInterface
      */
-    private $storeManager;
+    private StoreManagerInterface $storeManager;
 
     /**
      * Core store config
      *
      * @var ScopeConfigInterface
      */
-    private $scopeConfig;
+    private ScopeConfigInterface $scopeConfig;
 
     /**
      * @var DateTimeFactory
      */
-    private $dateFactory;
+    private DateTimeFactory $dateFactory;
+
+    /**
+     * @var EventManager
+     */
+    private EventManager $eventManager;
 
     /**
      * ShipmentManagement constructor.
@@ -72,7 +74,8 @@ class ShipmentManagement implements Api\ShipmentManagementInterface
         SortOrderBuilder $sortOrderBuilder,
         StoreManagerInterface $storeManager,
         ScopeConfigInterface $scopeConfig,
-        DateTimeFactory $dateFactory
+        DateTimeFactory $dateFactory,
+        EventManager $eventManager
     ) {
         $this->shipmentFactory = $shipmentFactory;
         $this->shipmentRepository = $shipmentRepository;
@@ -81,6 +84,7 @@ class ShipmentManagement implements Api\ShipmentManagementInterface
         $this->storeManager = $storeManager;
         $this->scopeConfig = $scopeConfig;
         $this->dateFactory = $dateFactory;
+        $this->eventManager = $eventManager;
     }
 
     /**
@@ -94,6 +98,7 @@ class ShipmentManagement implements Api\ShipmentManagementInterface
 
         $obtainedShipments = $this->shipmentRepository->getList($searchCriteria);
         $count = $obtainedShipments->getTotalCount();
+        $trackingNumberExisted = false;
 
         /**
          * @var $shipment ShipmentInterface
@@ -103,6 +108,7 @@ class ShipmentManagement implements Api\ShipmentManagementInterface
             $shipment->setShipmentId($shipmentData[ShipmentInterface::SHIPMENT_ID]);
         } elseif ($count === 1) {
             $shipment = $obtainedShipments->getItems()[0];
+            $trackingNumberExisted = ($shipment->getTrackingNumber());
         }
         $shipment->setStatus($shipmentData[ShipmentInterface::STATUS]);
         $shipment->setService($shipmentData[ShipmentInterface::SERVICE]);
@@ -121,7 +127,14 @@ class ShipmentManagement implements Api\ShipmentManagementInterface
                 ? $shipmentData[ShipmentInterface::DISPATCH_ORDER_ID]
                 : ''
         );
+
+        if(isset($shipmentData[ShipmentInterface::SHIPPING_METHOD])) {
+            $shipment->setShippingMethod($shipmentData[ShipmentInterface::SHIPPING_METHOD]);
+        }
+
+        if (!$trackingNumberExisted && $shipmentData[ShipmentInterface::TRACKING_NUMBER]) {
+            $this->eventManager->dispatch('inpost_trackingnumber_received', ['inpostShipment' => $shipment]);
+        }
         $this->shipmentRepository->save($shipment);
     }
-
 }

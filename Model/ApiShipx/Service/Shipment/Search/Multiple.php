@@ -48,7 +48,7 @@ class Multiple extends AbstractSearch
         for ($page = 1;; $page++) {
             $result = $this->call(null, ['page' => $page, 'created_at_gteq' => $daysAgo]);
 
-            $this->logger->info(print_r($this->callResult,true));
+            $this->logger->info(print_r($this->callResult, true));
 
             if ($this->callResult[CallResult::STRING_STATUS] != CallResult::STATUS_SUCCESS) {
                 throw new \Exception($this->callResult[CallResult::STRING_MESSAGE], $this->callResult[CallResult::STRING_RESPONSE_CODE]);
@@ -56,9 +56,9 @@ class Multiple extends AbstractSearch
 
             if (!$totalPagesUpdated) {
                 $totalPagesRaw = (float)$result['count'] / (float)$result['per_page'];
-                $this->logger->info(print_r($totalPagesRaw,true));
+                $this->logger->info(print_r($totalPagesRaw, true));
                 $totalPages = ceil($totalPagesRaw);
-                $this->logger->info(print_r($totalPages,true));
+                $this->logger->info(print_r($totalPages, true));
                 $totalPagesUpdated = true;
             }
 
@@ -83,7 +83,7 @@ class Multiple extends AbstractSearch
 
                         $receiver     = $item['receiver'];
                         $receiverData = '';
-                        if (strpos($item['service'], 'inpost_locker') !== false) {
+                        if ($item['service'] !== NULL && strpos($item['service'], 'inpost_locker') !== false) {
                             $receiverData .= $receiver['email'] . '<br>'
                                 . $receiver['phone'] . '<br>'
                                 . $item['custom_attributes']['target_point'];
@@ -124,7 +124,7 @@ class Multiple extends AbstractSearch
 
                         $this->shipmentManagement->addOrUpdate($formatedData);
                     } catch (\Exception $exception) {
-                        $this->logger->info(print_r($exception->getMessage(),true));
+                        $this->logger->info(print_r($exception->getMessage(), true));
                     }
                 }
             } else { // If no shipments from api end for loop

@@ -10,5 +10,4 @@ interface ShipmentManagementInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function addOrUpdate($shipmentData);
-
 }

@@ -66,11 +66,6 @@ abstract class AbstractMethod
      */
     public function isAllowed()
     {
-        //Darmowa dostawa od - done
-        //Maksymalna waga koszyka done
-        //Dopuszczalność wysyłki danego koszyka
-        //Okienko czasowe metody dostawy w weekend
-
         //Check if method is active
         if (!$this->configProvider->getConfigFlag($this->carrierCode . '/' . $this->methodKey . '/active')) {
             return false;
@@ -192,7 +187,7 @@ abstract class AbstractMethod
                 if ($item->getProduct()->isVirtual()) {
                     continue;
                 }
-                if(!$item->getFreeShipping()) {
+                if (!$item->getFreeShipping()) {
                     $hasAllItemsFreeshipping = false;
                     break;
                 }

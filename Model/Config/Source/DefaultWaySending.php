@@ -5,9 +5,6 @@ namespace Smartmage\Inpost\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
-/**
- * Class DefaultWaySending
- */
 class DefaultWaySending implements OptionSourceInterface
 {
     const INPOST_LOCKER_STANDARD = 'inpostlocker_standard';

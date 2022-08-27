@@ -16,7 +16,7 @@ use Smartmage\Inpost\Model\ConfigProvider;
 
 /**
  * Class PrintReturnLabel
- * @package Smartmage\Inpost\Controller\Adminhtml\Shipments
+ * Printing InPost shipment return label
  */
 class PrintReturnLabel extends Action
 {
@@ -46,7 +46,6 @@ class PrintReturnLabel extends Action
         $this->dateTime           = $dateTime;
         parent::__construct($context);
     }
-
 
     /**
      * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface

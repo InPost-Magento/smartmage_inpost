@@ -2,7 +2,9 @@
 
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment;
 
+use Magento\Framework\App\Request\Http as RequestHttp;
 use Magento\Framework\App\Response\Http;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Smartmage\Inpost\Api\Data\ShipmentInterface;
 use Smartmage\Inpost\Model\ApiShipx\AbstractService;
 use Smartmage\Inpost\Model\ApiShipx\CallResult;
@@ -34,12 +36,27 @@ abstract class AbstractCreate extends AbstractService
      */
     protected $logger;
 
+    /**
+     * @var RequestHttp
+     */
+    protected $request;
+
+    /**
+     * @param PsrLoggerInterface $logger
+     * @param ConfigProvider $configProvider
+     * @param ShippingMethods $shippingMethods
+     * @param ShipmentManagement $shipmentManagement
+     * @param ErrorHandler $errorHandler
+     * @param RequestHttp $request
+     * @throws NoSuchEntityException
+     */
     public function __construct(
         PsrLoggerInterface $logger,
         ConfigProvider $configProvider,
         ShippingMethods $shippingMethods,
         ShipmentManagement $shipmentManagement,
-        ErrorHandler $errorHandler
+        ErrorHandler $errorHandler,
+        RequestHttp $request
     ) {
         $this->logger = $logger;
         $this->configProvider = $configProvider;
@@ -48,12 +65,13 @@ abstract class AbstractCreate extends AbstractService
 
         $organizationId = $configProvider->getOrganizationId();
         $this->callUri = 'v1/organizations/' . $organizationId . '/shipments';
+        $this->request = $request;
 
         $this->successMessage = __('The shipment created successfully');
         parent::__construct($logger, $configProvider, $errorHandler);
     }
 
-    public function createShipment()
+    public function createShipment($order = null)
     {
         $response = $this->call($this->requestBody);
         $this->logger->info(print_r($this->callResult, true));
@@ -124,6 +142,14 @@ abstract class AbstractCreate extends AbstractService
                 $formatedData[ShipmentInterface::RECEIVER_DATA]       = $receiverData;
                 $formatedData[ShipmentInterface::REFERENCE]           = $response['reference'];
                 $formatedData[ShipmentInterface::TRACKING_NUMBER]     = $response['tracking_number'];
+                if(
+                    $this->request->getPost('shipment_fieldset')
+                    && isset($this->request->getPost('shipment_fieldset')['shipping_method'])
+                ) {
+                    $formatedData[ShipmentInterface::SHIPPING_METHOD]     = $this->request->getPost('shipment_fieldset')['shipping_method'];
+                } elseif ($order !== NULL) {
+                    $formatedData[ShipmentInterface::SHIPPING_METHOD] = $order->getShippingMethod();
+                }
 
                 if (isset($response['custom_attributes']) && isset($response['custom_attributes']['target_point'])) {
                     $formatedData[ShipmentInterface::TARGET_POINT] = $response['custom_attributes']['target_point'];

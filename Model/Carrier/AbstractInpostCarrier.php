@@ -202,4 +202,12 @@ abstract class AbstractInpostCarrier extends AbstractCarrier
     {
         return $this->checkoutSession->getQuote()->getItems();
     }
+
+    /**
+     * @return bool
+     */
+    public function isTrackingAvailable(): bool
+    {
+        return true;
+    }
 }

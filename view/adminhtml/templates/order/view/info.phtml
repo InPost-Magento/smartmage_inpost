@@ -58,7 +58,7 @@ endif; ?>
     </div>
     <?php
     $targetPoint = $order->getData('inpost_locker_id');
-    if($targetPoint) : ?>
+    if ($targetPoint): ?>
         <div class="admin__page-section-item-content">
             <br/>
             <?php echo __('Selected Paczkomat:') . ' ' . $targetPoint; ?>

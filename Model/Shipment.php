@@ -70,6 +70,11 @@ class Shipment extends AbstractModel implements ShipmentInterface
         return $this->getData(self::DISPATCH_ORDER_ID);
     }
 
+    public function getShippingMethod()
+    {
+        return $this->getData(self::SHIPPING_METHOD);
+    }
+
     public function setId($id)
     {
         return $this->setData(self::ENTITY_ID, $id);
@@ -125,4 +130,8 @@ class Shipment extends AbstractModel implements ShipmentInterface
         return $this->setData(self::DISPATCH_ORDER_ID, $dispatchOrderId);
     }
 
+    public function setShippingMethod($shippingMethod)
+    {
+        return $this->setData(self::SHIPPING_METHOD, $shippingMethod);
+    }
 }

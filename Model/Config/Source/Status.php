@@ -5,9 +5,6 @@ namespace Smartmage\Inpost\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
-/**
- * Class Status
- */
 class Status implements OptionSourceInterface
 {
     const CREATED = 'created';

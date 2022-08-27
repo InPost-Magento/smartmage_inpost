@@ -12,6 +12,7 @@
         <column name="receiver_data" xsi:type="varchar" length="255" nullable="true" comment="Receiver data"/>
         <column name="reference" xsi:type="varchar" length="255" nullable="true" comment="Reference"/>
         <column name="dispatch_order_id" xsi:type="varchar" length="255" nullable="true" comment="Dispatch Order ID"/>
+        <column name="shipping_method" xsi:type="varchar" length="255" nullable="true" comment="Shipping method"/>
 
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id"/>

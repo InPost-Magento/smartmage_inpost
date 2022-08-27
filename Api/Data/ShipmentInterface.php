@@ -15,6 +15,7 @@ interface ShipmentInterface
     const TRACKING_NUMBER = 'tracking_number';
     const TARGET_POINT = 'target_point';
     const DISPATCH_ORDER_ID = 'dispatch_order_id';
+    const SHIPPING_METHOD = 'shipping_method';
 
     /**
      * Get Id
