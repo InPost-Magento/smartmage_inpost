@@ -71,7 +71,7 @@ define([
                     },
                     dataType: 'json',
                 }).done(function(data) {
-                    if(data.status === 1) {
+                    if (data.status === 1) {
                         resolve('True');
                     } else {
                         reject('False');
@@ -100,7 +100,7 @@ define([
                     url: (checkoutData.getShippingInPostMode() === 'prod' ? self.apiEndpointProduction : self.apiEndpointTesting) + '/points/' + pointId,
                     type: 'GET',
                 }).done(function(result) {
-                    if(result.status !== 404) {
+                    if (result.status !== 404) {
                         checkoutData.setShippingInPostPoint(result);
                         resolve(result);
                     }
@@ -111,7 +111,7 @@ define([
         wrapperPointHtml: function(inPostCarrier, pointType) {
             const html = '<div data-inpost-wrapper="'+ pointType +'" class="inpost-carrier-wrapper"></div>';
             inPostCarrier.find('div').remove();
-            if(inPostCarrier.find('[data-inpost-wrapper]').length === 0) {
+            if (inPostCarrier.find('[data-inpost-wrapper]').length === 0) {
                 inPostCarrier.append(html);
             }
         },
@@ -120,7 +120,7 @@ define([
             return new Promise(function(resolve, reject) {
                 const self = $('[data-inpost-wrapper]');
 
-                if(self.length > 0) {
+                if (self.length > 0) {
                     self.html('');
                 }
                 resolve(true);
@@ -136,7 +136,7 @@ define([
                 html += '</div>';
                 html += selectPoint;
 
-                if(insert) {
+                if (insert) {
                     self.prepend(html);
                     resolve(html);
                 } else {
@@ -154,8 +154,8 @@ define([
             const wrapperPoint = carrierMethod.find('[data-inpost-wrapper]');
             let html = '';
 
-            if(wrapperPoint.length) {
-                if(pointData) {
+            if (wrapperPoint.length) {
+                if (pointData) {
                     self.pointDataHtml(pointData, self.selectPointHtml(true), false).then(function(htmlDataPoint) {
                         wrapperPoint.append(htmlDataPoint);
                     });
@@ -174,8 +174,8 @@ define([
                     const codeMethod = value[0].split('_');
                     const logoWrapper = $(value[0]).find('[data-inpost-logo-'+codeMethod[2]+'-'+codeMethod[3]+']');
 
-                    if($(value[0]).length) {
-                        if(logoWrapper.length > 0) {
+                    if ($(value[0]).length) {
+                        if (logoWrapper.length > 0) {
                             logoWrapper.remove();
                             $(value[0]).prepend('<div data-inpost-logo-'+codeMethod[2]+'-'+codeMethod[3]+'>' + value[1] + '</div>');
                         } else {
@@ -185,7 +185,7 @@ define([
                 });
 
                 $.each(self.inPostAllMethod('carrier'), function(index, value) {
-                    if($(value[0]).length) {
+                    if ($(value[0]).length) {
                         $(value[0]).html('');
                     }
                 });
@@ -195,10 +195,10 @@ define([
         },
 
         createModal: function(pointType) {
-            let html = '<div data-inpost-modal class="inpost-modal is-active">';
+            let html = '<div data-inpost-modal class="inpost-modal">';
                 html += '<div class="inpost-modal__container">';
                 html += '<div data-inpost-modal-btn-close class="btn-close"></div>';
-                html += '<inpost-geowidget onpoint="onpointselect" token="'+ this.apiToken +'" language="pl"  config="'+ pointType +'"></inpost-geowidget>';
+                html += '<inpost-geowidget onpoint="onpointselect" token="'+ this.apiToken +'" language="pl" config="'+ pointType +'"></inpost-geowidget>';
                 html += '</div>';
                 html += '</div>';
 
@@ -208,9 +208,9 @@ define([
         renderInPostDataHtml: function(pointData) {
             const self = this;
 
-            return new Promise(function(resolve, reject) {
+            return new Promise(function(resolve) {
                 $.each(self.inPostMethod(), function(index, value) {
-                    if($(value[0]).length) {
+                    if ($(value[0]).length) {
                         self.wrapperPointHtml($(value[0]), value[1]);
                         self.insertData($(value[0]), (pointData ? pointData : ''));
                     }
@@ -222,10 +222,10 @@ define([
         renderInPostData: function() {
             const self = this;
 
-            return new Promise(function(resolve, reject) {
+            return new Promise(function(resolve) {
                 fullScreenLoader.startLoader();
                 self.getPoint().then(function(pointId) {
-                    if(pointId) {
+                    if (pointId) {
                         self.getPointInformation(pointId).then(function(pointData) {
                             self.renderInPostDataHtml(pointData).then(function() {
                                 resolve(true);
@@ -263,6 +263,4 @@ define([
             });
         }
     }
-
-
 });

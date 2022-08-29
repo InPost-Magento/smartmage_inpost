@@ -29,25 +29,21 @@ body.overlay-modal-carrier {
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, .8);
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     z-index: 999;
 
-    &.is-active {
-        display: flex;
-    }
-
     &__container {
         position: relative;
         background: #fff;
-        max-width: 650px;
+        max-width: 90%;
         max-height: 600px;
         width: 100%;
         height: 100%;
         margin: 20px;
         padding: 70px 20px 20px;
-        overflow-y: auto;
+        overflow: hidden;
 
 
         .btn-close {
