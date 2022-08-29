@@ -8,9 +8,6 @@ use Magento\Framework\Data\OptionSourceInterface;
 use Magento\Shipping\Model\Config;
 use Magento\Store\Model\ScopeInterface;
 
-/**
- * Class ShippingMethods
- */
 class ShippingMethods implements OptionSourceInterface
 {
     const INPOST_MAPPER = [
@@ -60,7 +57,7 @@ class ShippingMethods implements OptionSourceInterface
     /**
      * {@inheritdoc}
      */
-    public function toOptionArray($isActiveOnlyFlag = false) : array
+    public function toOptionArray($isActiveOnlyFlag = false, $onlyMethodTitle = false) : array
     {
         $methods = [['value' => '', 'label' => '']];
         $carriers = $this->shippingConfig->getAllCarriers();
@@ -84,9 +81,11 @@ class ShippingMethods implements OptionSourceInterface
                 if (!$methodCode) {
                     continue;
                 }
+
+                $label = ($onlyMethodTitle) ? $methodTitle : '[' . $carrierTitle . '] ' . $methodTitle;
                 $methods[] = [
                     'value' => $carrierCode . '_' . $methodCode,
-                    'label' => '[' . $carrierTitle . '] ' . $methodTitle,
+                    'label' => $label,
                 ];
             }
         }

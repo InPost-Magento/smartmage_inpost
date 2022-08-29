@@ -12,9 +12,6 @@ use Smartmage\Inpost\Model\ApiShipx\Service\DispatchOrder\Create as DispatchOrde
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\ResourceModel\Shipment\CollectionFactory;
 
-/**
- * Class MassPrintLabel
- */
 class MassDispatchOrder extends MassActionAbstract
 {
 

@@ -5,9 +5,6 @@ namespace Smartmage\Inpost\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
-/**
- * Class LabelSize
- */
 class LabelSize implements OptionSourceInterface
 {
     const A4 = 'a4';

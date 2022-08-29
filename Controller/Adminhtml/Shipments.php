@@ -6,7 +6,7 @@ use Magento\Backend\App\Action;
 
 /**
  * Abstract Class Shipments
- * @package Smartmage\Inpost\Controller\Adminhtml
+ *
  */
 abstract class Shipments extends Action
 {

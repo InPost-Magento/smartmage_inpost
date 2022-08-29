@@ -11,7 +11,8 @@
             "reference": true,
             "tracking_number": true,
             "target_point": true,
-            "dispatch_order_id": true
+            "dispatch_order_id": true,
+            "shipping_method": true
         },
         "constraint": {
             "PRIMARY": true

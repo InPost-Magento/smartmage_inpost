@@ -101,5 +101,4 @@ class CartRepositoryExtended
 
         return [$quote];
     }
-
 }

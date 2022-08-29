@@ -8,10 +8,6 @@ use Smartmage\Inpost\Api\ShipmentOrderLinksProviderInterface;
 use Smartmage\Inpost\Model\ResourceModel\ShipmentOrderLink\Loader;
 use Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterfaceFactory;
 
-/**
- * Class Provider
- * @package Smartmage\Inpost\Model\ShipmentOrderLink
- */
 class Provider implements ShipmentOrderLinksProviderInterface
 {
     /** @var  EntityManager */
@@ -54,5 +50,20 @@ class Provider implements ShipmentOrderLinksProviderInterface
         }
 
         return $shipmentLinks;
+    }
+
+    /**
+     * @param $shipmentId
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getOrderIncrementId($shipmentId)
+    {
+        $ids = $this->loader->getOrderIncrementIdByShipmentId($shipmentId);
+        foreach ($ids as $id) {
+            return $id;
+        }
+
+        return false;
     }
 }

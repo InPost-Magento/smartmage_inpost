@@ -4,6 +4,10 @@ namespace Smartmage\Inpost\Api;
 
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Model\AbstractModel;
+use Smartmage\Inpost\Api\Data\ShipmentInterface;
+use Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterface;
 use Smartmage\Inpost\Api\Data\ShipmentOrderLinkSearchResultsInterface;
 
 interface ShipmentOrderLinkRepositoryInterface
@@ -11,8 +15,8 @@ interface ShipmentOrderLinkRepositoryInterface
     /**
      * Save shipment.
      *
-     * @param \Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterface|\Magento\Framework\Model\AbstractModel $shipmentOrderLink
-     * @return \Smartmage\Inpost\Api\Data\ShipmentInterface
+     * @param ShipmentOrderLinkInterface|AbstractModel $shipmentOrderLink
+     * @return ShipmentInterface
      * @throws Exception\CouldNotSaveException
      */
     public function save(Data\ShipmentOrderLinkInterface $shipmentOrderLink);
@@ -21,8 +25,8 @@ interface ShipmentOrderLinkRepositoryInterface
      * Retrieve shipment.
      *
      * @param int $linkId
-     * @return \Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterface
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @return ShipmentOrderLinkInterface
+     * @throws LocalizedException
      */
     public function getById($linkId);
 
@@ -37,9 +41,9 @@ interface ShipmentOrderLinkRepositoryInterface
     /**
      * Delete shipment.
      *
-     * @param \Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterface|\Magento\Framework\Model\AbstractModel $shipment
+     * @param ShipmentOrderLinkInterface|AbstractModel $shipment
      * @return bool true on success
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
     public function delete(Data\ShipmentOrderLinkInterface $shipment);
 
@@ -48,7 +52,7 @@ interface ShipmentOrderLinkRepositoryInterface
      *
      * @param int $linkId
      * @return bool true on success
-     * @throws Exception\LocalizedException
+     * @throws LocalizedException
      */
     public function deleteById($linkId);
 }

@@ -36,7 +36,7 @@ class GetPoint extends AbstractService
         $this->callUri = 'v1/points/' . $lockerId;
         $response = $this->getPointService();
 
-        if ($response->status != 'Operating') {
+        if (is_object($response) && $response->status != 'Operating') {
             return false;
         }
 

@@ -108,5 +108,4 @@ class AddProductBlockSendWithCourierAttribute implements DataPatchInterface, Pat
     {
         return [];
     }
-
 }

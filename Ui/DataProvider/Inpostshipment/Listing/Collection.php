@@ -42,5 +42,4 @@ class Collection extends SearchResult
         $this->addFilterToMap('increment_id', 'cpe.increment_id');
         $this->addFilterToMap('shipment_id', 'main_table.shipment_id');
     }
-
 }

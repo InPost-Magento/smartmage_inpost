@@ -1,7 +1,8 @@
 <?php
 namespace Smartmage\Inpost\Block\Adminhtml\Shipment\Create;
 
-class Address extends \Magento\Backend\Block\Template {
+class Address extends \Magento\Backend\Block\Template
+{
     /**
      * Block template
      *

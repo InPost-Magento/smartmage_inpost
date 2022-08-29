@@ -5,9 +5,6 @@ namespace Smartmage\Inpost\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
-/**
- * Class SendingMethod
- */
 class SendingMethod implements OptionSourceInterface
 {
     const PARCEL_LOCKER = 'parcel_locker';

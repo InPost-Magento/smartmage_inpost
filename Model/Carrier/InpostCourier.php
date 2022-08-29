@@ -80,8 +80,8 @@ class InpostCourier extends AbstractInpostCarrier implements CarrierInterface
         $this->rateResultFactory = $rateResultFactory;
         $this->rateMethodFactory = $rateMethodFactory;
         $methods = [
-            $c2c,
-            $c2cCod,
+            $standard,
+            $standardCod,
             $express1000,
             $express1200,
             $express1700,
@@ -89,8 +89,8 @@ class InpostCourier extends AbstractInpostCarrier implements CarrierInterface
             $localStandard,
             $localSuperExpress,
             $palette,
-            $standard,
-            $standardCod
+            $c2c,
+            $c2cCod
         ];
 
         parent::__construct(

@@ -2,6 +2,7 @@
 
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Create;
 
+use Magento\Framework\App\Request\Http as RequestHttp;
 use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Smartmage\Inpost\Model\ApiShipx\ErrorHandler;
 use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\AbstractCreate;
@@ -18,13 +19,13 @@ class Courier extends AbstractCreate
     protected $orderProcessor;
 
     /**
-     * Courier constructor.
-     * @param \Psr\Log\LoggerInterface $logger
+     * @param PsrLoggerInterface $logger
      * @param ConfigProvider $configProvider
      * @param ShippingMethods $shippingMethods
      * @param OrderProcessor $orderProcessor
-     * @param \Smartmage\Inpost\Model\ApiShipx\ErrorHandler $errorHandler
+     * @param ErrorHandler $errorHandler
      * @param ShipmentManagement $shipmentManagement
+     * @param RequestHttp $request
      */
     public function __construct(
         PsrLoggerInterface $logger,
@@ -32,10 +33,11 @@ class Courier extends AbstractCreate
         ShippingMethods $shippingMethods,
         OrderProcessor $orderProcessor,
         ErrorHandler $errorHandler,
-        ShipmentManagement $shipmentManagement
+        ShipmentManagement $shipmentManagement,
+        RequestHttp $request
     ) {
         $this->orderProcessor = $orderProcessor;
-        parent::__construct($logger, $configProvider, $shippingMethods, $shipmentManagement, $errorHandler);
+        parent::__construct($logger, $configProvider, $shippingMethods, $shipmentManagement, $errorHandler, $request);
     }
 
     public function createBody($data, $order)

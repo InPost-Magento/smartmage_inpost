@@ -5,9 +5,6 @@ namespace Smartmage\Inpost\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
-/**
- * Class Size
- */
 class Size implements OptionSourceInterface
 {
     const SMALL = 'small';

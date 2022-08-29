@@ -108,5 +108,4 @@ class AddProductBlockSendWithPaletteAttribute implements DataPatchInterface, Pat
     {
         return [];
     }
-
 }

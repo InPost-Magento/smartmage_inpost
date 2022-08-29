@@ -5,9 +5,6 @@ namespace Smartmage\Inpost\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
-/**
- * Class LabelFormat
- */
 class LabelFormat implements OptionSourceInterface
 {
     const PDF = 'pdf';

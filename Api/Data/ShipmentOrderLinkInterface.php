@@ -6,7 +6,7 @@ use Magento\Framework\Api\ExtensibleDataInterface;
 
 /**
  * Interface ShipmentOrderLinkInterface
- * @package Smartmage\Inpost\Api\Data
+ *
  */
 interface ShipmentOrderLinkInterface extends ExtensibleDataInterface
 {

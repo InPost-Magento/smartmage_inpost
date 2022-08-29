@@ -8,11 +8,6 @@ use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Checkout\Model\ConfigProviderInterface;
 
-
-/**
- * Class ConfigProvider
- * @package Smartmage\Inpost\Model
- */
 class ConfigProvider implements ConfigProviderInterface
 {
     const SHIPPING_MODE = 'mode';
