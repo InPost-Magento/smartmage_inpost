@@ -32,11 +32,17 @@
         <policy id="style-src">
             <values>
                 <value id="inpost-geowidget" type="host">https://geowidget.easypack24.net</value>
+                <value id="inpost-geowidget2" type="host">https://geowidget.inpost.pl</value>
             </values>
         </policy>
         <policy id="font-src">
             <values>
                 <value id="inpost-geowidget" type="host">https://geowidget.easypack24.net</value>
+            </values>
+        </policy>
+        <policy id="frame-src">
+            <values>
+                <value id="inpost-geowidget" type="host">https://geowidget-app.inpost.pl/</value>
             </values>
         </policy>
     </policies>
