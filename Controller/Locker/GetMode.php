@@ -3,8 +3,13 @@ namespace Smartmage\Inpost\Controller\Locker;
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\Result\Forward;
+use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Smartmage\Inpost\Model\Checkout\Processor;
 use Smartmage\Inpost\Model\ConfigProvider;
 
@@ -39,6 +44,10 @@ class GetMode extends Action
         return parent::__construct($context);
     }
 
+    /**
+     * @return ResponseInterface|Forward|Json|ResultInterface
+     * @throws NoSuchEntityException
+     */
     public function execute()
     {
         $result = $this->resultJsonFactory->create();

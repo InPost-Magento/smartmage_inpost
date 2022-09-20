@@ -154,5 +154,14 @@
                 </palette>
             </inpostcourier>
         </carriers>
+        <csp>
+            <policies>
+                <admin>
+                    <frame-ancestors>
+                        <inline>0</inline>
+                    </frame-ancestors>
+                </admin>
+            </policies>
+        </csp>
     </default>
 </config>

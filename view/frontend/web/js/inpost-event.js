@@ -9,9 +9,13 @@ requirejs([
     const inPost = {
         closeModal: function() {
             $(document).ready(function() {
-                $(document).on('click', '[data-inpost-modal-btn-close]', function() {
-                    const modalWrapper = $('[data-inpost-modal]');
-                    modalWrapper.remove();
+                $(document).on('click', '[data-inpost-modal-btn-close], [data-inpost-modal]', function() {
+                    $('[data-inpost-modal]').remove();
+                });
+                $(document).on('keyup', function(e) {
+                    if (e.key == "Escape") {
+                        $('[data-inpost-modal]').remove();
+                    }
                 });
             });
         },

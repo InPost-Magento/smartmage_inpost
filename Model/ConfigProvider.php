@@ -399,7 +399,9 @@ class ConfigProvider implements ConfigProviderInterface
     public function getConfig()
     {
         return [
-            'standard_inpostlocker' => ($this->getConfigData('inpostlocker/standard/popenabled')) ? 'parcel_locker-pop' : 'parcel_locker'
+            'standard_inpostlocker' => ($this->getConfigData('inpostlocker/standard/popenabled')) ? 'parcel_locker-pop' : 'parcel_locker',
+            'geowidget_token' => $this->getShippingConfigData('geowidget_token')
+//            ,'mode' => $this->getShippingConfigData('mode')
         ];
     }
 }

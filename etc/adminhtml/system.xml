@@ -933,6 +933,9 @@
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                     <label>Access Token</label>
                 </field>
+                <field id="geowidget_token" translate="label" type="textarea" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Geowidget Token</label>
+                </field>
                 <field id="label_format" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Label format</label>
                     <source_model>Smartmage\Inpost\Model\Config\Source\LabelFormat</source_model>

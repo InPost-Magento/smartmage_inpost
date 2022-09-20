@@ -13,7 +13,7 @@ define([
     return {
         apiEndpointProduction: 'https://api-pl-points.easypack24.net/v1',
         apiEndpointTesting: 'https://sandbox-api-shipx-pl.easypack24.net/v1',
-        apiToken: 'eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzQlpXVzFNZzVlQnpDYU1XU3JvTlBjRWFveFpXcW9Ua2FuZVB3X291LWxvIn0.eyJleHAiOjE5NjYwODA1MjcsImlhdCI6MTY1MDcyMDUyNywianRpIjoiMWI3ZTlmYzEtNjk5Ny00MzEyLTgzMWMtN2Q4ZTY5MWJmMDQ5IiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5pbnBvc3QucGwvYXV0aC9yZWFsbXMvZXh0ZXJuYWwiLCJzdWIiOiJmOjEyNDc1MDUxLTFjMDMtNGU1OS1iYTBjLTJiNDU2OTVlZjUzNTpNeFVub2t4dTdOOW9ZTmpQWFFXVE1CWWkyYUtxX05PQUNxMFYwZHlLOWUwIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoic2hpcHgiLCJzZXNzaW9uX3N0YXRlIjoiN2FhMWQwMjYtNTIxZi00YWNhLTk5YzctNTI3ODc4MjBkZjZjIiwiYWNyIjoiMSIsInNjb3BlIjoib3BlbmlkIGFwaTphcGlwb2ludHMiLCJhbGxvd2VkX3JlZmVycmVycyI6IiIsInV1aWQiOiJlOTAxNmU1Yy0xNzdkLTQ5NTgtYmY3NS1kYzE2NmVjMWJiN2YifQ.Zo5djVDHcAathxsI1zdiBOmrkY_jm4HDqLLfIPG7e5xcBlxorVxtcNKUm7_wezUHfTECuOqAxFCjuzB89jBKC5TtY8lJgmbm8bWWiDpyJ6mULjkeA-PGIw351wKGH46wH472RR06PUjYZx2B5WpLCFquZNPeIItsJVtsYg52JpAwiYyfYmm4g1CFk3tU7TtXy7GAYfkdZ5aGBsO_r0_sS6BmOfjd_UCo0egcWLRFW_yVR88uhQdtY0GjGkwzg0p7klSsZPCUQjOCTtZKYhoMvKHnV8sAhwgPg9h2VqyXj07DnKqlUHnaX5l0nlqt3zp5FfVoPhmB0oAPTSYQFSHVDQ',
+        apiToken: window.checkoutConfig.geowidget_token,
 
         inPostAllMethod: function(type) {
             const method = [
@@ -82,13 +82,7 @@ define([
 
         getPoint: function() {
             return new Promise(function(resolve, reject) {
-                $.ajax({
-                    type: "POST",
-                    url: '/inpost/locker/get',
-                    dataType: 'json',
-                }).done(function(data) {
-                    resolve(data.inpost_locker_id);
-                })
+                resolve(window.checkoutConfig.quoteData.inpost_locker_id);
             });
         },
 
@@ -103,6 +97,8 @@ define([
                     if (result.status !== 404) {
                         checkoutData.setShippingInPostPoint(result);
                         resolve(result);
+                    } else {
+                        reject(result);
                     }
                 });
             });
@@ -226,11 +222,18 @@ define([
                 fullScreenLoader.startLoader();
                 self.getPoint().then(function(pointId) {
                     if (pointId) {
-                        self.getPointInformation(pointId).then(function(pointData) {
-                            self.renderInPostDataHtml(pointData).then(function() {
-                                resolve(true);
-                            });
-                        });
+                        self.getPointInformation(pointId).then(
+                            function(pointData) {
+                                self.renderInPostDataHtml(pointData).then(function() {
+                                    resolve(true);
+                                });
+                            },
+                            function(pointData) {
+                                self.renderInPostDataHtml(false).then(function() {
+                                    resolve(true);
+                                });
+                            }
+                        );
                     } else {
                         self.renderInPostDataHtml().then(function() {
                             resolve(true);
@@ -243,7 +246,6 @@ define([
 
         init: function() {
             const self = this;
-
             shippingService.isLoading.subscribe(function (isLoading) {
                 if (!isLoading) {
                     self.renderInPostData().then(function() {
