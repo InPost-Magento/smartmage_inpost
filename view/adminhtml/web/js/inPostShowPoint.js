@@ -1,117 +1,68 @@
 requirejs([
     'jquery',
     'ko',
-    'inPostSdk',
+    'inPostGeoWidget',
 ], function ($, ko) {
     'use strict';
 
     var inPostModal = {
-        apiEndpointProduction: 'https://api-pl-points.easypack24.net/v1',
-        apiEndpointTesting: 'https://sandbox-api-shipx-pl.easypack24.net/v1',
 
-        getMode: function() {
-            return new Promise(function(resolve, reject) {
-                $.ajax({
-                    type: "POST",
-                    url: '/inpost/locker/getmode',
-                    dataType: 'json',
-                }).done(function(data) {
-                    resolve(data.mode);
-                });
-            });
-        },
+        createModal: function() {
+            let html = '<div data-inpost-modal class="inpost-modal is-active">';
+            html += '<div class="inpost-modal__container">';
+            html += '<div data-inpost-modal-btn-close class="btn-close"></div>';
+            html += '<inpost-geowidget onpoint="onpointselect" token="'+ $('.inpost_shipment-section').data('inposttoken') +'" language="pl"  config="parcelCollectPayment"></inpost-geowidget>';
+            html += '</div>';
+            html += '</div>';
 
-        config: function(mode, pointsTypes) {
-            var self = this;
-
-            return new Promise(function(resolve, reject) {
-                easyPack.init({
-                    apiEndpoint: (mode === 'prod' ? self.apiEndpointProduction : self.apiEndpointTesting),
-                    defaultLocale: 'pl',
-                    mapType: 'osm',
-                    searchType: 'osm',
-                    points: {
-                        types: pointsTypes,
-                        functions: ['parcel_collect']
-                    },
-                    map: {
-                        useGeolocation: true,
-                        initialTypes: pointsTypes
-                    }
-                });
-
-                resolve('True');
-            });
-        },
-
-        Modal: function() {
-            return new Promise(function(resolve, reject) {
-                easyPack.modalMap(function(point, modal) {
-                    var targetLocker = $('input[name="shipment_fieldset[target_locker]"]');
-                    var btnShowPoint = $('[data-inpost-select-point]');
-
-                    if(targetLocker.length) {
-                        ko.dataFor(targetLocker.get(0)).value(point.name);
-                        btnShowPoint.attr('data-inpost-select-point', point.name);
-                    }
-
-                    $('body').removeClass('overlay-modal-carrier');
-                    modal.closeModal();
-                    inPostModal.closeModal();
-
-
-                }, {width: document.documentElement.clientWidth, height: document.documentElement.clientHeight});
-
-                resolve('True');
-            });
+            $('body').append(html);
         },
 
         closeModal: function() {
-            return new Promise(function(resolve, reject) {
-                var modalMapInPost = $('#widget-modal');
-
-                if(modalMapInPost.length) {
-                    modalMapInPost.parent().remove();
-                }
-                resolve('true');
+            $(document).ready(function() {
+                $(document).on('click', '[data-inpost-modal-btn-close], [data-inpost-modal]', function() {
+                    const modalWrapper = $('[data-inpost-modal]');
+                    modalWrapper.removeClass('is-active');
+                });
+                $(document).on('keyup', function(e) {
+                    if (e.key == "Escape") {
+                        $('[data-inpost-modal]').removeClass('is-active');
+                    }
+                });
             });
         },
 
-        closeModalEvent: function() {
-            $(document).on('click', '#widget-modal .widget-modal__close', function(e) {
-                e.preventDefault();
-                $('body').removeClass('overlay-modal-carrier');
+        selectedPoint: function() {
+            $(document).on('onpointselect', function(event) {
+                const modalWrapper = $('[data-inpost-modal]');
+                const point = event.originalEvent.detail
+                const targetLocker = $('input[name="shipment_fieldset[target_locker]"]');
+                const btnShowPoint = $('[data-inpost-select-point]');
+
+                if (targetLocker.length) {
+                    ko.dataFor(targetLocker.get(0)).value(point.name);
+                    btnShowPoint.attr('data-inpost-select-point', point.name);
+                }
+
+                modalWrapper.removeClass('is-active');
             });
         },
 
         showModal: function() {
-            var self = this;
+            const self = this;
 
             $(document).on('click', '[data-inpost-select-point]', function(e) {
                 e.preventDefault();
-                var point = $(this).attr('data-inpost-select-point');
-                var configType = $(this).data('inpost-point-type');
+                const point = $(this).attr('data-inpost-select-point');
 
-                self.getMode().then(function(mode) {
-                    self.config(mode, (configType ? configType.split('-') : ['parcel_locker', 'pop'])).then(function() {
-                        self.Modal().then(function() {
-                            if(point.length > 0) {
-                                easyPack.map.searchLockerPoint(point);
-                            }
-                            var modalMapInPost = $('#widget-modal');
-                            $('body').addClass('overlay-modal-carrier');
-                            modalMapInPost.parent().css('background', 'rgba(0,0,0, .6)');
-                            modalMapInPost.parent().css('overflow-y', 'auto');
-                            modalMapInPost.addClass('modalMapInPost');
-                        });
-                    });
-                });
+                self.createModal(point);
             });
         },
 
         init: function() {
             this.showModal();
-            this.closeModalEvent();
+            this.closeModal();
+            this.selectedPoint();
         }
     };
 

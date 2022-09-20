@@ -1,14 +1,3 @@
-.inpost-field-hide {
-    display: none !important;
-}
-.inpost-shipments-form {
-    display: flex;
-    margin-top: 20px;
-
-    button {
-        margin-left: 10px;
-    }
-}
 body.overlay-modal-carrier {
     position: relative;
     overflow: hidden;
@@ -40,14 +29,10 @@ body.overlay-modal-carrier {
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, .8);
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     z-index: 999;
-
-    &.is-active {
-        display: flex;
-    }
 
     &__container {
         position: relative;
@@ -58,7 +43,7 @@ body.overlay-modal-carrier {
         height: 100%;
         margin: 20px;
         padding: 70px 20px 20px;
-        overflow-y: hidden;
+        overflow: hidden;
 
 
         .btn-close {

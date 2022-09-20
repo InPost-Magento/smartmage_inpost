@@ -32,10 +32,10 @@
     </table>
 
     <table name="quote" resource="default" engine="innodb">
-        <column name="inpost_locker_id" xsi:type="varchar" length="10" />
+        <column name="inpost_locker_id" xsi:type="varchar" length="16" />
     </table>
 
     <table name="sales_order" resource="default" engine="innodb">
-        <column name="inpost_locker_id" xsi:type="varchar" length="10" />
+        <column name="inpost_locker_id" xsi:type="varchar" length="16" />
     </table>
 </schema>

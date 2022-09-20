@@ -14,7 +14,6 @@ define(
         $t,
         shippingService,
         checkoutData,
-        inPostPaczkomaty
     ) {
         'use strict';
 
@@ -23,21 +22,14 @@ define(
                 errorValidationMessage: ko.observable(false),
                 inPostPoint: $('[data-shipping-inpost-selected-point]'),
 
-                initialize: function() {
-                    this._super();
-
-                    inPostPaczkomaty.selectInPostPoint();
-                    inPostPaczkomaty.hideInPostModalMap();
-                },
-
                 validateShippingInformation: function() {
-                    var self = this;
+                    const self = this;
 
                     if(quote.shippingMethod()) {
-                        var ShippingMethodCode = quote.shippingMethod().method_code+'_'+quote.shippingMethod().carrier_code;
+                        const ShippingMethodCode = quote.shippingMethod().method_code+'_'+quote.shippingMethod().carrier_code;
 
                         if (ShippingMethodCode === 'standard_inpostlocker' || ShippingMethodCode === 'standardcod_inpostlocker' || ShippingMethodCode === 'standardeow_inpostlocker' || ShippingMethodCode === 'standardeowcod_inpostlocker' ) {
-                            var pointDataDB = checkoutData.getShippingInPostPoint();
+                            const pointDataDB = checkoutData.getShippingInPostPoint();
 
                             if( typeof pointDataDB === 'undefined' || pointDataDB === null || pointDataDB.name.length === 0){
                                 self.errorValidationMessage(

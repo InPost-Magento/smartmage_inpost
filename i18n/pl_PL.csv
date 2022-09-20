@@ -20,7 +20,8 @@ Friday,Piątek
 Saturday,Sobota
 Sunday,Niedziela
 Organization ID,ID organizacji
-Access Token, Token dostępu
+Access Token,Token dostępu
+Geowidget Token,Token geowidgetu
 Label format,Format etykiety
 Label size,Rozmiar etykiety
 Automatically create order shipment,Automatycznie twórz przesyłkę do zamówienia
@@ -168,6 +169,8 @@ The shipment created successfully,Przesyłka wygenerowana poprawnie
 For the order,Dla zamówienia
 no Inpost shipment was generated due to:,nie została wygenerowana przesyłka InPost z powodu:
 Sender address post_code Nieprawidłowy,Kod pocztowy nadawcy jest nieprawidłowy
+Mode,Tryb
+Production,Produkcyjny
 Enable debug,Włącz debugowanie
 The inpost_courier_c2c service addressed to an individual customer,Usługa inpost_courier_c2c skierowana do klienta indywidualnego
 The inpost_courier_standard service addressed to the business client,Usługa inpost_courier_standard skierowana do klienta biznesowego
@@ -191,3 +194,5 @@ POP points enabled,PaczkoPunkty dostępne
 All Allowed Countries,Wszystkie dostępne kraje
 Specific Countries,Wybrane kraje
 Selected Paczkomat:,Wybrany Paczkomat:
+Yes,Tak
+No,Nie

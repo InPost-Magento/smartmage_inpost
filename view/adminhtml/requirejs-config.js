@@ -9,6 +9,9 @@ var config = {
         'inPostSdk': [
             'https://geowidget.easypack24.net/js/sdk-for-javascript'
         ],
+        'inPostGeoWidget': [
+            'https://geowidget.inpost.pl/inpost-geowidget'
+        ],
     },
     config: {
         mixins: {
