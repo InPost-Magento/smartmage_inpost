@@ -69,7 +69,7 @@ Print return label,Wydrukuj etykietę zwrotu
 Print dispatch order label,Wydrukuj potwierdzenie nadania
 InPost Shipments List,Lista Przesyłek InPost
 Small,Gabaryt A
-Medium,Gabaryt B
+Medium,Gabaryt B,module,Smartmage_Inpost
 Large,Gabaryt C
 X Large,Gabaryt D
 Create InPost Shipment,Utwórz przesyłkę
