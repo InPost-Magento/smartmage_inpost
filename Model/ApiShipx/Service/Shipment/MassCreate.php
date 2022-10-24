@@ -202,7 +202,7 @@ class MassCreate
         $data['service'] = $shippingMethod;
         $data['reference'] = $order->getIncrementId();
         $data['phone'] = $order->getShippingAddress()->getTelephone();
-        $data['insurance'] = $this->configProvider->getAutomaticPayForPackage()
+        $data['insurance'] = $this->configProvider->getAutomaticInsuranceForPackage()
             ? $this->priceCurrency->convertAndRound($order->getGrandTotal())
             : '';
         $data['cod'] = strpos($order->getShippingMethod(), 'cod')
