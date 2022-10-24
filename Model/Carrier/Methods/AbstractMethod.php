@@ -6,9 +6,10 @@ namespace Smartmage\Inpost\Model\Carrier\Methods;
 
 use Magento\Catalog\Model\Product\Type;
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Store\Model\StoreManagerInterface;
-use Smartmage\Inpost\Model\ConfigProvider;
 use Magento\Quote\Model\Quote\Address\RateRequest;
+use Magento\Store\Model\StoreManagerInterface;
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
+use Smartmage\Inpost\Model\ConfigProvider;
 
 abstract class AbstractMethod
 {
@@ -44,6 +45,8 @@ abstract class AbstractMethod
      */
     protected $blockAttribute;
 
+    protected $logger;
+
     /**
      * AbstractMethod constructor.
      * @param ScopeConfigInterface $scopeConfig
@@ -51,10 +54,12 @@ abstract class AbstractMethod
      * @param StoreManagerInterface $storeManager
      */
     public function __construct(
+        PsrLoggerInterface $logger,
         ScopeConfigInterface $scopeConfig,
         ConfigProvider $configProvider,
         StoreManagerInterface $storeManager
     ) {
+        $this->logger = $logger;
         $this->scopeConfig = $scopeConfig;
         $this->configProvider = $configProvider;
         $this->storeManager = $storeManager;
@@ -166,6 +171,11 @@ abstract class AbstractMethod
      */
     public function isFreeShipping($request)
     {
+        if($request->getFreeShipping()) {
+            $this->logger->info(print_r('Method ' . $this->carrierCode . '/' . $this->methodKey . ' free shipping reason: Request free shipping', true));
+            return true;
+        }
+
         if ($this->configProvider->getConfigFlag(
             $this->carrierCode . '/' . $this->methodKey . '/free_shipping_enable'
         )) {
@@ -175,7 +185,9 @@ abstract class AbstractMethod
 
             $total = $this->getQuoteTotal($request);
 
+
             if ($total >= $freeShippingFrom) {
+                $this->logger->info(print_r('Method ' . $this->carrierCode . '/' . $this->methodKey . ' free shipping reason:  config freeshipping ' . $total . ' >= ' . $freeShippingFrom, true));
                 return true;
             }
         }
@@ -184,13 +196,16 @@ abstract class AbstractMethod
         if ($allItems = $request->getAllItems()) {
             $hasAllItemsFreeshipping = true;
             foreach ($allItems as $item) {
-                if ($item->getProduct()->isVirtual()) {
+                if ($item->getProduct()->isVirtual() || $item->getParentItemId()) {
                     continue;
                 }
                 if (!$item->getFreeShipping()) {
                     $hasAllItemsFreeshipping = false;
                     break;
                 }
+            }
+            if($hasAllItemsFreeshipping) {
+                $this->logger->info(print_r('Method ' . $this->carrierCode . '/' . $this->methodKey . ' free shipping reason: All items set as freeshipping', true));
             }
 
             return $hasAllItemsFreeshipping;
