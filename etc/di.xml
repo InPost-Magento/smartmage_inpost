@@ -340,6 +340,11 @@
             <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
         </arguments>
     </type>
+    <type name="Smartmage\Inpost\Model\Carrier\Methods\AbstractMethod">
+        <arguments>
+            <argument name="logger" xsi:type="object">InpostDataLogHandler</argument>
+        </arguments>
+    </type>
     <type name="Smartmage\Inpost\Cron\SyncShipments">
         <arguments>
             <argument name="logger" xsi:type="object">InpostCronLogHandler</argument>
