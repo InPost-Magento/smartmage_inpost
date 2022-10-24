@@ -47,7 +47,7 @@ Become a partner(SzybkieZwroty.pl),Zostań Partnerem (SzybkieZwroty.pl)
 Url for szybkiezwroty, Adres URL do szybkiezwroty.pl
 Weight attribute code,Kod cechy produktu z wagą
 Weight unit,Jednostka wagi
-Automatic payment for generated package,Generowane przesyłki automatycznie ubezpieczaj
+Automatic insurance for generated package,Generowane przesyłki automatycznie ubezpieczaj
 Default pickup point,Domyślny punkt odbioru
 Kilograms,Kilogramy
 Grams,Gramy
@@ -196,3 +196,4 @@ Specific Countries,Wybrane kraje
 Selected Paczkomat:,Wybrany Paczkomat:
 Yes,Tak
 No,Nie
+Default insurance value,Domyślna wartość ubezpieczenia

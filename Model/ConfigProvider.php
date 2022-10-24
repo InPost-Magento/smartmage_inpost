@@ -30,7 +30,7 @@ class ConfigProvider implements ConfigProviderInterface
     const SHIPPING_SZYBKIEZWROTY_URL = 'szybkiezwroty_url';
     const SHIPPING_WEIGHT_ATTRIBUTE_CODE = 'weight_attribute_code';
     const SHIPPING_WEIGHT_UNIT = 'weight_unit';
-    const SHIPPING_AUTOMATIC_PAY_FOR_PACKAGE = 'automatic_pay_for_package';
+    const SHIPPING_AUTOMATIC_INSURANCE_FOR_PACKAGE = 'automatic_insurance_for_package';
     const SHIPPING_DEFAULT_PICKUP_POINT = 'default_pickup_pont';
     const SHIPPING_GET_SHIPMENTS_DAYS = 'get_shipments_days';
     const SHIPPING_LABEL_SIZE_PDF = 'label_size_pdf';
@@ -41,6 +41,7 @@ class ConfigProvider implements ConfigProviderInterface
     const ZPL = 'zpl';
     const DEFAULT_WEIGHT = 'default_weight';
     const DEFAULT_SIZE = 'default_size';
+    const DEFAULT_INSURANCE_VALUE = 'default_insurance_value';
     const DEFAULT_WIDTH = 'default_width';
     const DEFAULT_HEIGHT = 'default_height';
     const DEFAULT_LENGTH = 'default_length';
@@ -298,9 +299,9 @@ class ConfigProvider implements ConfigProviderInterface
      * @return mixed
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getAutomaticPayForPackage()
+    public function getAutomaticInsuranceForPackage()
     {
-        return $this->getShippingConfigData(self::SHIPPING_AUTOMATIC_PAY_FOR_PACKAGE);
+        return $this->getShippingConfigData(self::SHIPPING_AUTOMATIC_INSURANCE_FOR_PACKAGE);
     }
 
     /**
@@ -354,6 +355,11 @@ class ConfigProvider implements ConfigProviderInterface
     public function getDefaultSize()
     {
         return $this->getShippingConfigData(self::DEFAULT_SIZE);
+    }
+
+    public function getDefaultInsuranceValue()
+    {
+        return $this->getShippingConfigData(self::DEFAULT_INSURANCE_VALUE);
     }
 
     public function getDefaultWidth()

@@ -16,7 +16,7 @@
                 <free_method>G</free_method>
                 <weight_attribute_code>weight</weight_attribute_code>
                 <weight_unit>kg</weight_unit>
-                <automatic_pay_for_package>0</automatic_pay_for_package>
+                <automatic_insurance_for_package>0</automatic_insurance_for_package>
                 <get_shipments_days>60</get_shipments_days>
                 <default_size>small</default_size>
                 <default_weight>1</default_weight>
