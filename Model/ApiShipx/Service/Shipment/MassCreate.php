@@ -202,9 +202,15 @@ class MassCreate
         $data['service'] = $shippingMethod;
         $data['reference'] = $order->getIncrementId();
         $data['phone'] = $order->getShippingAddress()->getTelephone();
-        $data['insurance'] = $this->configProvider->getAutomaticInsuranceForPackage()
-            ? $this->priceCurrency->convertAndRound($order->getGrandTotal())
-            : '';
+
+        if($this->configProvider->getAutomaticInsuranceForPackage()) {
+            $insurance = $this->priceCurrency->convertAndRound($order->getGrandTotal());
+        } elseif($this->configProvider->getDefaultInsuranceValue()) {
+            $insurance = $this->configProvider->getDefaultInsuranceValue();
+        } else {
+            $insurance = '';
+        }
+        $data['insurance'] = $insurance;
         $data['cod'] = strpos($order->getShippingMethod(), 'cod')
             ? $this->priceCurrency->convertAndRound($order->getGrandTotal())
             : '';
