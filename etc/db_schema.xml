@@ -26,9 +26,9 @@
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="link_id"/>
         </constraint>
-        <constraint xsi:type="foreign" referenceId="SM_INPOST_SHIPMENT_ORDER_INCREMENT_ID_SALES_ORDER_INCREMENT_ID"
+        <!-- <constraint xsi:type="foreign" referenceId="SM_INPOST_SHIPMENT_ORDER_INCREMENT_ID_SALES_ORDER_INCREMENT_ID"
                     table="smartmage_inpost_shipment_order_link" column="increment_id"
-                    referenceTable="sales_order" referenceColumn="increment_id" onDelete="NO ACTION"/>
+                    referenceTable="sales_order" referenceColumn="increment_id" onDelete="NO ACTION"/> -->
     </table>
 
     <table name="quote" resource="default" engine="innodb">
