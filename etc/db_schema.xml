@@ -22,7 +22,7 @@
     <table name="smartmage_inpost_shipment_order_link" resource="default" engine="innodb" comment="Inpost shipment link with order">
         <column name="link_id" xsi:type="int" padding="10" unsigned="true" nullable="false" identity="true" comment="Link id"/>
         <column name="shipment_id" xsi:type="int" padding="10" unsigned="true" nullable="false" comment="Shipment id"/>
-        <column xsi:type="varchar" name="increment_id" nullable="false" length="32" comment="Increment ID"/>
+        <column xsi:type="varchar" name="increment_id" nullable="false" length="50" comment="Increment ID"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="link_id"/>
         </constraint>
