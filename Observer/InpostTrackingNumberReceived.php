@@ -133,6 +133,10 @@ class InpostTrackingNumberReceived implements ObserverInterface
             $track = $this->trackFactory->create()->addData($data);
             $orderShipment->addTrack($track);
 
+            // support to MSI
+            $orderShipment->getExtensionAttributes()->setSourceCode('default');
+
+
             // set order status after shipment creation
             $orderShipmentChangeStatus = $this->scopeConfig->getValue(
                 self::CONFIG_ORDER_SHIPMENT_STATUS,
