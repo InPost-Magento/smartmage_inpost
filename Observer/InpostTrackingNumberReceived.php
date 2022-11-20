@@ -139,8 +139,8 @@ class InpostTrackingNumberReceived implements ObserverInterface
                 $orderShipment->getExtensionAttributes()->setSourceCode('default');
             }
 
- 
-            // set order status after shipment creation
+
+            // set order status after shipment creation 
             $orderShipmentChangeStatus = $this->scopeConfig->getValue(
                 self::CONFIG_ORDER_SHIPMENT_STATUS,
                 ScopeInterface::SCOPE_STORE,
