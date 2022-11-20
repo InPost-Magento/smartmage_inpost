@@ -2,7 +2,6 @@
 namespace Smartmage\Inpost\Observer;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\App\ProductMetadataInterface;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Exception\LocalizedException as LocalizedException;
@@ -39,7 +38,6 @@ class InpostTrackingNumberReceived implements ObserverInterface
     private ShipmentTrackInterfaceFactory $trackFactory;
     private InpostService $inpostService;
     protected ConfigProvider $configProvider;
-    private ProductMetadataInterface $productMetadata;
 
     public function __construct(
         MessageManagerInterface             $messageManager,
@@ -53,8 +51,7 @@ class InpostTrackingNumberReceived implements ObserverInterface
         ShipmentTrackInterfaceFactory       $trackFactory,
         OrderRepository                     $orderRepository,
         InpostService                       $inpostService,
-        ConfigProvider                      $configProvider,
-        ProductMetadataInterface            $productMetadata
+        ConfigProvider                      $configProvider
     ) {
         $this->logger = $logger;
         $this->messageManager = $messageManager;
@@ -68,7 +65,6 @@ class InpostTrackingNumberReceived implements ObserverInterface
         $this->orderRepository = $orderRepository;
         $this->inpostService = $inpostService;
         $this->configProvider = $configProvider;
-        $this->productMetadata = $productMetadata;
     }
 
     public function execute(Observer $observer)
@@ -138,8 +134,8 @@ class InpostTrackingNumberReceived implements ObserverInterface
             $orderShipment->addTrack($track);
 
             // support to MSI
-            $version = $this->productMetadata->getVersion();
-            if (version_compare($version, '2.4.5', '<')) {
+            // if MSI has been disabled or removed then setSourceCode method does not exists
+            if (method_exists($orderShipment->getExtensionAttributes(),'setSourceCode')) {
                 $orderShipment->getExtensionAttributes()->setSourceCode('default');
             }
 
