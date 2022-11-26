@@ -51,21 +51,6 @@
             <argument name="code" xsi:type="string">inpostcourier_express1700</argument>
         </arguments>
     </virtualType>
-    <virtualType name="DefaultWaySendingLocalStandard" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
-        <arguments>
-            <argument name="code" xsi:type="string">inpostcourier_localstandard</argument>
-        </arguments>
-    </virtualType>
-    <virtualType name="DefaultWaySendingLocalExpress" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
-        <arguments>
-            <argument name="code" xsi:type="string">inpostcourier_localexpress</argument>
-        </arguments>
-    </virtualType>
-    <virtualType name="DefaultWaySendingLocalSuperExpress" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
-        <arguments>
-            <argument name="code" xsi:type="string">inpostcourier_localsuperexpress</argument>
-        </arguments>
-    </virtualType>
     <virtualType name="DefaultWaySendingPallette" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
         <arguments>
             <argument name="code" xsi:type="string">inpostcourier_palette</argument>
@@ -145,27 +130,6 @@
     <virtualType name="DefaultSendingPointExpress1700" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
         <arguments>
             <argument name="code" xsi:type="string">inpostcourier_express1700</argument>
-            <argument name="points" xsi:type="string">pop</argument>
-            <argument name="functions" xsi:type="string">standard_courier_send</argument>
-        </arguments>
-    </virtualType>
-    <virtualType name="DefaultSendingPointLocalStandard" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
-        <arguments>
-            <argument name="code" xsi:type="string">inpostcourier_localstandard</argument>
-            <argument name="points" xsi:type="string">pop</argument>
-            <argument name="functions" xsi:type="string">standard_courier_send</argument>
-        </arguments>
-    </virtualType>
-    <virtualType name="DefaultSendingPointLocalExpress" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
-        <arguments>
-            <argument name="code" xsi:type="string">inpostcourier_localexpress</argument>
-            <argument name="points" xsi:type="string">pop</argument>
-            <argument name="functions" xsi:type="string">standard_courier_send</argument>
-        </arguments>
-    </virtualType>
-    <virtualType name="DefaultSendingPointLocalSuperExpress" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
-        <arguments>
-            <argument name="code" xsi:type="string">inpostcourier_localsuperexpress</argument>
             <argument name="points" xsi:type="string">pop</argument>
             <argument name="functions" xsi:type="string">standard_courier_send</argument>
         </arguments>
