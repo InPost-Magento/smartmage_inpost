@@ -15,12 +15,12 @@ class OrderDetails extends AbstractInput
         parent::prepare();
 
         $config = $this->getData('config');
-        $data= $this->request->getParams();
+        $data = $this->request->getParams();
 
         if (isset($config['dataScope']) && $config['dataScope'] == 'order_details') {
-            $config['default'] = $this->order->getIncrementId() . ' '
+            $config['default'] = $this->order->getIncrementId() . ' - '
                 . $this->priceCurrency->convertAndRound($this->order->getGrandTotal())
-                . ' ' . $this->priceCurrency->getCurrencySymbol();
+                . ' ' . $this->order->getOrderCurrencyCode();
 
             $this->setData('config', (array)$config);
         }

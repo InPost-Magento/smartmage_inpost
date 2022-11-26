@@ -44,9 +44,6 @@ abstract class AbstractSave extends Action
             'inpostcourier_express1000' => $this->courier,
             'inpostcourier_express1200' => $this->courier,
             'inpostcourier_express1700' => $this->courier,
-            'inpostcourier_localstandard' => $this->courier,
-            'inpostcourier_localexpress' => $this->courier,
-            'inpostcourier_localsuperexpress' => $this->courier,
             'inpostcourier_palette' => $this->courier,
         ];
 

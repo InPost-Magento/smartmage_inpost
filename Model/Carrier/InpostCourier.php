@@ -15,9 +15,6 @@ use Smartmage\Inpost\Model\Carrier\Methods\Courier\C2cCod;
 use Smartmage\Inpost\Model\Carrier\Methods\Courier\Express1000;
 use Smartmage\Inpost\Model\Carrier\Methods\Courier\Express1200;
 use Smartmage\Inpost\Model\Carrier\Methods\Courier\Express1700;
-use Smartmage\Inpost\Model\Carrier\Methods\Courier\LocalExpress;
-use Smartmage\Inpost\Model\Carrier\Methods\Courier\LocalStandard;
-use Smartmage\Inpost\Model\Carrier\Methods\Courier\LocalSuperExpress;
 use Smartmage\Inpost\Model\Carrier\Methods\Courier\Palette;
 use Smartmage\Inpost\Model\Carrier\Methods\Courier\Standard;
 use Smartmage\Inpost\Model\Carrier\Methods\Courier\StandardCod;
@@ -46,9 +43,6 @@ class InpostCourier extends AbstractInpostCarrier implements CarrierInterface
      * @param Express1000 $express1000
      * @param Express1200 $express1200
      * @param Express1700 $express1700
-     * @param LocalExpress $localExpress
-     * @param LocalStandard $localStandard
-     * @param LocalSuperExpress $localSuperExpress
      * @param Palette $palette
      * @param Standard $standard
      * @param StandardCod $standardCod
@@ -67,9 +61,6 @@ class InpostCourier extends AbstractInpostCarrier implements CarrierInterface
         Express1000 $express1000,
         Express1200 $express1200,
         Express1700 $express1700,
-        LocalExpress $localExpress,
-        LocalStandard $localStandard,
-        LocalSuperExpress $localSuperExpress,
         Palette $palette,
         Standard $standard,
         StandardCod $standardCod,
@@ -85,9 +76,6 @@ class InpostCourier extends AbstractInpostCarrier implements CarrierInterface
             $express1000,
             $express1200,
             $express1700,
-            $localExpress,
-            $localStandard,
-            $localSuperExpress,
             $palette,
             $c2c,
             $c2cCod

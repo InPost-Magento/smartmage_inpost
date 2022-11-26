@@ -15,7 +15,7 @@ class TargetLocker extends AbstractInput
         parent::prepare();
 
         $config = $this->getData('config');
-        $data= $this->request->getParams();
+        $data = $this->request->getParams();
 
         if (isset($config['dataScope']) && $config['dataScope'] == 'target_locker') {
             if (isset($data['target_locker'])) {

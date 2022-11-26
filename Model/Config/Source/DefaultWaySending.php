@@ -18,9 +18,6 @@ class DefaultWaySending implements OptionSourceInterface
     const INPOST_COURIER_EXPRESS1000 = 'inpostcourier_express1000';
     const INPOST_COURIER_EXPRESS1200 = 'inpostcourier_express1200';
     const INPOST_COURIER_EXPRESS1700 = 'inpostcourier_express1700';
-    const INPOST_COURIER_LOCAL_STANDARD = 'inpostcourier_localstandard';
-    const INPOST_COURIER_LOCAL_EXPRESS = 'inpostcourier_localexpress';
-    const INPOST_COURIER_LOCAL_SUPER_EXPRESS = 'inpostcourier_localsuperexpress';
     const INPOST_COURIER_PALETTE = 'inpostcourier_palette';
 
     protected $code = '';
@@ -65,9 +62,6 @@ class DefaultWaySending implements OptionSourceInterface
             case (self::INPOST_COURIER_EXPRESS1000):
             case (self::INPOST_COURIER_EXPRESS1200):
             case (self::INPOST_COURIER_EXPRESS1700):
-            case (self::INPOST_COURIER_LOCAL_STANDARD):
-            case (self::INPOST_COURIER_LOCAL_EXPRESS):
-            case (self::INPOST_COURIER_LOCAL_SUPER_EXPRESS):
                 return [
                     ['value' => 'dispatch_order', 'label' => __('Odbiór przez Kuriera')],
                     ['value' => 'pop', 'label' => __('Nadanie w POP')],

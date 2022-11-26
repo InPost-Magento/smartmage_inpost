@@ -22,9 +22,6 @@ class ShippingMethods implements OptionSourceInterface
         'inpostcourier_express1000' => 'inpost_courier_express_1000',
         'inpostcourier_express1200' => 'inpost_courier_express_1200',
         'inpostcourier_express1700' => 'inpost_courier_express_1700',
-        'inpostcourier_localstandard' => 'inpost_courier_local_standard',
-        'inpostcourier_localexpress' => 'inpost_courier_local_express',
-        'inpostcourier_localsuperexpress' => 'inpost_courier_local_super_express',
         'inpostcourier_palette' => 'inpost_courier_palette',
     ];
 
