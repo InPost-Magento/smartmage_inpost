@@ -16,28 +16,31 @@ abstract class AbstractMethod
     /**
      * @var string
      */
-    public $methodKey;
+    public string $methodKey;
 
     /**
      * @var ScopeConfigInterface
      */
-    protected $scopeConfig;
+    protected ScopeConfigInterface $scopeConfig;
 
     /**
      * @var StoreManagerInterface
      */
-    protected $storeManager;
+    protected StoreManagerInterface $storeManager;
 
     /**
      * @var String
      */
-    public $carrierCode;
+    public string $carrierCode;
 
     /**
      * @var ConfigProvider
      */
-    protected $configProvider;
+    protected ConfigProvider $configProvider;
 
+    /**
+     * @var
+     */
     protected $quoteItems;
 
     /**
@@ -45,7 +48,15 @@ abstract class AbstractMethod
      */
     protected $blockAttribute;
 
-    protected $logger;
+    /**
+     * @var PsrLoggerInterface
+     */
+    protected PsrLoggerInterface $logger;
+
+    /**
+     * @var int
+     */
+    protected int $shippingMethodsMode;
 
     /**
      * AbstractMethod constructor.
@@ -71,6 +82,11 @@ abstract class AbstractMethod
      */
     public function isAllowed()
     {
+        //Check shipping methods mode
+        if ($this->shippingMethodsMode != $this->configProvider->getConfigData('inpostlocker/shippingmethodsmode')) {
+            return false;
+        }
+
         //Check if method is active
         if (!$this->configProvider->getConfigFlag($this->carrierCode . '/' . $this->methodKey . '/active')) {
             return false;

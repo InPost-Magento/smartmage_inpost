@@ -8,9 +8,14 @@ use Smartmage\Inpost\Model\Carrier\Methods\AbstractMethod;
 
 class StandardCod extends AbstractMethod
 {
-    public $methodKey = 'standardcod';
+    public string $methodKey = 'standardcod';
 
-    public $carrierCode = 'inpostlocker';
+    public string $carrierCode = 'inpostlocker';
 
     protected $blockAttribute = 'block_send_with_locker';
+
+    /**
+     * @var int
+     */
+    protected int $shippingMethodsMode = 1;
 }

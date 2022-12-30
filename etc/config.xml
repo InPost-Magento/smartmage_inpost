@@ -31,6 +31,7 @@
                 <model>Smartmage\Inpost\Model\Carrier\InpostLocker</model>
                 <title>InPost Paczkomaty</title>
                 <active>1</active>
+                <shippingmethodsmode>0</shippingmethodsmode>
                 <show_only_delivery_eow>0</show_only_delivery_eow>
                 <standard>
                     <active>0</active>
@@ -69,6 +70,14 @@
                     <sallowspecific>1</sallowspecific>
                     <specificcountry>PL</specificcountry>
                 </standardeowcod>
+                <economic>
+                    <active>0</active>
+                    <name>Paczka Ekonomiczna</name>
+                    <max_cart_weight>25</max_cart_weight>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
+                    <popenabled>1</popenabled>
+                </economic>
             </inpostlocker>
             <inpostcourier>
                 <model>Smartmage\Inpost\Model\Carrier\InpostCourier</model>

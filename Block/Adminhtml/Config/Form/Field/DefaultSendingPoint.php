@@ -31,7 +31,6 @@ class DefaultSendingPoint extends Field
      */
     public function render(AbstractElement $element) : string
     {
-        //inpostlocker_standardeow
         $html = parent::render($element);
         $points = '';
         $functions = json_encode(explode(',', $this->functions));

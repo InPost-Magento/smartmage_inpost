@@ -8,11 +8,16 @@ use Smartmage\Inpost\Model\Carrier\Methods\AbstractMethod;
 
 class StandardEowCod extends AbstractMethod
 {
-    public $methodKey = 'standardeowcod';
+    public string $methodKey = 'standardeowcod';
 
-    public $carrierCode = 'inpostlocker';
+    public string $carrierCode = 'inpostlocker';
 
     protected $blockAttribute = 'block_send_with_locker';
+
+    /**
+     * @var int
+     */
+    protected int $shippingMethodsMode = 0;
 
     protected function isWeekendSendAvailable(): bool
     {

@@ -11,6 +11,8 @@ use Smartmage\Inpost\Model\Carrier\Methods\Locker\Standard;
 use Smartmage\Inpost\Model\Carrier\Methods\Locker\StandardCod;
 use Smartmage\Inpost\Model\Carrier\Methods\Locker\StandardEow;
 use Smartmage\Inpost\Model\Carrier\Methods\Locker\StandardEowCod;
+use Smartmage\Inpost\Model\Carrier\Methods\Locker\Economic;
+use Smartmage\Inpost\Model\Config\Source\ShippingMethodsMode;
 use Psr\Log\LoggerInterface;
 use Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -40,6 +42,7 @@ class InpostLocker extends AbstractInpostCarrier implements CarrierInterface
      * @param StandardCod $standardCod
      * @param StandardEow $standardEow
      * @param StandardEowCod $standardEowCod
+     * @param Economic $economic
      * @param Session $checkoutSession
      * @param ConfigProvider $configProvider
      * @param array $data
@@ -54,6 +57,7 @@ class InpostLocker extends AbstractInpostCarrier implements CarrierInterface
         StandardCod $standardCod,
         StandardEow $standardEow,
         StandardEowCod $standardEowCod,
+        Economic $economic,
         Session $checkoutSession,
         ConfigProvider $configProvider,
         array $data = []
@@ -64,7 +68,8 @@ class InpostLocker extends AbstractInpostCarrier implements CarrierInterface
             $standardLocker,
             $standardCod,
             $standardEow,
-            $standardEowCod
+            $standardEowCod,
+            $economic
         ];
         parent::__construct(
             $scopeConfig,
@@ -92,7 +97,6 @@ class InpostLocker extends AbstractInpostCarrier implements CarrierInterface
             $this->getActiveAllowedMethods();
 
             foreach ($this->allowedMethods as $method) {
-
                 if (!in_array($method['key'], $this->eowMethods) && $this->eowAvailable) {
                     continue;
                 }
@@ -115,7 +119,9 @@ class InpostLocker extends AbstractInpostCarrier implements CarrierInterface
     {
         if ($this->configProvider->getConfigFlag(
             $this->_code . '/show_only_delivery_eow'
-        )) {
+        ) && $this->configProvider->getConfigData(
+            'inpostlocker/shippingmethodsmode'
+        ) == ShippingMethodsMode::SHIPPING_METHODS_MODE_STANDARD) {
             return true;
         }
 

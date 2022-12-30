@@ -15,7 +15,7 @@ class Cod extends AbstractInput
         parent::prepare();
 
         $config = $this->getData('config');
-        $data= $this->request->getParams();
+        $data = $this->request->getParams();
 
         if (isset($config['dataScope']) && $config['dataScope'] == 'cod') {
             if (isset($data['cod'])) {
