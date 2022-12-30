@@ -46,7 +46,7 @@ abstract class AbstractMethod
     /**
      * @var string
      */
-    protected $blockAttribute;
+    protected string $blockAttribute;
 
     /**
      * @var PsrLoggerInterface

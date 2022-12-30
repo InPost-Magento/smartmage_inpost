@@ -91,7 +91,7 @@
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">inpostshipment_form_create</item>
                     <item name="class" xsi:type="string">Smartmage\Inpost\Ui\Component\Form\Element\Service</item>
-                    <item name="disabled" xsi:type="boolean">false</item>
+                    <item name="disabled" xsi:type="boolean">true</item>
                 </item>
             </argument>
 
@@ -824,7 +824,7 @@
                                 </action>
                             </actions>
                         </rule>
-                        <rule name="14">
+                        <rule name="11">
                             <value>inpostcourier_palette</value>
                             <actions>
                                 <action name="0">
@@ -887,7 +887,7 @@
                                 </action>
                             </actions>
                         </rule>
-                        <rule name="15">
+                        <rule name="12">
                             <value>inpostlocker_economic</value>
                             <actions>
                                 <action name="0">

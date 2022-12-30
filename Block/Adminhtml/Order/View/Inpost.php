@@ -131,7 +131,7 @@ class Inpost extends AbstractOrder
      */
     public function getShippingService($shipment)
     {
-        return $this->serviceConfig->getServiceLabel($shipment->getService());
+        return $this->serviceConfig->getServiceLabel($shipment->getShippingMethod());
     }
 
     /**

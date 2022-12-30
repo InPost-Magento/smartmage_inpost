@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Smartmage\Inpost\Model\Carrier\Methods\Courier;
 
 use Smartmage\Inpost\Model\Carrier\Methods\AbstractMethod;
+use Smartmage\Inpost\Model\Config\Source\ShippingMethodsMode;
 
 class Express1700 extends AbstractMethod
 {
@@ -12,10 +13,7 @@ class Express1700 extends AbstractMethod
 
     public string $carrierCode = 'inpostcourier';
 
-    protected $blockAttribute = 'block_send_with_courier';
+    protected string $blockAttribute = 'block_send_with_courier';
 
-    /**
-     * @var int
-     */
-    protected int $shippingMethodsMode = 0;
+    protected int $shippingMethodsMode = ShippingMethodsMode::SHIPPING_METHODS_MODE_STANDARD;
 }

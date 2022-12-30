@@ -11,6 +11,7 @@ class DefaultWaySending implements OptionSourceInterface
     const INPOST_LOCKER_STANDARD_COD = 'inpostlocker_standardcod';
     const INPOST_LOCKER_STANDARD_EOW = 'inpostlocker_standardeow';
     const INPOST_LOCKER_STANDARD_EOW_COD = 'inpostlocker_standardeowcod';
+    const INPOST_LOCKER_ECONOMIC = 'inpostlocker_economic';
     const INPOST_COURIER_C2C = 'inpostcourier_c2c';
     const INPOST_COURIER_C2C_COD = 'inpostcourier_c2ccod';
     const INPOST_COURIER_STANDARD = 'inpostcourier_standard';
@@ -39,6 +40,7 @@ class DefaultWaySending implements OptionSourceInterface
         switch ($this->code) {
             case (self::INPOST_LOCKER_STANDARD):
             case (self::INPOST_LOCKER_STANDARD_COD):
+            case (self::INPOST_LOCKER_ECONOMIC):
                 return [
                     ['value' => 'parcel_locker', 'label' => __('Nadanie w Paczkomacie')],
                     ['value' => 'dispatch_order', 'label' => __('Odbiór przez Kuriera')],

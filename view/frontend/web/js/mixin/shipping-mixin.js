@@ -28,7 +28,12 @@ define(
                     if(quote.shippingMethod()) {
                         const ShippingMethodCode = quote.shippingMethod().method_code+'_'+quote.shippingMethod().carrier_code;
 
-                        if (ShippingMethodCode === 'standard_inpostlocker' || ShippingMethodCode === 'standardcod_inpostlocker' || ShippingMethodCode === 'standardeow_inpostlocker' || ShippingMethodCode === 'standardeowcod_inpostlocker' ) {
+                        if (ShippingMethodCode === 'standard_inpostlocker'
+                            || ShippingMethodCode === 'standardcod_inpostlocker'
+                            || ShippingMethodCode === 'standardeow_inpostlocker'
+                            || ShippingMethodCode === 'standardeowcod_inpostlocker'
+                            || ShippingMethodCode === 'economic_inpostlocker'
+                        ) {
                             const pointDataDB = checkoutData.getShippingInPostPoint();
 
                             if( typeof pointDataDB === 'undefined' || pointDataDB === null || pointDataDB.name.length === 0){

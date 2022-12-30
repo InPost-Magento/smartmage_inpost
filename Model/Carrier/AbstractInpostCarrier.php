@@ -104,7 +104,7 @@ abstract class AbstractInpostCarrier extends AbstractCarrier
     /**
      * @return array
      */
-    public function getActiveAllowedMethods(RateRequest $request)
+    public function getActiveAllowedMethods(RateRequest $request): array
     {
         $allowedMethods = [];
         $methods = [];

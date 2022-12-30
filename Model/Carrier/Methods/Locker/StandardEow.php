@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Smartmage\Inpost\Model\Carrier\Methods\Locker;
 
 use Smartmage\Inpost\Model\Carrier\Methods\AbstractMethod;
+use Smartmage\Inpost\Model\Config\Source\ShippingMethodsMode;
 
 class StandardEow extends AbstractMethod
 {
@@ -12,12 +13,9 @@ class StandardEow extends AbstractMethod
 
     public string $carrierCode = 'inpostlocker';
 
-    protected $blockAttribute = 'block_send_with_locker';
+    protected string $blockAttribute = 'block_send_with_locker';
 
-    /**
-     * @var int
-     */
-    protected int $shippingMethodsMode = 0;
+    protected int $shippingMethodsMode = ShippingMethodsMode::SHIPPING_METHODS_MODE_STANDARD;
 
     protected function isWeekendSendAvailable(): bool
     {

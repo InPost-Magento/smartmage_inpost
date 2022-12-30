@@ -4,9 +4,16 @@ declare(strict_types=1);
 namespace Smartmage\Inpost\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
+use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
 
 class Service implements OptionSourceInterface
 {
+
+    public function __construct(
+        ShippingMethods $shippingMethods
+    ) {
+        $this->shippingMethods = $shippingMethods;
+    }
 
     const SERVICE_LABEL = [
         'inpost_locker_standard' => 'Standard parcel locker delivery',
@@ -26,8 +33,10 @@ class Service implements OptionSourceInterface
     {
         $services = [];
 
-        foreach (self::SERVICE_LABEL as $key => $value) {
-            $services[] = ['value' => $key, 'label' => __($value)];
+        $methods = $this->shippingMethods->toOptionArray();
+
+        foreach ($methods as $method) {
+            $services[$method['value']] = ['value' => $method['value'], 'label' => __($method['label'])];
         }
 
         return $services;
@@ -39,6 +48,7 @@ class Service implements OptionSourceInterface
      */
     public function getServiceLabel($service)
     {
-        return (isset(self::SERVICE_LABEL[$service])) ? __(self::SERVICE_LABEL[$service]) : $service;
+        $services = $this->toOptionArray();
+        return (isset($services[$service])) ? __($services[$service]['label']) : $service;
     }
 }
