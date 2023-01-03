@@ -12,6 +12,7 @@ use Smartmage\Inpost\Model\Carrier\Methods\Locker\StandardCod;
 use Smartmage\Inpost\Model\Carrier\Methods\Locker\StandardEow;
 use Smartmage\Inpost\Model\Carrier\Methods\Locker\StandardEowCod;
 use Smartmage\Inpost\Model\Carrier\Methods\Locker\Economic;
+use Smartmage\Inpost\Model\Carrier\Methods\Locker\EconomicCod;
 use Smartmage\Inpost\Model\Config\Source\ShippingMethodsMode;
 use Psr\Log\LoggerInterface;
 use Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory;
@@ -43,6 +44,7 @@ class InpostLocker extends AbstractInpostCarrier implements CarrierInterface
      * @param StandardEow $standardEow
      * @param StandardEowCod $standardEowCod
      * @param Economic $economic
+     * @param EconomicCod $economicCod
      * @param Session $checkoutSession
      * @param ConfigProvider $configProvider
      * @param array $data
@@ -58,6 +60,7 @@ class InpostLocker extends AbstractInpostCarrier implements CarrierInterface
         StandardEow $standardEow,
         StandardEowCod $standardEowCod,
         Economic $economic,
+        EconomicCod $economicCod,
         Session $checkoutSession,
         ConfigProvider $configProvider,
         array $data = []
@@ -69,7 +72,8 @@ class InpostLocker extends AbstractInpostCarrier implements CarrierInterface
             $standardCod,
             $standardEow,
             $standardEowCod,
-            $economic
+            $economic,
+            $economicCod
         ];
         parent::__construct(
             $scopeConfig,
@@ -94,7 +98,7 @@ class InpostLocker extends AbstractInpostCarrier implements CarrierInterface
             /** @var Result $result */
             $result = $this->rateResultFactory->create();
 
-            $this->getActiveAllowedMethods();
+            $this->getActiveAllowedMethods($request);
 
             foreach ($this->allowedMethods as $method) {
                 if (!in_array($method['key'], $this->eowMethods) && $this->eowAvailable) {

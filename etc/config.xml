@@ -78,6 +78,13 @@
                     <specificcountry>PL</specificcountry>
                     <popenabled>1</popenabled>
                 </economic>
+                <economiccod>
+                    <active>0</active>
+                    <name>Paczka Ekonomiczna - płatność przy odbiorze</name>
+                    <max_cart_weight>25</max_cart_weight>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
+                </economiccod>
             </inpostlocker>
             <inpostcourier>
                 <model>Smartmage\Inpost\Model\Carrier\InpostCourier</model>

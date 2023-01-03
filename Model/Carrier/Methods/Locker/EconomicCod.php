@@ -7,13 +7,13 @@ namespace Smartmage\Inpost\Model\Carrier\Methods\Locker;
 use Smartmage\Inpost\Model\Carrier\Methods\AbstractMethod;
 use Smartmage\Inpost\Model\Config\Source\ShippingMethodsMode;
 
-class StandardCod extends AbstractMethod
+class EconomicCod extends AbstractMethod
 {
-    public string $methodKey = 'standardcod';
+    public string $methodKey = 'economiccod';
 
     public string $carrierCode = 'inpostlocker';
 
     protected string $blockAttribute = 'block_send_with_locker';
 
-    public int $shippingMethodsMode = ShippingMethodsMode::SHIPPING_METHODS_MODE_STANDARD;
+    public int $shippingMethodsMode = ShippingMethodsMode::SHIPPING_METHODS_MODE_ECONOMIC;
 }

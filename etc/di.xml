@@ -88,7 +88,14 @@
     <virtualType name="DefaultSendingPointEconomic" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
         <arguments>
             <argument name="code" xsi:type="string">inpostlocker_economic</argument>
-            <argument name="points" xsi:type="string">parcel_locker</argument>
+            <argument name="points" xsi:type="string">standard</argument>
+            <argument name="functions" xsi:type="string">parcel_send</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointEconomicCod" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostlocker_economiccod</argument>
+            <argument name="points" xsi:type="string">standard</argument>
             <argument name="functions" xsi:type="string">parcel_send</argument>
         </arguments>
     </virtualType>

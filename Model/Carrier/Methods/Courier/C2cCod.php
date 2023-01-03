@@ -15,5 +15,5 @@ class C2cCod extends AbstractMethod
 
     protected string $blockAttribute = 'block_send_with_courier';
 
-    protected int $shippingMethodsMode = ShippingMethodsMode::SHIPPING_METHODS_MODE_STANDARD;
+    public int $shippingMethodsMode = ShippingMethodsMode::SHIPPING_METHODS_MODE_STANDARD;
 }

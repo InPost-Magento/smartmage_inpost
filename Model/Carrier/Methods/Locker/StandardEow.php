@@ -15,7 +15,7 @@ class StandardEow extends AbstractMethod
 
     protected string $blockAttribute = 'block_send_with_locker';
 
-    protected int $shippingMethodsMode = ShippingMethodsMode::SHIPPING_METHODS_MODE_STANDARD;
+    public int $shippingMethodsMode = ShippingMethodsMode::SHIPPING_METHODS_MODE_STANDARD;
 
     protected function isWeekendSendAvailable(): bool
     {

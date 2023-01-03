@@ -15,5 +15,5 @@ class Economic extends AbstractMethod
 
     protected string $blockAttribute = 'block_send_with_locker';
 
-    protected int $shippingMethodsMode = ShippingMethodsMode::SHIPPING_METHODS_MODE_ECONOMIC;
+    public int $shippingMethodsMode = ShippingMethodsMode::SHIPPING_METHODS_MODE_ECONOMIC;
 }

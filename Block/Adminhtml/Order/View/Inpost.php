@@ -86,7 +86,7 @@ class Inpost extends AbstractOrder
      */
     public function getInpostShippingMethods() : array
     {
-        return $this->shippingMethods->toOptionArray();
+        return $this->shippingMethods->toOptionArray(true);
     }
 
     /**

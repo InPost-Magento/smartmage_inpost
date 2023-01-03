@@ -56,7 +56,7 @@ abstract class AbstractMethod
     /**
      * @var int
      */
-    protected int $shippingMethodsMode;
+    public int $shippingMethodsMode;
 
     /**
      * AbstractMethod constructor.
@@ -84,16 +84,24 @@ abstract class AbstractMethod
     {
         //Check shipping methods mode
         if ($this->shippingMethodsMode != $this->configProvider->getConfigData('inpostlocker/shippingmethodsmode')) {
+            $this->logger->info(print_r('Method not allowed. Shipping methods mode set to '
+                . $this->configProvider->getConfigData('inpostlocker/shippingmethodsmode') . ' while method '
+                . $this->methodKey . ' is '
+                . $this->shippingMethodsMode, true));
             return false;
         }
 
         //Check if method is active
         if (!$this->configProvider->getConfigFlag($this->carrierCode . '/' . $this->methodKey . '/active')) {
+            $this->logger->info(print_r('Method not allowed. Method '
+                . $this->methodKey . ' is is not active', true));
             return false;
         }
 
         //Check if products have disabled shipping method type
         if ($this->isShippingDisabled()) {
+            $this->logger->info(print_r('Method '
+                . $this->methodKey . ' not allowed. Shipping is disabled', true));
             return false;
         }
 
@@ -102,12 +110,18 @@ abstract class AbstractMethod
             $this->carrierCode . '/' . $this->methodKey . '/max_cart_weight'
         );
         if ($this->calculateWeight() > $maxWeight) {
+            $this->logger->info(print_r('Method '
+                . $this->methodKey . ' not allowed. Cart is too heavy.', true));
             return false;
         }
 
         if (!$this->isWeekendSendAvailable()) {
+            $this->logger->info(print_r('Method '
+                . $this->methodKey . ' not allowed. Weekend send is available.', true));
             return false;
         }
+        $this->logger->info(print_r('Method '
+            . $this->methodKey . ' is allowed', true));
 
         return true;
     }
