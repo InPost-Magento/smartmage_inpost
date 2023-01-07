@@ -24,7 +24,7 @@ class Insurance extends AbstractInput
             } else {
                 if ($this->configProvider->getAutomaticInsuranceForPackage()) {
                     $config['default'] = $this->priceCurrency->convertAndRound($this->order->getGrandTotal());
-                } elseif($this->configProvider->getDefaultInsuranceValue()) {
+                } elseif ($this->configProvider->getDefaultInsuranceValue()) {
                     $config['default'] = $this->configProvider->getDefaultInsuranceValue();
                 }
             }

@@ -65,7 +65,7 @@
             $selectedMethod = $block->getSelectedMethod();
             $orderId = $block->getOrder()->getId();
             ?>
-            <form action="<?= $this->getUrl('smartmageinpost/shipments/create') ?>" class="inpost-shipments-form">
+            <form action="<?= $block->getUrl('smartmageinpost/shipments/create') ?>" class="inpost-shipments-form">
                 <div class="control">
                     <input type="hidden" name="order_id" value="<?= $orderId ?>">
                     <select

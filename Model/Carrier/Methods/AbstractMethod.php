@@ -201,7 +201,7 @@ abstract class AbstractMethod
      */
     public function isFreeShipping($request)
     {
-        if($request->getFreeShipping()) {
+        if ($request->getFreeShipping()) {
             $this->logger->info(print_r('Method ' . $this->carrierCode . '/' . $this->methodKey . ' free shipping reason: Request free shipping', true));
             return true;
         }
@@ -234,7 +234,7 @@ abstract class AbstractMethod
                     break;
                 }
             }
-            if($hasAllItemsFreeshipping) {
+            if ($hasAllItemsFreeshipping) {
                 $this->logger->info(print_r('Method ' . $this->carrierCode . '/' . $this->methodKey . ' free shipping reason: All items set as freeshipping', true));
             }
 

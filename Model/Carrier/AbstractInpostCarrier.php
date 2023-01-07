@@ -175,7 +175,7 @@ abstract class AbstractInpostCarrier extends AbstractCarrier
     {
         $methods = [];
         foreach ($this->methods as $method) {
-            if($forShippingMethodsMode === true
+            if ($forShippingMethodsMode === true
                 && $method->shippingMethodsMode != $this->configProvider->getConfigData('inpostlocker/shippingmethodsmode')) {
                 continue;
             }
