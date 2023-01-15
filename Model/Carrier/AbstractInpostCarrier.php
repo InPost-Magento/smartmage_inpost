@@ -111,16 +111,10 @@ abstract class AbstractInpostCarrier extends AbstractCarrier
         $quoteItems = $request->getAllItems();
 
         foreach ($this->methods as $method) {
-
-            \Magento\Framework\App\ObjectManager::getInstance()->get(\Psr\Log\LoggerInterface::class)->debug($method->getKey() . 'xx');
             $method->setItems($quoteItems);
-            if ($method->isAllowed()) {
-                \Magento\Framework\App\ObjectManager::getInstance()->get(\Psr\Log\LoggerInterface::class)->debug('allowed ok');
-            }
             if ($method->isAllowed()
                 && $this->isShipCountryApplicable($request->getDestCountryId(), $method->getKey())
             ) {
-                \Magento\Framework\App\ObjectManager::getInstance()->get(\Psr\Log\LoggerInterface::class)->debug('jest ok');
                 if (in_array($method->getKey(), $this->eowMethods)) {
                     $this->eowAvailable = true;
                 }
@@ -171,14 +165,10 @@ abstract class AbstractInpostCarrier extends AbstractCarrier
     /**
      * @return array
      */
-    public function getAllowedMethods($forShippingMethodsMode = false) : array
+    public function getAllowedMethods() : array
     {
         $methods = [];
         foreach ($this->methods as $method) {
-            if($forShippingMethodsMode === true
-                && $method->shippingMethodsMode != $this->configProvider->getConfigData('inpostlocker/shippingmethodsmode')) {
-                continue;
-            }
             $methods[$method->getKey()] = $method->getName();
         }
         return $methods;

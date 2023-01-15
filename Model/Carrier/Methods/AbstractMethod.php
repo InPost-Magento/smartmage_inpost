@@ -53,10 +53,6 @@ abstract class AbstractMethod
      */
     protected PsrLoggerInterface $logger;
 
-    /**
-     * @var int
-     */
-    public int $shippingMethodsMode;
 
     /**
      * AbstractMethod constructor.
@@ -82,15 +78,6 @@ abstract class AbstractMethod
      */
     public function isAllowed()
     {
-        //Check shipping methods mode
-        if ($this->shippingMethodsMode != $this->configProvider->getConfigData('inpostlocker/shippingmethodsmode')) {
-            $this->logger->info(print_r('Method not allowed. Shipping methods mode set to '
-                . $this->configProvider->getConfigData('inpostlocker/shippingmethodsmode') . ' while method '
-                . $this->methodKey . ' is '
-                . $this->shippingMethodsMode, true));
-            return false;
-        }
-
         //Check if method is active
         if (!$this->configProvider->getConfigFlag($this->carrierCode . '/' . $this->methodKey . '/active')) {
             $this->logger->info(print_r('Method not allowed. Method '

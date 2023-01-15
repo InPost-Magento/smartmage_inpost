@@ -13,7 +13,6 @@ use Smartmage\Inpost\Model\Carrier\Methods\Locker\StandardEow;
 use Smartmage\Inpost\Model\Carrier\Methods\Locker\StandardEowCod;
 use Smartmage\Inpost\Model\Carrier\Methods\Locker\Economic;
 use Smartmage\Inpost\Model\Carrier\Methods\Locker\EconomicCod;
-use Smartmage\Inpost\Model\Config\Source\ShippingMethodsMode;
 use Psr\Log\LoggerInterface;
 use Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -123,9 +122,7 @@ class InpostLocker extends AbstractInpostCarrier implements CarrierInterface
     {
         if ($this->configProvider->getConfigFlag(
             $this->_code . '/show_only_delivery_eow'
-        ) && $this->configProvider->getConfigData(
-            'inpostlocker/shippingmethodsmode'
-        ) == ShippingMethodsMode::SHIPPING_METHODS_MODE_STANDARD) {
+        )) {
             return true;
         }
 

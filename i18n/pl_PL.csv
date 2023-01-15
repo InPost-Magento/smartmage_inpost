@@ -196,6 +196,3 @@ Yes,Tak
 No,Nie
 Default insurance value,Domyślna wartość ubezpieczenia
 Shipping methods mode,Tryb metod dostawy
-Standard mode,Tryb standardowy
-Economic mode,Tryb ekonomiczny
-In economic mode only InPost Locker Economic package is available. Please remember to switch access token after switching this option.,W trybie ekonomicznym jest dostępna tylko metoda InPost Paczkomaty - Paczka Ekonomiczna. Proszę pamiętać o zmianie tokena dostępu po przełączeniu tego pola.

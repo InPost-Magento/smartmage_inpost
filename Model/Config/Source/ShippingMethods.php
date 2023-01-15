@@ -67,7 +67,7 @@ class ShippingMethods implements OptionSourceInterface
                 continue;
             }
 
-            $carrierMethods = $carrierModel->getAllowedMethods($isActiveOnlyFlag);
+            $carrierMethods = $carrierModel->getAllowedMethods();
 
             if (!$carrierMethods) {
                 continue;

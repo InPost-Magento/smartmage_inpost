@@ -31,7 +31,6 @@
                 <model>Smartmage\Inpost\Model\Carrier\InpostLocker</model>
                 <title>InPost Paczkomaty</title>
                 <active>1</active>
-                <shippingmethodsmode>0</shippingmethodsmode>
                 <show_only_delivery_eow>0</show_only_delivery_eow>
                 <standard>
                     <active>0</active>
