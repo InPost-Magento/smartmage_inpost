@@ -142,12 +142,11 @@ abstract class AbstractCreate extends AbstractService
                 $formatedData[ShipmentInterface::RECEIVER_DATA]       = $receiverData;
                 $formatedData[ShipmentInterface::REFERENCE]           = $response['reference'];
                 $formatedData[ShipmentInterface::TRACKING_NUMBER]     = $response['tracking_number'];
-                if(
-                    $this->request->getPost('shipment_fieldset')
+                if ($this->request->getPost('shipment_fieldset')
                     && isset($this->request->getPost('shipment_fieldset')['shipping_method'])
                 ) {
                     $formatedData[ShipmentInterface::SHIPPING_METHOD]     = $this->request->getPost('shipment_fieldset')['shipping_method'];
-                } elseif ($order !== NULL) {
+                } elseif ($order !== null) {
                     $formatedData[ShipmentInterface::SHIPPING_METHOD] = $order->getShippingMethod();
                 }
 

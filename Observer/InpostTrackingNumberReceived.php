@@ -135,12 +135,12 @@ class InpostTrackingNumberReceived implements ObserverInterface
 
             // support to MSI
             // if MSI has been disabled or removed then setSourceCode method does not exists
-            if (method_exists($orderShipment->getExtensionAttributes(),'setSourceCode')) {
+            if (method_exists($orderShipment->getExtensionAttributes(), 'setSourceCode')) {
                 $orderShipment->getExtensionAttributes()->setSourceCode('default');
             }
 
 
-            // set order status after shipment creation 
+            // set order status after shipment creation
             $orderShipmentChangeStatus = $this->scopeConfig->getValue(
                 self::CONFIG_ORDER_SHIPMENT_STATUS,
                 ScopeInterface::SCOPE_STORE,
@@ -177,8 +177,8 @@ class InpostTrackingNumberReceived implements ObserverInterface
 
     public function getShippingMethodTitle($shippingMethodCode)
     {
-        if($shippingMethodCode) {
-            $carrierMethod = explode('_',$shippingMethodCode);
+        if ($shippingMethodCode) {
+            $carrierMethod = explode('_', $shippingMethodCode);
             return $this->configProvider->getConfigData(
                 $carrierMethod[0] . '/' . $carrierMethod[1] . '/name'
             );

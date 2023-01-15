@@ -12,7 +12,7 @@
 /** @var \Magento\Shipping\Helper\Data $shippingHelper */
 $shippingHelper = $block->getData('shippingHelper');
 /** @var \Magento\Tax\Helper\Data $taxHelper */
-$taxHelper = ($block->getData('taxHelper')) ? $block->getData('taxHelper') : $this->helper(Magento\Tax\Helper\Data::class);
+$taxHelper = ($block->getData('taxHelper')) ? $block->getData('taxHelper') : $block->helper(Magento\Tax\Helper\Data::class);
 ?>
 <?php $order = $block->getOrder() ?>
 <?php if ($order->getIsVirtual()):

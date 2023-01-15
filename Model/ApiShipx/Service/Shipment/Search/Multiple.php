@@ -83,7 +83,7 @@ class Multiple extends AbstractSearch
 
                         $receiver     = $item['receiver'];
                         $receiverData = '';
-                        if ($item['service'] !== NULL && strpos($item['service'], 'inpost_locker') !== false) {
+                        if ($item['service'] !== null && strpos($item['service'], 'inpost_locker') !== false) {
                             $receiverData .= $receiver['email'] . '<br>'
                                 . $receiver['phone'] . '<br>'
                                 . $item['custom_attributes']['target_point'];
