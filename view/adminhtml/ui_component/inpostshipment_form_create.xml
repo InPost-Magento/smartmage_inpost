@@ -824,7 +824,7 @@
                                 </action>
                             </actions>
                         </rule>
-                        <rule name="14">
+                        <rule name="11">
                             <value>inpostcourier_palette</value>
                             <actions>
                                 <action name="0">
