@@ -194,3 +194,5 @@ Selected Paczkomat:,Wybrany Paczkomat:
 Yes,Tak
 No,Nie
 Default insurance value,Domyślna wartość ubezpieczenia
+Module version,Wersja modułu
+"setup:upgrade required, module.xml version","setup:upgrade wymagany, wersja z module.xml"
