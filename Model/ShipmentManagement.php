@@ -128,7 +128,7 @@ class ShipmentManagement implements Api\ShipmentManagementInterface
                 : ''
         );
 
-        if(isset($shipmentData[ShipmentInterface::SHIPPING_METHOD])) {
+        if (isset($shipmentData[ShipmentInterface::SHIPPING_METHOD])) {
             $shipment->setShippingMethod($shipmentData[ShipmentInterface::SHIPPING_METHOD]);
         }
 

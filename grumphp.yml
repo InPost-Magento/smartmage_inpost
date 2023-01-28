@@ -1,0 +1,2 @@
+grumphp:
+    tasks: { phpcs: null, phpcsfixer: null, phpcsfixer2: null, phpmd: null, phpstan: null }

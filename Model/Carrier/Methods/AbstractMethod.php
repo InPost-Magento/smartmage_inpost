@@ -16,36 +16,43 @@ abstract class AbstractMethod
     /**
      * @var string
      */
-    public $methodKey;
+    public string $methodKey;
 
     /**
      * @var ScopeConfigInterface
      */
-    protected $scopeConfig;
+    protected ScopeConfigInterface $scopeConfig;
 
     /**
      * @var StoreManagerInterface
      */
-    protected $storeManager;
+    protected StoreManagerInterface $storeManager;
 
     /**
      * @var String
      */
-    public $carrierCode;
+    public string $carrierCode;
 
     /**
      * @var ConfigProvider
      */
-    protected $configProvider;
+    protected ConfigProvider $configProvider;
 
+    /**
+     * @var
+     */
     protected $quoteItems;
 
     /**
      * @var string
      */
-    protected $blockAttribute;
+    protected string $blockAttribute;
 
-    protected $logger;
+    /**
+     * @var PsrLoggerInterface
+     */
+    protected PsrLoggerInterface $logger;
+
 
     /**
      * AbstractMethod constructor.
@@ -73,11 +80,15 @@ abstract class AbstractMethod
     {
         //Check if method is active
         if (!$this->configProvider->getConfigFlag($this->carrierCode . '/' . $this->methodKey . '/active')) {
+            $this->logger->info(print_r('Method not allowed. Method '
+                . $this->methodKey . ' is is not active', true));
             return false;
         }
 
         //Check if products have disabled shipping method type
         if ($this->isShippingDisabled()) {
+            $this->logger->info(print_r('Method '
+                . $this->methodKey . ' not allowed. Shipping is disabled', true));
             return false;
         }
 
@@ -86,12 +97,18 @@ abstract class AbstractMethod
             $this->carrierCode . '/' . $this->methodKey . '/max_cart_weight'
         );
         if ($this->calculateWeight() > $maxWeight) {
+            $this->logger->info(print_r('Method '
+                . $this->methodKey . ' not allowed. Cart is too heavy.', true));
             return false;
         }
 
         if (!$this->isWeekendSendAvailable()) {
+            $this->logger->info(print_r('Method '
+                . $this->methodKey . ' not allowed. Weekend send is available.', true));
             return false;
         }
+        $this->logger->info(print_r('Method '
+            . $this->methodKey . ' is allowed', true));
 
         return true;
     }
@@ -171,7 +188,7 @@ abstract class AbstractMethod
      */
     public function isFreeShipping($request)
     {
-        if($request->getFreeShipping()) {
+        if ($request->getFreeShipping()) {
             $this->logger->info(print_r('Method ' . $this->carrierCode . '/' . $this->methodKey . ' free shipping reason: Request free shipping', true));
             return true;
         }
@@ -204,7 +221,7 @@ abstract class AbstractMethod
                     break;
                 }
             }
-            if($hasAllItemsFreeshipping) {
+            if ($hasAllItemsFreeshipping) {
                 $this->logger->info(print_r('Method ' . $this->carrierCode . '/' . $this->methodKey . ' free shipping reason: All items set as freeshipping', true));
             }
 

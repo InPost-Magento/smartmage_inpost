@@ -21,6 +21,7 @@ Saturday,Sobota
 Sunday,Niedziela
 Organization ID,ID organizacji
 Access Token,Token dostępu
+Economic mode Access Token,Token dostępu w trybie ekonomicznym
 Geowidget Token,Token geowidgetu
 Label format,Format etykiety
 Label size,Rozmiar etykiety
@@ -194,5 +195,7 @@ Selected Paczkomat:,Wybrany Paczkomat:
 Yes,Tak
 No,Nie
 Default insurance value,Domyślna wartość ubezpieczenia
+Shipping methods mode,Tryb metod dostawy
+"The use of this service requires a signed agreement. For this purpose, please contact your Sales Representative.","Korzystanie z tej usługi wymaga podpisanego porozumienia. W tym celu prosimy o kontakt z Przedstawicielem Handlowym."
 Module version,Wersja modułu
 "setup:upgrade required, module.xml version","setup:upgrade wymagany, wersja z module.xml"

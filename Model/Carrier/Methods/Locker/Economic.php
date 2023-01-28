@@ -6,9 +6,9 @@ namespace Smartmage\Inpost\Model\Carrier\Methods\Locker;
 
 use Smartmage\Inpost\Model\Carrier\Methods\AbstractMethod;
 
-class StandardCod extends AbstractMethod
+class Economic extends AbstractMethod
 {
-    public string $methodKey = 'standardcod';
+    public string $methodKey = 'economic';
 
     public string $carrierCode = 'inpostlocker';
 
