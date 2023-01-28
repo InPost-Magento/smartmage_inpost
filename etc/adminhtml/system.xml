@@ -870,6 +870,7 @@
                 <field id="mode" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Mode</label>
                     <source_model>Smartmage\Inpost\Model\Config\Source\Mode</source_model>
+                    <comment model="Smartmage\Inpost\Block\Adminhtml\System\ModuleVersion" />
                 </field>
                 <field id="debug_enabled" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Enable debug</label>
