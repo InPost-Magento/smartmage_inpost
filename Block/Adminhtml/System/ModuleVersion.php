@@ -14,9 +14,9 @@ class ModuleVersion extends AbstractBlock implements CommentInterface
     protected $_moduleList;
     public function __construct(
         \Magento\Framework\View\Element\Context $context,
-        array $data = [],
         ResourceInterface $resource,
-        ModuleListInterface $moduleList
+        ModuleListInterface $moduleList,
+        array $data = []
     ){
         parent::__construct($context, $data);
         $this->resource = $resource;
