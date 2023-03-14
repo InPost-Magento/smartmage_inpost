@@ -4,9 +4,12 @@ namespace Smartmage\Inpost\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Encryption\EncryptorInterface;
+use Magento\Framework\UrlInterface;
+use Magento\Framework\View\Asset\RepositoryFactory;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Checkout\Model\ConfigProviderInterface;
+use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
 
 class ConfigProvider implements ConfigProviderInterface
 {
@@ -63,7 +66,7 @@ class ConfigProvider implements ConfigProviderInterface
     protected $storeManager;
 
     /**
-     * @var \Magento\Framework\Encryption\EncryptorInterface
+     * @var EncryptorInterface
      */
     protected $encryptor;
 
@@ -71,16 +74,22 @@ class ConfigProvider implements ConfigProviderInterface
      * ConfigProvider constructor.
      * @param ScopeConfigInterface $scopeConfig
      * @param StoreManagerInterface $storeManager
-     * @param \Magento\Framework\Encryption\EncryptorInterface $encryptor
+     * @param EncryptorInterface $encryptor
+     * @param RepositoryFactory $repositoryFactory
+     * @param ShippingMethods $shippingMethods
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         StoreManagerInterface $storeManager,
-        EncryptorInterface $encryptor
+        EncryptorInterface $encryptor,
+        RepositoryFactory $repositoryFactory,
+        ShippingMethods $shippingMethods
     ) {
         $this->encryptor = $encryptor;
         $this->scopeConfig = $scopeConfig;
         $this->storeManager = $storeManager;
+        $this->repositoryFactory = $repositoryFactory;
+        $this->shippingMethods = $shippingMethods;
     }
 
     /**
@@ -404,10 +413,26 @@ class ConfigProvider implements ConfigProviderInterface
 
     public function getConfig()
     {
-        return [
+        $repository = $this->repositoryFactory->create();
+        $paczkomatDefaultLogo = $repository->getUrl('Smartmage_Inpost::images/inpost_paczkomat_logo.png');
+        $courierDefaultLogo = $repository->getUrl('Smartmage_Inpost::images/inpost_paczkomat_logo.png');
+
+        $listOfLogos = [];
+        foreach ($this->shippingMethods::INPOST_MAPPER as $key => $value) {
+            $configKey = str_replace('_','/', $key) . '/logo';
+            if ($configValue = $this->getConfigData($configKey)) {
+                $listOfLogos[$key] = $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . 'inpost_logo/' . $configValue;
+            } elseif(strpos('inpostlocker',$key) !== false) {
+                $listOfLogos[$key] = $paczkomatDefaultLogo;
+            } else {
+                $listOfLogos[$key] = $courierDefaultLogo;
+            }
+        }
+
+        return array_merge($listOfLogos, [
             'standard_inpostlocker' => ($this->getConfigData('inpostlocker/standard/popenabled')) ? 'parcel_locker-pop' : 'parcel_locker',
             'geowidget_token' => $this->getShippingConfigData('geowidget_token')
 //            ,'mode' => $this->getShippingConfigData('mode')
-        ];
+        ]);
     }
 }

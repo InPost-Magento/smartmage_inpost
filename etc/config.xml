@@ -29,12 +29,12 @@
         <carriers>
             <inpostlocker>
                 <model>Smartmage\Inpost\Model\Carrier\InpostLocker</model>
-                <title>InPost Paczkomaty</title>
+                <title>InPost Paczkomat® 24/7</title>
                 <active>1</active>
                 <show_only_delivery_eow>0</show_only_delivery_eow>
                 <standard>
                     <active>0</active>
-                    <name>Paczkomaty 24/7</name>
+                    <name>Paczkomat® 24/7</name>
                     <max_cart_weight>25</max_cart_weight>
                     <sallowspecific>1</sallowspecific>
                     <specificcountry>PL</specificcountry>
@@ -42,10 +42,11 @@
                 </standard>
                 <standardcod>
                     <active>0</active>
-                    <name>Paczkomaty 24/7 - płatność przy odbiorze</name>
+                    <name>Paczkomat® 24/7 - płatność przy odbiorze</name>
                     <max_cart_weight>25</max_cart_weight>
                     <sallowspecific>1</sallowspecific>
                     <specificcountry>PL</specificcountry>
+                    <logo>DJI-F450-quadcopter-kopen.jpg</logo>
                 </standardcod>
                 <standardeow>
                     <active>0</active>
