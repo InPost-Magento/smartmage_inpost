@@ -3,7 +3,7 @@
     <system>
         <section id="carriers">
             <group id="inpostlocker" translate="label" type="text" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>InPost - Paczkomaty</label>
+                <label>InPost Paczkomat® 24/7</label>
                 <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -17,7 +17,7 @@
                     <label>Title</label>
                 </field>
                 <group id="standard" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>InPost - Paczkomaty 24/7</label>
+                    <label>InPost Paczkomat® 24/7</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -49,6 +49,12 @@
                     </field>
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
+                    </field>
+                    <field id="logo" translate="label" type="image" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Logo for checkout</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <upload_dir config="system/filesystem/media">inpost_logo</upload_dir>
+                        <base_url type="media" scope_info="1">inpost_logo</base_url>
                     </field>
                     <field id="max_cart_weight" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
@@ -78,7 +84,7 @@
                     </field>
                 </group>
                 <group id="standardcod" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>InPost - Paczkomaty 24/7 - płatność przy odbiorze</label>
+                    <label>InPost Paczkomat® 24/7 - płatność przy odbiorze</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -110,6 +116,12 @@
                     </field>
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
+                    </field>
+                    <field id="logo" translate="label" type="image" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Logo for checkout</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <upload_dir config="system/filesystem/media">inpost_logo</upload_dir>
+                        <base_url type="media" scope_info="1">inpost_logo</base_url>
                     </field>
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
@@ -167,6 +179,12 @@
                     </field>
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
+                    </field>
+                    <field id="logo" translate="label" type="image" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Logo for checkout</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <upload_dir config="system/filesystem/media">inpost_logo</upload_dir>
+                        <base_url type="media" scope_info="1">inpost_logo</base_url>
                     </field>
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
@@ -239,6 +257,12 @@
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
                     </field>
+                    <field id="logo" translate="label" type="image" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Logo for checkout</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <upload_dir config="system/filesystem/media">inpost_logo</upload_dir>
+                        <base_url type="media" scope_info="1">inpost_logo</base_url>
+                    </field>
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
                         <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
@@ -277,7 +301,7 @@
                     </field>
                 </group>
                 <group id="economic" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>InPost Paczkomaty 24/7 - Paczka Ekonomiczna</label>
+                    <label>InPost Paczkomat® 24/7 - Paczka Ekonomiczna</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -310,6 +334,12 @@
                     </field>
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
+                    </field>
+                    <field id="logo" translate="label" type="image" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Logo for checkout</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <upload_dir config="system/filesystem/media">inpost_logo</upload_dir>
+                        <base_url type="media" scope_info="1">inpost_logo</base_url>
                     </field>
                     <field id="max_cart_weight" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
@@ -339,7 +369,7 @@
                     </field>
                 </group>
                 <group id="economiccod" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>InPost Paczkomaty 24/7 - Paczka Ekonomiczna - płatność przy odbiorze</label>
+                    <label>InPost Paczkomat® 24/7 - Paczka Ekonomiczna - płatność przy odbiorze</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -372,6 +402,12 @@
                     </field>
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
+                    </field>
+                    <field id="logo" translate="label" type="image" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Logo for checkout</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <upload_dir config="system/filesystem/media">inpost_logo</upload_dir>
+                        <base_url type="media" scope_info="1">inpost_logo</base_url>
                     </field>
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
@@ -441,6 +477,12 @@
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
                     </field>
+                    <field id="logo" translate="label" type="image" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Logo for checkout</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <upload_dir config="system/filesystem/media">inpost_logo</upload_dir>
+                        <base_url type="media" scope_info="1">inpost_logo</base_url>
+                    </field>
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
                         <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
@@ -499,6 +541,12 @@
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
                     </field>
+                    <field id="logo" translate="label" type="image" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Logo for checkout</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <upload_dir config="system/filesystem/media">inpost_logo</upload_dir>
+                        <base_url type="media" scope_info="1">inpost_logo</base_url>
+                    </field>
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
                         <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
@@ -555,6 +603,12 @@
                     </field>
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
+                    </field>
+                    <field id="logo" translate="label" type="image" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Logo for checkout</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <upload_dir config="system/filesystem/media">inpost_logo</upload_dir>
+                        <base_url type="media" scope_info="1">inpost_logo</base_url>
                     </field>
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
@@ -613,6 +667,12 @@
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
                     </field>
+                    <field id="logo" translate="label" type="image" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Logo for checkout</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <upload_dir config="system/filesystem/media">inpost_logo</upload_dir>
+                        <base_url type="media" scope_info="1">inpost_logo</base_url>
+                    </field>
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
                         <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
@@ -669,6 +729,12 @@
                     </field>
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
+                    </field>
+                    <field id="logo" translate="label" type="image" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Logo for checkout</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <upload_dir config="system/filesystem/media">inpost_logo</upload_dir>
+                        <base_url type="media" scope_info="1">inpost_logo</base_url>
                     </field>
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
@@ -727,6 +793,12 @@
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
                     </field>
+                    <field id="logo" translate="label" type="image" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Logo for checkout</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <upload_dir config="system/filesystem/media">inpost_logo</upload_dir>
+                        <base_url type="media" scope_info="1">inpost_logo</base_url>
+                    </field>
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
                         <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
@@ -780,6 +852,12 @@
                     </field>
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
+                    </field>
+                    <field id="logo" translate="label" type="image" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Logo for checkout</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <upload_dir config="system/filesystem/media">inpost_logo</upload_dir>
+                        <base_url type="media" scope_info="1">inpost_logo</base_url>
                     </field>
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
@@ -838,6 +916,12 @@
                     </field>
                     <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Position</label>
+                    </field>
+                    <field id="logo" translate="label" type="image" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Logo for checkout</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <upload_dir config="system/filesystem/media">inpost_logo</upload_dir>
+                        <base_url type="media" scope_info="1">inpost_logo</base_url>
                     </field>
                     <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Max cart weight</label>
