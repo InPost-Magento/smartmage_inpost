@@ -49,7 +49,7 @@ define([
             return new Promise(function(resolve, reject) {
                 $.ajax({
                     type: "POST",
-                    url: '/inpost/locker/getmode',
+                    url: window.checkoutConfig.base_url + 'inpost/locker/getmode',
                     dataType: 'json',
                 }).done(function(data) {
                     checkoutData.setShippingInPostMode(data.mode);
@@ -62,7 +62,7 @@ define([
             return new Promise(function(resolve, reject) {
                 $.ajax({
                     type: "POST",
-                    url: '/inpost/locker/save',
+                    url: window.checkoutConfig.base_url + 'inpost/locker/save',
                     data: {
                         'inpost_locker_id': dataToSend
                     },
