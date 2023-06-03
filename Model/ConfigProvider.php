@@ -486,7 +486,8 @@ class ConfigProvider implements ConfigProviderInterface
 
         return array_merge($listOfLogos, [
             'standard_inpostlocker' => ($this->getConfigData('inpostlocker/standard/popenabled')) ? 'parcel_locker-pop' : 'parcel_locker',
-            'geowidget_token' => $this->getShippingConfigData('geowidget_token')
+            'geowidget_token' => $this->getShippingConfigData('geowidget_token'),
+            'base_url' => $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_LINK)
         ]);
     }
 }
