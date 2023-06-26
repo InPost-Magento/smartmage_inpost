@@ -3,6 +3,7 @@
     <preference for="Smartmage\Inpost\Api\Data\ShipmentSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
     <preference for="Smartmage\Inpost\Api\Data\ShipmentInterface" type="Smartmage\Inpost\Model\Shipment" />
     <preference for="Smartmage\Inpost\Api\ShipmentRepositoryInterface" type="Smartmage\Inpost\Model\ShipmentRepository" />
+    <preference for="Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method\Form" type="Smartmage\Inpost\Block\Adminhtml\Order\Create\Shipping\Method\Form" />
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
