@@ -3,6 +3,7 @@ var config = {
         '*': {
             'easyPackWidget' : 'Smartmage_Inpost/js/easyPackWidget',
             'inPostShowModal' : 'Smartmage_Inpost/js/inPostShowPoint',
+            'Magento_Sales/order/create/scripts': 'Smartmage_Inpost/js/order/create/scripts'
         }
     },
     paths: {
