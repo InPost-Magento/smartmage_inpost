@@ -34,7 +34,7 @@
                 <show_only_delivery_eow>0</show_only_delivery_eow>
                 <standard>
                     <active>0</active>
-                    <name>Paczkomat® 24/7</name>
+                    <name>InPost Paczkomat® 24/7</name>
                     <max_cart_weight>25</max_cart_weight>
                     <sallowspecific>1</sallowspecific>
                     <specificcountry>PL</specificcountry>
@@ -42,14 +42,14 @@
                 </standard>
                 <standardcod>
                     <active>0</active>
-                    <name>Paczkomat® 24/7 - płatność przy odbiorze</name>
+                    <name>InPost Paczkomat® 24/7 - płatność przy odbiorze</name>
                     <max_cart_weight>25</max_cart_weight>
                     <sallowspecific>1</sallowspecific>
                     <specificcountry>PL</specificcountry>
                 </standardcod>
                 <standardeow>
                     <active>0</active>
-                    <name>Paczka w Weekend</name>
+                    <name>InPost Paczkomat® 24/7 - Paczka w Weekend</name>
                     <max_cart_weight>25</max_cart_weight>
                     <start_day>4</start_day>
                     <end_day>6</end_day>
@@ -60,7 +60,7 @@
                 </standardeow>
                 <standardeowcod>
                     <active>0</active>
-                    <name>Paczka w Weekend - płatność przy odbiorze</name>
+                    <name>InPost Paczkomat® 24/7 - Paczka w Weekend - płatność przy odbiorze</name>
                     <max_cart_weight>25</max_cart_weight>
                     <start_day>4</start_day>
                     <end_day>6</end_day>
@@ -71,7 +71,7 @@
                 </standardeowcod>
                 <economic>
                     <active>0</active>
-                    <name>Paczka Ekonomiczna</name>
+                    <name>InPost Paczkomat® 24/7 - Paczka Ekonomiczna</name>
                     <max_cart_weight>25</max_cart_weight>
                     <sallowspecific>1</sallowspecific>
                     <specificcountry>PL</specificcountry>
@@ -79,7 +79,7 @@
                 </economic>
                 <economiccod>
                     <active>0</active>
-                    <name>Paczka Ekonomiczna - płatność przy odbiorze</name>
+                    <name>InPost Paczkomat® 24/7 - Paczka Ekonomiczna - płatność przy odbiorze</name>
                     <max_cart_weight>25</max_cart_weight>
                     <sallowspecific>1</sallowspecific>
                     <specificcountry>PL</specificcountry>
