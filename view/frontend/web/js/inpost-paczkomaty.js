@@ -21,6 +21,8 @@ define([
                 ['#label_'+ type +'_standard_inpostlocker'],
                 ['#label_'+ type +'_standardeow_inpostlocker'],
                 ['#label_'+ type +'_standardeowcod_inpostlocker'],
+                ['#label_'+ type +'_economic_inpostlocker'],
+                ['#label_'+ type +'_economiccod_inpostlocker'],
                 ['#label_'+ type +'_c2c_inpostcourier'],
                 ['#label_'+ type +'_c2ccod_inpostcourier'],
                 ['#label_'+ type +'_standard_inpostcourier'],
@@ -38,6 +40,8 @@ define([
             const method = [
                 ['#label_method_standardcod_inpostlocker', 'parcelCollectPayment'],
                 ['#label_method_standard_inpostlocker', 'parcelCollect'],
+                ['#label_method_economic_inpostlocker', 'parcelCollect'],
+                ['#label_method_economiccod_inpostlocker', 'parcelCollectPayment'],
                 ['#label_method_standardeow_inpostlocker', 'parcelCollect247'],
                 ['#label_method_standardeowcod_inpostlocker', 'parcelCollect247']
             ];
