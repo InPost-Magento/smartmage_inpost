@@ -64,12 +64,9 @@ class Save extends AbstractSave
 
         $response = $shipmentClass->createShipment();
 
-        $this->logger->info('odpowiedz');
         $this->logger->info(print_r($response, true));
 
         if (isset($response[CallResult::STRING_RESPONSE_SHIPMENT_ID])) {
-            $this->logger->info('weszlo do tworzenia');
-
             $orderLink = $this->orderLinkFactory->create();
             $orderLink->setIncrementId($order->getIncrementId());
             $orderLink->setShipmentId($response[CallResult::STRING_RESPONSE_SHIPMENT_ID]);

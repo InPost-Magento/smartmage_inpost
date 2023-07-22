@@ -187,6 +187,15 @@ abstract class AbstractCreate extends AbstractService
             ];
         }
 
+        $phone = $this->requestBody['receiver']['phone'];
+        if (strlen($phone) == 12 && substr($phone, 0, 3) == '+48') {
+            $this->requestBody['receiver']['phone'] = substr($phone, 3);
+        }
+
+        if (strlen($phone) == 11 && substr($phone, 0, 2) == '48') {
+            $this->requestBody['receiver']['phone'] = substr($phone, 2);
+        }
+
         if ($data['insurance']) {
             $this->requestBody['insurance'] = [
                 "amount" => $data['insurance'],
