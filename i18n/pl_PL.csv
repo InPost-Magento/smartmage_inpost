@@ -198,3 +198,9 @@ Shipping methods mode,Tryb metod dostawy
 "The use of this service requires a signed agreement. For this purpose, please contact your Sales Representative.","Korzystanie z tej usługi wymaga podpisanego porozumienia. W tym celu prosimy o kontakt z Przedstawicielem Handlowym."
 Module version,Wersja modułu
 "setup:upgrade required, module.xml version","setup:upgrade wymagany, wersja z module.xml"
+Logo for checkout,Logo w procesie zamówienia
+None,Brak
+Economic pack variant,Wariant paczki ekonomicznej
+Parcel ID:,ID przesyłki:
+Label available from:,Etykieta dostępna od:
+"The 2D variant allows you to generate a label 48 hours after creating the shipment (Saturday, Sunday and Monday are excluded)","Wariant 2D umożliwia wygenerowanie etykiety po 48h od stworzenie przesyłki (wyłączone są dni sobota, niedziela i poniedziałek)"

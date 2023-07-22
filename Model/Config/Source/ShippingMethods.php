@@ -15,6 +15,8 @@ class ShippingMethods implements OptionSourceInterface
         'inpostlocker_standardcod' => 'inpost_locker_standard',
         'inpostlocker_standardeow' => 'inpost_locker_standard',
         'inpostlocker_standardeowcod' => 'inpost_locker_standard',
+        'inpostlocker_economic' => 'inpost_locker_economy',
+        'inpostlocker_economiccod' => 'inpost_locker_economy',
         'inpostcourier_standard' => 'inpost_courier_standard',
         'inpostcourier_standardcod' => 'inpost_courier_standard',
         'inpostcourier_c2c' => 'inpost_courier_c2c',

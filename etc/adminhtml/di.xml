@@ -19,4 +19,9 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method\Form">
+        <arguments>
+            <argument name="scopeConfig" xsi:type="object">Magento\Framework\App\Config\ScopeConfigInterface</argument>
+        </arguments>
+    </type>
 </config>

@@ -142,7 +142,7 @@ class Inpost extends AbstractOrder
     {
         $details = [];
         $details[ShipmentInterface::STATUS] = $this->statusConfig->getStatusLabel($shipment->getStatus());
-        if ($shipment->getService() == 'inpost_locker_standard') {
+        if (strpos($shipment->getService(), 'inpost_locker') !== false) {
             $details[ShipmentInterface::SHIPMENT_ATTRIBUTES] =
                 $this->sizeConfig->getSizeLabel($shipment->getShipmentsAttributes());
             $details[ShipmentInterface::TARGET_POINT] =  __("Point: ") . $shipment->getTargetPoint();

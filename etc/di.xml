@@ -3,6 +3,7 @@
     <preference for="Smartmage\Inpost\Api\Data\ShipmentSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
     <preference for="Smartmage\Inpost\Api\Data\ShipmentInterface" type="Smartmage\Inpost\Model\Shipment" />
     <preference for="Smartmage\Inpost\Api\ShipmentRepositoryInterface" type="Smartmage\Inpost\Model\ShipmentRepository" />
+    <preference for="Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method\Form" type="Smartmage\Inpost\Block\Adminhtml\Order\Create\Shipping\Method\Form" />
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
@@ -82,6 +83,20 @@
         <arguments>
             <argument name="code" xsi:type="string">inpostlocker_standardeowcod</argument>
             <argument name="points" xsi:type="string">parcel_locker</argument>
+            <argument name="functions" xsi:type="string">parcel_send</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointEconomic" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostlocker_economic</argument>
+            <argument name="points" xsi:type="string">standard</argument>
+            <argument name="functions" xsi:type="string">parcel_send</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointEconomicCod" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostlocker_economiccod</argument>
+            <argument name="points" xsi:type="string">standard</argument>
             <argument name="functions" xsi:type="string">parcel_send</argument>
         </arguments>
     </virtualType>
