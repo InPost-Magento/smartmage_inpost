@@ -165,6 +165,10 @@ abstract class AbstractCreate extends AbstractService
 
     public function createBody($data, $order)
     {
+        if(!empty($data['commercial_product_identifier'])) {
+            $this->requestBody['commercial_product_identifier'] = $data['commercial_product_identifier'];
+        }
+
         $this->requestBody['service'] = $this->shippingMethods::INPOST_MAPPER[$data['service']];
         $this->requestBody['reference'] = $data['reference'];
         $this->requestBody['only_choice_of_offer'] = false;

@@ -22,7 +22,8 @@ abstract class AbstractService implements ServiceInterface
         'too_big' => 'Podana wartość jest zbyt duża.',
         'invalid_format' => 'Podana wartość ma niepoprawny format, np. gdy w pole numer telefonu zostały wpisane litery.',
         'not_a_number' => 'Wprowadzona wartość powinna być liczbą.',
-        'not_an_integer' => 'Wprowadzona wartość powinna być liczbą całkowitą.'
+        'not_an_integer' => 'Wprowadzona wartość powinna być liczbą całkowitą.',
+        'label_not_found' => 'Etykieta będzie dostępna od '
     ];
 
     protected $method;
@@ -177,11 +178,11 @@ abstract class AbstractService implements ServiceInterface
         } elseif ($responseCode == Http::STATUS_CODE_404) { //Szukany zasób nie został odnaleziony, np. adres URL jest niepoprawny lub zasób nie istnieje.
 
             $response = json_decode($response, true);
-
             curl_close($ch);
+            $errorsStr = $this->errorHandler->handle($response);
 
             $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
-            $this->callResult[CallResult::STRING_MESSAGE] = $response[self::API_RESPONSE_MESSAGE_KEY];
+            $this->callResult[CallResult::STRING_MESSAGE] = $errorsStr;
             $this->callResult[CallResult::STRING_RESPONSE_CODE] = Http::STATUS_CODE_404;
 
             return $response;

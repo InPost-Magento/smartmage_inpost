@@ -7,6 +7,7 @@ use Magento\Framework\Data\OptionSourceInterface;
 
 class Service implements OptionSourceInterface
 {
+    private ShippingMethods $shippingMethods;
 
     public function __construct(
         ShippingMethods $shippingMethods
