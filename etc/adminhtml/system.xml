@@ -965,26 +965,10 @@
                     <label>Label format</label>
                     <source_model>Smartmage\Inpost\Model\Config\Source\LabelFormat</source_model>
                 </field>
-                <field id="label_size_pdf" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" canRestore="1">
-                    <label>Label size</label>
-                    <source_model>LabelSizePdf</source_model>
-                    <depends>
-                        <field id="label_format">pdf</field>
-                    </depends>
-                </field>
-                <field id="label_size_epl" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" canRestore="1">
-                    <label>Label size</label>
-                    <source_model>LabelSizeEpl</source_model>
-                    <depends>
-                        <field id="label_format">epl</field>
-                    </depends>
-                </field>
-                <field id="label_size_zpl" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" canRestore="1">
-                    <label>Label size</label>
-                    <source_model>LabelSizeZpl</source_model>
-                    <depends>
-                        <field id="label_format">zpl</field>
-                    </depends>
+                <field id="label_size" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Locker label size</label>
+                    <source_model>Smartmage\Inpost\Model\Config\Source\LabelSize</source_model>
+                    <comment><![CDATA[Courier service has only A6 format]]></comment>
                 </field>
                 <field id="create_order_shipment" translate="label comment" type="select" sortOrder="45" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Automatically create order shipment</label>

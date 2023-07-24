@@ -191,7 +191,7 @@ abstract class AbstractCreate extends AbstractService
             ];
         }
 
-        $phone = $this->requestBody['receiver']['phone'];
+        $phone = str_replace(array(' ','-'), '', $this->requestBody['receiver']['phone']);
         if (strlen($phone) == 12 && substr($phone, 0, 3) == '+48') {
             $this->requestBody['receiver']['phone'] = substr($phone, 3);
         }

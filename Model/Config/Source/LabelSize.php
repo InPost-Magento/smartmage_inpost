@@ -7,7 +7,7 @@ use Magento\Framework\Data\OptionSourceInterface;
 
 class LabelSize implements OptionSourceInterface
 {
-    const A4 = 'a4';
+    const normal = 'normal'; //A4
     const A6 = 'a6';
 
     const PDF = 'pdf';
@@ -26,19 +26,9 @@ class LabelSize implements OptionSourceInterface
      */
     public function toOptionArray() : array
     {
-        switch ($this->code) {
-            case (self::PDF):
-                return [
-                    ['value' => self::A4, 'label' => __('A4')],
-                ];
-            case (self::EPL):
-            case (self::ZPL):
-                return [
-                    ['value' => self::A4, 'label' => __('A4')],
-                    ['value' => self::A6, 'label' => __('A6')],
-                ];
-            default:
-                return [];
-        }
+        return [
+            ['value' => self::normal, 'label' => __('A4')],
+            ['value' => self::A6, 'label' => __('A6')]
+        ];
     }
 }
