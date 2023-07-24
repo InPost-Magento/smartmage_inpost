@@ -65,8 +65,6 @@ class PrintLabel extends Action
             LabelFormat::STRING_SIZE => $labelSize,
         ];
 
-        file_put_contents(MAGENTO_BP . '/var/log/oneline.log', print_r($labelsData,true), FILE_APPEND);
-
         try {
             $result = $this->printoutLabels->getLabels($labelsData);
 
