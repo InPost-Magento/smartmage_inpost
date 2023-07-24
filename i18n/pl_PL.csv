@@ -23,7 +23,8 @@ Organization ID,ID organizacji
 Access Token,Token dostępu
 Geowidget Token,Token geowidgetu
 Label format,Format etykiety
-Label size,Rozmiar etykiety
+Locker label size,Rozmiar etykiety przesyłki paczkomatowej
+Courier service has only A6 format,Usługa kurierska ma tylko format A6
 Automatically create order shipment,Automatycznie twórz przesyłkę do zamówienia
 Order shipment will be created after receiving InPost tracking number,Przesyłka do zamówienia zostanie utworzona po otrzymaniu numeru śledzenia z API InPostu
 Notify customer about order shipment,Powiadamiaj klienta o utworzeniu przesyłki do zamówienia

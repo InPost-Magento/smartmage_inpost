@@ -5,9 +5,7 @@
             <inpost>
                 <mode>test</mode>
                 <label_format>pdf</label_format>
-                <label_size_pdf>a4</label_size_pdf>
-                <label_size_epl>a4</label_size_epl>
-                <label_size_zpl>a4</label_size_zpl>
+                <label_size>normal</label_size>
                 <create_order_shipment>0</create_order_shipment>
                 <notify_order_shipment>1</notify_order_shipment>
                 <order_shipment_status>processing</order_shipment_status>
