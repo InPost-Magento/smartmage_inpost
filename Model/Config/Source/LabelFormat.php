@@ -12,7 +12,7 @@ class LabelFormat implements OptionSourceInterface
     const ZPL = 'zpl';
     const ZIP = 'zip';
 
-    const STRING_SIZE = 'size';
+    const STRING_SIZE = 'type';
     const STRING_FORMAT = 'format';
 
     const LABEL_CONTENT_TYPES = [

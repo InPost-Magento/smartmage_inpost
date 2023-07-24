@@ -5,9 +5,7 @@
             <inpost>
                 <mode>test</mode>
                 <label_format>pdf</label_format>
-                <label_size_pdf>a4</label_size_pdf>
-                <label_size_epl>a4</label_size_epl>
-                <label_size_zpl>a4</label_size_zpl>
+                <label_size>normal</label_size>
                 <create_order_shipment>0</create_order_shipment>
                 <notify_order_shipment>1</notify_order_shipment>
                 <order_shipment_status>processing</order_shipment_status>
@@ -29,12 +27,12 @@
         <carriers>
             <inpostlocker>
                 <model>Smartmage\Inpost\Model\Carrier\InpostLocker</model>
-                <title>InPost Paczkomaty</title>
+                <title>InPost Paczkomat® 24/7</title>
                 <active>1</active>
                 <show_only_delivery_eow>0</show_only_delivery_eow>
                 <standard>
                     <active>0</active>
-                    <name>Paczkomaty 24/7</name>
+                    <name>InPost Paczkomat® 24/7</name>
                     <max_cart_weight>25</max_cart_weight>
                     <sallowspecific>1</sallowspecific>
                     <specificcountry>PL</specificcountry>
@@ -42,14 +40,14 @@
                 </standard>
                 <standardcod>
                     <active>0</active>
-                    <name>Paczkomaty 24/7 - płatność przy odbiorze</name>
+                    <name>InPost Paczkomat® 24/7 - płatność przy odbiorze</name>
                     <max_cart_weight>25</max_cart_weight>
                     <sallowspecific>1</sallowspecific>
                     <specificcountry>PL</specificcountry>
                 </standardcod>
                 <standardeow>
                     <active>0</active>
-                    <name>Paczka w Weekend</name>
+                    <name>InPost Paczkomat® 24/7 - Paczka w Weekend</name>
                     <max_cart_weight>25</max_cart_weight>
                     <start_day>4</start_day>
                     <end_day>6</end_day>
@@ -60,7 +58,7 @@
                 </standardeow>
                 <standardeowcod>
                     <active>0</active>
-                    <name>Paczka w Weekend - płatność przy odbiorze</name>
+                    <name>InPost Paczkomat® 24/7 - Paczka w Weekend - płatność przy odbiorze</name>
                     <max_cart_weight>25</max_cart_weight>
                     <start_day>4</start_day>
                     <end_day>6</end_day>
@@ -69,6 +67,21 @@
                     <sallowspecific>1</sallowspecific>
                     <specificcountry>PL</specificcountry>
                 </standardeowcod>
+                <economic>
+                    <active>0</active>
+                    <name>InPost Paczkomat® 24/7 - Paczka Ekonomiczna</name>
+                    <max_cart_weight>25</max_cart_weight>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
+                    <popenabled>1</popenabled>
+                </economic>
+                <economiccod>
+                    <active>0</active>
+                    <name>InPost Paczkomat® 24/7 - Paczka Ekonomiczna - płatność przy odbiorze</name>
+                    <max_cart_weight>25</max_cart_weight>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
+                </economiccod>
             </inpostlocker>
             <inpostcourier>
                 <model>Smartmage\Inpost\Model\Carrier\InpostCourier</model>

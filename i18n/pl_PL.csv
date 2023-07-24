@@ -23,7 +23,8 @@ Organization ID,ID organizacji
 Access Token,Token dostępu
 Geowidget Token,Token geowidgetu
 Label format,Format etykiety
-Label size,Rozmiar etykiety
+Locker label size,Rozmiar etykiety przesyłki paczkomatowej
+Courier service has only A6 format,Usługa kurierska ma tylko format A6
 Automatically create order shipment,Automatycznie twórz przesyłkę do zamówienia
 Order shipment will be created after receiving InPost tracking number,Przesyłka do zamówienia zostanie utworzona po otrzymaniu numeru śledzenia z API InPostu
 Notify customer about order shipment,Powiadamiaj klienta o utworzeniu przesyłki do zamówienia
@@ -198,3 +199,9 @@ Shipping methods mode,Tryb metod dostawy
 "The use of this service requires a signed agreement. For this purpose, please contact your Sales Representative.","Korzystanie z tej usługi wymaga podpisanego porozumienia. W tym celu prosimy o kontakt z Przedstawicielem Handlowym."
 Module version,Wersja modułu
 "setup:upgrade required, module.xml version","setup:upgrade wymagany, wersja z module.xml"
+Logo for checkout,Logo w procesie zamówienia
+None,Brak
+Economic pack variant,Wariant paczki ekonomicznej
+Parcel ID:,ID przesyłki:
+Label available from:,Etykieta dostępna od:
+"The 2D variant allows you to generate a label 48 hours after creating the shipment (Saturday, Sunday and Monday are excluded)","Wariant 2D umożliwia wygenerowanie etykiety po 48h od stworzenie przesyłki (wyłączone są dni sobota, niedziela i poniedziałek)"
