@@ -2,6 +2,8 @@
 
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment\Create;
 
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Store\Model\ScopeInterface;
 use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\AbstractCreate;
 
 class Locker extends AbstractCreate
@@ -24,6 +26,12 @@ class Locker extends AbstractCreate
 
         if (strpos($data['service'], 'eow') !== false) {
             $this->requestBody['end_of_week_collection'] = true;
+        }
+
+        if (strpos($data['service'], 'economic') !== false) {
+            $data['commercial_product_identifier'] = $this->configProvider->getShippingConfigData(
+                'commercial_product_identifier'
+            );
         }
 
         parent::createBody($data, $order);

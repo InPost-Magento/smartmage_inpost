@@ -113,8 +113,8 @@ class MassCreate
                 $result = null;
                 if (strpos($service, 'inpost_locker') !== false) {
                     $data = $this->prepareData($order, self::LOCKER_SERVICE);
-
                     $this->locker->createBody($data, $order);
+
                     try {
                         $result = $this->locker->createShipment($order);
                     } catch (\Exception $e) {

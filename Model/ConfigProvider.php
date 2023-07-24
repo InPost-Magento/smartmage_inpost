@@ -4,9 +4,13 @@ namespace Smartmage\Inpost\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Encryption\EncryptorInterface;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\UrlInterface;
+use Magento\Framework\View\Asset\RepositoryFactory;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Checkout\Model\ConfigProviderInterface;
+use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
 
 class ConfigProvider implements ConfigProviderInterface
 {
@@ -60,30 +64,46 @@ class ConfigProvider implements ConfigProviderInterface
     protected $storeManager;
 
     /**
-     * @var \Magento\Framework\Encryption\EncryptorInterface
+     * @var EncryptorInterface
      */
     protected $encryptor;
+
+    /**
+     * @var ShippingMethods
+     */
+    private $shippingMethods;
+
+    /**
+     * @var RepositoryFactory
+     */
+    private $repositoryFactory;
 
     /**
      * ConfigProvider constructor.
      * @param ScopeConfigInterface $scopeConfig
      * @param StoreManagerInterface $storeManager
-     * @param \Magento\Framework\Encryption\EncryptorInterface $encryptor
+     * @param EncryptorInterface $encryptor
+     * @param RepositoryFactory $repositoryFactory
+     * @param ShippingMethods $shippingMethods
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         StoreManagerInterface $storeManager,
-        EncryptorInterface $encryptor
+        EncryptorInterface $encryptor,
+        RepositoryFactory $repositoryFactory,
+        ShippingMethods $shippingMethods
     ) {
         $this->encryptor = $encryptor;
         $this->scopeConfig = $scopeConfig;
         $this->storeManager = $storeManager;
+        $this->repositoryFactory = $repositoryFactory;
+        $this->shippingMethods = $shippingMethods;
     }
 
     /**
      * @param $field
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getShippingConfigData($field)
     {
@@ -98,7 +118,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getMode()
     {
@@ -106,6 +126,9 @@ class ConfigProvider implements ConfigProviderInterface
     }
 
 
+    /**
+     * @throws NoSuchEntityException
+     */
     public function getDebugEnabled()
     {
         return $this->getShippingConfigData(self::DEBUG_ENABLED);
@@ -113,7 +136,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getOrganizationId()
     {
@@ -122,7 +145,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getAccessToken()
     {
@@ -131,7 +154,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getLabelFormat()
     {
@@ -140,7 +163,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getLabelSize()
     {
@@ -149,7 +172,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getChangeAddress()
     {
@@ -158,7 +181,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getSenderName()
     {
@@ -167,7 +190,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getSenderSurname()
     {
@@ -176,7 +199,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getSenderEmail()
     {
@@ -185,7 +208,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getSenderPhone()
     {
@@ -194,7 +217,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getSenderStreet()
     {
@@ -203,7 +226,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getSenderBuildingNumber()
     {
@@ -212,7 +235,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getSenderCity()
     {
@@ -221,7 +244,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getSenderPostcode()
     {
@@ -230,13 +253,16 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getSenderCountryCode()
     {
         return $this->getShippingConfigData(self::SHIPPING_SENDER_COUNTRY_CODE);
     }
 
+    /**
+     * @throws NoSuchEntityException
+     */
     public function getSenderCompany()
     {
         return $this->getShippingConfigData(self::SHIPPING_SENDER_COMPANY_NAME);
@@ -244,7 +270,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getBecomePartner()
     {
@@ -253,7 +279,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getSzybkiezwrotyUrl()
     {
@@ -265,7 +291,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getWeightAttributeCode()
     {
@@ -274,7 +300,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getWeightUnit()
     {
@@ -283,7 +309,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getAutomaticInsuranceForPackage()
     {
@@ -292,7 +318,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getGetShipmentsDays()
     {
@@ -303,7 +329,7 @@ class ConfigProvider implements ConfigProviderInterface
      * @param $field
      * template: carrier_code/method_key/field_name
      * @return false|mixed
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getConfigData($field)
     {
@@ -320,7 +346,7 @@ class ConfigProvider implements ConfigProviderInterface
      * @param $field
      * template: carrier_code/method_key/field_name
      * @return bool
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getConfigFlag($field)
     {
@@ -333,67 +359,121 @@ class ConfigProvider implements ConfigProviderInterface
         );
     }
 
+    /**
+     * @throws NoSuchEntityException
+     */
     public function getDefaultWeight()
     {
         return $this->getShippingConfigData(self::DEFAULT_WEIGHT);
     }
 
+    /**
+     * @throws NoSuchEntityException
+     */
     public function getDefaultSize()
     {
         return $this->getShippingConfigData(self::DEFAULT_SIZE);
     }
 
+    /**
+     * @throws NoSuchEntityException
+     */
     public function getDefaultInsuranceValue()
     {
         return $this->getShippingConfigData(self::DEFAULT_INSURANCE_VALUE);
     }
 
+    /**
+     * @throws NoSuchEntityException
+     */
     public function getDefaultWidth()
     {
         return $this->getShippingConfigData(self::DEFAULT_WIDTH);
     }
 
+    /**
+     * @throws NoSuchEntityException
+     */
     public function getDefaultLength()
     {
         return $this->getShippingConfigData(self::DEFAULT_LENGTH);
     }
 
+    /**
+     * @throws NoSuchEntityException
+     */
     public function getDefaultHeight()
     {
         return $this->getShippingConfigData(self::DEFAULT_HEIGHT);
     }
 
+    /**
+     * @throws NoSuchEntityException
+     */
     public function getDefaultPickupStreet()
     {
         return $this->getShippingConfigData(self::SHIPPING_PICKUP_STREET);
     }
 
+    /**
+     * @throws NoSuchEntityException
+     */
     public function getDefaultPickupBuildingNumber()
     {
         return $this->getShippingConfigData(self::SHIPPING_PICKUP_BUILDING_NUMBER);
     }
 
+    /**
+     * @throws NoSuchEntityException
+     */
     public function getDefaultPickupCity()
     {
         return $this->getShippingConfigData(self::SHIPPING_PICKUP_CITY);
     }
 
+    /**
+     * @throws NoSuchEntityException
+     */
     public function getDefaultPickupPostCode()
     {
         return $this->getShippingConfigData(self::SHIPPING_PICKUP_POST_CODE);
     }
 
+    /**
+     * @throws NoSuchEntityException
+     */
     public function getDefaultPickupCountryCode()
     {
         return $this->getShippingConfigData(self::SHIPPING_PICKUP_COUNTRY_CODE);
     }
 
+    /**
+     * @throws NoSuchEntityException
+     */
     public function getConfig()
     {
-        return [
+        $repository = $this->repositoryFactory->create();
+        $paczkomatDefaultLogo = $repository->getUrl('Smartmage_Inpost::images/inpost_paczkomat_logo.png');
+        $courierDefaultLogo = $repository->getUrl('Smartmage_Inpost::images/inpost_kurier_logo.png');
+        $listOfLogos = [];
+
+        foreach ($this->shippingMethods::INPOST_MAPPER as $key => $value) {
+            $configKey = str_replace('_','/', $key) . '/logo';
+            $keyArray = explode('_',$key);
+            $logoKey = $keyArray[0] . '_' . $keyArray[1] . '_' . $keyArray[0];
+            if ($configValue = $this->getConfigData($configKey)) {
+                $listOfLogos[$logoKey] = $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . 'inpost_logo/' . $configValue;
+            } elseif(strpos($key,'inpostlocker') !== false) {
+                $listOfLogos[$logoKey] = $paczkomatDefaultLogo;
+            } else {
+                $listOfLogos[$logoKey] = $courierDefaultLogo;
+            }
+        }
+
+        return array_merge($listOfLogos, [
             'standard_inpostlocker' => ($this->getConfigData('inpostlocker/standard/popenabled')) ? 'parcel_locker-pop' : 'parcel_locker',
-            'geowidget_token' => $this->getShippingConfigData('geowidget_token')
-//            ,'mode' => $this->getShippingConfigData('mode')
-        ];
+            'geowidget_token' => $this->getShippingConfigData('geowidget_token'),
+            'base_url' => $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_LINK)
+        ]);
     }
 }

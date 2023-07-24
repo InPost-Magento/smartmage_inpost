@@ -35,7 +35,10 @@ class ErrorHandler implements ErrorHandlerInterface
             } else {
                 $tmpValue = ucfirst($path) . $value;
                 if ($key == 'shipment_id') {
-                    $tmpValue = 'Parcel ID: ' . $tmpValue;
+                    $tmpValue = __('Parcel ID:') . ' ' . $tmpValue;
+                } elseif ($key == 'label_available_from') {
+                    $tmpValue = '<strong>' . __('The 2D variant allows you to generate a label 48 hours after creating the shipment (Saturday, Sunday and Monday are excluded)') . '</strong><br>';
+                    $tmpValue .= __('Label available from:') . ' ' . $value;
                 }
                 $output[] = $tmpValue;
             }

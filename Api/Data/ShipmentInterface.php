@@ -12,6 +12,7 @@ interface ShipmentInterface
     const SENDING_METHOD = 'sending_method';
     const RECEIVER_DATA = 'receiver_data';
     const REFERENCE = 'reference';
+    const COMMERCIAL_PRODUCT_IDENTIFIER = 'commercial_product_identifier';
     const TRACKING_NUMBER = 'tracking_number';
     const TARGET_POINT = 'target_point';
     const DISPATCH_ORDER_ID = 'dispatch_order_id';
