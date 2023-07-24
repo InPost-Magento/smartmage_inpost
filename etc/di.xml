@@ -150,24 +150,6 @@
         </arguments>
     </virtualType>
 
-    <virtualType name="LabelSizePdf" type="Smartmage\Inpost\Model\Config\Source\LabelSize">
-        <arguments>
-            <argument name="code" xsi:type="string">pdf</argument>
-        </arguments>
-    </virtualType>
-
-    <virtualType name="LabelSizeEpl" type="Smartmage\Inpost\Model\Config\Source\LabelSize">
-        <arguments>
-            <argument name="code" xsi:type="string">epl</argument>
-        </arguments>
-    </virtualType>
-
-    <virtualType name="LabelSizeZpl" type="Smartmage\Inpost\Model\Config\Source\LabelSize">
-        <arguments>
-            <argument name="code" xsi:type="string">zpl</argument>
-        </arguments>
-    </virtualType>
-
     <preference for="Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterface"
                 type="Smartmage\Inpost\Model\ShipmentOrderLink"/>
     <preference for="Smartmage\Inpost\Api\ShipmentOrderLinksProviderInterface"

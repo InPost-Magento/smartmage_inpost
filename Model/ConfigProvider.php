@@ -37,9 +37,6 @@ class ConfigProvider implements ConfigProviderInterface
     const SHIPPING_AUTOMATIC_INSURANCE_FOR_PACKAGE = 'automatic_insurance_for_package';
     const SHIPPING_DEFAULT_PICKUP_POINT = 'default_pickup_pont';
     const SHIPPING_GET_SHIPMENTS_DAYS = 'get_shipments_days';
-    const SHIPPING_LABEL_SIZE_PDF = 'label_size_pdf';
-    const SHIPPING_LABEL_SIZE_EPL = 'label_size_epl';
-    const SHIPPING_LABEL_SIZE_ZPL = 'label_size_zpl';
     const PDF = 'pdf';
     const EPL = 'epl';
     const ZPL = 'zpl';
@@ -170,18 +167,7 @@ class ConfigProvider implements ConfigProviderInterface
      */
     public function getLabelSize()
     {
-        $labelFormat = $this->getLabelFormat();
-
-        switch ($labelFormat) {
-            case (self::PDF):
-                return $this->getShippingConfigData(self::SHIPPING_LABEL_SIZE_PDF);
-            case (self::EPL):
-                return $this->getShippingConfigData(self::SHIPPING_LABEL_SIZE_EPL);
-            case (self::ZPL):
-                return $this->getShippingConfigData(self::SHIPPING_LABEL_SIZE_ZPL);
-            default:
-                return null;
-        }
+        return $this->getShippingConfigData(self::SHIPPING_LABEL_SIZE);
     }
 
     /**
