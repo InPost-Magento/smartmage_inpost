@@ -143,7 +143,9 @@ define([
         },
 
         selectPointHtml: function(point) {
-            return '<button data-inpost-select-point class="action secondary small" title="'+ (point ? $t('Change pickup point') : $t('Please select a pickup point')) +'">'+ (point ? $t('Change pickup point') : $t('Please select a pickup point')) +'</button>';
+            return '<button data-inpost-select-point class="action secondary small" title="'+
+                (point ? $t('Change pickup point') : $t('Please select a pickup point')) +
+                '">'+ (point ? $t('Change pickup point') : $t('Please select a pickup point')) +'</button>';
         },
 
         insertData: function(carrierMethod, pointData) {
@@ -163,15 +165,18 @@ define([
             }
         },
 
-        insertLogoInPost: function() {
+        insertLogoInPost: function(timeout) {
             const self = this;
+            let timeoutIncrement = timeout ? timeout : 1;
 
             return new Promise(function(resolve, reject) {
+                let found = false;
                 $.each(self.inPostAllMethod('method'), function(index, value) {
                     const codeMethod = value[0].split('_');
                     const logoWrapper = $(value[0]).find('[data-inpost-logo-'+codeMethod[2]+'-'+codeMethod[3]+']');
 
                     if ($(value[0]).length) {
+                        found = true;
                         if (logoWrapper.length > 0) {
                             logoWrapper.remove();
                         }
@@ -189,6 +194,13 @@ define([
                     }
                 });
 
+                if(!found && timeoutIncrement < 10) {
+                    // in case of delay in loading the shipping method, call self.insertLogoInPost() with delay 2s
+                    setTimeout(function() {
+                        self.insertLogoInPost(timeoutIncrement + 1);
+                    }, 2000);
+                }
+
                 resolve(true);
             });
         },
@@ -204,16 +216,25 @@ define([
             $('body').append(html);
         },
 
-        renderInPostDataHtml: function(pointData) {
+        renderInPostDataHtml: function(pointData, timeout) {
             const self = this;
+            let timeoutIncrement = timeout ? timeout : 1;
 
             return new Promise(function(resolve) {
+                let found = false;
                 $.each(self.inPostMethod(), function(index, value) {
                     if ($(value[0]).length) {
+                        found = true;
                         self.wrapperPointHtml($(value[0]), value[1]);
                         self.insertData($(value[0]), (pointData ? pointData : ''));
                     }
                 });
+                if (!found && timeoutIncrement < 10) {
+                    // in case of delay in loading the shipping method, call self.renderInPostDataHtml() with delay 2s
+                    setTimeout(function() {
+                        self.renderInPostDataHtml(pointData, timeoutIncrement + 1);
+                    }, 2000);
+                }
                 resolve(true);
             });
         },
@@ -260,8 +281,8 @@ define([
             });
 
             self.getMode().then(function() {
-                self.renderInPostData().then(function() {
-                    self.insertLogoInPost().then(function() {
+                self.renderInPostData().then(function () {
+                    self.insertLogoInPost().then(function () {
                         fullScreenLoader.stopLoader();
                     });
                 });
