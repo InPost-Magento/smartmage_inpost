@@ -24,7 +24,9 @@ class SalesOrderBeforeSaveObserver implements ObserverInterface
         $order = $observer->getEvent()->getOrder();
 
         $orderPostData = $this->request->getPostValue('order');
-        $order->setData('inpost_locker_id', $orderPostData['inpost_locker_id']);
+        if (isset($orderPostData['inpost_locker_id'])) {
+            $order->setData('inpost_locker_id', $orderPostData['inpost_locker_id']);
+        }
 
         return $this;
     }
