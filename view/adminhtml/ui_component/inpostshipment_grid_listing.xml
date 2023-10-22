@@ -94,6 +94,17 @@
                     </item>
                 </argument>
             </action>
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected items?</message>
+                        <title translate="true">Delete InPost shipments</title>
+                    </confirm>
+                    <url path="*/*/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete InPost shipments</label>
+                </settings>
+            </action>
         </massaction>
 <!--        <exportButton name="export_button"/>-->
         <paging name="listing_paging"/>
