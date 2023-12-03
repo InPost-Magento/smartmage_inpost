@@ -22,10 +22,13 @@ class SalesOrderBeforeSaveObserver implements ObserverInterface
     {
         /** @var \Magento\Sales\Model\Order $order */
         $order = $observer->getEvent()->getOrder();
-
         $orderPostData = $this->request->getPostValue('order');
-        if (isset($orderPostData['inpost_locker_id'])) {
-            $order->setData('inpost_locker_id', $orderPostData['inpost_locker_id']);
+
+        if (is_array($orderPostData) && array_key_exists('inpost_locker_id', $orderPostData)) {
+            $inpostLockerId = $orderPostData['inpost_locker_id'];
+            if (!empty($inpostLockerId)) {
+                $order->setData('inpost_locker_id', $inpostLockerId);
+            }
         }
 
         return $this;
