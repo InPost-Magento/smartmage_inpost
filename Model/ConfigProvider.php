@@ -105,14 +105,15 @@ class ConfigProvider implements ConfigProviderInterface
      * @return mixed
      * @throws NoSuchEntityException
      */
-    public function getShippingConfigData($field)
+    public function getShippingConfigData($field, $storeId = null)
     {
         $path = 'shipping/inpost/' . $field;
+        $store = $storeId ? $this->storeManager->getStore($storeId) : $this->storeManager->getStore();
 
         return $this->scopeConfig->getValue(
             $path,
             ScopeInterface::SCOPE_STORE,
-            $this->storeManager->getStore()
+            $store
         );
     }
 
@@ -138,9 +139,9 @@ class ConfigProvider implements ConfigProviderInterface
      * @return mixed
      * @throws NoSuchEntityException
      */
-    public function getOrganizationId()
+    public function getOrganizationId($storeId = null)
     {
-        return $this->getShippingConfigData(self::SHIPPING_ORGANIZATION_ID);
+        return $this->getShippingConfigData(self::SHIPPING_ORGANIZATION_ID, $storeId);
     }
 
     /**
