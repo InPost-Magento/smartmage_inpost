@@ -73,6 +73,10 @@ abstract class AbstractCreate extends AbstractService
 
     public function createShipment($order = null)
     {
+        if($order !== null) {
+            $organizationId = $this->configProvider->getOrganizationId($order->getStore()->getCode());
+            $this->callUri = 'v1/organizations/' . $organizationId . '/shipments';
+        }
         $response = $this->call($this->requestBody);
         $this->logger->info(print_r($this->callResult, true));
         $this->logger->info(print_r($response, true));

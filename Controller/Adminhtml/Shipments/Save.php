@@ -62,7 +62,7 @@ class Save extends AbstractSave
             $order
         );
 
-        $response = $shipmentClass->createShipment();
+        $response = $shipmentClass->createShipment($order);
 
         $this->logger->info(print_r($response, true));
 

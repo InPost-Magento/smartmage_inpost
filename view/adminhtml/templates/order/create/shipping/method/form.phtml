@@ -102,7 +102,8 @@ $geowidgetToken = $block->getInPostToken();
 
                     <?php if($_rate->getCarrier() == 'inpostlocker') { ?>
                         <div class="details-target_point">
-                            <?php echo __('Selected pickup point:') ?> <strong><?php echo $targetPoint ? $targetPoint : __('None') ?></strong>                                                                                                                                         <a data-inpost-select-point="WAW171M" href="#">Pokaż na mapie</a>
+                            <?php echo __('Selected pickup point:') ?> <strong><?php echo $targetPoint ? $targetPoint : __('None') ?></strong>
+                            <a data-inpost-select-point="WAW171M" href="#">Pokaż na mapie</a>
                         </div>
                     <?php } ?>
 
