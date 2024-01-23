@@ -2,13 +2,13 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
         <css src="https://geowidget.inpost.pl/inpost-geowidget.css" media="all" src_type="url"/>
-        <script src="Smartmage_Inpost::js/inPostShowPoint.js" />
     </head>
     <body>
         <referenceBlock name="order_create_shipping_form">
             <action method="setTemplate">
                 <argument name="template" xsi:type="string">Smartmage_Inpost::order/create/shipping/method/form.phtml</argument>
             </action>
+            <block class="Smartmage\Inpost\Block\Adminhtml\InpostMode" name="smartmage_inpost.inpost_mode" template="Smartmage_Inpost::inpostMode.phtml"/>
         </referenceBlock>
     </body>
 </page>

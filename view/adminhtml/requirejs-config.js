@@ -2,17 +2,14 @@ var config = {
     map: {
         '*': {
             'easyPackWidget' : 'Smartmage_Inpost/js/easyPackWidget',
-            'inPostShowModal' : 'Smartmage_Inpost/js/inPostShowPoint',
+            'inPostShowModal' : 'Smartmage_Inpost/js/inPostShowModal',
             'Magento_Sales/order/create/scripts': 'Smartmage_Inpost/js/order/create/scripts'
         }
     },
     paths: {
-        'inPostSdk': [
-            'https://geowidget.easypack24.net/js/sdk-for-javascript'
-        ],
-        'inPostGeoWidget': [
-            'https://geowidget.inpost.pl/inpost-geowidget'
-        ],
+        'inPostSdk': 'Smartmage_Inpost/js/inpostSdkAdminLoader',
+        'inpost-geowidget-sandbox': 'https://sandbox-easy-geowidget-sdk.easypack24.net/inpost-geowidget',
+        'inpost-geowidget': 'https://geowidget.inpost.pl/inpost-geowidget'
     },
     config: {
         mixins: {
