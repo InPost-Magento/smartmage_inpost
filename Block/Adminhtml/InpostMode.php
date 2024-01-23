@@ -1,23 +1,25 @@
 <?php
-namespace Smartmage\Inpost\Block\Adminhtml\Shipment\Create;
+namespace Smartmage\Inpost\Block\Adminhtml;
 
+use Magento\Backend\Block\Template;
+use Magento\Backend\Block\Template\Context;
 use Magento\Directory\Helper\Data as DirectoryHelper;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Json\Helper\Data as JsonHelper;
 use Smartmage\Inpost\Model\ConfigProvider;
 
-class Address extends \Magento\Backend\Block\Template
+class InpostMode extends Template
 {
     /**
      * Block template
      *
      * @var string
      */
-    protected $_template = 'Smartmage_Inpost::shipment/create/address.phtml';
+    protected $_template = 'Smartmage_Inpost::inpostMode.phtml';
     protected $configProvider;
 
     public function __construct(
-        \Magento\Backend\Block\Template\Context $context,
+        Context $context,
         ConfigProvider $configProvider,
         array $data = [],
         ?JsonHelper $jsonHelper = null,

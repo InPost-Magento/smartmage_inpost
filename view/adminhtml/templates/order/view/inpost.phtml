@@ -2,7 +2,7 @@
 /**
  * @var $block \Smartmage\Inpost\Block\Adminhtml\Order\View\Inpost
  */ ?>
-<section class="admin__page-section inpost_shipment-section" data-inposttoken="<?= $block->getInPostToken() ?>">
+<section class="admin__page-section">
     <div class="admin__page-section-title">
         <span class="title"><?= __('Przesyłki InPost') ?></span>
     </div>
@@ -61,9 +61,9 @@
                 </table>
             <?php endif ?>
             <?php
-            $methods = $block->getInpostShippingMethods();
-            $selectedMethod = $block->getSelectedMethod();
-            $orderId = $block->getOrder()->getId();
+                $methods = $block->getInpostShippingMethods();
+                $selectedMethod = $block->getSelectedMethod();
+                $orderId = $block->getOrder()->getId();
             ?>
             <form action="<?= $block->getUrl('smartmageinpost/shipments/create') ?>" class="inpost-shipments-form">
                 <div class="control">

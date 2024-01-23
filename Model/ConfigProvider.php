@@ -10,6 +10,7 @@ use Magento\Framework\View\Asset\RepositoryFactory;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Checkout\Model\ConfigProviderInterface;
+use phpseclib3\Exception\FileNotFoundException;
 use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
 
 class ConfigProvider implements ConfigProviderInterface
@@ -18,6 +19,7 @@ class ConfigProvider implements ConfigProviderInterface
     const DEBUG_ENABLED = 'debug_enabled';
     const SHIPPING_ORGANIZATION_ID = 'organization_id';
     const SHIPPING_ACCESS_TOKEN = 'access_token';
+    const SHIPPING_GEOWIDGET_TOKEN = 'geowidget_token';
     const SHIPPING_LABEL_FORMAT = 'label_format';
     const SHIPPING_LABEL_SIZE = 'label_size';
     const SHIPPING_CHANGE_ADDRESS = 'change_address';
@@ -105,14 +107,15 @@ class ConfigProvider implements ConfigProviderInterface
      * @return mixed
      * @throws NoSuchEntityException
      */
-    public function getShippingConfigData($field)
+    public function getShippingConfigData($field, $storeId = null)
     {
         $path = 'shipping/inpost/' . $field;
+        $store = $storeId ? $this->storeManager->getStore($storeId) : $this->storeManager->getStore();
 
         return $this->scopeConfig->getValue(
             $path,
             ScopeInterface::SCOPE_STORE,
-            $this->storeManager->getStore()
+            $store
         );
     }
 
@@ -138,9 +141,9 @@ class ConfigProvider implements ConfigProviderInterface
      * @return mixed
      * @throws NoSuchEntityException
      */
-    public function getOrganizationId()
+    public function getOrganizationId($storeId = null)
     {
-        return $this->getShippingConfigData(self::SHIPPING_ORGANIZATION_ID);
+        return $this->getShippingConfigData(self::SHIPPING_ORGANIZATION_ID, $storeId);
     }
 
     /**
@@ -150,6 +153,15 @@ class ConfigProvider implements ConfigProviderInterface
     public function getAccessToken()
     {
         return $this->encryptor->decrypt($this->getShippingConfigData(self::SHIPPING_ACCESS_TOKEN));
+    }
+
+    /**
+     * @return mixed
+     * @throws NoSuchEntityException
+     */
+    public function getGeowidgetToken()
+    {
+        return $this->encryptor->decrypt($this->getShippingConfigData(self::SHIPPING_GEOWIDGET_TOKEN));
     }
 
     /**
@@ -447,6 +459,11 @@ class ConfigProvider implements ConfigProviderInterface
         return $this->getShippingConfigData(self::SHIPPING_PICKUP_COUNTRY_CODE);
     }
 
+    public function getIsInpostParcelLockerEnabled()
+    {
+        return $this->getConfigFlag('inpostlocker/standard/popenabled');
+    }
+
     /**
      * @throws NoSuchEntityException
      */
@@ -470,10 +487,13 @@ class ConfigProvider implements ConfigProviderInterface
             }
         }
 
+        $inpostMode = $this->getShippingConfigData('mode');
+
         return array_merge($listOfLogos, [
             'standard_inpostlocker' => ($this->getConfigData('inpostlocker/standard/popenabled')) ? 'parcel_locker-pop' : 'parcel_locker',
-            'geowidget_token' => $this->getShippingConfigData('geowidget_token'),
-            'base_url' => $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_LINK)
+            'geowidget_token' => $this->getGeowidgetToken(),
+            'base_url' => $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_LINK),
+            'inpost_mode' => $inpostMode
         ]);
     }
 }

@@ -43,6 +43,7 @@
         <policy id="frame-src">
             <values>
                 <value id="inpost-geowidget" type="host">https://geowidget-app.inpost.pl/</value>
+                <value id="inpost-geowidget-sandbox" type="host">https://sandbox-easy-geowidget.easypack24.net/</value>
             </values>
         </policy>
     </policies>
