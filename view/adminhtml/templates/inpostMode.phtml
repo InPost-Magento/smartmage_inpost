@@ -1,0 +1,10 @@
+<?php
+/**
+ * @var $block \Smartmage\Inpost\Block\Adminhtml\InpostMode
+ */ ?>
+<div class="inpost_shipment-section" data-inposttoken="<?= $block->getGeowidgetToken() ?>"></div>
+<script>
+    require(['jquery', 'domReady!','inPostShowModal'], function($) {
+        window.inpostMode = '<?php echo $block->getInPostMode(); ?>';
+    });
+</script>

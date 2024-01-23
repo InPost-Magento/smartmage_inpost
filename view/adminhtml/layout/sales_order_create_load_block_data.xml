@@ -5,6 +5,7 @@
             <action method="setTemplate">
                 <argument name="template" xsi:type="string">Smartmage_Inpost::order/create/shipping/method/form.phtml</argument>
             </action>
+            <block class="Smartmage\Inpost\Block\Adminhtml\InpostMode" name="smartmage_inpost.inpost_mode" template="Smartmage_Inpost::inpostMode.phtml"/>
         </referenceBlock>
     </body>
 </page>
