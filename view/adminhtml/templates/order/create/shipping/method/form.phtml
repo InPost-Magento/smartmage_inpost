@@ -13,6 +13,7 @@
 /** @var \Magento\Tax\Helper\Data $taxHelper */
 $taxHelper = $block->getData('taxHelper');
 $targetPoint = empty($block->getRequest()->getParam('order')['inpost_locker_id']) ? '' : $block->getRequest()->getParam('order')['inpost_locker_id'];
+$geowidgetToken = $block->getInPostToken();
 ?>
 
 <?php $_shippingRateGroups = $block->getShippingRates(); ?>
@@ -59,8 +60,7 @@ $targetPoint = empty($block->getRequest()->getParam('order')['inpost_locker_id']
 
                                     <?php if(strpos($block->escapeHtmlAttr($_code), 'inpostlocker') === 0) { ?>
                                         <div class="details-target_point">
-                                            <?php echo __('Selected pickup point:') ?> <strong><?php echo $targetPoint ? $targetPoint : __('None') ?></strong>
-                                            <a data-inpost-select-point="WAW171M" href="#">Pokaż na mapie</a>
+                                            <?php echo __('Selected pickup point:') ?> <strong><?php echo $targetPoint ? $targetPoint : __('None') ?></strong>                                                                                                                                         <a data-inpost-select-point="WAW171M" href="#">Pokaż na mapie</a>
                                         </div>
                                     <?php } ?>
 
@@ -148,6 +148,7 @@ script;
     ) ?>
 <?php endif; ?>
 
+<div class="inpost_shipment-section" data-inposttoken="<?php echo $geowidgetToken; ?>"></div>
 <input type="hidden" name="order[inpost_locker_id]" value="<?php echo $targetPoint ?>" class="validate-select-and-value"   />
 <script type="text/javascript">
     require([
@@ -185,4 +186,3 @@ $scriptString .= <<<script
 script;
 ?>
 <?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
-<?php echo $this->getChildHtml('smartmage_inpost.inpost_mode'); ?>

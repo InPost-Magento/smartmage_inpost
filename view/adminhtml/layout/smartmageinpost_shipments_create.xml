@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"  xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
+        <script src="Smartmage_Inpost::js/inPostShowPoint.js" />
         <css src="https://geowidget.easypack24.net/css/easypack.css" media="all" src_type="url"/>
     </head>
     <body>
         <referenceContainer name="content">
             <uiComponent name="inpostshipment_form_create"/>
-            <block class="Smartmage\Inpost\Block\Adminhtml\InpostMode" name="smartmage_inpost.inpost_mode" template="Smartmage_Inpost::inpostMode.phtml"/>
         </referenceContainer>
     </body>
 </page>

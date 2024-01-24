@@ -18,6 +18,8 @@ var config = {
         }
     },
     paths: {
-        'inPostSdk': 'Smartmage_Inpost/js/inpost-sdk-loader'
+        'inPostSdk': [
+            'https://geowidget.inpost.pl/inpost-geowidget'
+        ],
     },
 };

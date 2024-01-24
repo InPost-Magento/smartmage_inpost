@@ -3,6 +3,7 @@ namespace Smartmage\Inpost\Block\Adminhtml\Order\Create\Shipping\Method;
 
 use Magento\Backend\Block\Template\Context;
 use Magento\Backend\Model\Session\Quote;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Pricing\PriceCurrencyInterface;
 use Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method\Form as OriginalForm;
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -34,5 +35,14 @@ class Form extends OriginalForm
     ) {
         $this->configProvider = $configProvider;
         parent::__construct($context, $sessionQuote, $orderCreate, $priceCurrency, $taxData);
+    }
+
+    /**
+     * @return mixed
+     * @throws NoSuchEntityException
+     */
+    public function getInPostToken()
+    {
+        return $this->configProvider->getShippingConfigData('geowidget_token');
     }
 }

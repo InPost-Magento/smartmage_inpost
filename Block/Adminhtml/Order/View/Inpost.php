@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Smartmage\Inpost\Block\Adminhtml\Order\View;
 
 use Magento\Backend\Block\Template\Context;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Registry;
 use Magento\Sales\Block\Adminhtml\Order\AbstractOrder;
 use Magento\Sales\Helper\Admin;
@@ -106,7 +107,7 @@ class Inpost extends AbstractOrder
         $shipments = [];
         if ($inpostShipmentLinks = $this->getOrder()->getExtensionAttributes()->getInpostShipmentLinks()) {
             foreach ($inpostShipmentLinks as $inpostShipmentLink) {
-                if ($shipment = $this->getInpostShipment($inpostShipmentLink->getShipmentId())) {
+                if ($shipment = $this->getInpostShippment($inpostShipmentLink->getShipmentId())) {
                     $shipments[] = $shipment;
                 }
             }
@@ -203,7 +204,7 @@ class Inpost extends AbstractOrder
      * @return \Magento\Framework\Model\AbstractModel|\Smartmage\Inpost\Api\Data\ShipmentInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getInpostShipment($inpostShipmentId)
+    public function getInpostShippment($inpostShipmentId)
     {
         $shipment = null;
         try {
@@ -211,5 +212,14 @@ class Inpost extends AbstractOrder
         } catch (\Exception $e) {
         }
         return $shipment;
+    }
+
+    /**
+     * @return mixed
+     * @throws NoSuchEntityException
+     */
+    public function getInPostToken()
+    {
+        return $this->configProvider->getShippingConfigData('geowidget_token');
     }
 }
