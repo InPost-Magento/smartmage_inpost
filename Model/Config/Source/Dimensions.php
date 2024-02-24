@@ -10,6 +10,7 @@ class Dimensions extends AbstractSource
     {
         if (!$this->_options) {
             $this->_options = [
+                ['label' => __(' '), 'value' => ''],
                 ['label' => __('Dimension A'), 'value' => 'a'],
                 ['label' => __('Dimension B'), 'value' => 'b'],
                 ['label' => __('Dimension C'), 'value' => 'c']
