@@ -55,7 +55,7 @@ class AddProductDimensionAttribute implements DataPatchInterface, PatchRevertabl
                 'user_defined' => true,
                 'global' => ScopedAttributeInterface::SCOPE_STORE,
                 'group' => 'General',
-                'source' => 'Smartmage\Inpost\Model\COnfig\Source\Dimensions',
+                'source' => 'Smartmage\Inpost\Model\Config\Source\Dimensions',
                 'default' => 0,
                 'sort_order' => 32768,
                 'visible_on_front' => false,
