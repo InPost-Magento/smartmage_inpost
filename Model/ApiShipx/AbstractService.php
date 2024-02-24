@@ -85,9 +85,6 @@ abstract class AbstractService implements ServiceInterface
 
         $endpoint = $this->getBaseUri() . '/' . $this->callUri;
 
-        $this->logger->info(print_r('$parameters', true));
-        $this->logger->info(print_r($parameters, true));
-
         if ($this->method === CURLOPT_HTTPGET && is_array($parameters)) {
             $url = $endpoint . '?' . http_build_query($parameters);
             $url = $string = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '[]=', $url);
@@ -95,23 +92,14 @@ abstract class AbstractService implements ServiceInterface
             $url = $endpoint;
         }
 
-        $this->logger->info(print_r($url, true));
-
         curl_setopt($ch, CURLOPT_URL, $url);
 
         if ($this->method === CURLOPT_POST) {
             $this->requestHeaders['Content-Type'] = "Content-Type: application/json";
-
             $requestBodyJson = json_encode($requestBody);
-
-            $this->logger->info(print_r('START - $requestBodyJson -------------', true));
-            $this->logger->info(print_r($requestBodyJson, true));
-            $this->logger->info(print_r('END - $requestBodyJson --------------', true));
-
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $requestBodyJson);
         }
-        $this->logger->info(print_r($this->requestHeaders, true));
 
         curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -127,11 +115,6 @@ abstract class AbstractService implements ServiceInterface
             CallResult::STRING_MESSAGE => 'Default fail message',
             CallResult::STRING_RESPONSE_CODE => Http::STATUS_CODE_500
         ];
-
-        $this->logger->info(print_r($responseCode, true));
-        if ($this->isResponseJson) {
-            $this->logger->info(print_r($response, true));
-        }
 
         if ($responseCode == $this->successResponseCode) {
             if ($this->isResponseJson) {

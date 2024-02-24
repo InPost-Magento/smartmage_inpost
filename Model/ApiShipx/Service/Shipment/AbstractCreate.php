@@ -78,8 +78,6 @@ abstract class AbstractCreate extends AbstractService
             $this->callUri = 'v1/organizations/' . $organizationId . '/shipments';
         }
         $response = $this->call($this->requestBody);
-        $this->logger->info(print_r($this->callResult, true));
-        $this->logger->info(print_r($response, true));
 
         //throw if api fail
         if ($this->callResult[CallResult::STRING_STATUS] != CallResult::STATUS_SUCCESS) {

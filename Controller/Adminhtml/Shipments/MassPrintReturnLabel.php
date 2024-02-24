@@ -99,9 +99,6 @@ class MassPrintReturnLabel extends MassActionAbstract
             LabelFormat::STRING_SIZE => $labelSize,
         ];
 
-        $this->logger->info(print_r('$labelsData', true));
-        $this->logger->info(print_r($labelsData, true));
-
         try {
             if (!empty($shipmentIds)) {
                 $result = $this->printoutReturnLabels->getLabels($labelsData);

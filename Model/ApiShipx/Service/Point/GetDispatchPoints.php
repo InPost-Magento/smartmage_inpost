@@ -66,8 +66,6 @@ class GetDispatchPoints extends AbstractService
         if (isset($result['items']) && !empty($result['items'])) {
             $this->callResult['items'] = $result['items'];
         }
-        $this->logger->info('getAllDispatchPoints');
-        $this->logger->info(print_r($result, true));
         return $this->callResult;
     }
 }
