@@ -4,7 +4,6 @@ namespace Smartmage\Inpost\Setup\Patch\Data;
 
 use Magento\Catalog\Model\Product;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
-use Magento\Eav\Model\Entity\Attribute\Source\Boolean;
 use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
@@ -18,12 +17,12 @@ class AddProductDimensionAttribute implements DataPatchInterface, PatchRevertabl
     /**
      * @var ModuleDataSetupInterface
      */
-    protected $moduleDataSetup;
+    protected ModuleDataSetupInterface $moduleDataSetup;
 
     /**
      * @var EavSetupFactory
      */
-    protected $eavSetupFactory;
+    protected EavSetupFactory $eavSetupFactory;
 
     /**
      * AddProductSendLockerAttribute constructor.
@@ -41,7 +40,7 @@ class AddProductDimensionAttribute implements DataPatchInterface, PatchRevertabl
     /**
      * {@inheritdoc}
      */
-    public function apply(): AddProductBlockSendWithLockerAttribute
+    public function apply(): self
     {
         $this->moduleDataSetup->getConnection()->startSetup();
 
@@ -84,7 +83,7 @@ class AddProductDimensionAttribute implements DataPatchInterface, PatchRevertabl
     /**
      * {@inheritdoc}
      */
-    public function revert()
+    public function revert(): void
     {
         $this->moduleDataSetup->getConnection()->startSetup();
 
