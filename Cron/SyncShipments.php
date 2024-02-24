@@ -35,9 +35,7 @@ class SyncShipments
      */
     public function execute()
     {
-        $this->logger->info('inpost syn start');
         $this->searchMultiple->getAllShipments();
-        $this->logger->info('inpost syn end');
 
         return $this;
     }

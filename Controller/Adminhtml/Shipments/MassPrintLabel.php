@@ -82,9 +82,6 @@ class MassPrintLabel extends MassActionAbstract
             LabelFormat::STRING_SIZE => $labelSize,
         ];
 
-        $this->logger->info(print_r('$labelsData', true));
-        $this->logger->info(print_r($labelsData, true));
-
         try {
             $result = $this->printoutLabels->getLabels($labelsData);
 

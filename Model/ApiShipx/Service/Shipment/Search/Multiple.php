@@ -48,17 +48,13 @@ class Multiple extends AbstractSearch
         for ($page = 1;; $page++) {
             $result = $this->call(null, ['page' => $page, 'created_at_gteq' => $daysAgo]);
 
-            $this->logger->info(print_r($this->callResult, true));
-
             if ($this->callResult[CallResult::STRING_STATUS] != CallResult::STATUS_SUCCESS) {
                 throw new \Exception($this->callResult[CallResult::STRING_MESSAGE], $this->callResult[CallResult::STRING_RESPONSE_CODE]);
             }
 
             if (!$totalPagesUpdated) {
                 $totalPagesRaw = (float)$result['count'] / (float)$result['per_page'];
-                $this->logger->info(print_r($totalPagesRaw, true));
                 $totalPages = ceil($totalPagesRaw);
-                $this->logger->info(print_r($totalPages, true));
                 $totalPagesUpdated = true;
             }
 

@@ -61,10 +61,7 @@ class Save extends AbstractSave
             $data['shipment_fieldset'],
             $order
         );
-
         $response = $shipmentClass->createShipment($order);
-
-        $this->logger->info(print_r($response, true));
 
         if (isset($response[CallResult::STRING_RESPONSE_SHIPMENT_ID])) {
             $orderLink = $this->orderLinkFactory->create();

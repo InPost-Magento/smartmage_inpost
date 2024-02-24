@@ -98,9 +98,6 @@ class MassDispatchOrder extends MassActionAbstract
             ],
         ];
 
-        $this->logger->info(print_r('$labelsData', true));
-        $this->logger->info(print_r($dispatchData, true));
-
         try {
             if (!empty($omittedIds)) {
                 $this->messageManager->addWarningMessage((count($omittedIds) > 1 ? __('Shipments') : __('Shipment'))
