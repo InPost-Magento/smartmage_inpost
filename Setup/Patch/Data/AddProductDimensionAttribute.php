@@ -49,7 +49,7 @@ class AddProductDimensionAttribute implements DataPatchInterface, PatchRevertabl
             Product::ENTITY,
             self::DIMENSION_ATTRIBUTE_CODE,
             [
-                'type' => 'int',
+                'type' => 'varchar',
                 'label' => 'InPost package dimension',
                 'input' => 'select',
                 'user_defined' => true,

@@ -7,11 +7,12 @@ use Magento\Framework\Encryption\EncryptorInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Asset\RepositoryFactory;
+use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Checkout\Model\ConfigProviderInterface;
-use phpseclib3\Exception\FileNotFoundException;
 use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
+use Smartmage\Inpost\Model\Config\Source\Size as SizeSource;
 
 class ConfigProvider implements ConfigProviderInterface
 {
@@ -80,6 +81,8 @@ class ConfigProvider implements ConfigProviderInterface
      */
     private $repositoryFactory;
 
+    private OrderRepositoryInterface $orderRepository;
+
     /**
      * ConfigProvider constructor.
      * @param ScopeConfigInterface $scopeConfig
@@ -93,17 +96,20 @@ class ConfigProvider implements ConfigProviderInterface
         StoreManagerInterface $storeManager,
         EncryptorInterface $encryptor,
         RepositoryFactory $repositoryFactory,
-        ShippingMethods $shippingMethods
+        ShippingMethods $shippingMethods,
+        OrderRepositoryInterface $orderRepository
     ) {
         $this->encryptor = $encryptor;
         $this->scopeConfig = $scopeConfig;
         $this->storeManager = $storeManager;
         $this->repositoryFactory = $repositoryFactory;
         $this->shippingMethods = $shippingMethods;
+        $this->orderRepository = $orderRepository;
     }
 
     /**
      * @param $field
+     * @param null $storeId
      * @return mixed
      * @throws NoSuchEntityException
      */
@@ -382,8 +388,19 @@ class ConfigProvider implements ConfigProviderInterface
     /**
      * @throws NoSuchEntityException
      */
-    public function getDefaultSize()
+    public function getDefaultSize(int|bool $orderId = false)
     {
+        if($orderId) {
+            $order = $this->orderRepository->get($orderId);
+            $dimensions = [];
+            foreach ($order->getItems() as $item) {
+                $dimensions[$item->getProduct()->getInpostDimension()] = $item->getProduct()->getInpostDimension();
+            }
+            $dimensionsOrdered = array_intersect_key(SizeSource::SIZE_LABEL, $dimensions);
+            end($dimensionsOrdered);
+            $selectedDimension = key($dimensionsOrdered);
+            if($selectedDimension !== '') return $selectedDimension;
+        }
         return $this->getShippingConfigData(self::DEFAULT_SIZE);
     }
 
