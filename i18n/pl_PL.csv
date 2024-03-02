@@ -211,3 +211,8 @@ A total of %1 record(s) have been deleted.,Łącznie usunięto %1 rekord(y/ów).
 A total of %1 record(s) haven\'t been deleted. Please see server logs for more details.,Łącznie nie usunięto %1 rekord(y/ów). Proszę sprawdzić logi serwera w celu uzyskania więcej informacji.
 (%1 record),(%1 rekord)
 (%1 records),(%1 rekordy)
+InPost package dimension,Gabaryt InPost
+Dimension A,Gabaryt A
+Dimension B,Gabaryt B
+Dimension C,Gabaryt C
+Use product attribute,Użyj cechy produktu

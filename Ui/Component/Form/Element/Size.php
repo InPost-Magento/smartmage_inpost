@@ -2,13 +2,7 @@
 
 namespace Smartmage\Inpost\Ui\Component\Form\Element;
 
-use Magento\Framework\App\Request\Http;
-use Magento\Framework\Pricing\PriceCurrencyInterface;
-use Magento\Framework\View\Element\UiComponent\ContextInterface;
-use Magento\Sales\Api\OrderRepositoryInterface;
-use Smartmage\Inpost\Model\Config\Source\DefaultWaySending;
-use Smartmage\Inpost\Model\ConfigProvider;
-use Smartmage\Inpost\Model\Config\Source\Size as SizeSource;
+use Magento\Framework\Exception\NoSuchEntityException;
 
 class Size extends AbstractSelect
 {
@@ -17,23 +11,25 @@ class Size extends AbstractSelect
      * Prepare component configuration
      *
      * @return void
+     * @throws NoSuchEntityException
      */
-    public function prepare()
+    public function prepare(): void
     {
         parent::prepare();
 
         $config = $this->getData('config');
-        $data= $this->request->getParams();
+        $data = $this->request->getParams();
         $shippingMethod = $data['shipping_method'];
 
         $this->size->setShippingMethod($shippingMethod);
+        $this->size->setIncludeProductAttribute(false);
 
         if (isset($config['dataScope']) && $config['dataScope'] == 'size') {
             $config['options'] = $this->size->toOptionArray();
             if (isset($data['size'])) {
                 $config['default'] = $data['size'];
             } else {
-                $config['default'] = $this->configProvider->getDefaultSize();
+                $config['default'] = $this->configProvider->getDefaultSize($data['order_id']);
             }
             $this->setData('config', (array)$config);
         }

@@ -2,6 +2,7 @@
 
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment;
 
+use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Pricing\PriceCurrencyInterface;
 use Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterfaceFactory;
 use Smartmage\Inpost\Api\ShipmentOrderLinkRepositoryInterface;
@@ -91,6 +92,7 @@ class MassCreate
     /**
      * @param $orders
      * @return array
+     * @throws CouldNotSaveException
      */
     public function createShipments($orders)
     {
@@ -175,7 +177,7 @@ class MassCreate
             case (self::LOCKER_SERVICE):
                 $extensionAttributes = $order->getExtensionAttributes();
                 $data = [
-                    'size' => $this->configProvider->getDefaultSize(),
+                    'size' => $this->configProvider->getDefaultSize($order->getId()),
                     'target_locker' => $order->getData('inpost_locker_id'),
                 ];
                 break;
