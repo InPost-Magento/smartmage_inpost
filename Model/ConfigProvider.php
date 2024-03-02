@@ -388,7 +388,7 @@ class ConfigProvider implements ConfigProviderInterface
     /**
      * @throws NoSuchEntityException
      */
-    public function getDefaultSize(int|bool $orderId = false)
+    public function getDefaultSize($orderId = false)
     {
         if($orderId) {
             $order = $this->orderRepository->get($orderId);
