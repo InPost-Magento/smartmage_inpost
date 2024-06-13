@@ -144,7 +144,7 @@ abstract class AbstractService implements ServiceInterface
             $this->callResult[CallResult::STRING_RESPONSE_CODE] = $responseCode;
 
             return $responseDecoded;
-        } elseif (in_array($responseCode, [,
+        } elseif (in_array($responseCode, [
                 Http::STATUS_CODE_401,
                 Http::STATUS_CODE_403,
                 Http::STATUS_CODE_422,
