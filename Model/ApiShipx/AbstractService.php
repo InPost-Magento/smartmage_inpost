@@ -127,9 +127,13 @@ abstract class AbstractService implements ServiceInterface
 
             return $response;
         } elseif (in_array($responseCode, [
-                Http::STATUS_CODE_400,
-                Http::STATUS_CODE_404
-            ])) {
+            Http::STATUS_CODE_400,
+            Http::STATUS_CODE_401,
+            Http::STATUS_CODE_403,
+            Http::STATUS_CODE_404,
+            Http::STATUS_CODE_422,
+            Http::STATUS_CODE_500
+        ])) {
             $responseDecoded = json_decode($response, true);
             if (json_last_error() !== JSON_ERROR_NONE) {
                 // Log response if JSON decoding failed
@@ -141,27 +145,6 @@ abstract class AbstractService implements ServiceInterface
 
             $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
             $this->callResult[CallResult::STRING_MESSAGE] = $errorsStr;
-            $this->callResult[CallResult::STRING_RESPONSE_CODE] = $responseCode;
-
-            return $responseDecoded;
-        } elseif (in_array($responseCode, [
-                Http::STATUS_CODE_401,
-                Http::STATUS_CODE_403,
-                Http::STATUS_CODE_422,
-                Http::STATUS_CODE_500
-            ])) {
-            $responseDecoded = json_decode($response, true);
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                // Log response if JSON decoding failed
-                error_log("Failed to decode JSON response: " . $response);
-                $responseDecoded = $response;
-            }
-            curl_close($ch);
-
-            $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
-            $this->callResult[CallResult::STRING_MESSAGE] = isset($responseDecoded[self::API_RESPONSE_MESSAGE_KEY])
-                ? $responseDecoded[self::API_RESPONSE_MESSAGE_KEY]
-                : 'Unknown error message';
             $this->callResult[CallResult::STRING_RESPONSE_CODE] = $responseCode;
 
             return $responseDecoded;
