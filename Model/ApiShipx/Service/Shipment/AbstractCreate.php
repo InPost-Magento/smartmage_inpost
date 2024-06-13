@@ -217,6 +217,7 @@ abstract class AbstractCreate extends AbstractService
         }
 
         $this->requestBody['custom_attributes']['sending_method'] = $data['sending_method'];
+        $this->requestBody['sending_method'] = $data['sending_method'];
         $this->requestBody['comments'] = '';
 
         if ($data['sending_method'] != 'dispatch_order') {

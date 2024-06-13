@@ -21,6 +21,7 @@ class DefaultWaySending implements OptionSourceInterface
     const INPOST_COURIER_EXPRESS1200 = 'inpostcourier_express1200';
     const INPOST_COURIER_EXPRESS1700 = 'inpostcourier_express1700';
     const INPOST_COURIER_PALETTE = 'inpostcourier_palette';
+    const INPOST_COURIER_ALCOHOL = 'inpostcourier_alcohol';
 
     protected $code = '';
 
@@ -66,6 +67,7 @@ class DefaultWaySending implements OptionSourceInterface
             case (self::INPOST_COURIER_EXPRESS1000):
             case (self::INPOST_COURIER_EXPRESS1200):
             case (self::INPOST_COURIER_EXPRESS1700):
+            case (self::INPOST_COURIER_ALCOHOL):
                 return [
                     ['value' => 'dispatch_order', 'label' => __('Odbiór przez Kuriera')],
                     ['value' => 'pop', 'label' => __('Nadanie w POP')],

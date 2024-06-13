@@ -47,6 +47,7 @@ abstract class AbstractSave extends Action
             'inpostcourier_express1200' => $this->courier,
             'inpostcourier_express1700' => $this->courier,
             'inpostcourier_palette' => $this->courier,
+            'inpostcourier_alcohol' => $this->courier,
         ];
 
         parent::__construct($context);

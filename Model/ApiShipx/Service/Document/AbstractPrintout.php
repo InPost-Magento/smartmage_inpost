@@ -12,4 +12,9 @@ abstract class AbstractPrintout extends AbstractService
     protected $successResponseCode = Http::STATUS_CODE_200;
 
     protected $isResponseJson = false;
+    const MASS_LABELS_NOT_ALLOWED_LIST = [
+        'inpostcourier_alcohol'
+    ];
+    public string $singleCallUri;
+    public string $massCallUri;
 }

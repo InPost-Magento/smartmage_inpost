@@ -30,7 +30,8 @@ define([
                 ['#label_'+ type +'_express1000_inpostcourier'],
                 ['#label_'+ type +'_express1200_inpostcourier'],
                 ['#label_'+ type +'_express1700_inpostcourier'],
-                ['#label_'+ type +'_palette_inpostcourier']
+                ['#label_'+ type +'_palette_inpostcourier'],
+                ['#label_'+ type +'_alcohol_inpostcourier']
             ];
 
             return method;

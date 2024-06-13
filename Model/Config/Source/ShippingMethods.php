@@ -25,6 +25,7 @@ class ShippingMethods implements OptionSourceInterface
         'inpostcourier_express1200' => 'inpost_courier_express_1200',
         'inpostcourier_express1700' => 'inpost_courier_express_1700',
         'inpostcourier_palette' => 'inpost_courier_palette',
+        'inpostcourier_alcohol' => 'inpost_courier_alcohol',
     ];
 
     const INPOST_CARRIER_CODES = ['inpostlocker', 'inpostcourier'];

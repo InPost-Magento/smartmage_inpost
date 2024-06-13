@@ -934,6 +934,69 @@
                         <can_be_empty>1</can_be_empty>
                     </field>
                 </group>
+                <group id="alcohol" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>InPost - SmartCourier</label>
+                    <field id="active" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" canRestore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Method name</label>
+                    </field>
+                    <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Price</label>
+                        <validate>validate-number validate-zero-or-greater</validate>
+                    </field>
+                    <field id="free_shipping_enable" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1">
+                        <label>Enable Free Shipping Threshold</label>
+                        <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    </field>
+                    <field id="free_shipping_subtotal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1">
+                        <label>Free Shipping Amount Threshold</label>
+                        <validate>validate-number validate-zero-or-greater</validate>
+                        <depends>
+                            <field id="free_shipping_enable">1</field>
+                        </depends>
+                    </field>
+                    <field id="tax_including" translate="label" type="select" sortOrder="61" showInDefault="1" showInWebsite="1">
+                        <label>Free Shipping Amount Including Tax</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="free_shipping_enable">1</field>
+                        </depends>
+                    </field>
+                    <field id="position" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Position</label>
+                    </field>
+                    <field id="logo" translate="label" type="image" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Logo for checkout</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <upload_dir config="system/filesystem/media">inpost_logo</upload_dir>
+                        <base_url type="media" scope_info="1">inpost_logo</base_url>
+                    </field>
+                    <field id="max_cart_weight" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Max cart weight</label>
+                        <comment>The default value of 25 refers to the maximum weight of a package that Inpost delivers in kilograms. If you use a different unit, adjust this value and set the appropriate unit in the "Inpost - general configuration" section</comment>
+                    </field>
+                    <field id="default_way_sending" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1">
+                        <label>Default way of sending</label>
+                        <source_model>DefaultWaySendingAlcohol</source_model>
+                    </field>
+                    <field id="default_sending_point" translate="comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Default sending point</label>
+                        <frontend_model>DefaultSendingPointCourierAlcohol</frontend_model>
+                    </field>
+                    <field id="sallowspecific" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Ship to Applicable Countries</label>
+                        <frontend_class>shipping-applicable-country</frontend_class>
+                        <source_model>Magento\Shipping\Model\Config\Source\Allspecificcountries</source_model>
+                    </field>
+                    <field id="specificcountry" translate="label" type="multiselect" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Ship to Specific Countries</label>
+                        <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                        <can_be_empty>1</can_be_empty>
+                    </field>
+                </group>
             </group>
         </section>
         <section id="shipping">

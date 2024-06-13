@@ -13,6 +13,7 @@ use Smartmage\Inpost\Model\ApiShipx\CallResult;
 use Smartmage\Inpost\Model\ApiShipx\Service\Document\Printout\ReturnLabels as PrintoutReturnLabels;
 use Smartmage\Inpost\Model\Config\Source\LabelFormat;
 use Smartmage\Inpost\Model\ConfigProvider;
+use Smartmage\Inpost\Model\Order\Processor as OrderProcessor;
 
 /**
  * Class PrintReturnLabel
@@ -30,6 +31,7 @@ class PrintReturnLabel extends Action
      * @var PsrLoggerInterface
      */
     protected $logger;
+    private OrderProcessor $orderProcessor;
 
     public function __construct(
         FileFactory $fileFactory,
@@ -37,13 +39,15 @@ class PrintReturnLabel extends Action
         ConfigProvider $configProvider,
         PrintoutReturnLabels $printoutReturnLabels,
         DateTime $dateTime,
-        PsrLoggerInterface $logger
+        PsrLoggerInterface $logger,
+        OrderProcessor $orderProcessor
     ) {
         $this->logger = $logger;
         $this->fileFactory           = $fileFactory;
         $this->configProvider      = $configProvider;
         $this->printoutReturnLabels  = $printoutReturnLabels;
         $this->dateTime           = $dateTime;
+        $this->orderProcessor = $orderProcessor;
         parent::__construct($context);
     }
 
@@ -55,17 +59,12 @@ class PrintReturnLabel extends Action
     {
         $shipmentId = $this->getRequest()->getParam('id');
         $labelFormat = $this->configProvider->getLabelFormat();
-        $labelSize = $this->configProvider->getLabelSize();
-        $labelsData = [
-            'ids' => [$shipmentId],
-            LabelFormat::STRING_FORMAT => $labelFormat,
-            LabelFormat::STRING_SIZE => $labelSize,
-        ];
+        $order = $this->orderProcessor->getOrder($this->getRequest()->getParam('order_id'));
 
         try {
-            $result = $this->printoutReturnLabels->getLabels($labelsData);
+            $result = $this->printoutReturnLabels->getLabels([$shipmentId], [$order->getShippingMethod()]);
 
-            $fileContent = ['type' => 'string', 'value' => $result[CallResult::STRING_FILE], 'rm' => true];
+            $fileContent = ['type' => 'string', 'value' => $result['files'][0][CallResult::STRING_FILE], 'rm' => true];
 
             return $this->fileFactory->create(
                 sprintf('labels-%s.' . $labelFormat, $this->dateTime->date('Y-m-d_H-i-s')),
