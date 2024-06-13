@@ -13,7 +13,7 @@ class Alcohol extends AbstractMethod
 
     public string $carrierCode = 'inpostcourier';
 
-    protected string $blockAttribute = 'block_send_with_locker';
+    protected string $blockAttribute = 'block_send_with_courier';
 
     /**
      * @return bool
