@@ -14,6 +14,7 @@ use Smartmage\Inpost\Model\ApiShipx\Service\Document\Printout\Labels as Printout
 use Smartmage\Inpost\Model\Config\Source\LabelFormat;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\ResourceModel\Shipment\CollectionFactory;
+use Smartmage\Inpost\Service\FileService;
 
 /**
  * Class MassPrintLabel
@@ -37,6 +38,7 @@ class MassPrintLabel extends MassActionAbstract
      * @var PsrLoggerInterface
      */
     protected $logger;
+    private FileService $fileService;
 
     /**
      * @return \Magento\Backend\Model\View\Result\Redirect|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
@@ -51,13 +53,15 @@ class MassPrintLabel extends MassActionAbstract
         ConfigProvider $configProvider,
         PrintoutLabels $printoutLabels,
         FileFactory $fileFactory,
-        DateTime $dateTime
+        DateTime $dateTime,
+        FileService $fileService
     ) {
         parent::__construct($context, $filter, $collectionFactory, $configProvider);
         $this->printoutLabels = $printoutLabels;
         $this->fileFactory = $fileFactory;
         $this->dateTime = $dateTime;
         $this->logger = $logger;
+        $this->fileService = $fileService;
     }
 
     public function execute()
@@ -70,32 +74,38 @@ class MassPrintLabel extends MassActionAbstract
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $collection = $this->filter->getCollection($this->collectionFactory->create());
         $shipmentIds = $collection->getColumnValues('shipment_id');
+        $shipmentServices = $collection->getColumnValues('shipping_method');
 
         $services = array_count_values($collection->getColumnValues('service'));
 
         $labelFormat = $this->configProvider->getLabelFormat();
-        $labelSize = $this->configProvider->getLabelSize();
-
-        $labelsData = [
-            'ids' => $shipmentIds,
-            LabelFormat::STRING_FORMAT => $labelFormat,
-            LabelFormat::STRING_SIZE => $labelSize,
-        ];
 
         try {
-            $result = $this->printoutLabels->getLabels($labelsData);
+            $results = $this->printoutLabels->getLabels($shipmentIds, $shipmentServices);
+            $files = [];
 
-            if (count($services) > 1) {
-                $labelFormat = 'zip';
+            if(count($results['files']) > 1) {
+                foreach($results['files'] as $result) {
+                    $files[] = $result[CallResult::STRING_FILE];
+                }
+                $filePath = $this->fileService->createZip($files, $results['format']);
+                $resultData = [
+                    $filePath,
+                    LabelFormat::ZIP,
+                    'filename'
+                ];
+            } else {
+                $resultData = [
+                    $results['files'][0][CallResult::STRING_FILE],
+                    $results['format'],
+                    'string'
+                ];
             }
 
-            $fileContent = ['type' => 'string', 'value' => $result[CallResult::STRING_FILE], 'rm' => true];
-
-            return $this->fileFactory->create(
-                sprintf('labels-%s.' . $labelFormat, $this->dateTime->date('Y-m-d_H-i-s')),
-                $fileContent,
-                DirectoryList::VAR_DIR,
-                LabelFormat::LABEL_CONTENT_TYPES[$labelFormat]
+            return $this->fileService->generateFile(
+                $resultData[0],
+                $resultData[1],
+                $resultData[2]
             );
         } catch (\Exception $e) {
             $this->logger->info(print_r($e->getMessage(), true));

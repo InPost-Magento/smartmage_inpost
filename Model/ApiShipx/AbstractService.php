@@ -87,7 +87,7 @@ abstract class AbstractService implements ServiceInterface
 
         if ($this->method === CURLOPT_HTTPGET && is_array($parameters)) {
             $url = $endpoint . '?' . http_build_query($parameters);
-            $url = $string = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '[]=', $url);
+            $url = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '[]=', $url);
         } else {
             $url = $endpoint;
         }
@@ -107,7 +107,6 @@ abstract class AbstractService implements ServiceInterface
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->requestHeaders);
 
         $response = curl_exec($ch);
-
         $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         $this->callResult = [
@@ -127,63 +126,51 @@ abstract class AbstractService implements ServiceInterface
             $this->callResult[CallResult::STRING_RESPONSE_CODE] = $responseCode;
 
             return $response;
-        } elseif ($responseCode == Http::STATUS_CODE_400) { //Przy przesyłaniu danych metodą POST lub PUT wystąpiły błędy w walidacji. Szczegółowe błędy walidacji zawarte są pod atrybutem details.
-
-            $response = json_decode($response, true);
+        } elseif (in_array($responseCode, [
+                Http::STATUS_CODE_400,
+                Http::STATUS_CODE_404
+            ])) {
+            $responseDecoded = json_decode($response, true);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                // Log response if JSON decoding failed
+                error_log("Failed to decode JSON response: " . $response);
+                $responseDecoded = $response;
+            }
+            $errorsStr = $this->errorHandler->handle($responseDecoded);
             curl_close($ch);
-            $errorsStr = $this->errorHandler->handle($response);
 
             $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
             $this->callResult[CallResult::STRING_MESSAGE] = $errorsStr;
-            $this->callResult[CallResult::STRING_RESPONSE_CODE] = Http::STATUS_CODE_400;
+            $this->callResult[CallResult::STRING_RESPONSE_CODE] = $responseCode;
 
-            return $response;
-        } elseif ($responseCode == Http::STATUS_CODE_401) { //Dostęp do zasobu jest niemożliwy ponieważ zapytanie nie zostało podpisane kluczem access token.
-
-            $response = json_decode($response, true);
+            return $responseDecoded;
+        } elseif (in_array($responseCode, [,
+                Http::STATUS_CODE_401,
+                Http::STATUS_CODE_403,
+                Http::STATUS_CODE_422,
+                Http::STATUS_CODE_500
+            ])) {
+            $responseDecoded = json_decode($response, true);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                // Log response if JSON decoding failed
+                error_log("Failed to decode JSON response: " . $response);
+                $responseDecoded = $response;
+            }
             curl_close($ch);
 
             $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
-            $this->callResult[CallResult::STRING_MESSAGE] = $response[self::API_RESPONSE_MESSAGE_KEY];
-            $this->callResult[CallResult::STRING_RESPONSE_CODE] = Http::STATUS_CODE_401;
+            $this->callResult[CallResult::STRING_MESSAGE] = isset($responseDecoded[self::API_RESPONSE_MESSAGE_KEY])
+                ? $responseDecoded[self::API_RESPONSE_MESSAGE_KEY]
+                : 'Unknown error message';
+            $this->callResult[CallResult::STRING_RESPONSE_CODE] = $responseCode;
 
-            return $response;
-        } elseif ($responseCode == Http::STATUS_CODE_403) { //Dostęp do określone zasobu jest zabroniony dla tego zapytania (np. z powodu braku lub niewłaściwego zakresu uprawnień).
-
-            $response = json_decode($response, true);
-            curl_close($ch);
-
-            $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
-            $this->callResult[CallResult::STRING_MESSAGE] = $response[self::API_RESPONSE_MESSAGE_KEY];
-            $this->callResult[CallResult::STRING_RESPONSE_CODE] = Http::STATUS_CODE_403;
-
-            return $response;
-        } elseif ($responseCode == Http::STATUS_CODE_404) { //Szukany zasób nie został odnaleziony, np. adres URL jest niepoprawny lub zasób nie istnieje.
-
-            $response = json_decode($response, true);
-            curl_close($ch);
-            $errorsStr = $this->errorHandler->handle($response);
-
-            $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
-            $this->callResult[CallResult::STRING_MESSAGE] = $errorsStr;
-            $this->callResult[CallResult::STRING_RESPONSE_CODE] = Http::STATUS_CODE_404;
-
-            return $response;
-        } elseif ($responseCode == Http::STATUS_CODE_500) { //Wystąpił błąd po stronie serwera.
-
-            $response = json_decode($response, true);
-            curl_close($ch);
-
-            $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
-            $this->callResult[CallResult::STRING_MESSAGE] = $response[self::API_RESPONSE_MESSAGE_KEY];
-            $this->callResult[CallResult::STRING_RESPONSE_CODE] = Http::STATUS_CODE_500;
-
-            return $response;
+            return $responseDecoded;
         } else {
             $errNo = curl_errno($ch);
             $errStr = curl_error($ch);
+            curl_close($ch);
 
-            throw new \Exception('Unknown cURL Error - ' . $errNo . ': ' . $errStr, $responseCode);
+            throw new \Exception('Unknown cURL Error - ' . $errNo . ' [' . $responseCode . ']: ' . $errStr . $response, $responseCode);
         }
     }
 }

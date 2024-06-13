@@ -17,6 +17,7 @@ use Smartmage\Inpost\Model\ApiShipx\Service\Shipment\MassCreate;
 use Smartmage\Inpost\Model\Config\Source\LabelFormat;
 use Smartmage\Inpost\Model\Config\Source\ShippingMethods;
 use Smartmage\Inpost\Model\ConfigProvider;
+use Smartmage\Inpost\Service\FileService;
 
 class MassCreateAndPrintShipment extends Action
 {
@@ -65,6 +66,8 @@ class MassCreateAndPrintShipment extends Action
      * @var PsrLoggerInterface
      */
     protected $logger;
+    private DirectoryList $directoryList;
+    private FileService $fileService;
 
     /**
      * MassCreateAndPrintShipment constructor.
@@ -77,6 +80,9 @@ class MassCreateAndPrintShipment extends Action
      * @param FileFactory $fileFactory
      * @param DateTime $dateTime
      * @param ShippingMethods $shippingMethods
+     * @param PsrLoggerInterface $logger
+     * @param DirectoryList $directoryList
+     * @param FileService $fileService
      */
     public function __construct(
         Context $context,
@@ -88,7 +94,9 @@ class MassCreateAndPrintShipment extends Action
         FileFactory $fileFactory,
         DateTime $dateTime,
         ShippingMethods $shippingMethods,
-        PsrLoggerInterface $logger
+        PsrLoggerInterface $logger,
+        DirectoryList $directoryList,
+        FileService $fileService
     ) {
         $this->logger = $logger;
         parent::__construct($context);
@@ -100,11 +108,12 @@ class MassCreateAndPrintShipment extends Action
         $this->fileFactory = $fileFactory;
         $this->dateTime = $dateTime;
         $this->shippingMethods = $shippingMethods;
+        $this->directoryList = $directoryList;
+        $this->fileService = $fileService;
     }
 
     public function execute()
     {
-
         if (!$this->getRequest()->isPost()) {
             throw new \Magento\Framework\Exception\NotFoundException(__('Page not found.'));
         }
@@ -137,33 +146,35 @@ class MassCreateAndPrintShipment extends Action
             }
         }
 
-        $labelFormat = $this->configProvider->getLabelFormat();
-        $labelSize = $this->configProvider->getLabelSize();
-
-        if (count($messages['shipment_ids']) > 0) {
+        if (count($messages['shipmentIds']) > 0) {
             for ($x = 0; $x <= 10; $x++) {
                 try {
-                    if (!empty($messages['shipment_ids'])) {
+                    if (!empty($messages['shipmentIds'])) {
+                        $results = $this->labels->getLabels($messages['shipmentIds'], $messages['shipmentServices']);
+                        $files = [];
 
-                        if (count($services) > 1) {
-                            $labelFormat = 'zip';
+                        if(count($results['files']) > 1) {
+                            foreach($results['files'] as $result) {
+                                $files[] = $result[CallResult::STRING_FILE];
+                            }
+                            $filePath = $this->fileService->createZip($files, $results['format']);
+                            $resultData = [
+                                $filePath,
+                                LabelFormat::ZIP,
+                                'filename'
+                            ];
+                        } else {
+                            $resultData = [
+                                $results['files'][0][CallResult::STRING_FILE],
+                                $results['format'],
+                                'string'
+                            ];
                         }
 
-                        $labelsData = [
-                            'ids' => $messages['shipment_ids'],
-                            LabelFormat::STRING_FORMAT => $labelFormat,
-                            LabelFormat::STRING_SIZE => $labelSize,
-                        ];
-
-                        $result = $this->labels->getLabels($labelsData);
-
-                        $fileContent = ['type' => 'string', 'value' => $result[CallResult::STRING_FILE], 'rm' => true];
-
-                        return $this->fileFactory->create(
-                            sprintf('labels-%s.' . $labelFormat, $this->dateTime->date('Y-m-d_H-i-s')),
-                            $fileContent,
-                            DirectoryList::VAR_DIR,
-                            LabelFormat::LABEL_CONTENT_TYPES[$labelFormat]
+                        return $this->fileService->generateFile(
+                            $resultData[0],
+                            $resultData[1],
+                            $resultData[2]
                         );
                     }
 
@@ -172,7 +183,7 @@ class MassCreateAndPrintShipment extends Action
                     preg_match("/.+(\ .+<br>)$/", $e->getMessage(), $matches);
 
                     if (isset($matches[1]) &&
-                        ($key = array_search(strip_tags(trim($matches[1])), $messages['shipment_ids']))
+                        ($key = array_search(strip_tags(trim($matches[1])), $messages['shipmentIds']))
                         !== false
                     ) {
                         $this->logger->info(print_r($e->getMessage(), true));
@@ -180,7 +191,7 @@ class MassCreateAndPrintShipment extends Action
                         $this->messageManager->addExceptionMessage(
                             $e
                         );
-                        unset($messages['shipment_ids'][$key]);
+                        unset($messages['shipmentIds'][$key]);
                         continue;
                     }
 
@@ -190,6 +201,7 @@ class MassCreateAndPrintShipment extends Action
                         $e
                     );
                 }
+                sleep(2);
             }
         }
 

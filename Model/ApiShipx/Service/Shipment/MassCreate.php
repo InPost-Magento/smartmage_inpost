@@ -3,6 +3,7 @@
 namespace Smartmage\Inpost\Model\ApiShipx\Service\Shipment;
 
 use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Pricing\PriceCurrencyInterface;
 use Smartmage\Inpost\Api\Data\ShipmentOrderLinkInterfaceFactory;
 use Smartmage\Inpost\Api\ShipmentOrderLinkRepositoryInterface;
@@ -108,6 +109,7 @@ class MassCreate
         $notInpostMethods = [];
         $successOrderIds = [];
         $shipmentIds = [];
+        $shipmentServices = [];
         foreach ($orders as $order) {
             $this->orderProcessor->setOrder($order);
             $service = $this->shippingMethods->getInpostMethod($order->getShippingMethod());
@@ -146,6 +148,7 @@ class MassCreate
                     $orderLink->setShipmentId($result[CallResult::STRING_RESPONSE_SHIPMENT_ID]);
                     $this->orderLinkRepository->save($orderLink);
                     $shipmentIds[] = $result[CallResult::STRING_RESPONSE_SHIPMENT_ID];
+                    $shipmentServices[] = $order->getShippingMethod();
                 }
             } else {
                 $notInpostMethods[] = $order->getIncrementId();
@@ -159,7 +162,8 @@ class MassCreate
             'notInpost' => !empty($notInpostMethods) ? $notInpostMethodsMsg : false,
             'success' => !empty($successOrderIds) ? $successMsg : false,
             'error' => !empty($errorMsg) ? $errorMsg : false,
-            'shipment_ids' => $shipmentIds,
+            'shipmentIds' => $shipmentIds,
+            'shipmentServices' => $shipmentServices,
         ];
     }
 
@@ -167,6 +171,7 @@ class MassCreate
      * @param $order
      * @param $serviceType
      * @return array
+     * @throws NoSuchEntityException
      */
     private function prepareData($order, $serviceType)
     {

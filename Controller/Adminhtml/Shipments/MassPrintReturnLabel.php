@@ -4,7 +4,6 @@ namespace Smartmage\Inpost\Controller\Adminhtml\Shipments;
 
 use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\Response\Http\FileFactory;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Stdlib\DateTime\DateTime;
@@ -14,6 +13,7 @@ use Smartmage\Inpost\Model\ApiShipx\Service\Document\Printout\ReturnLabels as Pr
 use Smartmage\Inpost\Model\Config\Source\LabelFormat;
 use Smartmage\Inpost\Model\ConfigProvider;
 use Smartmage\Inpost\Model\ResourceModel\Shipment\CollectionFactory;
+use Smartmage\Inpost\Service\FileService;
 
 class MassPrintReturnLabel extends MassActionAbstract
 {
@@ -33,6 +33,7 @@ class MassPrintReturnLabel extends MassActionAbstract
      * @var PsrLoggerInterface
      */
     protected $logger;
+    private FileService $fileService;
 
     /**
      * MassPrintReturnLabel constructor.
@@ -43,6 +44,8 @@ class MassPrintReturnLabel extends MassActionAbstract
      * @param PrintoutReturnLabels $printoutReturnLabels
      * @param FileFactory $fileFactory
      * @param DateTime $dateTime
+     * @param PsrLoggerInterface $logger
+     * @param FileService $fileService
      */
     public function __construct(
         Context $context,
@@ -52,13 +55,15 @@ class MassPrintReturnLabel extends MassActionAbstract
         PrintoutReturnLabels $printoutReturnLabels,
         FileFactory $fileFactory,
         DateTime $dateTime,
-        PsrLoggerInterface $logger
+        PsrLoggerInterface $logger,
+        FileService $fileService
     ) {
         $this->logger = $logger;
         parent::__construct($context, $filter, $collectionFactory, $configProvider);
         $this->printoutReturnLabels = $printoutReturnLabels;
         $this->fileFactory = $fileFactory;
         $this->dateTime = $dateTime;
+        $this->fileService = $fileService;
     }
 
     /**
@@ -75,9 +80,7 @@ class MassPrintReturnLabel extends MassActionAbstract
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $collection = $this->filter->getCollection($this->collectionFactory->create());
-
-        $labelFormat = $this->configProvider->getLabelFormat();
-        $labelSize = $this->configProvider->getLabelSize();
+        $shipmentServices = $collection->getColumnValues('shipping_method');
 
         $shipmentIds = [];
         $omittedIds = [];
@@ -93,27 +96,33 @@ class MassPrintReturnLabel extends MassActionAbstract
             }
         }
 
-        $labelsData = [
-            'ids' => $shipmentIds,
-            LabelFormat::STRING_FORMAT => $labelFormat,
-            LabelFormat::STRING_SIZE => $labelSize,
-        ];
-
         try {
             if (!empty($shipmentIds)) {
-                $result = $this->printoutReturnLabels->getLabels($labelsData);
+                $results = $this->printoutReturnLabels->getLabels($shipmentIds, array_keys($services));
+                $files = [];
 
-                $fileContent = ['type' => 'string', 'value' => $result[CallResult::STRING_FILE], 'rm' => true];
-
-                if (count($services) > 1) {
-                    $labelFormat = 'zip';
+                if(count($results['files']) > 1) {
+                    foreach($results['files'] as $result) {
+                        $files[] = $result[CallResult::STRING_FILE];
+                    }
+                    $filePath = $this->fileService->createZip($files, $results['format']);
+                    $resultData = [
+                        $filePath,
+                        LabelFormat::ZIP,
+                        'filename'
+                    ];
+                } else {
+                    $resultData = [
+                        $results['files'][0][CallResult::STRING_FILE],
+                        $results['format'],
+                        'string'
+                    ];
                 }
 
-                return $this->fileFactory->create(
-                    sprintf('labels-%s.' . $labelFormat, $this->dateTime->date('Y-m-d_H-i-s')),
-                    $fileContent,
-                    DirectoryList::VAR_DIR,
-                    LabelFormat::LABEL_CONTENT_TYPES[$labelFormat]
+                return $this->fileService->generateFile(
+                    $resultData[0],
+                    $resultData[1],
+                    $resultData[2]
                 );
             } else {
                 if (!empty($omittedIds)) {

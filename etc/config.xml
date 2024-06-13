@@ -87,20 +87,6 @@
                 <model>Smartmage\Inpost\Model\Carrier\InpostCourier</model>
                 <title>InPost Kurier</title>
                 <active>1</active>
-                <c2c>
-                    <active>0</active>
-                    <name>Kurier C2C</name>
-                    <max_cart_weight>25</max_cart_weight>
-                    <sallowspecific>1</sallowspecific>
-                    <specificcountry>PL</specificcountry>
-                </c2c>
-                <c2ccod>
-                    <active>0</active>
-                    <name>Kurier C2C - płatność przy odbiorze</name>
-                    <max_cart_weight>25</max_cart_weight>
-                    <sallowspecific>1</sallowspecific>
-                    <specificcountry>PL</specificcountry>
-                </c2ccod>
                 <standard>
                     <active>0</active>
                     <name>Kurier</name>
@@ -144,6 +130,27 @@
                     <sallowspecific>1</sallowspecific>
                     <specificcountry>PL</specificcountry>
                 </palette>
+                <c2c>
+                    <active>0</active>
+                    <name>Kurier C2C</name>
+                    <max_cart_weight>25</max_cart_weight>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
+                </c2c>
+                <c2ccod>
+                    <active>0</active>
+                    <name>Kurier C2C - płatność przy odbiorze</name>
+                    <max_cart_weight>25</max_cart_weight>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
+                </c2ccod>
+                <alcohol>
+                    <active>0</active>
+                    <name>SmartCourier</name>
+                    <max_cart_weight>25</max_cart_weight>
+                    <sallowspecific>1</sallowspecific>
+                    <specificcountry>PL</specificcountry>
+                </alcohol>
             </inpostcourier>
         </carriers>
         <csp>

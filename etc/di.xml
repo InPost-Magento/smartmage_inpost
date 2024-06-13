@@ -32,6 +32,11 @@
             <argument name="code" xsi:type="string">inpostcourier_c2ccod</argument>
         </arguments>
     </virtualType>
+    <virtualType name="DefaultWaySendingAlcohol" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_alcohol</argument>
+        </arguments>
+    </virtualType>
     <virtualType name="DefaultWaySendingCourierStandard" type="Smartmage\Inpost\Model\Config\Source\DefaultWaySending">
         <arguments>
             <argument name="code" xsi:type="string">inpostcourier_standard</argument>
@@ -145,6 +150,13 @@
     <virtualType name="DefaultSendingPointExpress1700" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
         <arguments>
             <argument name="code" xsi:type="string">inpostcourier_express1700</argument>
+            <argument name="points" xsi:type="string">pop</argument>
+            <argument name="functions" xsi:type="string">standard_courier_send</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DefaultSendingPointCourierAlcohol" type="Smartmage\Inpost\Block\Adminhtml\Config\Form\Field\DefaultSendingPoint">
+        <arguments>
+            <argument name="code" xsi:type="string">inpostcourier_alcohol</argument>
             <argument name="points" xsi:type="string">pop</argument>
             <argument name="functions" xsi:type="string">standard_courier_send</argument>
         </arguments>
