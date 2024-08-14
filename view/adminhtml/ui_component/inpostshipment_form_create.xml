@@ -886,7 +886,7 @@
                                 </action>
                             </actions>
                         </rule>
-                        <rule name="4">
+                        <rule name="12">
                             <value>inpostcourier_alcohol</value>
                             <actions>
                                 <action name="0">
@@ -949,7 +949,7 @@
                                 </action>
                             </actions>
                         </rule>
-                        <rule name="12">
+                        <rule name="13">
                             <value>inpostlocker_economic</value>
                             <actions>
                                 <action name="0">
@@ -1020,7 +1020,7 @@
                                 </action>
                             </actions>
                         </rule>
-                        <rule name="13">
+                        <rule name="14">
                             <value>inpostlocker_economiccod</value>
                             <actions>
                                 <action name="0">
