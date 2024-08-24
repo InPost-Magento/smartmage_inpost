@@ -44,7 +44,7 @@ class Courier extends AbstractCreate
     {
         $this->requestBody = [
             "receiver" => [
-                "company_name" => $data['company_name'],
+                "company_name" => $data['company_name'] ?: '.',
                 "first_name" => $data['first_name'],
                 "last_name" => $data['last_name'],
                 'phone' => $data['phone'],
