@@ -94,7 +94,7 @@ class Inpost extends AbstractOrder
      */
     public function getSelectedMethod() : string
     {
-        return $this->getOrder()->getShippingMethod();
+        return (string) $this->getOrder()->getShippingMethod();
     }
 
     /**
