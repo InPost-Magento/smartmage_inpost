@@ -6,6 +6,7 @@ use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Smartmage\Inpost\Model\ApiShipx\AbstractService;
 use Smartmage\Inpost\Model\ApiShipx\ErrorHandler;
 use Smartmage\Inpost\Model\ConfigProvider;
+use stdClass;
 
 class GetPoint extends AbstractService
 {
@@ -22,6 +23,19 @@ class GetPoint extends AbstractService
     ) {
         //$this->method = CURLOPT_HTTPGET;
         parent::__construct($logger, $configProvider, $errorHandler);
+    }
+
+    /**
+     * Get locker address
+     *
+     * @param string $lockerId
+     * @return stdClass
+     */
+    public function getLockerAddress(string $lockerId): stdClass
+    {
+        $this->callUri = 'v1/points/' . $lockerId;
+        $response = $this->getPointService();
+        return $response->address_details;
     }
 
     /**
