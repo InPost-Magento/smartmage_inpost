@@ -51,8 +51,11 @@ class SetOrderShippingAddressObserver implements ObserverInterface
         $target = $observer->getEvent()->getOrder();
         $lockerAddress = $this->pointService->getLockerAddress($source->getInpostLockerId());
 
+        $street = $lockerAddress->street . ' ' . $lockerAddress->building_number
+            . ($lockerAddress->flat_number ? '/' . $lockerAddress->flat_number : '');
+
         $target->getShippingAddress()
-            ->setStreet($lockerAddress->street)
+            ->setStreet($street)
             ->setCity($lockerAddress->city)
             ->setPostcode($lockerAddress->post_code)
             ->setCountryId('PL')
