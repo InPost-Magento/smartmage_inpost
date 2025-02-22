@@ -25,7 +25,7 @@ class SetOrderShippingAddressObserver implements ObserverInterface
         Config $fieldsetConfig,
         OrderInterface $orderInterface,
         GetPoint $pointService,
-        ConfigProvider $configProvider,
+        ConfigProvider $configProvider
     ) {
         $this->fieldsetConfig = $fieldsetConfig;
         $this->orderInterface = $orderInterface;
@@ -42,7 +42,7 @@ class SetOrderShippingAddressObserver implements ObserverInterface
         $source = $observer->getEvent()->getQuote();
         if(
             !$source->getInpostLockerId()
-            || !str_contains($source->getShippingAddress()->getShippingMethod(), 'inpostlocker')
+            || strpos($source->getShippingAddress()->getShippingMethod(), 'inpostlocker') === false
         ) {
             return $this;
         }
