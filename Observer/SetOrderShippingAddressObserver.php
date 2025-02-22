@@ -9,6 +9,7 @@ use Magento\Quote\Model\Quote;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Model\Order;
 use Smartmage\Inpost\Model\ApiShipx\Service\Point\GetPoint;
+use Smartmage\Inpost\Model\ConfigProvider;
 
 class SetOrderShippingAddressObserver implements ObserverInterface
 {
@@ -18,18 +19,25 @@ class SetOrderShippingAddressObserver implements ObserverInterface
 
     protected GetPoint $pointService;
 
+    protected ConfigProvider $configProvider;
+
     public function __construct(
         Config $fieldsetConfig,
         OrderInterface $orderInterface,
-        GetPoint $pointService
+        GetPoint $pointService,
+        ConfigProvider $configProvider,
     ) {
         $this->fieldsetConfig = $fieldsetConfig;
         $this->orderInterface = $orderInterface;
         $this->pointService = $pointService;
+        $this->configProvider = $configProvider;
     }
 
     public function execute(Observer $observer)
     {
+        if(!$this->configProvider->getChangeShippingAddress()) {
+            return $this;
+        }
         /** @var Quote $source */
         $source = $observer->getEvent()->getQuote();
         if(

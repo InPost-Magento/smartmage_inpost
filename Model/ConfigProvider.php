@@ -55,6 +55,7 @@ class ConfigProvider implements ConfigProviderInterface
     const SHIPPING_PICKUP_CITY = 'pickup_city';
     const SHIPPING_PICKUP_POST_CODE = 'pickup_post_code';
     const SHIPPING_PICKUP_COUNTRY_CODE = 'pickup_country_code';
+    const SHIPPING_CHANGE_SHIPPING_ADDRESS = 'change_shipping_address';
 
     /**
      * @var ScopeConfigInterface
@@ -90,6 +91,7 @@ class ConfigProvider implements ConfigProviderInterface
      * @param EncryptorInterface $encryptor
      * @param RepositoryFactory $repositoryFactory
      * @param ShippingMethods $shippingMethods
+     * @param OrderRepositoryInterface $orderRepository
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
@@ -479,6 +481,11 @@ class ConfigProvider implements ConfigProviderInterface
     public function getIsInpostParcelLockerEnabled()
     {
         return $this->getConfigFlag('inpostlocker/standard/popenabled');
+    }
+
+    public function getChangeShippingAddress()
+    {
+        return $this->getShippingConfigData(self::SHIPPING_CHANGE_SHIPPING_ADDRESS);
     }
 
     /**
