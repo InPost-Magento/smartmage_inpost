@@ -1053,6 +1053,10 @@
                         <field id="create_order_shipment">1</field>
                     </depends>
                 </field>
+                <field id="change_shipping_address" translate="label" type="select" sortOrder="48" showInDefault="1" showInWebsite="1" canRestore="1">
+                    <label>Change order shipping address to locker address</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
                 <field id="change_address" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" canRestore="1">
                     <label>Change sender's address</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
