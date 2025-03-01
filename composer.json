@@ -1,0 +1,33 @@
+{
+    "name": "smartmage/inpost",
+    "description": "Magento 2 InPost official module",
+    "type": "magento2-module",
+    "license": [
+        "proprietary"
+    ],
+    "require": {
+        "php": ">=8.0.0 <8.3.0",
+        "magento/framework": ">=102.0.0",
+        "magento/module-backend": ">=101.0.0",
+        "magento/module-store": ">=101.0.0",
+        "magento/module-sales": ">=102.0.0",
+        "magento/module-checkout": ">=100.3.0",
+        "magento/module-catalog": ">=103.0.0",
+        "magento/module-config": ">=101.1.0",
+        "magento/module-quote": ">=101.1.0",
+        "magento/module-ui": ">=101.1.0",
+        "magento/module-shipping": ">=100.3.0",
+        "ext-openssl": "*",
+        "ext-zip": "*",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Smartmage\\Inpost\\": ""
+        }
+    }
+}
