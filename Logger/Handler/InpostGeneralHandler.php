@@ -2,6 +2,7 @@
 
 namespace Smartmage\Inpost\Logger\Handler;
 
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Filesystem\DriverInterface;
 use Magento\Framework\Logger\Handler\Base as BaseHandler;
 use Magento\Framework\Stdlib\DateTime\Timezone as Timezone;
@@ -49,8 +50,9 @@ class InpostGeneralHandler extends BaseHandler
 
     /**
      * @param array $record
+     * @throws NoSuchEntityException
      */
-    public function write(array $record): void
+    public function write($record): void
     {
         if ($this->configProvider->getDebugEnabled()) {
             parent::write($record);
