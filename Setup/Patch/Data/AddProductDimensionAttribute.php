@@ -63,9 +63,6 @@ class AddProductDimensionAttribute implements DataPatchInterface, PatchRevertabl
         }
     }
 
-    public static function getDependencies(): array { return []; }
-    public function getAliases(): array { return []; }
-
     /**
      * @throws ValidateException
      * @throws LocalizedException
@@ -154,4 +151,7 @@ class AddProductDimensionAttribute implements DataPatchInterface, PatchRevertabl
     {
         return $this->moduleDataSetup->getTable($name);
     }
+
+    public static function getDependencies(): array { return []; }
+    public function getAliases(): array { return []; }
 }

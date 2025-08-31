@@ -67,9 +67,6 @@ class AddProductBlockSendWithLockerAttribute implements DataPatchInterface, Patc
         }
     }
 
-    public static function getDependencies(): array { return []; }
-    public function getAliases(): array { return []; }
-
     /**
      * @throws ValidateException
      * @throws LocalizedException
@@ -158,4 +155,7 @@ class AddProductBlockSendWithLockerAttribute implements DataPatchInterface, Patc
     {
         return $this->moduleDataSetup->getTable($name);
     }
+
+    public static function getDependencies(): array { return []; }
+    public function getAliases(): array { return []; }
 }
