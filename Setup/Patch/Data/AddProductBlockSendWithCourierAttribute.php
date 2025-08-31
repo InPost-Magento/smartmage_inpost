@@ -21,12 +21,18 @@ use Magento\Framework\Validator\ValidateException;
  */
 class AddProductBlockSendWithCourierAttribute implements DataPatchInterface, PatchRevertableInterface
 {
+    protected const ATTRIBUTE_CODE = 'block_send_with_courier';
     protected const GROUP_NAME = 'General';
     protected const SORT_ORDER = 32766;
+    protected ModuleDataSetupInterface $moduleDataSetup;
+    protected EavSetupFactory $eavSetupFactory;
 
-    protected static function attributeCode(): string
-    {
-        return 'block_send_with_courier';
+    public function __construct(
+        ModuleDataSetupInterface $moduleDataSetup,
+        EavSetupFactory $eavSetupFactory
+    ) {
+        $this->eavSetupFactory = $eavSetupFactory;
+        $this->moduleDataSetup = $moduleDataSetup;
     }
 
     protected function attributeDefinition(): array
@@ -38,16 +44,6 @@ class AddProductBlockSendWithCourierAttribute implements DataPatchInterface, Pat
             'source' => Boolean::class,
             'default'=> 0,
         ];
-    }
-    protected ModuleDataSetupInterface $moduleDataSetup;
-    protected EavSetupFactory $eavSetupFactory;
-
-    public function __construct(
-        ModuleDataSetupInterface $moduleDataSetup,
-        EavSetupFactory $eavSetupFactory
-    ) {
-        $this->eavSetupFactory = $eavSetupFactory;
-        $this->moduleDataSetup = $moduleDataSetup;
     }
 
     final public function apply(): self
@@ -65,7 +61,7 @@ class AddProductBlockSendWithCourierAttribute implements DataPatchInterface, Pat
     {
         $this->db()->startSetup();
         try {
-            $this->safeRemoveAttribute(static::attributeCode());
+            $this->safeRemoveAttribute(self::ATTRIBUTE_CODE);
         } finally {
             $this->db()->endSetup();
         }
@@ -81,15 +77,14 @@ class AddProductBlockSendWithCourierAttribute implements DataPatchInterface, Pat
     protected function ensureAttributeExistsAndAssigned(): void
     {
         $eav = $this->eav();
-        $code = static::attributeCode();
 
-        $existing = $eav->getAttribute(Product::ENTITY, $code);
+        $existing = $eav->getAttribute(Product::ENTITY, self::ATTRIBUTE_CODE);
         if (!$existing || empty($existing['attribute_id'])) {
             $definition = $this->withSafeDefaults($this->attributeDefinition());
-            $eav->addAttribute(Product::ENTITY, $code, $definition);
+            $eav->addAttribute(Product::ENTITY, self::ATTRIBUTE_CODE, $definition);
         }
 
-        $this->assignToAllSets($code, static::GROUP_NAME, static::SORT_ORDER);
+        $this->assignToAllSets(self::ATTRIBUTE_CODE, static::GROUP_NAME, static::SORT_ORDER);
     }
 
     /**

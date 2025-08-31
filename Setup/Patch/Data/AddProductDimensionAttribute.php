@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Smartmage\Inpost\Setup\Patch\Data;
 
 use Magento\Catalog\Model\Product;
@@ -15,12 +17,18 @@ use Magento\Framework\Validator\ValidateException;
 
 class AddProductDimensionAttribute implements DataPatchInterface, PatchRevertableInterface
 {
+    protected const ATTRIBUTE_CODE = 'inpost_dimension';
     protected const GROUP_NAME = 'General';
     protected const SORT_ORDER = 32768;
+    protected ModuleDataSetupInterface $moduleDataSetup;
+    protected EavSetupFactory $eavSetupFactory;
 
-    protected static function attributeCode(): string
-    {
-        return 'inpost_dimension';
+    public function __construct(
+        ModuleDataSetupInterface $moduleDataSetup,
+        EavSetupFactory $eavSetupFactory
+    ) {
+        $this->eavSetupFactory = $eavSetupFactory;
+        $this->moduleDataSetup = $moduleDataSetup;
     }
 
     protected function attributeDefinition(): array
@@ -32,16 +40,6 @@ class AddProductDimensionAttribute implements DataPatchInterface, PatchRevertabl
             'source' => 'Smartmage\Inpost\Model\Config\Source\Dimensions',
             'default' => 0
         ];
-    }
-    protected ModuleDataSetupInterface $moduleDataSetup;
-    protected EavSetupFactory $eavSetupFactory;
-
-    public function __construct(
-        ModuleDataSetupInterface $moduleDataSetup,
-        EavSetupFactory $eavSetupFactory
-    ) {
-        $this->eavSetupFactory = $eavSetupFactory;
-        $this->moduleDataSetup = $moduleDataSetup;
     }
 
     final public function apply(): self
@@ -59,7 +57,7 @@ class AddProductDimensionAttribute implements DataPatchInterface, PatchRevertabl
     {
         $this->db()->startSetup();
         try {
-            $this->safeRemoveAttribute(static::attributeCode());
+            $this->safeRemoveAttribute(self::ATTRIBUTE_CODE);
         } finally {
             $this->db()->endSetup();
         }
@@ -75,15 +73,14 @@ class AddProductDimensionAttribute implements DataPatchInterface, PatchRevertabl
     protected function ensureAttributeExistsAndAssigned(): void
     {
         $eav = $this->eav();
-        $code = static::attributeCode();
 
-        $existing = $eav->getAttribute(Product::ENTITY, $code);
+        $existing = $eav->getAttribute(Product::ENTITY, self::ATTRIBUTE_CODE);
         if (!$existing || empty($existing['attribute_id'])) {
             $definition = $this->withSafeDefaults($this->attributeDefinition());
-            $eav->addAttribute(Product::ENTITY, $code, $definition);
+            $eav->addAttribute(Product::ENTITY, self::ATTRIBUTE_CODE, $definition);
         }
 
-        $this->assignToAllSets($code, static::GROUP_NAME, static::SORT_ORDER);
+        $this->assignToAllSets(self::ATTRIBUTE_CODE, static::GROUP_NAME, static::SORT_ORDER);
     }
 
     /**
