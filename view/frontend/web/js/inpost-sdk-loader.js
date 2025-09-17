@@ -10,7 +10,7 @@ define([], function () {
     }
 
     function waitForCheckoutConfig() {
-        if (typeof window.checkoutConfig.inpost_mode !== 'undefined') {
+        if (window.checkoutConfig && typeof window.checkoutConfig.inpost_mode !== 'undefined') {
             loadInpostScript();
         } else {
             setTimeout(waitForCheckoutConfig, 500);
