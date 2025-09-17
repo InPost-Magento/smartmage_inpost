@@ -18,7 +18,7 @@ use Magento\Framework\Validator\ValidateException;
 
 class AddProductAlcoholAttribute implements DataPatchInterface, PatchRevertableInterface
 {
-    protected const ATTRIBUTE_CODE = 'inpost_alcohol';
+    public const ATTRIBUTE_CODE = 'inpost_alcohol';
     protected const GROUP_NAME = 'General';
     protected const SORT_ORDER = 32769;
     protected ModuleDataSetupInterface $moduleDataSetup;

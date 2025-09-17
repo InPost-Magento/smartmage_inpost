@@ -29,7 +29,7 @@ class Alcohol extends AbstractMethod
             $product = $item->getProduct();
             $allowAlcohol = $product->getResource()->getAttributeRawValue(
                 $product->getId(),
-                AddProductAlcoholAttribute::INPOST_ALCOHOL,
+                AddProductAlcoholAttribute::ATTRIBUTE_CODE,
                 $storeId
             );
 
