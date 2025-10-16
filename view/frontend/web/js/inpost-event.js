@@ -25,6 +25,10 @@ requirejs([
                 const modalWrapper = $('[data-inpost-modal]');
                 const point = event.originalEvent.detail;
 
+                if (point && point.name && point.name.startsWith('PL_')) {
+                    point.name = point.name.substring(3);
+                }
+
                 inPostPaczkomaty.setPoint(point.name).then(function() {
                     inPostPaczkomaty.cleanPointDataHtml().then(function() {
                         inPostPaczkomaty.pointDataHtml(point, inPostPaczkomaty.selectPointHtml(true), true).then(function() {

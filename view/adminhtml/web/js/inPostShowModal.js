@@ -7,31 +7,62 @@ requirejs([
 
     var inPostModal = {
 
-        createModal: function () {
+        createModal: function (pointName) {
+            const self = this;
             let geowidget = document.getElementById('geowidget');
             if (geowidget) geowidget.remove();
             let geowidgetConfig = jQuery('[name="order[shipping_method]"][id$="cod"]:checked').length ? 'parcelCollectPayment' : 'parcelCollect';
             let html = '<div data-inpost-modal class="inpost-modal is-active">';
             html += '<div class="inpost-modal__container">';
             html += '<div data-inpost-modal-btn-close class="btn-close"></div>';
-            html += '<inpost-geowidget id="geowidget" onpoint="onpointselect" token="'+ $('.inpost_shipment-section').data('inposttoken') +'" language="pl"  config="' + geowidgetConfig + '"></inpost-geowidget>';
+            html += '<inpost-geowidget id="geowidget" onpoint="onpointselect" token="'+ $('.inpost_shipment-section').data('inposttoken') +'" language="pl" country="PL"  config="' + geowidgetConfig + '"></inpost-geowidget>';
             html += '</div>';
             html += '</div>';
 
             $('body').append(html);
             geowidget = document.getElementById('geowidget');
 
-            if (geowidget) {
-                geowidget.addEventListener('inpost.geowidget.init', (event) => {
-                    const api = event.detail.api;
-                    const pointName = jQuery('.details-target_point strong:first').text();
-                    if(pointName !== '' && pointName !== undefined && pointName !== 'None') {
-                        api.showPoint(pointName).then(() => {
-                            api.showPointDetails(pointName).catch(error => console.log('failed to show point details: ', error));
-                        });
+            if (!geowidget) return;
+
+            geowidget.addEventListener('onpointselect', function(event) {
+                const modalWrapper = $('[data-inpost-modal]');
+                const point = event.detail;
+
+                if (point && point.name && point.name.startsWith('PL_')) {
+                    point.name = point.name.substring(3);
+                }
+
+                const targetLocker = $('input[name="shipment_fieldset[target_locker]"]');
+                const btnShowPoint = $('[data-inpost-select-point]');
+
+                if (targetLocker.length) {
+                    ko.dataFor(targetLocker.get(0)).value(point.name);
+                    btnShowPoint.attr('data-inpost-select-point', point.name);
+                }
+                if ($('input[name="order[inpost_locker_id]"]').length) {
+                    $('input[name="order[inpost_locker_id]"]').val(point.name);
+                    $('.details-target_point strong').text(point.name);
+                    $('[data-inpost-select-point]').attr('data-inpost-select-point', point.name);
+                    if (typeof order !== 'undefined' && order.setShippingMethod) {
+                        order.setShippingMethod($('[name="order[shipping_method]"]:checked').val());
                     }
-                });
-            }
+                }
+                modalWrapper.removeClass('is-active');
+            });
+
+            geowidget.addEventListener('inpost.geowidget.init', (event) => {
+                try {
+                    const api = event.detail?.api;
+                    if (!api) return;
+                    if (pointName) {
+                        api.showPoint(pointName)
+                            .then(() => api.showPointDetails(pointName))
+                            .catch(error => console.error('Failed to show point details:', error));
+                    }
+                } catch (error) {
+                    console.error('Geowidget initialization error:', error);
+                }
+            });
         },
 
         closeModal: function() {
@@ -45,28 +76,6 @@ requirejs([
                         $('[data-inpost-modal]').removeClass('is-active');
                     }
                 });
-            });
-        },
-
-        selectedPoint: function() {
-            $(document).on('onpointselect', function(event) {
-                const modalWrapper = $('[data-inpost-modal]');
-                const point = event.originalEvent.detail
-                const targetLocker = $('input[name="shipment_fieldset[target_locker]"]');
-                const btnShowPoint = $('[data-inpost-select-point]');
-
-                if (targetLocker.length) {
-                    ko.dataFor(targetLocker.get(0)).value(point.name);
-                    btnShowPoint.attr('data-inpost-select-point', point.name);
-                }
-                if ($('input[name="order[inpost_locker_id]"]').length) {
-                    $('input[name="order[inpost_locker_id]"]').val(point.name);
-                    $('.details-target_point strong').text(point.name);
-                    btnShowPoint.attr('data-inpost-select-point', point.name);
-                    order.setShippingMethod($('[name="order[shipping_method]"]:checked').val());
-                }
-
-                modalWrapper.removeClass('is-active');
             });
         },
 
@@ -84,7 +93,10 @@ requirejs([
 
             $(document).on('click', '[data-inpost-select-point]', function(e) {
                 e.preventDefault();
-                const point = $(this).attr('data-inpost-select-point');
+                const $link = $(this);
+                const $strong = $link.closest('.details-target_point').find('strong');
+                const currentPoint = $strong.length ? $strong.text().trim() : '';
+                const point = (currentPoint && currentPoint !== 'None') ? currentPoint : $link.attr('data-inpost-select-point');
                 self.createModal(point);
             });
         },
@@ -92,7 +104,6 @@ requirejs([
         init: function() {
             this.showModal();
             this.closeModal();
-            this.selectedPoint();
             this.selectedShippingMethod();
         }
     };

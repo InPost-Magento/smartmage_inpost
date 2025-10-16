@@ -8,8 +8,8 @@ var config = {
     },
     paths: {
         'inPostSdk': 'Smartmage_Inpost/js/inpostSdkAdminLoader',
-        'inpost-geowidget-sandbox': 'https://sandbox-easy-geowidget-sdk.easypack24.net/inpost-geowidget',
-        'inpost-geowidget': 'https://geowidget.inpost.pl/inpost-geowidget'
+        'inpost-geowidget-sandbox': 'https://sandbox-global-geowidget-sdk.easypack24.net/inpost-geowidget',
+        'inpost-geowidget': 'https://geowidget.inpost-group.com/inpost-geowidget'
     },
     config: {
         mixins: {

@@ -3,9 +3,9 @@ define([], function () {
 
     function loadInpostScript() {
         if (window.checkoutConfig.inpost_mode === 'test') {
-            require(['https://sandbox-easy-geowidget-sdk.easypack24.net/inpost-geowidget.js']);
+            require(['https://sandbox-global-geowidget-sdk.easypack24.net/inpost-geowidget.js']);
         } else if (window.checkoutConfig.inpost_mode === 'prod') {
-            require(['https://geowidget.inpost.pl/inpost-geowidget.js']);
+            require(['https://geowidget.inpost-group.com/inpost-geowidget.js']);
         }
     }
 

@@ -149,23 +149,26 @@ script;
 <?php endif; ?>
 
 <input type="hidden" name="order[inpost_locker_id]" value="<?php echo $targetPoint ?>" class="validate-select-and-value"   />
-<script type="text/javascript">
-    require([
-        'jquery',
-        'jquery/ui',
-        'jquery/validate',
-        'mage/translate'
-    ], function($){
-        $.validator.addMethod(
-            'validate-select-and-value', function(value) {
-                var InPostShippingMethodSelected = Boolean(jQuery('[id^=s_method_inpostlocker_]:checked').length);
-                return (
-                    (InPostShippingMethodSelected&& value !== '')
-                    || !InPostShippingMethodSelected
-                );
-            }, $.mage.__('Please select a pickup point'));
-    });
-</script>
+<?php
+$scriptString = <<<script
+require([
+    'jquery',
+    'jquery/ui',
+    'jquery/validate',
+    'mage/translate'
+], function($){
+    $.validator.addMethod(
+        'validate-select-and-value', function(value) {
+            var InPostShippingMethodSelected = Boolean(jQuery('[id^=s_method_inpostlocker_]:checked').length);
+            return (
+                (InPostShippingMethodSelected && value !== '')
+                || !InPostShippingMethodSelected
+            );
+        }, $.mage.__('Please select a pickup point'));
+});
+script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
 
 <div id="shipping-method-overlay" class="order-methods-overlay">
     <span><?= $block->escapeHtml(__('You don\'t need to select a shipping method.')) ?></span>

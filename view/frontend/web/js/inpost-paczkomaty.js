@@ -210,7 +210,7 @@ define([
             let html = '<div data-inpost-modal class="inpost-modal">';
                 html += '<div class="inpost-modal__container">';
                 html += '<div data-inpost-modal-btn-close class="btn-close"></div>';
-                html += '<inpost-geowidget onpoint="onpointselect" token="'+ this.apiToken +'" language="pl" config="'+ pointType +'"></inpost-geowidget>';
+                html += '<inpost-geowidget onpoint="onpointselect" token="'+ this.apiToken +'" language="pl" country="PL" config="'+ pointType +'"></inpost-geowidget>';
                 html += '</div>';
                 html += '</div>';
 

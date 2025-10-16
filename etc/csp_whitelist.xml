@@ -7,6 +7,8 @@
                 <value id="easypack" type="host">*.easypack24.net</value>
                 <value id="inpost" type="host">*.inpost.pl</value>
                 <value id="osm" type="host">*.openstreetmap.org</value>
+                <value id="inpost-geowidget-sandbox" type="host">sandbox-global-geowidget-sdk.easypack24.net</value>
+                <value id="inpost-geowidget-prod" type="host">geowidget.inpost-group.com</value>
             </values>
         </policy>
         <policy id="connect-src">
@@ -33,6 +35,8 @@
             <values>
                 <value id="inpost-geowidget" type="host">https://geowidget.easypack24.net</value>
                 <value id="inpost-geowidget2" type="host">https://geowidget.inpost.pl</value>
+                <value id="inpost-geowidget-sandbox" type="host">sandbox-global-geowidget-sdk.easypack24.net</value>
+                <value id="inpost-geowidget-prod" type="host">geowidget.inpost-group.com</value>
             </values>
         </policy>
         <policy id="font-src">
