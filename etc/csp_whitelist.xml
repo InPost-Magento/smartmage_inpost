@@ -48,6 +48,8 @@
             <values>
                 <value id="inpost-geowidget" type="host">https://geowidget-app.inpost.pl/</value>
                 <value id="inpost-geowidget-sandbox" type="host">https://sandbox-easy-geowidget.easypack24.net/</value>
+                <value id="inpostinternational-geowidget" type="host">https://geowidget-app.inpost-group.com/</value>
+                <value id="inpostinternational-geowidget-sandbox" type="host">https://sandbox-global-geowidget.easypack24.net/</value>
             </values>
         </policy>
     </policies>
