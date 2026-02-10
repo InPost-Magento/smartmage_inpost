@@ -18,6 +18,7 @@ use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Smartmage\Inpost\Api\ShipmentOrderLinksProviderInterface;
 use Smartmage\Inpost\Model\Config\Source\Service as InpostService;
 use Smartmage\Inpost\Model\ConfigProvider;
+use Smartmage\Inpost\Model\Msi\ShipmentSourceCodeResolver;
 
 class InpostTrackingNumberReceived implements ObserverInterface
 {
@@ -39,6 +40,8 @@ class InpostTrackingNumberReceived implements ObserverInterface
     private InpostService $inpostService;
     protected ConfigProvider $configProvider;
 
+    private ShipmentSourceCodeResolver $shipmentSourceCodeResolver;
+
     public function __construct(
         MessageManagerInterface             $messageManager,
         OrderFactory                        $orderFactory,
@@ -51,7 +54,8 @@ class InpostTrackingNumberReceived implements ObserverInterface
         ShipmentTrackInterfaceFactory       $trackFactory,
         OrderRepository                     $orderRepository,
         InpostService                       $inpostService,
-        ConfigProvider                      $configProvider
+        ConfigProvider                      $configProvider,
+        ShipmentSourceCodeResolver          $shipmentSourceCodeResolver
     ) {
         $this->logger = $logger;
         $this->messageManager = $messageManager;
@@ -65,6 +69,7 @@ class InpostTrackingNumberReceived implements ObserverInterface
         $this->orderRepository = $orderRepository;
         $this->inpostService = $inpostService;
         $this->configProvider = $configProvider;
+        $this->shipmentSourceCodeResolver = $shipmentSourceCodeResolver;
     }
 
     public function execute(Observer $observer)
@@ -135,8 +140,12 @@ class InpostTrackingNumberReceived implements ObserverInterface
 
             // support to MSI
             // if MSI has been disabled or removed then setSourceCode method does not exists
-            if (method_exists($orderShipment->getExtensionAttributes(), 'setSourceCode')) {
-                $orderShipment->getExtensionAttributes()->setSourceCode('default');
+            $extensionAttributes = $orderShipment->getExtensionAttributes();
+            if ($extensionAttributes && method_exists($extensionAttributes, 'setSourceCode')) {
+                $sourceCode = $this->shipmentSourceCodeResolver->resolveForOrder($order);
+                if ($sourceCode) {
+                    $extensionAttributes->setSourceCode($sourceCode);
+                }
             }
 
 
