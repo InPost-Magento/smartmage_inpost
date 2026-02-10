@@ -6,20 +6,26 @@ class ErrorHandler implements ErrorHandlerInterface
 {
     public function handle($jsonResponse): string
     {
-        $errors = '[' . $jsonResponse['error'] . ']<br>';
-        $errors .= $jsonResponse['message'] . '<br>';
+        if (!is_array($jsonResponse)) {
+            $raw = is_string($jsonResponse) ? substr($jsonResponse, 0, 500) : '';
+            return $raw !== '' ? __('API error. Invalid response: %1', [$raw]) : __('API error. Invalid or empty response.');
+        }
 
-        if (is_array($jsonResponse['details'])) {
-            $details = $this->nestedValues($jsonResponse['details']);
-            foreach ($details as $key => $detail) {
+        $error = $jsonResponse['error'] ?? '';
+        $message = $jsonResponse['message'] ?? '';
+        $errors = '[' . $error . ']<br>';
+        $errors .= $message . '<br>';
+
+        $details = $jsonResponse['details'] ?? null;
+        if (is_array($details)) {
+            $detailLines = $this->nestedValues($details);
+            foreach ($detailLines as $detail) {
                 if ($detail) {
                     $errors .= '- ' . __($detail) . '<br>';
                 }
             }
-        } else {
-            if ($jsonResponse['details']) {
-                $errors .= '- ' . __($jsonResponse['details']);
-            }
+        } elseif ($details) {
+            $errors .= '- ' . __($details);
         }
 
         return $errors;
