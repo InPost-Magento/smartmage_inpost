@@ -174,18 +174,37 @@ define([
                 let found = false;
                 $.each(self.inPostAllMethod('method'), function(index, value) {
                     const codeMethod = value[0].split('_');
-                    const logoWrapper = $(value[0]).find('[data-inpost-logo-'+codeMethod[2]+'-'+codeMethod[3]+']');
+                    const methodElement = $(value[0]);
+                    const methodCode = codeMethod[2]+'-'+codeMethod[3];
+                    const commentKey = codeMethod[3]+'_'+codeMethod[2]+'_'+codeMethod[3]+'_method_comment';
+                    const wrapperSelector = '[data-inpost-wrapper]';
+                    const logoSelector = '[data-inpost-logo-'+methodCode+']';
+                    const commentSelector = '[data-inpost-comment-'+methodCode+']';
 
-                    if ($(value[0]).length) {
+                    if (methodElement.length) {
                         found = true;
-                        if (logoWrapper.length > 0) {
-                            logoWrapper.remove();
-                        }
-                        $(value[0]).prepend(
-                            '<div data-inpost-logo-'+codeMethod[2]+'-'+codeMethod[3]+'><img src="'
-                                + window.checkoutConfig[codeMethod[3]+'_'+codeMethod[2]+'_'+codeMethod[3]]
+                        methodElement.find(logoSelector).remove();
+                        methodElement.find(commentSelector).remove();
+
+                        methodElement.prepend(
+                            '<div data-inpost-logo-'+methodCode+'><img src="'
+                            + window.checkoutConfig[codeMethod[3]+'_'+codeMethod[2]+'_'+codeMethod[3]]
                             + '" alt="" title=""/></div>'
                         );
+
+                        if (window.checkoutConfig[commentKey]) {
+                            const commentHtml =
+                                '<div data-inpost-comment-'+methodCode+' class="inpost-method-comment">'
+                                + window.checkoutConfig[commentKey]
+                                + '</div>';
+                            const wrapperElement = methodElement.find(wrapperSelector);
+
+                            if (wrapperElement.length > 0) {
+                                wrapperElement.before(commentHtml);
+                            } else {
+                                methodElement.append(commentHtml);
+                            }
+                        }
                     }
                 });
 
@@ -195,7 +214,7 @@ define([
                     }
                 });
 
-                if(!found && timeoutIncrement < 10) {
+                if (!found && timeoutIncrement < 10) {
                     // in case of delay in loading the shipping method, call self.insertLogoInPost() with delay 2s
                     setTimeout(function() {
                         self.insertLogoInPost(timeoutIncrement + 1);

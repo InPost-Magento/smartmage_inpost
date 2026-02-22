@@ -497,6 +497,7 @@ class ConfigProvider implements ConfigProviderInterface
         $paczkomatDefaultLogo = $repository->getUrl('Smartmage_Inpost::images/inpost_paczkomat_logo.png');
         $courierDefaultLogo = $repository->getUrl('Smartmage_Inpost::images/inpost_kurier_logo.png');
         $listOfLogos = [];
+        $listOfComments = [];
 
         foreach ($this->shippingMethods::INPOST_MAPPER as $key => $value) {
             $configKey = str_replace('_','/', $key) . '/logo';
@@ -509,11 +510,13 @@ class ConfigProvider implements ConfigProviderInterface
             } else {
                 $listOfLogos[$logoKey] = $courierDefaultLogo;
             }
+            $commentConfigKey = $logoKey . '_method_comment';
+            $listOfComments[$commentConfigKey] = $this->getConfigData(str_replace('logo', 'method_comment', $configKey));
         }
 
         $inpostMode = $this->getShippingConfigData('mode');
 
-        return array_merge($listOfLogos, [
+        return array_merge($listOfLogos, $listOfComments, [
             'standard_inpostlocker' => ($this->getConfigData('inpostlocker/standard/popenabled')) ? 'parcel_locker-pop' : 'parcel_locker',
             'geowidget_token' => $this->getGeowidgetToken(),
             'base_url' => $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_LINK),

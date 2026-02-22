@@ -25,6 +25,9 @@
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
                     </field>
+                    <field id="method_comment" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Method comment</label>
+                    </field>
                     <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Price</label>
                         <validate>validate-number validate-zero-or-greater</validate>
@@ -92,6 +95,9 @@
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
                     </field>
+                    <field id="method_comment" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Method comment</label>
+                    </field>
                     <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Price</label>
                         <validate>validate-number validate-zero-or-greater</validate>
@@ -154,6 +160,9 @@
                     </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
+                    </field>
+                    <field id="method_comment" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Method comment</label>
                     </field>
                     <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Price</label>
@@ -231,6 +240,9 @@
                     </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
+                    </field>
+                    <field id="method_comment" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Method comment</label>
                     </field>
                     <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Price</label>
@@ -310,6 +322,9 @@
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
                     </field>
+                    <field id="method_comment" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Method comment</label>
+                    </field>
                     <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Price</label>
                         <validate>validate-number validate-zero-or-greater</validate>
@@ -371,6 +386,9 @@
                     </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
+                    </field>
+                    <field id="method_comment" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Method comment</label>
                     </field>
                     <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Price</label>
@@ -440,6 +458,9 @@
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
                     </field>
+                    <field id="method_comment" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Method comment</label>
+                    </field>
                     <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Price</label>
                         <validate>validate-number validate-zero-or-greater</validate>
@@ -504,6 +525,9 @@
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
                     </field>
+                    <field id="method_comment" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Method comment</label>
+                    </field>
                     <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Price</label>
                         <validate>validate-number validate-zero-or-greater</validate>
@@ -566,6 +590,9 @@
                     </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
+                    </field>
+                    <field id="method_comment" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Method comment</label>
                     </field>
                     <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Price</label>
@@ -630,6 +657,9 @@
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
                     </field>
+                    <field id="method_comment" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Method comment</label>
+                    </field>
                     <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Price</label>
                         <validate>validate-number validate-zero-or-greater</validate>
@@ -692,6 +722,9 @@
                     </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
+                    </field>
+                    <field id="method_comment" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Method comment</label>
                     </field>
                     <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Price</label>
@@ -756,6 +789,9 @@
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
                     </field>
+                    <field id="method_comment" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Method comment</label>
+                    </field>
                     <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Price</label>
                         <validate>validate-number validate-zero-or-greater</validate>
@@ -815,6 +851,9 @@
                     </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
+                    </field>
+                    <field id="method_comment" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Method comment</label>
                     </field>
                     <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Price</label>
@@ -880,6 +919,9 @@
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
                     </field>
+                    <field id="method_comment" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Method comment</label>
+                    </field>
                     <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Price</label>
                         <validate>validate-number validate-zero-or-greater</validate>
@@ -942,6 +984,9 @@
                     </field>
                     <field id="name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Method name</label>
+                    </field>
+                    <field id="method_comment" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Method comment</label>
                     </field>
                     <field id="price" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Price</label>
