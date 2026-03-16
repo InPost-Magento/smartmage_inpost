@@ -169,7 +169,7 @@ class ConfigProvider implements ConfigProviderInterface
      */
     public function getGeowidgetToken()
     {
-        return $this->encryptor->decrypt($this->getShippingConfigData(self::SHIPPING_GEOWIDGET_TOKEN));
+        return $this->getSafeConfigToken(self::SHIPPING_GEOWIDGET_TOKEN);
     }
 
     /**
@@ -486,6 +486,67 @@ class ConfigProvider implements ConfigProviderInterface
     public function getChangeShippingAddress()
     {
         return $this->getShippingConfigData(self::SHIPPING_CHANGE_SHIPPING_ADDRESS);
+    }
+
+    /**
+     * Resolves token value from config in a JSON-safe form.
+     * Handles both encrypted and plain values to keep backward compatibility.
+     *
+     * @throws NoSuchEntityException
+     */
+    private function getSafeConfigToken(string $field): string
+    {
+        $rawValue = $this->getShippingConfigData($field);
+        if (!is_scalar($rawValue) || $rawValue === '') {
+            return '';
+        }
+
+        $rawValue = (string) $rawValue;
+        $resolvedValue = $rawValue;
+
+        if ($this->isEncryptedValue($rawValue)) {
+            try {
+                $decryptedValue = $this->encryptor->decrypt($rawValue);
+                if (is_scalar($decryptedValue) && $decryptedValue !== '') {
+                    $resolvedValue = (string)$decryptedValue;
+                }
+            } catch (\Throwable $exception) {
+                return '';
+            }
+        }
+
+        return $this->normalizeUtf8String($resolvedValue);
+    }
+
+    /**
+     * Magento encrypted values are stored with numeric prefixes like "0:3:".
+     */
+    private function isEncryptedValue(string $value): bool
+    {
+        return (bool) preg_match('/^\d+:\d+:/', $value);
+    }
+
+    /**
+     * Ensures the value can be safely serialized to JSON.
+     */
+    private function normalizeUtf8String(string $value): string
+    {
+        if ($value === '') {
+            return '';
+        }
+
+        if (preg_match('//u', $value) === 1) {
+            return $value;
+        }
+
+        if (function_exists('iconv')) {
+            $normalizedValue = iconv('UTF-8', 'UTF-8//IGNORE', $value);
+            if ($normalizedValue !== false && preg_match('//u', $normalizedValue) === 1) {
+                return $normalizedValue;
+            }
+        }
+
+        return '';
     }
 
     /**
