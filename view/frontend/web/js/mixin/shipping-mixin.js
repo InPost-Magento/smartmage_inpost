@@ -1,66 +1,48 @@
-define(
-    [
-        'jquery',
-        'ko',
-        'Magento_Checkout/js/model/quote',
-        'mage/translate',
-        'Magento_Checkout/js/model/shipping-service',
-        'Magento_Checkout/js/checkout-data',
-        'inPostPaczkomaty'
-    ], function (
-        $,
-        ko,
-        quote,
-        $t,
-        shippingService,
-        checkoutData,
-    ) {
-        'use strict';
+define([
+    'jquery',
+    'ko',
+    'Magento_Checkout/js/model/quote',
+    'mage/translate',
+    'inPostPaczkomaty'
+], function (
+    $,
+    ko,
+    quote,
+    $t,
+    inPostPaczkomaty
+) {
+    'use strict';
 
-        return function (target) {
-            return target.extend({
-                errorValidationMessage: ko.observable(false),
-                inPostPoint: $('[data-shipping-inpost-selected-point]'),
+    return function (target) {
+        return target.extend({
+            errorValidationMessage: ko.observable(false),
 
-                validateShippingInformation: function() {
-                    const self = this;
+            validateShippingInformation: function () {
+                var shippingMethod = quote.shippingMethod();
+                var pointData;
 
-                    if(quote.shippingMethod()) {
-                        const ShippingMethodCode = quote.shippingMethod().method_code+'_'+quote.shippingMethod().carrier_code;
+                if (shippingMethod) {
+                    pointData = inPostPaczkomaty.getCurrentValidationPoint();
 
-                        if (ShippingMethodCode === 'standard_inpostlocker'
-                            || ShippingMethodCode === 'standardcod_inpostlocker'
-                            || ShippingMethodCode === 'standardeow_inpostlocker'
-                            || ShippingMethodCode === 'standardeowcod_inpostlocker'
-                            || ShippingMethodCode === 'economic_inpostlocker'
-                            || ShippingMethodCode === 'economiccod_inpostlocker'
+                    if (inPostPaczkomaty.isPickupMethod(shippingMethod.carrier_code, shippingMethod.method_code)) {
+                        if (!pointData || !pointData.name) {
+                            this.errorValidationMessage($t('Please select a pickup point'));
+                            return false;
+                        }
+
+                        if (inPostPaczkomaty.requiresParcelLocker(shippingMethod.method_code) &&
+                            (!pointData.type || pointData.type.indexOf('parcel_locker') === -1)
                         ) {
-                            const pointDataDB = checkoutData.getShippingInPostPoint();
-
-                            if( typeof pointDataDB === 'undefined' || pointDataDB === null || pointDataDB.name.length === 0){
-                                self.errorValidationMessage(
-                                    $t('Please select a pickup point')
-                                );
-                                return false;
-
-                            } else {
-                                if(ShippingMethodCode === 'standardcod_inpostlocker'
-                                    || ShippingMethodCode === 'standardeowcod_inpostlocker'
-                                    || ShippingMethodCode === 'economiccod_inpostlocker') {
-                                    if(!pointDataDB.type.includes('parcel_locker')) {
-                                        self.errorValidationMessage(
-                                            $t('The selected point does not support the cash on delivery method')
-                                        );
-                                        return false;
-                                    }
-                                }
-                            }
+                            this.errorValidationMessage(
+                                $t('The selected point does not support the cash on delivery method')
+                            );
+                            return false;
                         }
                     }
+                }
 
-                    return this._super();
-                },
-            });
-        }
-    }
-);
+                return this._super();
+            }
+        });
+    };
+});
