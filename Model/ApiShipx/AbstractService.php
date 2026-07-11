@@ -119,7 +119,6 @@ abstract class AbstractService implements ServiceInterface
             if ($this->isResponseJson) {
                 $response = json_decode($response, true);
             }
-            curl_close($ch);
 
             $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_SUCCESS;
             $this->callResult[CallResult::STRING_MESSAGE] = $this->successMessage;
@@ -141,7 +140,6 @@ abstract class AbstractService implements ServiceInterface
                 $responseDecoded = $response;
             }
             $errorsStr = $this->errorHandler->handle($responseDecoded);
-            curl_close($ch);
 
             $this->callResult[CallResult::STRING_STATUS] = CallResult::STATUS_FAIL;
             $this->callResult[CallResult::STRING_MESSAGE] = $errorsStr;
@@ -151,7 +149,6 @@ abstract class AbstractService implements ServiceInterface
         } else {
             $errNo = curl_errno($ch);
             $errStr = curl_error($ch);
-            curl_close($ch);
 
             throw new \Exception('Unknown cURL Error - ' . $errNo . ' [' . $responseCode . ']: ' . $errStr . $response, $responseCode);
         }

@@ -65,7 +65,6 @@ class GetPoint extends AbstractService
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_URL, $this->getBaseUri() . '/' . $this->callUri);
         $result = curl_exec($ch);
-        curl_close($ch);
 
         return json_decode($result);
     }
