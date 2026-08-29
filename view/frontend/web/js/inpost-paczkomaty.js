@@ -44,10 +44,19 @@ define([
         return carrierCode + '_' + methodCode;
     }
 
+    function getCheckoutConfig() {
+        var checkoutConfig = window.checkoutConfig;
+
+        if (!checkoutConfig) {
+            throw new Error('Smartmage_Inpost: window.checkoutConfig is not available');
+        }
+
+        return checkoutConfig;
+    }
+
     return {
         apiEndpointProduction: 'https://api-pl-points.easypack24.net/v1',
         apiEndpointTesting: 'https://sandbox-api-shipx-pl.easypack24.net/v1',
-        apiToken: window.checkoutConfig.geowidget_token,
         providerId: 'smartmage-poland',
         initialized: false,
         listenersBound: false,
@@ -65,8 +74,12 @@ define([
                 methodCode === 'economiccod';
         },
 
+        getApiToken: function () {
+            return getCheckoutConfig().geowidget_token;
+        },
+
         getMode: function () {
-            return window.checkoutConfig.inpost_mode === 'test' ? 'test' : 'prod';
+            return getCheckoutConfig().inpost_mode === 'test' ? 'test' : 'prod';
         },
 
         getSdkUrl: function () {
@@ -219,7 +232,7 @@ define([
         setPoint: function (dataToSend) {
             return $.ajax({
                 type: 'POST',
-                url: window.checkoutConfig.base_url + 'inpost/locker/save',
+                url: getCheckoutConfig().base_url + 'inpost/locker/save',
                 data: {
                     inpost_locker_id: dataToSend
                 },
@@ -280,6 +293,7 @@ define([
             var commentKey;
             var logoUrl;
             var comment;
+            var checkoutConfig;
             var titleWrapper;
             var logoElement;
             var commentElement;
@@ -294,8 +308,9 @@ define([
             methodCode = parts.join('_');
             logoKey = carrierCode + '_' + methodCode + '_' + carrierCode;
             commentKey = logoKey + '_method_comment';
-            logoUrl = window.checkoutConfig[logoKey];
-            comment = window.checkoutConfig[commentKey];
+            checkoutConfig = getCheckoutConfig();
+            logoUrl = checkoutConfig[logoKey];
+            comment = checkoutConfig[commentKey];
             titleWrapper = carrierCell.find('.carrier-title-wrapper');
 
             if (!titleWrapper.length) {
@@ -389,6 +404,7 @@ define([
         hydrateCurrentPoint: function () {
             var self = this;
             var context = this.getCurrentContext();
+            var checkoutConfig;
             var pointId;
 
             if (!self.isContextSupported(context) || self.getContextPoint(context)) {
@@ -399,7 +415,8 @@ define([
                 return Promise.resolve(self.getLegacyPoint(context));
             }
 
-            pointId = window.checkoutConfig.quoteData && window.checkoutConfig.quoteData.inpost_locker_id;
+            checkoutConfig = getCheckoutConfig();
+            pointId = checkoutConfig.quoteData && checkoutConfig.quoteData.inpost_locker_id;
 
             if (!pointId) {
                 return Promise.resolve(null);
@@ -502,7 +519,7 @@ define([
                 },
                 getWidgetAttributes: function (context) {
                     return {
-                        token: self.apiToken,
+                        token: self.getApiToken(),
                         language: 'pl',
                         config: pickupMethodConfigs[context.methodValue],
                         onpoint: 'onpointselect'
