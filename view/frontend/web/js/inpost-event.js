@@ -1,10 +1,11 @@
 requirejs([
-    'jquery',
-    'inPostPaczkomaty'
-], function ($, inPostPaczkomaty) {
+    'domReady!'
+], function () {
     'use strict';
 
-    $(document).ready(function () {
+    requirejs([
+        'inPostPaczkomaty'
+    ], function (inPostPaczkomaty) {
         inPostPaczkomaty.init();
     });
 });
