@@ -5,7 +5,8 @@ define([
     'mage/translate',
     'Magento_Checkout/js/checkout-data',
     'Smartmage_Inpost/js/inpost-geowidget-coordinator',
-    'inPostSdk'
+    'inPostSdk',
+    'Magento_Ui/js/lib/view/utils/async'
 ], function ($, quote, shippingService, $t, checkoutData, coordinator) {
     'use strict';
 
@@ -61,6 +62,7 @@ define([
         initialized: false,
         listenersBound: false,
         shippingSubscriptionBound: false,
+        methodObserversBound: false,
         providerRegistered: false,
         pointRequestCache: {},
 
@@ -248,6 +250,10 @@ define([
 
         getMethodInput: function (methodValue) {
             return $('input[type="radio"][value="' + methodValue + '"]').first();
+        },
+
+        getMethodInputSelector: function (methodValue) {
+            return 'input[type="radio"][value="' + methodValue + '"]';
         },
 
         getMethodRow: function (methodValue) {
@@ -547,6 +553,22 @@ define([
             });
         },
 
+        bindMethodObservers: function () {
+            var self = this;
+
+            if (self.methodObserversBound) {
+                return;
+            }
+
+            self.methodObserversBound = true;
+
+            allInpostMethods.forEach(function (methodValue) {
+                $.async(self.getMethodInputSelector(methodValue), function () {
+                    self.renderMethod(methodValue);
+                });
+            });
+        },
+
         init: function () {
             if (this.initialized) {
                 return;
@@ -557,6 +579,7 @@ define([
             this.bindListeners();
             this.bindShippingUpdates();
             this.renderInPostData();
+            this.bindMethodObservers();
         }
     };
 });
