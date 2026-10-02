@@ -1,10 +1,17 @@
-requirejs([
-    'jquery',
-    'inPostPaczkomaty'
-], function ($, inPostPaczkomaty) {
+(function () {
     'use strict';
 
-    $(document).ready(function () {
-        inPostPaczkomaty.init();
-    });
-});
+    function initInPost() {
+        requirejs([
+            'inPostPaczkomaty'
+        ], function (inPostPaczkomaty) {
+            inPostPaczkomaty.init();
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initInPost, { once: true });
+    } else {
+        initInPost();
+    }
+}());
