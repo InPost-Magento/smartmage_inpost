@@ -1,17 +1,17 @@
 define([
-    'jquery',
     'ko',
     'Magento_Checkout/js/model/quote',
     'mage/translate',
-    'inPostPaczkomaty'
+    'Smartmage_Inpost/js/inpost-checkout-state'
 ], function (
-    $,
     ko,
     quote,
     $t,
-    inPostPaczkomaty
+    inpostCheckoutState
 ) {
     'use strict';
+
+    var providerId = inpostCheckoutState.getDefaultProviderId();
 
     return function (target) {
         return target.extend({
@@ -22,15 +22,15 @@ define([
                 var pointData;
 
                 if (shippingMethod) {
-                    pointData = inPostPaczkomaty.getCurrentValidationPoint();
+                    pointData = inpostCheckoutState.getCurrentValidationPoint(providerId);
 
-                    if (inPostPaczkomaty.isPickupMethod(shippingMethod.carrier_code, shippingMethod.method_code)) {
+                    if (inpostCheckoutState.isPickupMethod(shippingMethod.carrier_code, shippingMethod.method_code)) {
                         if (!pointData || !pointData.name) {
                             this.errorValidationMessage($t('Please select a pickup point'));
                             return false;
                         }
 
-                        if (inPostPaczkomaty.requiresParcelLocker(shippingMethod.method_code) &&
+                        if (inpostCheckoutState.requiresParcelLocker(shippingMethod.method_code) &&
                             (!pointData.type || pointData.type.indexOf('parcel_locker') === -1)
                         ) {
                             this.errorValidationMessage(

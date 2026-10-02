@@ -1,8 +1,6 @@
 define([
-    'jquery',
-    'rjsResolver',
-    'inPostPaczkomaty'
-], function ($,resolver, inPostPaczkomaty) {
+    'rjsResolver'
+], function (resolver) {
     'use strict';
 
     return function (target) {
@@ -10,7 +8,13 @@ define([
         function hideLoader($loader) {
             $loader.parentNode.removeChild($loader);
 
-            inPostPaczkomaty.init();
+            if (!window.checkoutConfig || !window.checkoutConfig.smartmageInpostCheckoutEnabled) {
+                return;
+            }
+
+            requirejs(['inPostPaczkomaty'], function (inPostPaczkomaty) {
+                inPostPaczkomaty.init();
+            });
         }
 
         target = function (config, $loader) {
@@ -18,6 +22,5 @@ define([
         };
 
         return target;
-    }
-
+    };
 });

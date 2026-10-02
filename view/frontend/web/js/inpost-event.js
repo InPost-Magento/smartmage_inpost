@@ -1,10 +1,15 @@
 requirejs([
-    'jquery',
-    'inPostPaczkomaty'
-], function ($, inPostPaczkomaty) {
+    'jquery'
+], function ($) {
     'use strict';
 
     $(document).ready(function () {
-        inPostPaczkomaty.init();
+        if (!window.checkoutConfig || !window.checkoutConfig.smartmageInpostCheckoutEnabled) {
+            return;
+        }
+
+        requirejs(['inPostPaczkomaty'], function (inPostPaczkomaty) {
+            inPostPaczkomaty.init();
+        });
     });
 });
