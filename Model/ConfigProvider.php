@@ -37,6 +37,7 @@ class ConfigProvider implements ConfigProviderInterface
     const SHIPPING_SZYBKIEZWROTY_URL = 'szybkiezwroty_url';
     const SHIPPING_WEIGHT_ATTRIBUTE_CODE = 'weight_attribute_code';
     const SHIPPING_WEIGHT_UNIT = 'weight_unit';
+    const SHIPPING_CHECKOUT_INTEGRATION_ACTIVE = 'checkout_integration_active';
     const SHIPPING_AUTOMATIC_INSURANCE_FOR_PACKAGE = 'automatic_insurance_for_package';
     const SHIPPING_DEFAULT_PICKUP_POINT = 'default_pickup_pont';
     const SHIPPING_GET_SHIPMENTS_DAYS = 'get_shipments_days';
@@ -121,6 +122,24 @@ class ConfigProvider implements ConfigProviderInterface
         $store = $storeId ? $this->storeManager->getStore($storeId) : $this->storeManager->getStore();
 
         return $this->scopeConfig->getValue(
+            $path,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+    }
+
+    /**
+     * @param $field
+     * @param null $storeId
+     * @return bool
+     * @throws NoSuchEntityException
+     */
+    public function getShippingConfigFlag($field, $storeId = null): bool
+    {
+        $path = 'shipping/inpost/' . $field;
+        $store = $storeId ? $this->storeManager->getStore($storeId) : $this->storeManager->getStore();
+
+        return $this->scopeConfig->isSetFlag(
             $path,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -491,8 +510,49 @@ class ConfigProvider implements ConfigProviderInterface
     /**
      * @throws NoSuchEntityException
      */
+    public function isCheckoutIntegrationEnabled(): bool
+    {
+        if (!$this->getShippingConfigFlag(self::SHIPPING_CHECKOUT_INTEGRATION_ACTIVE)) {
+            return false;
+        }
+
+        return $this->hasActiveCheckoutMethods();
+    }
+
+    /**
+     * @throws NoSuchEntityException
+     */
+    private function hasActiveCheckoutMethods(): bool
+    {
+        foreach (array_keys($this->shippingMethods::INPOST_MAPPER) as $shippingMethod) {
+            [$carrierCode, $methodCode] = explode('_', $shippingMethod, 2);
+
+            if (!$this->getConfigFlag($carrierCode . '/active')) {
+                continue;
+            }
+
+            if ($this->getConfigFlag($carrierCode . '/' . $methodCode . '/active')) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @throws NoSuchEntityException
+     */
     public function getConfig()
     {
+        $isCheckoutIntegrationEnabled = $this->isCheckoutIntegrationEnabled();
+        $baseConfig = [
+            'smartmageInpostCheckoutEnabled' => $isCheckoutIntegrationEnabled
+        ];
+
+        if (!$isCheckoutIntegrationEnabled) {
+            return $baseConfig;
+        }
+
         $repository = $this->repositoryFactory->create();
         $paczkomatDefaultLogo = $repository->getUrl('Smartmage_Inpost::images/inpost_paczkomat_logo.png');
         $courierDefaultLogo = $repository->getUrl('Smartmage_Inpost::images/inpost_kurier_logo.png');
@@ -516,7 +576,7 @@ class ConfigProvider implements ConfigProviderInterface
 
         $inpostMode = $this->getShippingConfigData('mode');
 
-        return array_merge($listOfLogos, $listOfComments, [
+        return array_merge($listOfLogos, $listOfComments, $baseConfig, [
             'standard_inpostlocker' => ($this->getConfigData('inpostlocker/standard/popenabled')) ? 'parcel_locker-pop' : 'parcel_locker',
             'geowidget_token' => $this->getGeowidgetToken(),
             'base_url' => $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_LINK),

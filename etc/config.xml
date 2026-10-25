@@ -4,6 +4,7 @@
         <shipping>
             <inpost>
                 <mode>test</mode>
+                <checkout_integration_active>1</checkout_integration_active>
                 <label_format>pdf</label_format>
                 <label_size>normal</label_size>
                 <create_order_shipment>0</create_order_shipment>

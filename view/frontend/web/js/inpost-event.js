@@ -2,6 +2,10 @@
     'use strict';
 
     function initInPost() {
+        if (!window.checkoutConfig || !window.checkoutConfig.smartmageInpostCheckoutEnabled) {
+            return;
+        }
+
         requirejs([
             'inPostPaczkomaty'
         ], function (inPostPaczkomaty) {

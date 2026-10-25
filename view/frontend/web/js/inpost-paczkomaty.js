@@ -4,10 +4,11 @@ define([
     'Magento_Checkout/js/model/shipping-service',
     'mage/translate',
     'Magento_Checkout/js/checkout-data',
+    'Smartmage_Inpost/js/inpost-checkout-state',
     'Smartmage_Inpost/js/inpost-geowidget-coordinator',
     'inPostSdk',
     'Magento_Ui/js/lib/view/utils/async'
-], function ($, quote, shippingService, $t, checkoutData, coordinator) {
+], function ($, quote, shippingService, $t, checkoutData, inpostCheckoutState, coordinator) {
     'use strict';
 
     var pickupMethodConfigs = {
@@ -58,7 +59,7 @@ define([
     return {
         apiEndpointProduction: 'https://api-pl-points.easypack24.net/v1',
         apiEndpointTesting: 'https://sandbox-api-shipx-pl.easypack24.net/v1',
-        providerId: 'smartmage-poland',
+        providerId: inpostCheckoutState.getDefaultProviderId(),
         initialized: false,
         listenersBound: false,
         shippingSubscriptionBound: false,
@@ -67,13 +68,11 @@ define([
         pointRequestCache: {},
 
         isPickupMethod: function (carrierCode, methodCode) {
-            return Object.prototype.hasOwnProperty.call(pickupMethodConfigs, buildMethodValue(carrierCode, methodCode));
+            return inpostCheckoutState.isPickupMethod(carrierCode, methodCode);
         },
 
         requiresParcelLocker: function (methodCode) {
-            return methodCode === 'standardcod' ||
-                methodCode === 'standardeowcod' ||
-                methodCode === 'economiccod';
+            return inpostCheckoutState.requiresParcelLocker(methodCode);
         },
 
         getApiToken: function () {
@@ -95,39 +94,23 @@ define([
         },
 
         getShippingCountry: function () {
-            var shippingAddress = quote.shippingAddress();
-
-            return shippingAddress && shippingAddress.countryId ? shippingAddress.countryId : 'PL';
+            return inpostCheckoutState.getShippingCountry();
         },
 
         createContext: function (carrierCode, methodCode) {
-            return {
-                providerId: this.providerId,
-                carrierCode: carrierCode,
-                methodCode: methodCode,
-                methodValue: buildMethodValue(carrierCode, methodCode),
-                countryId: this.getShippingCountry()
-            };
+            return inpostCheckoutState.createContext(this.providerId, carrierCode, methodCode);
         },
 
         getCurrentContext: function () {
-            var method = quote.shippingMethod();
-
-            if (!method || !this.isPickupMethod(method.carrier_code, method.method_code)) {
-                return null;
-            }
-
-            return this.createContext(method.carrier_code, method.method_code);
+            return inpostCheckoutState.getCurrentContext(this.providerId);
         },
 
         isContextSupported: function (context) {
-            return !!context &&
-                context.countryId === 'PL' &&
-                Object.prototype.hasOwnProperty.call(pickupMethodConfigs, context.methodValue);
+            return inpostCheckoutState.isContextSupported(context);
         },
 
         getContextKey: function (context) {
-            return coordinator.getContextKey(this.providerId, context);
+            return inpostCheckoutState.getContextKey(this.providerId, context);
         },
 
         getStoragePayload: function (context, point) {
@@ -144,66 +127,19 @@ define([
         },
 
         isPayloadCompatible: function (payload, context) {
-            var pointContext;
-
-            if (!payload || !context || context.countryId !== 'PL') {
-                return false;
-            }
-
-            pointContext = payload._inpostContext;
-
-            if (!pointContext) {
-                return false;
-            }
-
-            return pointContext.providerId === this.providerId &&
-                pointContext.carrierCode === context.carrierCode &&
-                pointContext.methodCode === context.methodCode &&
-                pointContext.countryId === context.countryId;
+            return inpostCheckoutState.isPayloadCompatible(this.providerId, payload, context);
         },
 
         getContextPoint: function (context) {
-            var contextKey = this.getContextKey(context);
-            var payload = contextKey ? checkoutData.getShippingInPostContextPoint(contextKey) : null;
-
-            if (this.isPayloadCompatible(payload, context)) {
-                return payload;
-            }
-
-            return null;
+            return inpostCheckoutState.getContextPoint(this.providerId, context);
         },
 
         getLegacyPoint: function (context) {
-            var currentMethod = quote.shippingMethod();
-            var payload = checkoutData.getShippingInPostPoint();
-
-            if (!context || context.countryId !== 'PL' || !payload || !payload.name) {
-                return null;
-            }
-
-            if (payload._inpostContext && !this.isPayloadCompatible(payload, context)) {
-                return null;
-            }
-
-            if (!payload._inpostContext && (
-                !currentMethod ||
-                currentMethod.carrier_code !== context.carrierCode ||
-                currentMethod.method_code !== context.methodCode
-            )) {
-                return null;
-            }
-
-            return payload;
+            return inpostCheckoutState.getLegacyPoint(this.providerId, context);
         },
 
         getCurrentValidationPoint: function () {
-            var context = this.getCurrentContext();
-
-            if (!this.isContextSupported(context)) {
-                return null;
-            }
-
-            return this.getContextPoint(context) || this.getLegacyPoint(context);
+            return inpostCheckoutState.getCurrentValidationPoint(this.providerId);
         },
 
         fetchPointById: function (pointId) {
